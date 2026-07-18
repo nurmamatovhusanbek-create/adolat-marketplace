@@ -60,15 +60,20 @@ function DialogOverlay({
   )
 }
 
-type DialogSize = "sm" | "md" | "lg" | "xl" | "2xl" | "full"
+type DialogSize = "sm" | "md" | "lg" | "xl" | "2xl" | "full";
 
+/**
+ * Size mapping — uses sm: breakpoint so mobile gets the calc() fallback
+ * (defined in base classes), and ≥640px gets the proper desktop size.
+ * This prevents the modal from touching screen edges on tablet/small desktop.
+ */
 const dialogSizeClasses: Record<DialogSize, string> = {
-  sm: "max-w-md",
-  md: "max-w-lg",
-  lg: "max-w-2xl",
-  xl: "max-w-4xl",
-  "2xl": "max-w-6xl",
-  full: "max-w-[calc(100vw-2rem)]",
+  sm: "sm:max-w-md",
+  md: "sm:max-w-lg",
+  lg: "sm:max-w-2xl",
+  xl: "sm:max-w-4xl",
+  "2xl": "sm:max-w-6xl",
+  full: "sm:max-w-[calc(100vw-2rem)]",
 }
 
 function DialogContent({
@@ -88,12 +93,15 @@ function DialogContent({
         data-slot="dialog-content"
         className={cn(
           "fixed left-[50%] top-[50%] z-50 grid w-full translate-x-[-50%] translate-y-[-50%]",
+          // Mobile fallback: never touch screen edges — always 1rem breathing room
+          "max-w-[calc(100vw-2rem)]",
           "gap-0 rounded-2xl border border-border/50 bg-background p-0 shadow-2xl",
           "max-h-[calc(100vh-2rem)] overflow-hidden",
           "data-[state=open]:animate-in data-[state=closed]:animate-out",
           "data-[state=closed]:fade-out-0 data-[state=open]:fade-in-0",
           "data-[state=closed]:zoom-out-95 data-[state=open]:zoom-in-95",
           "duration-200",
+          // Desktop size override (sm: breakpoint and up)
           dialogSizeClasses[size],
           className
         )}
