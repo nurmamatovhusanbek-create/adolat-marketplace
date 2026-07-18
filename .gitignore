@@ -51,7 +51,7 @@ Thumbs.db
 # Research repos (cloned for design reference)
 research/
 
-# Scripts (research data)
+# Scripts (research data) — but KEEP templates-data.json
 scripts/*.json
 !scripts/templates-data.json
 

@@ -26,47 +26,35 @@ async function main() {
       for (const a of advs) {
         try {
           const u = await db.user.upsert({where:{email:a.e},update:{},create:{id:nanoid(),email:a.e,phone:a.p,name:a.n,passwordHash:h,role:"ADVOCATE",status:"ACTIVE"}});
-          // Try to find existing profile by slug, update if exists, create if not
           const existing = await db.advocateProfile.findUnique({where:{slug:a.s}});
-          if (existing) {
-            await db.advocateProfile.update({where:{slug:a.s},data:{userId:u.id,titleUz:a.t,titleRu:a.t,bioUz:a.b,bioRu:a.b,licenseNumber:a.l,licenseVerified:true,specialty:a.sp,secondarySpecs:JSON.stringify(a.ss),expertise:JSON.stringify(a.ep),languages:JSON.stringify(a.la),region:a.r,city:a.ci,experienceYears:a.ex,rating:a.ra,reviewsCount:a.rv,casesResolved:a.ca,successRate:a.su,responseTimeHours:a.rh,consultationFee:a.cf,hourlyFee:a.hf,verified:true,topRated:!!a.tr,availability:"available",tagsJson:JSON.stringify(a.tr?["TOP-10"]:[]),education:JSON.stringify(a.ed)}});
-          } else {
-            await db.advocateProfile.create({data:{id:nanoid(),userId:u.id,slug:a.s,titleUz:a.t,titleRu:a.t,bioUz:a.b,bioRu:a.b,licenseNumber:a.l,licenseVerified:true,specialty:a.sp,secondarySpecs:JSON.stringify(a.ss),expertise:JSON.stringify(a.ep),languages:JSON.stringify(a.la),region:a.r,city:a.ci,experienceYears:a.ex,rating:a.ra,reviewsCount:a.rv,casesResolved:a.ca,successRate:a.su,responseTimeHours:a.rh,consultationFee:a.cf,hourlyFee:a.hf,verified:true,topRated:!!a.tr,availability:"available",tagsJson:JSON.stringify(a.tr?["TOP-10"]:[]),education:JSON.stringify(a.ed)}});
-          }
+          if (existing) { await db.advocateProfile.update({where:{slug:a.s},data:{userId:u.id,titleUz:a.t,titleRu:a.t,bioUz:a.b,bioRu:a.b,licenseNumber:a.l,licenseVerified:true,specialty:a.sp,secondarySpecs:JSON.stringify(a.ss),expertise:JSON.stringify(a.ep),languages:JSON.stringify(a.la),region:a.r,city:a.ci,experienceYears:a.ex,rating:a.ra,reviewsCount:a.rv,casesResolved:a.ca,successRate:a.su,responseTimeHours:a.rh,consultationFee:a.cf,hourlyFee:a.hf,verified:true,topRated:!!a.tr,availability:"available",tagsJson:JSON.stringify(a.tr?["TOP-10"]:[]),education:JSON.stringify(a.ed)}}); }
+          else { await db.advocateProfile.create({data:{id:nanoid(),userId:u.id,slug:a.s,titleUz:a.t,titleRu:a.t,bioUz:a.b,bioRu:a.b,licenseNumber:a.l,licenseVerified:true,specialty:a.sp,secondarySpecs:JSON.stringify(a.ss),expertise:JSON.stringify(a.ep),languages:JSON.stringify(a.la),region:a.r,city:a.ci,experienceYears:a.ex,rating:a.ra,reviewsCount:a.rv,casesResolved:a.ca,successRate:a.su,responseTimeHours:a.rh,consultationFee:a.cf,hourlyFee:a.hf,verified:true,topRated:!!a.tr,availability:"available",tagsJson:JSON.stringify(a.tr?["TOP-10"]:[]),education:JSON.stringify(a.ed)}}); }
         } catch(e) {console.log("[startup] adv skip:",a.n,e.message?.slice(0,80));}
       }
       console.log("[startup] Advocates seeded:", await db.advocateProfile.count());
     }
 
-    // === DOCUMENTS — replace ALL with real v3.0 templates ===
+    // === DOCUMENTS — delete ALL old ones (FK-safe order) ===
     console.log("[startup] Loading document templates...");
     const templatesData = require("./templates-data.json");
     console.log("[startup] Found", templatesData.length, "templates");
 
-    // Delete old documents and templates
+    // DELETE IN FK-SAFE ORDER: drafts → templates → documents
+    await db.documentDraft.deleteMany({});
+    console.log("[startup] Drafts deleted");
     await db.documentTemplate.deleteMany({});
+    console.log("[startup] Old templates deleted");
     await db.legalDocument.deleteMany({});
-    console.log("[startup] Old documents cleared");
+    console.log("[startup] Old documents deleted");
 
     // Create new documents with real templates
     for (const d of templatesData) {
       try {
         const doc = await db.legalDocument.create({
-          data: {
-            id: nanoid(), slug: d.slug, titleUz: d.titleUz, titleRu: d.titleRu,
-            category: d.category, subcategory: d.subcategory,
-            descriptionUz: d.descriptionUz, descriptionRu: d.descriptionUz,
-            pages: d.pages, downloads: d.downloads, rating: d.rating,
-            priceUzs: d.priceUzs, isFree: d.isFree, isPopular: d.isPopular, isNew: d.isNew,
-            legalBasisUz: d.legalBasisUz, lastUpdated: new Date(), tagsJson: "[]",
-          },
+          data: { id: nanoid(), slug: d.slug, titleUz: d.titleUz, titleRu: d.titleRu, category: d.category, subcategory: d.subcategory, descriptionUz: d.descriptionUz, descriptionRu: d.descriptionUz, pages: d.pages, downloads: d.downloads, rating: d.rating, priceUzs: d.priceUzs, isFree: d.isFree, isPopular: d.isPopular, isNew: d.isNew, legalBasisUz: d.legalBasisUz, lastUpdated: new Date(), tagsJson: "[]" }
         });
         await db.documentTemplate.create({
-          data: {
-            id: nanoid(), documentId: doc.id,
-            fieldsSchema: d.fieldsSchema, bodySchema: d.bodySchema,
-            estimatedFillMinutes: d.estimatedFillMinutes, version: 1,
-          },
+          data: { id: nanoid(), documentId: doc.id, fieldsSchema: d.fieldsSchema, bodySchema: d.bodySchema, estimatedFillMinutes: d.estimatedFillMinutes, version: 1 }
         });
       } catch(e) { console.log("[startup] doc skip:", d.slug, e.message?.slice(0,80)); }
     }

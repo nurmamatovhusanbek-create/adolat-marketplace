@@ -1,7 +1,7 @@
 "use client";
 
 import { useState } from "react";
-import { Scale, Search, Menu, FileText, Users, Briefcase, Plus, HelpCircle, LogIn, LogOut, LayoutDashboard, Shield } from "lucide-react";
+import { Scale, Search, Menu, FileText, Users, Briefcase, Plus, HelpCircle, LogIn, LogOut, LayoutDashboard, Shield, ArrowLeft } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import {
@@ -35,11 +35,16 @@ const NAV_ITEMS: { label: string; view: ViewType; icon: typeof Users }[] = [
   { label: "Qoidalar", view: "how-it-works", icon: HelpCircle },
 ];
 
+// Views where the main nav should be hidden (admin/advocate dashboards)
+const HIDE_NAV_VIEWS: ViewType[] = ["admin-panel", "advocate-dashboard"];
+
 export function Header() {
   const { currentView, setView, setPostRequestOpen, setAuthOpen, setDashboardOpen } = useMarketplaceStore();
   const { user, loading: userLoading } = useAppUser();
   const [mobileOpen, setMobileOpen] = useState(false);
   const [quickSearch, setQuickSearch] = useState("");
+
+  const hideNav = HIDE_NAV_VIEWS.includes(currentView);
 
   const handleNav = (view: ViewType) => {
     setView(view);
@@ -90,7 +95,8 @@ export function Header() {
           </div>
         </button>
 
-        {/* Desktop nav — editorial section-divider style */}
+        {/* Desktop nav — editorial section-divider style (hidden in admin/advocate views) */}
+        {!hideNav && (
         <nav className="ml-2 hidden items-center gap-0 md:flex">
           {NAV_ITEMS.map((item, i) => (
             <div key={item.view} className="flex items-center">
@@ -109,8 +115,10 @@ export function Header() {
             </div>
           ))}
         </nav>
+        )}
 
-        {/* Quick search — LobeHub style minimal */}
+        {/* Quick search — LobeHub style minimal (hidden in admin/advocate views) */}
+        {!hideNav && (
         <form onSubmit={handleQuickSearch} className="ml-auto hidden flex-1 items-center lg:flex max-w-xs">
           <div className="relative w-full group">
             <Search className="pointer-events-none absolute left-3 top-1/2 h-4 w-4 -translate-y-1/2 text-muted-foreground transition-colors group-focus-within:text-accent" />
@@ -122,9 +130,11 @@ export function Header() {
             />
           </div>
         </form>
+        )}
 
         {/* Actions */}
         <div className="ml-auto flex items-center gap-2 lg:ml-2">
+          {!hideNav && (
           <Button
             variant="outline"
             size="sm"
@@ -143,6 +153,15 @@ export function Header() {
             <span className="hidden sm:inline">So'rov joylash</span>
             <span className="sm:hidden">So'rov</span>
           </Button>
+          )}
+
+          {/* Back to site button for admin/advocate views */}
+          {hideNav && (
+          <Button variant="outline" size="sm" onClick={() => handleNav("home")} className="gap-1.5">
+            <ArrowLeft className="h-3.5 w-3.5" />
+            Bosh sahifa
+          </Button>
+          )}
 
           {/* User menu / sign in */}
           {userLoading ? (
