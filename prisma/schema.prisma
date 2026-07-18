@@ -2,6 +2,7 @@
 // Prisma schema (SQLite for development; production-ready structure)
 
 generator client {
+  binaryTargets = ["native", "debian-openssl-3.0.x", "debian-openssl-1.1.x"]
   provider = "prisma-client-js"
 }
 
