@@ -1,10 +1,9 @@
 # Adolat Marketplace — Production Dockerfile
-# Uses Node.js (Bun doesn't support Next.js 16 Turbopack worker_threads)
 
 FROM node:20-slim AS deps
 WORKDIR /app
 COPY package.json package-lock.json* ./
-RUN npm install --production
+RUN npm install
 
 FROM node:20-slim AS builder
 WORKDIR /app
@@ -15,6 +14,7 @@ ENV NEXTAUTH_SECRET="build-placeholder-secret"
 ENV NEXTAUTH_URL="http://localhost:3000"
 RUN npx prisma generate
 RUN npm run build
+RUN npm prune --production
 
 FROM node:20-slim AS runner
 WORKDIR /app
@@ -26,6 +26,7 @@ COPY --from=builder /app/prisma ./prisma
 COPY --from=builder /app/node_modules/.prisma ./node_modules/.prisma
 COPY --from=builder /app/node_modules/@prisma ./node_modules/@prisma
 RUN mkdir -p storage/uploads && chown -R nextjs:nodejs storage
+RUN apt-get update -qq && apt-get install -y -qq curl > /dev/null 2>&1 && rm -rf /var/lib/apt/lists/*
 RUN npm install --global prisma@6
 ENV NODE_ENV=production
 ENV PORT=3000
