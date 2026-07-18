@@ -1,0 +1,251 @@
+@import "tailwindcss";
+@import "tw-animate-css";
+
+@custom-variant dark (&:is(.dark *));
+
+@theme inline {
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --font-sans: var(--font-geist-sans);
+  --font-serif: var(--font-serif);
+  --font-mono: var(--font-geist-mono);
+  --color-sidebar-ring: var(--sidebar-ring);
+  --color-sidebar-border: var(--sidebar-border);
+  --color-sidebar-accent-foreground: var(--sidebar-accent-foreground);
+  --color-sidebar-accent: var(--sidebar-accent);
+  --color-sidebar-primary-foreground: var(--sidebar-primary-foreground);
+  --color-sidebar-primary: var(--sidebar-primary);
+  --color-sidebar-foreground: var(--sidebar-foreground);
+  --color-sidebar: var(--sidebar);
+  --color-chart-5: var(--chart-5);
+  --color-chart-4: var(--chart-4);
+  --color-chart-3: var(--chart-3);
+  --color-chart-2: var(--chart-2);
+  --color-chart-1: var(--chart-1);
+  --color-ring: var(--ring);
+  --color-input: var(--input);
+  --color-border: var(--border);
+  --color-destructive: var(--destructive);
+  --color-accent-foreground: var(--accent-foreground);
+  --color-accent: var(--accent);
+  --color-muted-foreground: var(--muted-foreground);
+  --color-muted: var(--muted);
+  --color-secondary-foreground: var(--secondary-foreground);
+  --color-secondary: var(--secondary);
+  --color-primary-foreground: var(--primary-foreground);
+  --color-primary: var(--primary);
+  --color-popover-foreground: var(--popover-foreground);
+  --color-popover: var(--popover);
+  --color-card-foreground: var(--card-foreground);
+  --color-card: var(--card);
+  --radius-sm: calc(var(--radius) - 4px);
+  --radius-md: calc(var(--radius) - 2px);
+  --radius-lg: var(--radius);
+  --radius-xl: calc(var(--radius) + 4px);
+}
+
+/* ============================================================================
+   EDITORIAL TRUST — design system
+   Inspired by: Claude skill (warm parchment + clay accent),
+   Editorial skill (serif display + 8pt grid),
+   Enterprise skill (dark mode + glass panels),
+   LobeHub (4px spacing scale, semantic tokens, calm content-first)
+   ============================================================================ */
+
+:root {
+  --radius: 0.5rem; /* 8px - per LobeHub default radius */
+
+  /* --- Surfaces (warm parchment, never pure white) --- */
+  --background: oklch(0.985 0.008 75);           /* warm ivory parchment */
+  --foreground: oklch(0.18 0.015 60);            /* near-black ink */
+
+  --card: oklch(1 0.005 75);                      /* pure paper for cards */
+  --card-foreground: oklch(0.18 0.015 60);
+  --popover: oklch(1 0.005 75);
+  --popover-foreground: oklch(0.18 0.015 60);
+
+  /* --- Primary = near-black ink (LobeHub monochrome default) --- */
+  --primary: oklch(0.22 0.015 60);
+  --primary-foreground: oklch(0.985 0.008 75);
+
+  /* --- Secondary = warm parchment surfaces --- */
+  --secondary: oklch(0.96 0.01 75);
+  --secondary-foreground: oklch(0.22 0.015 60);
+
+  --muted: oklch(0.95 0.008 75);
+  --muted-foreground: oklch(0.45 0.015 60);
+
+  /* --- Accent = earthy clay (the single chromatic moment) --- */
+  /* Used sparingly: hero underlines, key CTAs, "verified" badges */
+  --accent: oklch(0.62 0.13 45);                  /* terracotta clay */
+  --accent-foreground: oklch(0.985 0.008 75);
+
+  /* --- Functional colors --- */
+  --destructive: oklch(0.55 0.21 27);
+  --border: oklch(0.88 0.01 75);                  /* warm hairline */
+  --input: oklch(0.88 0.01 75);
+  --ring: oklch(0.62 0.13 45);                    /* matches accent for focus */
+
+  --chart-1: oklch(0.62 0.13 45);                 /* clay */
+  --chart-2: oklch(0.45 0.08 145);                /* sage */
+  --chart-3: oklch(0.5 0.1 240);                  /* ink blue */
+  --chart-4: oklch(0.7 0.12 80);                  /* gold */
+  --chart-5: oklch(0.4 0.05 60);                  /* graphite */
+
+  --sidebar: oklch(0.97 0.008 75);
+  --sidebar-foreground: oklch(0.18 0.015 60);
+  --sidebar-primary: oklch(0.22 0.015 60);
+  --sidebar-primary-foreground: oklch(0.985 0.008 75);
+  --sidebar-accent: oklch(0.95 0.008 75);
+  --sidebar-accent-foreground: oklch(0.22 0.015 60);
+  --sidebar-border: oklch(0.88 0.01 75);
+  --sidebar-ring: oklch(0.62 0.13 45);
+
+  /* --- Custom: trust signals --- */
+  --trust-verified: oklch(0.45 0.08 145);          /* sage green */
+  --trust-urgent: oklch(0.55 0.21 27);             /* terracotta red */
+  --trust-premium: oklch(0.7 0.12 80);             /* warm gold */
+}
+
+.dark {
+  --background: oklch(0.14 0.01 60);              /* warm near-black */
+  --foreground: oklch(0.96 0.005 75);
+  --card: oklch(0.18 0.01 60);
+  --card-foreground: oklch(0.96 0.005 75);
+  --popover: oklch(0.2 0.012 60);
+  --popover-foreground: oklch(0.96 0.005 75);
+  --primary: oklch(0.96 0.005 75);
+  --primary-foreground: oklch(0.18 0.015 60);
+  --secondary: oklch(0.25 0.01 60);
+  --secondary-foreground: oklch(0.96 0.005 75);
+  --muted: oklch(0.22 0.01 60);
+  --muted-foreground: oklch(0.7 0.01 60);
+  --accent: oklch(0.7 0.13 45);                    /* brighter clay in dark */
+  --accent-foreground: oklch(0.14 0.01 60);
+  --destructive: oklch(0.7 0.19 22);
+  --border: oklch(1 0 0 / 8%);
+  --input: oklch(1 0 0 / 12%);
+  --ring: oklch(0.7 0.13 45);
+}
+
+@layer base {
+  * {
+    @apply border-border outline-ring/50;
+  }
+  body {
+    @apply bg-background text-foreground;
+    font-feature-settings: "ss01", "ss02", "cv01", "cv11";
+  }
+  /* Serif display for headings - "Editorial Classic" inspired */
+  h1, h2, h3 {
+    font-family: var(--font-serif), Georgia, "Times New Roman", serif;
+    letter-spacing: -0.02em;
+  }
+}
+
+@layer utilities {
+  /* Background grid - subtle parchment texture */
+  .bg-grid-pattern {
+    background-image: linear-gradient(
+        to right,
+        oklch(0.18 0.015 60 / 0.04) 1px,
+        transparent 1px
+      ),
+      linear-gradient(to bottom, oklch(0.18 0.015 60 / 0.04) 1px, transparent 1px);
+    background-size: 32px 32px;
+  }
+
+  /* Hero radial - warm parchment with clay glow */
+  .bg-hero-radial {
+    background:
+      radial-gradient(ellipse 60% 40% at 20% 20%, oklch(0.62 0.13 45 / 0.10), transparent 60%),
+      radial-gradient(ellipse 50% 50% at 85% 80%, oklch(0.45 0.08 145 / 0.06), transparent 60%),
+      linear-gradient(to bottom, oklch(0.985 0.008 75), oklch(0.97 0.008 75));
+  }
+
+  .text-balance {
+    text-wrap: balance;
+  }
+
+  /* Editorial drop-cap for first paragraph in long-form content */
+  .drop-cap::first-letter {
+    font-family: var(--font-serif), Georgia, serif;
+    font-size: 3.5rem;
+    line-height: 1;
+    font-weight: 700;
+    float: left;
+    margin: 0.1em 0.1em 0 0;
+    color: var(--accent);
+  }
+
+  /* Underline accent (Claude skill signature) */
+  .underline-accent {
+    background-image: linear-gradient(to right, var(--accent), var(--accent));
+    background-size: 100% 3px;
+    background-repeat: no-repeat;
+    background-position: 0 100%;
+    padding-bottom: 2px;
+  }
+
+  /* Editorial divider */
+  .editorial-divider {
+    height: 1px;
+    background: linear-gradient(to right,
+      transparent,
+      oklch(0.18 0.015 60 / 0.15) 20%,
+      oklch(0.18 0.015 60 / 0.15) 80%,
+      transparent
+    );
+  }
+
+  /* Hard shadow (Claude/Editorial style - no soft shadows) */
+  .shadow-hard {
+    box-shadow: 4px 4px 0 0 oklch(0.18 0.015 60 / 0.08);
+  }
+  .shadow-hard-sm {
+    box-shadow: 2px 2px 0 0 oklch(0.18 0.015 60 / 0.06);
+  }
+  .shadow-hard-clay {
+    box-shadow: 4px 4px 0 0 oklch(0.62 0.13 45 / 0.18);
+  }
+
+  /* Custom scrollbar (LobeHub style) */
+  .scrollbar-thin::-webkit-scrollbar {
+    width: 6px;
+    height: 6px;
+  }
+  .scrollbar-thin::-webkit-scrollbar-track {
+    background: transparent;
+  }
+  .scrollbar-thin::-webkit-scrollbar-thumb {
+    background: oklch(0.18 0.015 60 / 0.2);
+    border-radius: 9999px;
+  }
+  .scrollbar-thin::-webkit-scrollbar-thumb:hover {
+    background: oklch(0.62 0.13 45 / 0.4);
+  }
+
+  /* Verified badge shimmer */
+  @keyframes verified-pulse {
+    0%, 100% { opacity: 1; }
+    50% { opacity: 0.7; }
+  }
+  .verified-pulse {
+    animation: verified-pulse 2.5s ease-in-out infinite;
+  }
+
+  /* Smooth focus ring (LobeHub) */
+  .focus-ring:focus-visible {
+    outline: 2px solid var(--ring);
+    outline-offset: 2px;
+  }
+
+  /* Reduced motion - per LobeHub design rule */
+  @media (prefers-reduced-motion: reduce) {
+    *, *::before, *::after {
+      animation-duration: 0.01ms !important;
+      animation-iteration-count: 1 !important;
+      transition-duration: 0.01ms !important;
+    }
+  }
+}

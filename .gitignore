@@ -1,0 +1,76 @@
+# Dependencies
+node_modules/
+.pnp/
+.pnp.js
+
+# Next.js
+.next/
+out/
+build/
+dist/
+
+# Production
+*.tsbuildinfo
+next-env.d.ts
+
+# Environment
+.env
+.env.local
+.env.production.local
+.env.development.local
+
+# Database
+db/
+*.db
+*.db-journal
+*.sqlite
+*.sqlite3
+
+# Storage (user uploads)
+storage/
+
+# Logs
+*.log
+dev.log
+server.log
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+
+# IDE
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Research repos (cloned for design reference)
+research/
+
+# Scripts (research data)
+scripts/*.json
+
+# Download artifacts
+download/*.png
+download/*.pdf
+download/*.docx
+
+# Mini-services
+mini-services/chat-service/node_modules/
+mini-services/chat-service/storage/
+
+# Prisma
+prisma/migrations/
+
+# Docker
+docker-compose.override.yml
+
+# Vercel
+.vercel
+
+# Render
+.render/
