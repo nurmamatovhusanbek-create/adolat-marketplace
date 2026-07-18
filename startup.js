@@ -1,7 +1,7 @@
 const { execSync } = require("child_process");
 async function main() {
   console.log("[startup] Adolat starting...");
-  try { execSync("npx prisma db push --accept-data-loss", { stdio: "inherit", timeout: 30000 }); console.log("[startup] Tables created"); } catch(e) { console.error("[startup] db push warning:", e.message?.slice(0,200)); }
+  try { execSync("node node_modules/prisma/build/index.js db push --accept-data-loss", { stdio: "inherit", timeout: 30000 }); console.log("[startup] Tables created"); } catch(e) { console.error("[startup] db push warning:", e.message?.slice(0,200)); }
   try {
     const { PrismaClient } = require("@prisma/client");
     const bcrypt = require("bcryptjs");

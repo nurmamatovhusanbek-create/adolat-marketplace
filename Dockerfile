@@ -27,11 +27,14 @@ COPY --from=builder /app/startup.js ./startup.js
 
 COPY --from=builder /app/node_modules/.prisma ./node_modules/.prisma
 COPY --from=builder /app/node_modules/@prisma ./node_modules/@prisma
+COPY --from=builder /app/node_modules/prisma ./node_modules/prisma
+
+COPY --from=builder /app/node_modules/bcryptjs ./node_modules/bcryptjs
+COPY --from=builder /app/node_modules/nanoid ./node_modules/nanoid
 
 RUN mkdir -p storage/uploads && chown -R nextjs:nodejs storage /app
 
 RUN apt-get update -qq && apt-get install -y -qq curl > /dev/null 2>&1 && rm -rf /var/lib/apt/lists/*
-RUN npm install --global prisma@6
 
 ENV NODE_ENV=production
 ENV PORT=3000
