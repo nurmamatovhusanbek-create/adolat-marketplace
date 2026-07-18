@@ -26,8 +26,14 @@ async function main() {
       for (const a of advs) {
         try {
           const u = await db.user.upsert({where:{email:a.e},update:{},create:{id:nanoid(),email:a.e,phone:a.p,name:a.n,passwordHash:h,role:"ADVOCATE",status:"ACTIVE"}});
-          await db.advocateProfile.upsert({where:{slug:a.s},update:{},create:{id:nanoid(),userId:u.id,slug:a.s,titleUz:a.t,titleRu:a.t,bioUz:a.b,bioRu:a.b,licenseNumber:a.l,licenseVerified:true,specialty:a.sp,secondarySpecs:JSON.stringify(a.ss),expertise:JSON.stringify(a.ep),languages:JSON.stringify(a.la),region:a.r,city:a.ci,experienceYears:a.ex,rating:a.ra,reviewsCount:a.rv,casesResolved:a.ca,successRate:a.su,responseTimeHours:a.rh,consultationFee:a.cf,hourlyFee:a.hf,verified:true,topRated:!!a.tr,availability:"available",tagsJson:JSON.stringify(a.tr?["TOP-10"]:[]),education:JSON.stringify(a.ed)}});
-        } catch(e) {console.log("[startup] adv skip:",a.n);}
+          // Try to find existing profile by slug, update if exists, create if not
+          const existing = await db.advocateProfile.findUnique({where:{slug:a.s}});
+          if (existing) {
+            await db.advocateProfile.update({where:{slug:a.s},data:{userId:u.id,titleUz:a.t,titleRu:a.t,bioUz:a.b,bioRu:a.b,licenseNumber:a.l,licenseVerified:true,specialty:a.sp,secondarySpecs:JSON.stringify(a.ss),expertise:JSON.stringify(a.ep),languages:JSON.stringify(a.la),region:a.r,city:a.ci,experienceYears:a.ex,rating:a.ra,reviewsCount:a.rv,casesResolved:a.ca,successRate:a.su,responseTimeHours:a.rh,consultationFee:a.cf,hourlyFee:a.hf,verified:true,topRated:!!a.tr,availability:"available",tagsJson:JSON.stringify(a.tr?["TOP-10"]:[]),education:JSON.stringify(a.ed)}});
+          } else {
+            await db.advocateProfile.create({data:{id:nanoid(),userId:u.id,slug:a.s,titleUz:a.t,titleRu:a.t,bioUz:a.b,bioRu:a.b,licenseNumber:a.l,licenseVerified:true,specialty:a.sp,secondarySpecs:JSON.stringify(a.ss),expertise:JSON.stringify(a.ep),languages:JSON.stringify(a.la),region:a.r,city:a.ci,experienceYears:a.ex,rating:a.ra,reviewsCount:a.rv,casesResolved:a.ca,successRate:a.su,responseTimeHours:a.rh,consultationFee:a.cf,hourlyFee:a.hf,verified:true,topRated:!!a.tr,availability:"available",tagsJson:JSON.stringify(a.tr?["TOP-10"]:[]),education:JSON.stringify(a.ed)}});
+          }
+        } catch(e) {console.log("[startup] adv skip:",a.n,e.message?.slice(0,80));}
       }
       console.log("[startup] Advocates seeded:", await db.advocateProfile.count());
     }

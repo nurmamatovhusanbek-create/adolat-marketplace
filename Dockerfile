@@ -26,8 +26,9 @@ COPY --from=builder /app/.next/static ./.next/static
 COPY --from=builder /app/public ./public
 COPY --from=builder /app/prisma ./prisma
 
-# Copy startup script
+# Copy startup script + templates data
 COPY --from=builder /app/startup.js ./startup.js
+COPY --from=builder /app/scripts/templates-data.json ./templates-data.json
 
 # Copy Prisma client + engine (NOT the CLI — it has broken deps after prune)
 COPY --from=builder /app/node_modules/.prisma ./node_modules/.prisma
