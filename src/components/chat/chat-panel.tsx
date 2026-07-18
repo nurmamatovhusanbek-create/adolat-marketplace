@@ -98,7 +98,7 @@ export function ChatPanel() {
 
   return (
     <Sheet open={state.open} onOpenChange={(o) => !o && closeChat()}>
-      <SheetContent side="right" className="w-screen p-0 sm:max-w-none lg:max-w-none" style={{ maxWidth: "100vw" }}>
+      <SheetContent side="right" className="w-screen h-screen p-0" style={{ maxWidth: "100vw", maxHeight: "100vh" }}>
         <SheetHeader className="border-b border-border p-4">
           <SheetTitle className="flex items-center gap-3">
             <Button variant="ghost" size="icon" onClick={closeChat} className="h-8 w-8"><ArrowLeft className="h-4 w-4" /></Button>

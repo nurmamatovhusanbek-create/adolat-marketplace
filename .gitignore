@@ -53,6 +53,7 @@ research/
 
 # Scripts (research data)
 scripts/*.json
+!scripts/templates-data.json
 
 # Download artifacts
 download/*.png

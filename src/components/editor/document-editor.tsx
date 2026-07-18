@@ -553,7 +553,7 @@ export function DocumentEditor() {
 
         {/* Preview sheet */}
         <Sheet open={showPreview} onOpenChange={setShowPreview}>
-          <SheetContent side="right" className="w-screen overflow-y-auto p-0" style={{ maxWidth: "100vw" }}>
+          <SheetContent side="right" className="w-screen h-screen overflow-y-auto p-0" style={{ maxWidth: "100vw", maxHeight: "100vh" }}>
             <SheetHeader className="border-b p-4">
               <SheetTitle className="flex items-center gap-2">
                 <Eye className="h-4 w-4 text-primary" />
