@@ -88,7 +88,7 @@ export async function GET(
   });
 
   const buffer = await generatePdf(doc.titleUz, rendered);
-  return new NextResponse(buffer, {
+  return new NextResponse(new Uint8Array(buffer), {
     headers: {
       "Content-Type": "application/pdf",
       "Content-Disposition": `attachment; filename="${slug}.pdf"`,
@@ -207,7 +207,7 @@ export async function POST(
       : "application/pdf";
   const filename = `${slug}.${parsed.data.format}`;
 
-  return new NextResponse(buffer, {
+  return new NextResponse(new Uint8Array(buffer), {
     headers: {
       "Content-Type": contentType,
       "Content-Disposition": `attachment; filename="${filename}"`,
