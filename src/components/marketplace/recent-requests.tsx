@@ -15,11 +15,14 @@ import {
 import { Card } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
+import { Skeleton } from "@/components/ui/skeleton";
 import { SectionHeader } from "./category-grid";
 import { SPECIALTIES, DOCUMENT_CATEGORIES, REGIONS } from "@/lib/marketplace/data";
 import { useMarketplaceStore } from "@/lib/marketplace/store";
+import { useInView } from "@/hooks/use-in-view";
 import { formatPrice } from "@/lib/marketplace/format";
 import type { DocumentCategory, Specialty } from "@/lib/marketplace/types";
+import { cn } from "@/lib/utils";
 
 interface ApiRequest {
   id: string;
@@ -43,6 +46,7 @@ export function RecentRequests() {
   const { setView, setPostRequestOpen } = useMarketplaceStore();
   const [requests, setRequests] = useState<ApiRequest[]>([]);
   const [loading, setLoading] = useState(true);
+  const [gridRef, gridInView] = useInView<HTMLDivElement>();
 
   useEffect(() => {
     (async () => {
@@ -89,17 +93,36 @@ export function RecentRequests() {
         />
 
         {loading ? (
+          /* Skeleton matches loaded card shape: badges + title + description + meta row. */
           <div className="mt-10 grid gap-4 lg:grid-cols-2">
             {[1, 2, 3, 4].map((i) => (
-              <Card key={i} className="h-40 animate-pulse border-border bg-secondary/40" />
+              <Card key={i} className="flex h-40 flex-col gap-3 border-border bg-card p-5">
+                <div className="flex gap-1.5">
+                  <Skeleton className="h-5 w-20 rounded-full" />
+                  <Skeleton className="h-5 w-16 rounded-full" />
+                </div>
+                <Skeleton className="h-4 w-3/4" />
+                <Skeleton className="h-3 w-full" />
+                <Skeleton className="h-3 w-5/6" />
+                <div className="mt-auto flex items-center justify-between border-t border-border pt-3">
+                  <Skeleton className="h-3 w-32" />
+                  <Skeleton className="h-7 w-20 rounded-md" />
+                </div>
+              </Card>
             ))}
           </div>
         ) : (
-          <div className="mt-10 grid gap-4 lg:grid-cols-2">
+          <div
+            ref={gridRef}
+            className={cn(
+              "reveal-stagger mt-10 grid gap-4 lg:grid-cols-2",
+              gridInView && "in-view"
+            )}
+          >
             {requests.map((req, idx) => (
               <Card
                 key={req.id}
-                className="group relative flex flex-col gap-3 border-border bg-card p-5 transition-all hover:border-accent/30 hover:shadow-hard-sm"
+                className="group relative flex flex-col gap-3 border-border bg-card p-5 hover:-translate-y-0.5 hover:shadow-beautiful-sm hover:border-accent/30"
               >
                 {/* Editorial rank number */}
                 <div className="absolute right-4 top-4 font-mono text-[10px] font-bold uppercase tracking-wider text-muted-foreground">

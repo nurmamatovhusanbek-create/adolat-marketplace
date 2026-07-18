@@ -271,7 +271,7 @@ export function AdvocateListing() {
 function AdvocateListItem({ adv, onSelect }: { adv: Advocate; onSelect: () => void }) {
   const spec = SPECIALTIES[adv.specialty];
   return (
-    <Card className="border-border p-4 transition-all hover:border-foreground/30 hover:shadow-md sm:p-5">
+    <Card className="border-border p-4 hover:-translate-y-0.5 hover:shadow-beautiful-sm hover:border-foreground/30 sm:p-5">
       <div className="flex flex-col gap-4 sm:flex-row">
         {/* Photo */}
         <div className="flex shrink-0 items-start gap-3 sm:flex-col sm:items-center">

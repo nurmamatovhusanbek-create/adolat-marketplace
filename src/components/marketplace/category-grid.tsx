@@ -6,6 +6,7 @@ import { Badge } from "@/components/ui/badge";
 import { DynamicIcon } from "./dynamic-icon";
 import { DOCUMENT_CATEGORIES } from "@/lib/marketplace/data";
 import { useMarketplaceStore } from "@/lib/marketplace/store";
+import { useInView } from "@/hooks/use-in-view";
 import type { DocumentCategory } from "@/lib/marketplace/types";
 import { cn } from "@/lib/utils";
 
@@ -50,6 +51,8 @@ const COLOR_MAP: Record<string, { bg: string; text: string; border: string; hove
 
 export function CategoryGrid() {
   const { setView, setDocumentCategory } = useMarketplaceStore();
+  // Reveal-on-scroll for the grid container; children stagger in via .reveal-stagger CSS
+  const [gridRef, gridInView] = useInView<HTMLDivElement>();
 
   const handleCategoryClick = (cat: DocumentCategory) => {
     setDocumentCategory(cat);
@@ -65,17 +68,24 @@ export function CategoryGrid() {
         description="Yuridik shaxslar, ko'chmas mulk, sud ishlari va boshqa 700+ tayyor hujjat namunalari. Kerakli kategoriyani tanlang."
       />
 
-      <div className="mt-10 grid grid-cols-1 gap-5 sm:grid-cols-2 lg:grid-cols-3">
+      <div
+        ref={gridRef}
+        className={cn(
+          "reveal-stagger mt-10 grid grid-cols-1 gap-5 sm:grid-cols-2 lg:grid-cols-3",
+          gridInView && "in-view"
+        )}
+      >
         {DOCUMENT_CATEGORIES.map((cat) => {
           const colors = COLOR_MAP[cat.color] ?? COLOR_MAP.emerald;
           return (
             <Card
               key={cat.id}
               onClick={() => handleCategoryClick(cat.id)}
-              className="group relative cursor-pointer overflow-hidden border-border bg-card p-6 transition-all hover:-translate-y-1 hover:shadow-hard"
+              // Refined hover: small lift + beautiful-md shadow (warm-editorial.md two-elevation rule)
+              className="group relative cursor-pointer overflow-hidden border-border bg-card p-6 hover:-translate-y-1 hover:shadow-beautiful-md hover:border-border/0"
             >
               {/* Hard shadow accent line on hover */}
-              <div className="absolute left-0 top-0 h-full w-1 bg-accent opacity-0 transition-opacity group-hover:opacity-100" />
+              <div className="absolute left-0 top-0 h-full w-1 bg-accent opacity-0 transition-opacity duration-200 ease-[cubic-bezier(0.2,0,0,1)] group-hover:opacity-100" />
 
               <div className="flex items-start justify-between">
                 <div
@@ -114,9 +124,9 @@ export function CategoryGrid() {
                 )}
               </div>
 
-              <div className="mt-5 flex items-center gap-1 font-mono text-xs font-semibold uppercase tracking-wider text-accent opacity-0 transition-opacity group-hover:opacity-100">
+              <div className="mt-5 flex items-center gap-1 font-mono text-xs font-semibold uppercase tracking-wider text-accent opacity-0 transition-all duration-200 ease-[cubic-bezier(0.2,0,0,1)] group-hover:opacity-100">
                 Ko'rish
-                <ArrowRight className="h-3.5 w-3.5 transition-transform group-hover:translate-x-1" />
+                <ArrowRight className="h-3.5 w-3.5 transition-transform duration-200 ease-[cubic-bezier(0.2,0,0,1)] group-hover:translate-x-1" />
               </div>
             </Card>
           );
@@ -137,8 +147,17 @@ export function SectionHeader({
   description?: string;
   action?: React.ReactNode;
 }) {
+  // Scroll-reveal — fades up + settles. Respects prefers-reduced-motion (see hook).
+  const [ref, inView] = useInView<HTMLDivElement>();
+
   return (
-    <div className="flex flex-col items-start justify-between gap-4 sm:flex-row sm:items-end">
+    <div
+      ref={ref}
+      className={cn(
+        "reveal-on-scroll flex flex-col items-start justify-between gap-4 sm:flex-row sm:items-end",
+        inView && "in-view"
+      )}
+    >
       <div className="max-w-2xl">
         <div className="mb-3 flex items-center gap-3">
           <span className="h-px w-8 bg-accent" />

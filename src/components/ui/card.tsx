@@ -7,7 +7,13 @@ function Card({ className, ...props }: React.ComponentProps<"div">) {
     <div
       data-slot="card"
       className={cn(
+        // Warm-editorial card recipe (warm-editorial/DESIGN.md):
+        // - 16px radius (rounded-xl)
+        // - Two elevation levels: flat (default) + raised (hover via parent class)
+        // - Brand easing on hover
         "bg-card text-card-foreground flex flex-col gap-6 rounded-xl border py-6 shadow-sm",
+        // Smooth hover transition (consumers add hover:-translate-y-1 hover:shadow-* themselves)
+        "transition-[transform,box-shadow,border-color] duration-200 ease-[cubic-bezier(0.2,0,0,1)]",
         className
       )}
       {...props}

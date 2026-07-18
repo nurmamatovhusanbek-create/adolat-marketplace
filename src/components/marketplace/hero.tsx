@@ -42,7 +42,7 @@ export function Hero() {
           {/* Left: editorial copy + search */}
           <div className="lg:col-span-7">
             {/* Editorial eyebrow with date — newspaper masthead feel */}
-            <div className="mb-6 flex items-center gap-3 text-xs">
+            <div className="rise rise-1 mb-6 flex items-center gap-3 text-xs">
               <span className="font-mono uppercase tracking-[0.2em] text-muted-foreground">
                 {new Date().toLocaleDateString("uz-UZ", { day: "numeric", month: "long", year: "numeric" })}
               </span>
@@ -53,7 +53,7 @@ export function Hero() {
               </Badge>
             </div>
 
-            <h1 className="text-balance font-serif text-4xl font-bold leading-[1.05] tracking-tight text-foreground sm:text-5xl lg:text-6xl">
+            <h1 className="rise rise-2 text-balance font-serif text-4xl font-bold leading-[1.05] tracking-tight text-foreground sm:text-5xl lg:text-6xl">
               Huquqiy masalalarni{" "}
               <span className="relative inline-block whitespace-nowrap">
                 <span className="italic text-accent">bir joyda</span>
@@ -74,14 +74,14 @@ export function Hero() {
               yeching
             </h1>
 
-            <p className="mt-7 max-w-xl text-balance text-base leading-relaxed text-muted-foreground sm:text-lg">
+            <p className="rise rise-3 mt-7 max-w-xl text-balance text-base leading-relaxed text-muted-foreground sm:text-lg">
               Tasdiqlangan advokatlarni toping, 700+ tayyor huquqiy hujjat namunalarini
               yuklab oling yoki huquqiy so'rovingizni joylang va bir necha soat ichida
               mutaxassislar javob bersin.
             </p>
 
             {/* Dual search — editorial toggle */}
-            <form onSubmit={handleSearch} className="mt-9">
+            <form onSubmit={handleSearch} className="rise rise-4 mt-9">
               <div className="mb-3 flex items-center gap-2">
                 <span className="text-xs font-semibold uppercase tracking-wider text-muted-foreground">
                   Qidiruv turi:
@@ -91,7 +91,7 @@ export function Hero() {
                     type="button"
                     onClick={() => setMode("advocates")}
                     className={cn(
-                      "flex items-center gap-1.5 rounded px-3 py-1 text-xs font-medium transition-all",
+                      "flex items-center gap-1.5 rounded px-3 py-1 text-xs font-medium transition-colors duration-150 ease-[cubic-bezier(0.2,0,0,1)]",
                       mode === "advocates"
                         ? "bg-foreground text-background"
                         : "text-muted-foreground hover:text-foreground"
@@ -104,7 +104,7 @@ export function Hero() {
                     type="button"
                     onClick={() => setMode("documents")}
                     className={cn(
-                      "flex items-center gap-1.5 rounded px-3 py-1 text-xs font-medium transition-all",
+                      "flex items-center gap-1.5 rounded px-3 py-1 text-xs font-medium transition-colors duration-150 ease-[cubic-bezier(0.2,0,0,1)]",
                       mode === "documents"
                         ? "bg-foreground text-background"
                         : "text-muted-foreground hover:text-foreground"
@@ -133,7 +133,7 @@ export function Hero() {
                 <Button
                   type="submit"
                   size="lg"
-                  className="h-14 gap-1.5 bg-foreground px-8 text-base text-background shadow-hard-clay transition-all hover:translate-x-0.5 hover:translate-y-0.5 hover:bg-foreground"
+                  className="h-14 gap-1.5 bg-foreground px-8 text-base text-background shadow-hard-clay transition-[transform,box-shadow,background-color] duration-150 ease-[cubic-bezier(0.2,0,0,1)] hover:translate-x-0.5 hover:translate-y-0.5 hover:bg-foreground active:scale-[0.98]"
                 >
                   Qidirish
                   <ArrowRight className="h-4 w-4" />
@@ -152,7 +152,7 @@ export function Hero() {
                       setMode(tag.includes("shartnoma") || tag.includes("hujjat") ? "documents" : "advocates");
                     }}
                     className={cn(
-                      "rounded-full border border-border bg-card px-3 py-1 text-xs font-medium transition-all hover:border-accent/40 hover:text-accent",
+                      "rounded-full border border-border bg-card px-3 py-1 text-xs font-medium transition-colors duration-150 ease-[cubic-bezier(0.2,0,0,1)] hover:border-accent/40 hover:text-accent active:scale-[0.98]",
                       i === 0 && "border-accent/30 bg-accent/5 text-accent"
                     )}
                   >
@@ -163,7 +163,7 @@ export function Hero() {
             </form>
 
             {/* CTA: post request */}
-            <div className="mt-8 flex flex-wrap items-center gap-3 text-sm">
+            <div className="rise rise-5 mt-8 flex flex-wrap items-center gap-3 text-sm">
               <span className="text-muted-foreground">Yoki o'z so'rovingizni joylang:</span>
               <Button
                 variant="outline"
@@ -176,7 +176,7 @@ export function Hero() {
             </div>
 
             {/* Trust badges — Trust & Authority pattern */}
-            <div className="mt-10 flex flex-wrap items-center gap-x-6 gap-y-3 border-t border-border pt-6 text-xs text-muted-foreground">
+            <div className="rise rise-5 mt-10 flex flex-wrap items-center gap-x-6 gap-y-3 border-t border-border pt-6 text-xs text-muted-foreground">
               <div className="flex items-center gap-1.5">
                 <BadgeCheck className="h-4 w-4 text-accent" />
                 Barcha advokatlar litsenziyalangan
@@ -193,7 +193,7 @@ export function Hero() {
           </div>
 
           {/* Right: editorial stat card — magazine sidebar feel */}
-          <div className="lg:col-span-5">
+          <div className="rise rise-3 lg:col-span-5">
             <div className="relative">
               {/* Editorial label */}
               <div className="mb-3 flex items-center justify-between">

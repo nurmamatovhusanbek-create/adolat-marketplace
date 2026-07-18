@@ -1,77 +1,51 @@
-# Dependencies
-node_modules/
-.pnp/
+# dependencies
+/node_modules
+/.pnp
 .pnp.js
 
-# Next.js
-.next/
-out/
-build/
-dist/
+# testing
+/coverage
 
-# Production
-*.tsbuildinfo
-next-env.d.ts
+# next.js
+/.next/
+/out/
 
-# Environment
-.env
-.env.local
-.env.production.local
-.env.development.local
+# production
+/build
 
-# Database
-db/
-*.db
-*.db-journal
-*.sqlite
-*.sqlite3
+# misc
+.DS_Store
+*.pem
 
-# Storage (user uploads)
-storage/
-
-# Logs
-*.log
-dev.log
-server.log
+# debug
 npm-debug.log*
 yarn-debug.log*
 yarn-error.log*
+.pnpm-debug.log*
+
+# local env files
+.env
+.env*.local
+
+# vercel
+.vercel
+
+# typescript
+*.tsbuildinfo
+next-env.d.ts
 
 # IDE
 .vscode/
 .idea/
-*.swp
-*.swo
-*~
 
-# OS
-.DS_Store
-Thumbs.db
+# logs
+dev.log
+*.log
 
-# Research repos (cloned for design reference)
+# platform files (NOT needed in repo)
+download/
 research/
-
-# Scripts (research data) — but KEEP templates-data.json
-scripts/*.json
-!scripts/templates-data.json
-
-# Download artifacts
-download/*.png
-download/*.pdf
-download/*.docx
-
-# Mini-services
-mini-services/chat-service/node_modules/
-mini-services/chat-service/storage/
-
-# Prisma
-prisma/migrations/
-
-# Docker
-docker-compose.override.yml
-
-# Vercel
-.vercel
-
-# Render
-.render/
+research-v2/
+skills/
+tool-results/
+worklog.md

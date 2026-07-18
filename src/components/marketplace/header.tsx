@@ -135,24 +135,26 @@ export function Header() {
         {/* Actions */}
         <div className="ml-auto flex items-center gap-2 lg:ml-2">
           {!hideNav && (
-          <Button
-            variant="outline"
-            size="sm"
-            onClick={() => handleNav("for-advocates")}
-            className="hidden sm:inline-flex gap-1.5"
-          >
-            <Users className="h-3.5 w-3.5" />
-            Advokat uchun
-          </Button>
-          <Button
-            size="sm"
-            onClick={() => setPostRequestOpen(true)}
-            className="gap-1.5 bg-foreground text-background hover:bg-foreground/90"
-          >
-            <Plus className="h-3.5 w-3.5" />
-            <span className="hidden sm:inline">So'rov joylash</span>
-            <span className="sm:hidden">So'rov</span>
-          </Button>
+            <>
+              <Button
+                variant="outline"
+                size="sm"
+                onClick={() => handleNav("for-advocates")}
+                className="hidden sm:inline-flex gap-1.5"
+              >
+                <Users className="h-3.5 w-3.5" />
+                Advokat uchun
+              </Button>
+              <Button
+                size="sm"
+                onClick={() => setPostRequestOpen(true)}
+                className="gap-1.5 bg-foreground text-background hover:bg-foreground/90"
+              >
+                <Plus className="h-3.5 w-3.5" />
+                <span className="hidden sm:inline">So'rov joylash</span>
+                <span className="sm:hidden">So'rov</span>
+              </Button>
+            </>
           )}
 
           {/* Back to site button for admin/advocate views */}

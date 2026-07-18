@@ -111,10 +111,26 @@ export function ChatPanel() {
         <div className="flex h-[calc(100vh-9rem)] flex-col">
           <ScrollArea className="flex-1 bg-secondary/20 p-4">
             {state.loading ? (<div className="flex h-full items-center justify-center"><Loader2 className="h-6 w-6 animate-spin text-muted-foreground" /></div>)
-            : state.messages.length === 0 ? (<div className="flex h-full flex-col items-center justify-center gap-2 text-center"><div className="flex h-12 w-12 items-center justify-center rounded-full bg-accent/10"><Send className="h-6 w-6 text-accent" /></div><p className="font-serif text-sm font-bold">Suhbatni boshlang</p><p className="max-w-xs text-xs text-muted-foreground">Birinchi xabaringizni yuboring.</p></div>)
+            : state.messages.length === 0 ? (
+              /* Empty state — rise entrance for celebratory feel */
+              <div className="rise rise-1 flex h-full flex-col items-center justify-center gap-2 text-center">
+                <div className="flex h-12 w-12 items-center justify-center rounded-full bg-accent/10">
+                  <Send className="h-6 w-6 text-accent" />
+                </div>
+                <p className="font-serif text-sm font-bold">Suhbatni boshlang</p>
+                <p className="max-w-xs text-xs text-muted-foreground">Birinchi xabaringizni yuboring.</p>
+              </div>
+            )
             : (<div className="space-y-3">{state.messages.map((msg) => { const isMine = msg.senderId === currentUserId; return (
-              <div key={msg.id} className={cn("flex", isMine ? "justify-end" : "justify-start")}>
-                <div className={cn("max-w-[80%] rounded-lg p-3", isMine ? "bg-foreground text-background" : "bg-card border border-border")}>
+              /* Message bubble — slide-in entrance via CSS animation.
+                 Use transform + opacity only (GPU-composited, no layout thrashing). */
+              <div key={msg.id} className={cn("flex animate-[riseIn_0.3s_cubic-bezier(0.2,0,0,1)_forwards]", isMine ? "justify-end" : "justify-start")}>
+                <div className={cn(
+                  "max-w-[80%] rounded-2xl p-3 shadow-beautiful-sm",
+                  isMine
+                    ? "bg-foreground text-background rounded-br-md"
+                    : "bg-card border border-border rounded-bl-md"
+                )}>
                   {msg.content && <p className="text-sm leading-relaxed whitespace-pre-wrap break-words">{msg.content}</p>}
                   {msg.attachments?.length > 0 && <div className="mt-2 space-y-1.5">{msg.attachments.map((att) => <AttachmentChip key={att.filename} att={att} dark={isMine} />)}</div>}
                   <div className={cn("mt-1 flex items-center justify-end gap-1 text-[10px]", isMine ? "text-background/60" : "text-muted-foreground")}>
@@ -122,15 +138,28 @@ export function ChatPanel() {
                     {isMine && (msg.isRead ? <CheckCheck className="h-3 w-3" /> : <Check className="h-3 w-3" />)}
                   </div>
                 </div>
-              </div>); })}<div ref={messagesEndRef} /></div>)}
+              </div>); })}
+              {/* Typing indicator — shown when other user is typing.
+                   Three dots bounce in sequence via .typing-dot CSS in globals.css. */}
+              {state.otherTyping && (
+                <div className="flex justify-start">
+                  <div className="flex items-center gap-1 rounded-2xl rounded-bl-md border border-border bg-card px-4 py-3 shadow-beautiful-sm">
+                    <span className="typing-dot h-1.5 w-1.5 rounded-full bg-muted-foreground" />
+                    <span className="typing-dot h-1.5 w-1.5 rounded-full bg-muted-foreground" />
+                    <span className="typing-dot h-1.5 w-1.5 rounded-full bg-muted-foreground" />
+                  </div>
+                </div>
+              )}
+              <div ref={messagesEndRef} />
+            </div>)}
           </ScrollArea>
           {pendingAttachments.length > 0 && (<div className="border-t border-border bg-card p-2"><div className="flex flex-wrap gap-2">{pendingAttachments.map((att, i) => (<div key={att.filename} className="flex items-center gap-2 rounded-md border border-border bg-secondary/50 px-2 py-1"><FileText className="h-3 w-3 text-accent" /><span className="max-w-32 truncate text-[11px]">{att.originalName}</span><button onClick={() => setPendingAttachments(p => p.filter((_, idx) => idx !== i))} className="text-muted-foreground hover:text-destructive"><X className="h-3 w-3" /></button></div>))}</div></div>)}
           <div className="border-t border-border bg-card p-3">
             <div className="flex items-end gap-2">
               <input ref={fileInputRef} type="file" onChange={handleFileSelect} className="hidden" accept="image/jpeg,image/png,image/webp,image/gif,application/pdf,.doc,.docx,.txt" />
               <Button variant="ghost" size="icon" onClick={() => fileInputRef.current?.click()} disabled={uploadingFile || state.sending} className="h-9 w-9 shrink-0" aria-label="Fayl biriktirish">{uploadingFile ? <Loader2 className="h-4 w-4 animate-spin" /> : <Paperclip className="h-4 w-4" />}</Button>
-              <Input value={input} onChange={(e) => setInput(e.target.value)} onKeyDown={(e) => { if (e.key === "Enter" && !e.shiftKey) { e.preventDefault(); void handleSend(); } }} placeholder="Xabar yozing..." disabled={state.sending || state.loading || !state.conversation} className="h-9 flex-1 resize-none" />
-              <Button onClick={handleSend} disabled={state.sending || (!input.trim() && pendingAttachments.length === 0) || !state.conversation} size="icon" className="h-9 w-9 shrink-0 bg-foreground text-background hover:bg-foreground/90">{state.sending ? <Loader2 className="h-4 w-4 animate-spin" /> : <Send className="h-4 w-4" />}</Button>
+              <Input value={input} onChange={(e) => setInput(e.target.value)} onKeyDown={(e) => { if (e.key === "Enter" && !e.shiftKey) { e.preventDefault(); void handleSend(); } }} placeholder="Xabar yozing..." disabled={state.sending || state.loading || !state.conversation} className="h-9 flex-1 resize-none" aria-label="Xabar matni" />
+              <Button onClick={handleSend} disabled={state.sending || (!input.trim() && pendingAttachments.length === 0) || !state.conversation} size="icon" className="h-9 w-9 shrink-0 bg-foreground text-background hover:bg-foreground/90" aria-label="Xabar yuborish">{state.sending ? <Loader2 className="h-4 w-4 animate-spin" /> : <Send className="h-4 w-4" />}</Button>
             </div>
             <p className="mt-1.5 px-1 text-[10px] text-muted-foreground">Enter — yuborish · Shift+Enter — yangi qator · Maks 10 MB</p>
           </div>

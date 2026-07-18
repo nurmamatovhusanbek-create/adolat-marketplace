@@ -200,7 +200,7 @@ export function DocumentListing() {
                 const cat = DOCUMENT_CATEGORIES.find(c => c.id === doc.category);
                 return (
                   <Card key={doc.id} onClick={() => setActiveDocument(doc as unknown as LegalDocument)}
-                    className="group relative flex cursor-pointer flex-col border-border bg-card p-5 transition-all hover:-translate-y-1 hover:shadow-hard">
+                    className="group relative flex cursor-pointer flex-col border-border bg-card p-5 hover:-translate-y-1 hover:shadow-beautiful-md hover:border-border/0">
                     {idx < 3 && (
                       <div className="absolute -left-2 -top-2 flex h-7 w-7 items-center justify-center rounded-full bg-foreground font-serif text-xs font-bold text-background shadow-hard-sm">
                         {idx + 1}

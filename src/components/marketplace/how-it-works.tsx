@@ -30,7 +30,7 @@ export function HowItWorks() {
       {/* Two parallel flows */}
       <div className="mt-12 grid gap-6 lg:grid-cols-2">
         {/* Documents flow */}
-        <Card className="group relative overflow-hidden border-border bg-card p-8 transition-all hover:shadow-hard">
+        <Card className="group relative overflow-hidden border-border bg-card p-8 hover:-translate-y-1 hover:shadow-beautiful-md hover:border-border/0">
           {/* Editorial number */}
           <div className="absolute right-6 top-6 font-serif text-7xl font-bold text-accent/10">
             01
@@ -73,14 +73,14 @@ export function HowItWorks() {
 
           <button
             onClick={() => setView("documents")}
-            className="mt-6 flex w-full items-center justify-center gap-1.5 rounded-lg border border-trust-verified/30 bg-trust-verified/5 py-2.5 text-sm font-semibold text-trust-verified transition-all hover:bg-trust-verified/10"
+            className="mt-6 flex w-full items-center justify-center gap-1.5 rounded-lg border border-trust-verified/30 bg-trust-verified/5 py-2.5 text-sm font-semibold text-trust-verified transition-colors duration-150 ease-[cubic-bezier(0.2,0,0,1)] hover:bg-trust-verified/10 active:scale-[0.98]"
           >
             Hujjatlarga o'tish
           </button>
         </Card>
 
         {/* Advocates flow */}
-        <Card className="group relative overflow-hidden border-border bg-card p-8 transition-all hover:shadow-hard">
+        <Card className="group relative overflow-hidden border-border bg-card p-8 hover:-translate-y-1 hover:shadow-beautiful-md hover:border-border/0">
           <div className="absolute right-6 top-6 font-serif text-7xl font-bold text-accent/10">
             02
           </div>
@@ -123,7 +123,7 @@ export function HowItWorks() {
 
           <button
             onClick={() => setView("advocates")}
-            className="mt-6 flex w-full items-center justify-center gap-1.5 rounded-lg border border-accent/30 bg-accent/5 py-2.5 text-sm font-semibold text-accent transition-all hover:bg-accent/10"
+            className="mt-6 flex w-full items-center justify-center gap-1.5 rounded-lg border border-accent/30 bg-accent/5 py-2.5 text-sm font-semibold text-accent transition-colors duration-150 ease-[cubic-bezier(0.2,0,0,1)] hover:bg-accent/10 active:scale-[0.98]"
           >
             Advokatlarga o'tish
           </button>
@@ -162,7 +162,7 @@ function Step({
         className="group flex w-full items-start gap-3 text-left disabled:cursor-default"
       >
         <div className="relative flex shrink-0 flex-col items-center">
-          <div className="flex h-9 w-9 items-center justify-center rounded-full border-2 border-foreground bg-background font-serif text-sm font-bold text-foreground transition-colors group-hover:border-accent group-hover:text-accent">
+          <div className="flex h-9 w-9 items-center justify-center rounded-full border-2 border-foreground bg-background font-serif text-sm font-bold text-foreground transition-colors duration-150 ease-[cubic-bezier(0.2,0,0,1)] group-hover:border-accent group-hover:text-accent">
             {num}
           </div>
         </div>

@@ -17,7 +17,7 @@ export function Testimonials() {
 
         <div className="mt-10 grid gap-5 sm:grid-cols-2 lg:grid-cols-4">
           {TESTIMONIALS.map((t, i) => (
-            <Card key={t.id} className="group relative flex flex-col gap-3 border-border bg-card p-5 transition-all hover:shadow-hard-sm">
+            <Card key={t.id} className="group relative flex flex-col gap-3 border-border bg-card p-5 hover:-translate-y-0.5 hover:shadow-beautiful-sm">
               {/* Editorial quote mark */}
               <Quote className="absolute right-4 top-4 h-8 w-8 text-accent/15" />
               {i === 0 && (

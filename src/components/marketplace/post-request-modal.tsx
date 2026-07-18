@@ -131,9 +131,10 @@ export function PostRequestModal() {
     <Dialog open={isPostRequestOpen} onOpenChange={(o) => !o && handleClose()}>
       <DialogContent className="w-[98vw] max-w-[98vw] h-[95vh] max-h-[95vh] overflow-y-auto p-0 scrollbar-thin">
         {submitted ? (
-          <div className="flex flex-col items-center gap-4 p-8 text-center">
-            <div className="flex h-16 w-16 items-center justify-center rounded-full bg-emerald-100">
-              <CheckCircle2 className="h-9 w-9 text-emerald-600" />
+          /* Success state — rise entrance choreography for celebratory feel */
+          <div className="rise rise-1 flex flex-col items-center gap-4 p-8 text-center">
+            <div className="flex h-16 w-16 items-center justify-center rounded-full bg-trust-verified/10">
+              <CheckCircle2 className="h-9 w-9 text-trust-verified" />
             </div>
             <DialogTitle className="text-xl font-bold text-foreground">
               So'rovingiz joylandi!
@@ -165,23 +166,24 @@ export function PostRequestModal() {
                 So'rovingizni joylang va advokatlar siz bilan bog'lanadi. Butunlay bepul.
               </p>
 
-              {/* Step indicator */}
+              {/* Step indicator — Law of Uniform Connectedness (laws-of-ux.md):
+                  connecting lines tie wizard steps together more strongly than proximity alone. */}
               <div className="mt-4 flex items-center gap-1.5">
                 {STEPS.map((s, i) => (
                   <div key={s} className="flex flex-1 items-center gap-1.5">
                     <div
-                      className={`flex h-7 w-7 items-center justify-center rounded-full text-xs font-bold transition-colors ${
+                      className={`flex h-7 w-7 items-center justify-center rounded-full text-xs font-bold transition-colors duration-200 ease-[cubic-bezier(0.2,0,0,1)] ${
                         i < step
-                          ? "bg-emerald-600 text-white"
+                          ? "bg-trust-verified text-white"
                           : i === step
-                            ? "bg-primary text-primary-foreground"
+                            ? "bg-primary text-primary-foreground ring-2 ring-accent/40 ring-offset-2 ring-offset-background"
                             : "bg-secondary-foreground/10 text-muted-foreground"
                       }`}
                     >
                       {i < step ? <CheckCircle2 className="h-4 w-4" /> : i + 1}
                     </div>
                     <span
-                      className={`hidden text-xs font-medium sm:inline ${
+                      className={`hidden text-xs font-medium transition-colors duration-200 ease-[cubic-bezier(0.2,0,0,1)] sm:inline ${
                         i === step ? "text-foreground" : "text-muted-foreground"
                       }`}
                     >
@@ -189,8 +191,8 @@ export function PostRequestModal() {
                     </span>
                     {i < STEPS.length - 1 && (
                       <div
-                        className={`h-0.5 flex-1 rounded ${
-                          i < step ? "bg-emerald-600" : "bg-border"
+                        className={`h-0.5 flex-1 rounded transition-colors duration-300 ease-[cubic-bezier(0.2,0,0,1)] ${
+                          i < step ? "bg-trust-verified" : "bg-border"
                         }`}
                       />
                     )}
@@ -558,14 +560,14 @@ function TypeCard({
   return (
     <button
       onClick={onClick}
-      className={`flex flex-col items-start gap-1.5 rounded-xl border-2 p-4 text-left transition-all ${
+      className={`flex flex-col items-start gap-1.5 rounded-xl border-2 p-4 text-left transition-colors duration-150 ease-[cubic-bezier(0.2,0,0,1)] active:scale-[0.99] ${
         selected
-          ? "border-primary bg-primary/5 shadow-sm"
+          ? "border-primary bg-primary/5 shadow-beautiful-sm"
           : "border-border bg-card hover:border-primary/40"
       }`}
     >
       <div
-        className={`flex h-9 w-9 items-center justify-center rounded-lg ${
+        className={`flex h-9 w-9 items-center justify-center rounded-lg transition-colors duration-150 ease-[cubic-bezier(0.2,0,0,1)] ${
           selected ? "bg-primary text-primary-foreground" : "bg-secondary text-muted-foreground"
         }`}
       >

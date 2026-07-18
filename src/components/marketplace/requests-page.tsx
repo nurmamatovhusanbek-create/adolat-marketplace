@@ -151,7 +151,7 @@ export function RequestsPage() {
           {filtered.map((req) => (
             <Card
               key={req.id}
-              className="border-border p-5 transition-all hover:border-primary/30 hover:shadow-md"
+              className="border-border p-5 hover:-translate-y-0.5 hover:shadow-beautiful-sm hover:border-primary/30"
             >
               <div className="flex flex-col gap-3 sm:flex-row sm:items-start">
                 <div className="flex-1">

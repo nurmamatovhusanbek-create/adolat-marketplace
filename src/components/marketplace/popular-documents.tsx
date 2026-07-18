@@ -5,11 +5,14 @@ import { Download, Star, Clock, FileText, ArrowRight, Sparkles, Tag, ShieldCheck
 import { Card } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
+import { Skeleton } from "@/components/ui/skeleton";
 import { SectionHeader } from "./category-grid";
 import { DOCUMENT_CATEGORIES } from "@/lib/marketplace/data";
 import { useMarketplaceStore } from "@/lib/marketplace/store";
+import { useInView } from "@/hooks/use-in-view";
 import type { LegalDocument } from "@/lib/marketplace/types";
 import { formatDownloads, formatPrice } from "@/lib/marketplace/format";
+import { cn } from "@/lib/utils";
 
 interface ApiDoc {
   id: string;
@@ -37,6 +40,8 @@ export function PopularDocuments() {
   const { setView, setActiveDocument } = useMarketplaceStore();
   const [docs, setDocs] = useState<ApiDoc[]>([]);
   const [loading, setLoading] = useState(true);
+  // Reveal-on-scroll for the grid; children stagger in via .reveal-stagger CSS
+  const [gridRef, gridInView] = useInView<HTMLDivElement>();
 
   useEffect(() => {
     (async () => {
@@ -68,20 +73,51 @@ export function PopularDocuments() {
       />
 
       {loading ? (
+        /* Skeleton matches loaded card shape per state-coverage.md:
+           badge row + title + description + meta row + formats + footer. */
         <div className="mt-10 grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-3">
           {[1, 2, 3, 4, 5, 6].map((i) => (
-            <Card key={i} className="h-64 animate-pulse border-border bg-secondary/40" />
+            <Card key={i} className="flex h-64 flex-col border-border bg-card p-5">
+              <div className="flex items-center justify-between">
+                <Skeleton className="h-5 w-20 rounded-full" />
+                <Skeleton className="h-5 w-12 rounded-full" />
+              </div>
+              <Skeleton className="mt-3 h-4 w-full" />
+              <Skeleton className="mt-1.5 h-4 w-3/4" />
+              <Skeleton className="mt-1.5 h-3 w-full" />
+              <Skeleton className="mt-1.5 h-3 w-5/6" />
+              <div className="mt-4 flex gap-3">
+                <Skeleton className="h-3 w-10" />
+                <Skeleton className="h-3 w-10" />
+                <Skeleton className="h-3 w-10" />
+                <Skeleton className="ml-auto h-3 w-12" />
+              </div>
+              <div className="mt-3 flex gap-1.5">
+                <Skeleton className="h-4 w-10" />
+                <Skeleton className="h-4 w-10" />
+              </div>
+              <div className="mt-auto flex items-center justify-between border-t border-border pt-3">
+                <Skeleton className="h-6 w-20" />
+                <Skeleton className="h-8 w-24 rounded-md" />
+              </div>
+            </Card>
           ))}
         </div>
       ) : (
-        <div className="mt-10 grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-3">
+        <div
+          ref={gridRef}
+          className={cn(
+            "reveal-stagger mt-10 grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-3",
+            gridInView && "in-view"
+          )}
+        >
           {docs.map((doc, idx) => {
             const cat = DOCUMENT_CATEGORIES.find((c) => c.id === doc.category);
             return (
               <Card
                 key={doc.id}
                 onClick={() => setActiveDocument(doc as LegalDocument)}
-                className="group relative flex cursor-pointer flex-col border-border bg-card p-5 transition-all hover:-translate-y-1 hover:shadow-hard"
+                className="group relative flex cursor-pointer flex-col border-border bg-card p-5 hover:-translate-y-1 hover:shadow-beautiful-md hover:border-border/0"
               >
                 {/* Editorial rank badge for top 3 */}
                 {idx < 3 && (

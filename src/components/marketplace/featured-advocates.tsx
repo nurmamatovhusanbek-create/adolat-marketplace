@@ -13,9 +13,11 @@ import {
 import { Card } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
+import { Skeleton } from "@/components/ui/skeleton";
 import { SectionHeader } from "./category-grid";
 import { SPECIALTIES } from "@/lib/marketplace/data";
 import { useMarketplaceStore } from "@/lib/marketplace/store";
+import { useInView } from "@/hooks/use-in-view";
 import { formatPrice } from "@/lib/marketplace/format";
 import type { Advocate } from "@/lib/marketplace/types";
 import { openChatWith } from "@/components/chat/chat-panel";
@@ -53,6 +55,8 @@ export function FeaturedAdvocates() {
   const { setView, setActiveAdvocate } = useMarketplaceStore();
   const [advocates, setAdvocates] = useState<ApiAdvocate[]>([]);
   const [loading, setLoading] = useState(true);
+  // Reveal-on-scroll for the grid; children stagger in via .reveal-stagger CSS
+  const [gridRef, gridInView] = useInView<HTMLDivElement>();
 
   useEffect(() => {
     (async () => {
@@ -91,19 +95,51 @@ export function FeaturedAdvocates() {
         />
 
         {loading ? (
+          /* Skeleton matches loaded card shape per state-coverage.md:
+             avatar + name + title + badges + 3-stat row + footer + response strip.
+             Never use generic sizes — always mirror the real content layout. */
           <div className="mt-10 grid grid-cols-1 gap-5 sm:grid-cols-2 lg:grid-cols-3">
             {[1, 2, 3, 4, 5, 6].map((i) => (
-              <Card key={i} className="h-72 animate-pulse border-border bg-secondary/40" />
+              <Card key={i} className="h-72 border-border bg-card p-5">
+                <div className="flex items-start gap-3">
+                  <Skeleton className="h-14 w-14 rounded-lg" />
+                  <div className="flex-1 space-y-2">
+                    <Skeleton className="h-4 w-3/4" />
+                    <Skeleton className="h-3 w-full" />
+                    <Skeleton className="h-3 w-2/3" />
+                  </div>
+                </div>
+                <div className="mt-3 flex gap-1.5">
+                  <Skeleton className="h-5 w-20 rounded-full" />
+                  <Skeleton className="h-5 w-16 rounded-full" />
+                </div>
+                <div className="mt-4 grid grid-cols-3 gap-2 border-t border-border pt-3">
+                  <Skeleton className="h-10" />
+                  <Skeleton className="h-10" />
+                  <Skeleton className="h-10" />
+                </div>
+                <div className="mt-4 flex items-center justify-between border-t border-border pt-3">
+                  <Skeleton className="h-8 w-24" />
+                  <Skeleton className="h-8 w-28 rounded-md" />
+                </div>
+                <Skeleton className="mt-3 h-8 w-full rounded-md" />
+              </Card>
             ))}
           </div>
         ) : (
-          <div className="mt-10 grid grid-cols-1 gap-5 sm:grid-cols-2 lg:grid-cols-3">
+          <div
+            ref={gridRef}
+            className={cn(
+              "reveal-stagger mt-10 grid grid-cols-1 gap-5 sm:grid-cols-2 lg:grid-cols-3",
+              gridInView && "in-view"
+            )}
+          >
             {featured.map((adv) => {
               const spec = SPECIALTIES[adv.specialty];
               return (
                 <Card
                   key={adv.id}
-                  className="group relative flex flex-col overflow-hidden border-border bg-card p-5 transition-all hover:-translate-y-1 hover:shadow-hard"
+                  className="group relative flex flex-col overflow-hidden border-border bg-card p-5 hover:-translate-y-1 hover:shadow-beautiful-md hover:border-border/0"
                 >
                   {/* Online indicator strip */}
                   {adv.online && (

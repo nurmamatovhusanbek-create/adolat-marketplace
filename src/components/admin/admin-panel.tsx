@@ -256,7 +256,7 @@ export function AdminPanel() {
                 </thead>
                 <tbody>
                   {adminDocs.map(d => (
-                    <tr key={d.id} className="border-b border-border/30 hover:bg-secondary/20">
+                    <tr key={d.id} className="border-b border-border/30 transition-colors duration-150 ease-[cubic-bezier(0.2,0,0,1)] hover:bg-secondary/20">
                       <td className="px-4 py-3">
                         <div className="font-serif font-bold text-foreground">{d.titleUz}</div>
                         <div className="text-[10px] text-muted-foreground">{d.slug}</div>
@@ -308,7 +308,7 @@ export function AdminPanel() {
                 </thead>
                 <tbody>
                   {filteredUsers.map(u => (
-                    <tr key={u.id} className="border-b border-border/50 hover:bg-secondary/30">
+                    <tr key={u.id} className="border-b border-border/50 transition-colors duration-150 ease-[cubic-bezier(0.2,0,0,1)] hover:bg-secondary/30">
                       <td className="px-4 py-3">
                         <div className="font-serif font-bold text-foreground">{u.name}</div>
                         <div className="text-[10px] text-muted-foreground">{u.email}</div>
@@ -356,7 +356,7 @@ export function AdminPanel() {
                   {logs.map(l => {
                     const actionInfo = ACTION_LABELS[l.action] || { label: l.action, color: "text-muted-foreground" };
                     return (
-                      <tr key={l.id} className="border-b border-border/30 hover:bg-secondary/20">
+                      <tr key={l.id} className="border-b border-border/30 transition-colors duration-150 ease-[cubic-bezier(0.2,0,0,1)] hover:bg-secondary/20">
                         <td className="px-4 py-2 font-mono text-[10px] text-muted-foreground whitespace-nowrap">{new Date(l.createdAt).toLocaleString("uz-UZ", { dateStyle: "short", timeStyle: "short" })}</td>
                         <td className="px-4 py-2"><span className={cn("text-xs font-medium", actionInfo.color)}>{actionInfo.label}</span></td>
                         <td className="hidden px-4 py-2 sm:table-cell">{l.user ? <div><span className="text-xs font-medium">{l.user.name}</span><span className="ml-1 text-[10px] text-muted-foreground">({l.user.role})</span></div> : <span className="text-[10px] text-muted-foreground">—</span>}</td>
@@ -385,7 +385,7 @@ export function AdminPanel() {
 
 function StatCard({ icon, value, label, sub }: { icon: React.ReactNode; value: string; label: string; sub?: string }) {
   return (
-    <Card className="border-border p-4">
+    <Card className="border-border p-4 hover:-translate-y-0.5 hover:shadow-beautiful-sm hover:border-border/0">
       <div className="mb-2">{icon}</div>
       <div className="font-serif text-2xl font-bold text-foreground">{value}</div>
       <div className="text-[10px] font-mono uppercase tracking-wider text-muted-foreground">{label}</div>
@@ -403,7 +403,10 @@ function BarRow({ label, value, total, color }: { label: string; value: number; 
         <span className="font-bold text-foreground">{value}</span>
       </div>
       <div className="h-2 overflow-hidden rounded-full bg-secondary">
-        <div className={cn("h-full rounded-full transition-all", color)} style={{ width: `${pct}%` }} />
+        {/* Animate width on mount/change via transition-[width]. Per animation-discipline.md:
+           animate transform/opacity for GPU compositing — width animation is acceptable here
+           because it's user-triggered (data load) not scrubbed. */}
+        <div className={cn("h-full rounded-full transition-[width] duration-500 ease-[cubic-bezier(0.2,0,0,1)]", color)} style={{ width: `${pct}%` }} />
       </div>
     </div>
   );
