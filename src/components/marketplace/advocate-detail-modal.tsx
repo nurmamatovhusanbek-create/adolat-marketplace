@@ -1,20 +1,20 @@
 "use client";
 
 import {
-  Star,
-  BadgeCheck,
-  MapPin,
-  Clock,
   Briefcase,
-  Zap,
+  Calendar,
+  ChatCircle,
+  CheckCircle,
+  Clock,
   Globe,
   GraduationCap,
-  Award,
-  MessageSquare,
-  Calendar,
-  CheckCircle2,
+  Lightning,
+  MapPin,
+  Medal,
+  SealCheck,
   ShieldCheck,
-} from "lucide-react";
+  Star,
+} from "@phosphor-icons/react/dist/ssr";
 import {
   Dialog,
   DialogContent,
@@ -66,7 +66,7 @@ export function AdvocateDetailModal() {
 
   return (
     <Dialog open={isOpen} onOpenChange={(o) => !o && handleClose()}>
-      <DialogContent className="w-[98vw] max-w-[98vw] h-[95vh] max-h-[95vh] overflow-y-auto p-0 scrollbar-thin">
+      <DialogContent size="2xl" className="max-h-[90vh] overflow-hidden p-0">
         {adv && (
           <>
             {/* Header banner */}
@@ -91,7 +91,7 @@ export function AdvocateDetailModal() {
                       {adv.name}
                     </DialogTitle>
                     {adv.verified && (
-                      <BadgeCheck className="h-5 w-5 text-accent" aria-label="Tasdiqlangan" />
+                      <SealCheck weight="fill" className="h-5 w-5 text-accent" aria-label="Tasdiqlangan" />
                     )}
                     {adv.topRated && (
                       <Badge className="bg-accent text-accent-foreground text-xs">TOP-10</Badge>
@@ -100,19 +100,19 @@ export function AdvocateDetailModal() {
                   <p className="mt-1 text-sm text-primary-foreground/80">{adv.titleUz}</p>
                   <div className="mt-3 flex flex-wrap items-center gap-3 text-xs text-primary-foreground/90">
                     <span className="flex items-center gap-1">
-                      <Star className="h-3.5 w-3.5 fill-accent text-accent" />
+                      <Star weight="fill" className="h-3.5 w-3.5 fill-accent text-accent" />
                       <strong>{adv.rating}</strong> ({adv.reviewsCount} sharh)
                     </span>
                     <span className="flex items-center gap-1">
-                      <MapPin className="h-3.5 w-3.5" />
+                      <MapPin weight="regular" className="h-3.5 w-3.5" />
                       {REGIONS[adv.region].uz}
                     </span>
                     <span className="flex items-center gap-1">
-                      <Clock className="h-3.5 w-3.5" />
+                      <Clock weight="regular" className="h-3.5 w-3.5" />
                       {adv.responseTimeHours} soat javob
                     </span>
                     <span className="flex items-center gap-1">
-                      <Briefcase className="h-3.5 w-3.5" />
+                      <Briefcase weight="regular" className="h-3.5 w-3.5" />
                       {adv.experienceYears} yil tajriba
                     </span>
                   </div>
@@ -120,7 +120,7 @@ export function AdvocateDetailModal() {
               </div>
             </div>
 
-            <div className="p-6">
+            <div className="overflow-y-auto p-6 scrollbar-thin max-h-[calc(90vh-12rem)]">
               {/* Quick stats */}
               <div className="grid grid-cols-3 gap-3">
                 <StatBox value={`${adv.experienceYears}`} label="Yil tajriba" />
@@ -135,7 +135,7 @@ export function AdvocateDetailModal() {
                   className="flex-1 gap-1.5"
                   size="lg"
                 >
-                  <MessageSquare className="h-4 w-4" />
+                  <ChatCircle weight="regular" className="h-4 w-4" />
                   To'g'ridan-to'g'ri bog'lanish
                 </Button>
                 <Button
@@ -144,7 +144,7 @@ export function AdvocateDetailModal() {
                   className="flex-1 gap-1.5"
                   size="lg"
                 >
-                  <Calendar className="h-4 w-4" />
+                  <Calendar weight="regular" className="h-4 w-4" />
                   Konsultatsiya bron qilish
                 </Button>
               </div>
@@ -152,7 +152,7 @@ export function AdvocateDetailModal() {
               {/* Bio */}
               <DialogHeader className="mt-6 text-left">
                 <DialogTitle className="flex items-center gap-2 text-base">
-                  <ShieldCheck className="h-4 w-4 text-primary" />
+                  <ShieldCheck weight="regular" className="h-4 w-4 text-primary" />
                   Biografiya
                 </DialogTitle>
               </DialogHeader>
@@ -161,7 +161,7 @@ export function AdvocateDetailModal() {
               {/* Expertise */}
               <DialogHeader className="mt-6 text-left">
                 <DialogTitle className="flex items-center gap-2 text-base">
-                  <Award className="h-4 w-4 text-primary" />
+                  <Medal weight="regular" className="h-4 w-4 text-primary" />
                   Mutaxassislik sohalari
                 </DialogTitle>
               </DialogHeader>
@@ -180,7 +180,7 @@ export function AdvocateDetailModal() {
               <div className="mt-4 grid grid-cols-1 gap-2 sm:grid-cols-2">
                 {(adv.expertise ?? []).map((e) => (
                   <div key={e} className="flex items-center gap-2 text-sm">
-                    <CheckCircle2 className="h-4 w-4 shrink-0 text-emerald-600" />
+                    <CheckCircle weight="regular" className="h-4 w-4 shrink-0 text-emerald-600" />
                     <span className="text-foreground/90">{e}</span>
                   </div>
                 ))}
@@ -231,7 +231,7 @@ export function AdvocateDetailModal() {
                 </div>
                 <div className="rounded-lg border border-border bg-card p-3">
                   <div className="mb-2 flex items-center gap-1.5 text-xs font-semibold uppercase tracking-wider text-muted-foreground">
-                    <BadgeCheck className="h-3.5 w-3.5" />
+                    <SealCheck weight="fill" className="h-3.5 w-3.5" />
                     Litsenziya
                   </div>
                   <div className="text-sm font-mono font-semibold text-foreground">
@@ -248,7 +248,7 @@ export function AdvocateDetailModal() {
               {/* Pricing */}
               <DialogHeader className="text-left">
                 <DialogTitle className="flex items-center gap-2 text-base">
-                  <Zap className="h-4 w-4 text-accent" />
+                  <Lightning weight="fill" className="h-4 w-4 text-accent" />
                   Narxlar
                 </DialogTitle>
               </DialogHeader>

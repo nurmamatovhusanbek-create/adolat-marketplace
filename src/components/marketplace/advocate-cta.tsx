@@ -1,6 +1,13 @@
 "use client";
 
-import { ArrowRight, TrendingUp, ShieldCheck, Users, Wallet, Sparkles } from "lucide-react";
+import {
+  ArrowRight,
+  TrendUp,
+  ShieldCheck,
+  Users,
+  Wallet,
+  Sparkle,
+} from "@phosphor-icons/react/dist/ssr";
 import { Button } from "@/components/ui/button";
 import { useMarketplaceStore } from "@/lib/marketplace/store";
 
@@ -8,18 +15,11 @@ export function AdvocateCTA() {
   const { setView } = useMarketplaceStore();
 
   return (
-    <section className="mx-auto max-w-7xl px-4 py-20 sm:px-6 lg:px-8">
-      <div className="relative overflow-hidden rounded-2xl bg-foreground px-6 py-12 text-background sm:px-12 lg:py-16">
-        {/* Editorial newspaper texture */}
+    <section className="mx-auto max-w-7xl px-4 py-20 sm:px-6 lg:px-8 lg:py-24">
+      <div className="relative overflow-hidden rounded-3xl bg-foreground px-6 py-12 text-background shadow-beautiful-xl sm:px-12 lg:py-16">
         <div className="pointer-events-none absolute inset-0 bg-grid-pattern opacity-10" aria-hidden />
-        <div
-          className="pointer-events-none absolute -right-32 -top-32 h-96 w-96 rounded-full bg-accent/20 blur-3xl"
-          aria-hidden
-        />
-        <div
-          className="pointer-events-none absolute -bottom-24 -left-24 h-72 w-72 rounded-full bg-trust-premium/10 blur-3xl"
-          aria-hidden
-        />
+        <div className="pointer-events-none absolute -right-32 -top-32 size-96 rounded-full bg-accent/20 blur-3xl" aria-hidden />
+        <div className="pointer-events-none absolute -bottom-24 -left-24 size-72 rounded-full bg-warning/15 blur-3xl" aria-hidden />
 
         <div className="relative grid items-center gap-8 lg:grid-cols-2">
           <div>
@@ -29,11 +29,11 @@ export function AdvocateCTA() {
                 Advokatlar uchun
               </p>
             </div>
-            <h2 className="text-balance font-serif text-3xl font-bold leading-tight tracking-tight text-background sm:text-4xl">
+            <h2 className="text-balance font-serif text-3xl font-bold leading-tight tracking-tight text-background sm:text-4xl lg:text-5xl">
               Mijozlar bazasiga kiring va{" "}
               <span className="italic text-accent">daromadingizni</span> oshiring
             </h2>
-            <p className="mt-4 max-w-xl text-balance text-sm leading-relaxed text-background/80 sm:text-base">
+            <p className="mt-4 max-w-xl text-pretty text-base leading-relaxed text-background/80">
               Bepul ro'yxatdan o'ting, profilingizni yarating va oyiga o'rtacha 30+ yangi
               mijozga ega bo'ling. Tasdiqlangan advokatlar platformada ustuvor ko'rsatiladi.
             </p>
@@ -41,11 +41,12 @@ export function AdvocateCTA() {
             <div className="mt-7 flex flex-wrap gap-3">
               <Button
                 size="lg"
+                tone="brand"
                 onClick={() => setView("for-advocates")}
-                className="gap-1.5 bg-accent text-accent-foreground hover:bg-accent/90"
               >
+                <Sparkle className="size-4" weight="fill" />
                 Bepul ro'yxatdan o'tish
-                <ArrowRight className="h-4 w-4" />
+                <ArrowRight className="size-4" weight="bold" />
               </Button>
               <Button
                 size="lg"
@@ -61,23 +62,23 @@ export function AdvocateCTA() {
           {/* Stats grid */}
           <div className="grid grid-cols-2 gap-4">
             <Card2
-              icon={<TrendingUp className="h-5 w-5" />}
+              icon={<TrendUp className="size-5" weight="duotone" />}
               value="+30 oyiga"
               label="O'rtacha yangi mijozlar"
               accent
             />
             <Card2
-              icon={<Wallet className="h-5 w-5" />}
+              icon={<Wallet className="size-5" weight="duotone" />}
               value="0% komissiya"
               label="Birinchi 3 mijoz uchun"
             />
             <Card2
-              icon={<ShieldCheck className="h-5 w-5" />}
+              icon={<ShieldCheck className="size-5" weight="duotone" />}
               value="1284+"
               label="Faol advokatlar"
             />
             <Card2
-              icon={<Users className="h-5 w-5" />}
+              icon={<Users className="size-5" weight="duotone" />}
               value="14 viloyat"
               label="Bozorga kirish"
               accent
@@ -101,8 +102,8 @@ function Card2({
   accent?: boolean;
 }) {
   return (
-    <div className={`rounded-xl border p-5 backdrop-blur-sm ${accent ? "border-accent/30 bg-accent/10" : "border-background/15 bg-background/5"}`}>
-      <div className={`mb-3 flex h-9 w-9 items-center justify-center rounded-lg ${accent ? "bg-accent/20 text-accent" : "bg-background/15 text-background"}`}>
+    <div className={`rounded-2xl border p-5 backdrop-blur-sm ${accent ? "border-accent/30 bg-accent/10" : "border-background/15 bg-background/5"}`}>
+      <div className={`mb-3 flex size-9 items-center justify-center rounded-lg ${accent ? "bg-accent/20 text-accent" : "bg-background/15 text-background"}`}>
         {icon}
       </div>
       <div className="font-serif text-xl font-bold text-background">{value}</div>

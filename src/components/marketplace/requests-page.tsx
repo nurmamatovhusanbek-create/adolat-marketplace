@@ -1,18 +1,18 @@
 "use client";
 
 import {
-  MapPin,
+  ArrowRight,
+  Briefcase,
+  BuildingOffice,
+  ChatCircle,
   Clock,
   Eye,
-  MessageSquare,
-  ArrowRight,
-  Building2,
+  Fire,
+  MagnifyingGlass,
+  MapPin,
   User,
-  Flame,
   Wallet,
-  Briefcase,
-  Search,
-} from "lucide-react";
+} from "@phosphor-icons/react/dist/ssr";
 import { Card } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
@@ -75,7 +75,7 @@ export function RequestsPage() {
       <div className="mb-6 flex flex-col items-start justify-between gap-4 sm:flex-row sm:items-end">
         <div>
           <h1 className="flex items-center gap-2 text-2xl font-bold tracking-tight text-foreground sm:text-3xl">
-            <Briefcase className="h-7 w-7 text-primary" />
+            <Briefcase weight="regular" className="h-7 w-7 text-primary" />
             Huquqiy so'rovlar taxtasi
           </h1>
           <p className="mt-1 text-sm text-muted-foreground">
@@ -93,7 +93,7 @@ export function RequestsPage() {
       {/* Search bar */}
       <div className="mb-4 grid gap-3 sm:grid-cols-3">
         <div className="relative sm:col-span-1">
-          <Search className="pointer-events-none absolute left-4 top-1/2 h-5 w-5 -translate-y-1/2 text-muted-foreground" />
+          <MagnifyingGlass weight="regular" className="pointer-events-none absolute left-4 top-1/2 h-5 w-5 -translate-y-1/2 text-muted-foreground" />
           <Input
             value={search}
             onChange={(e) => setSearch(e.target.value)}
@@ -139,8 +139,8 @@ export function RequestsPage() {
 
       {/* List */}
       {filtered.length === 0 ? (
-        <Card className="border-border p-12 text-center">
-          <Briefcase className="mx-auto mb-3 h-12 w-12 text-muted-foreground/40" />
+        <Card className="p-12 text-center">
+          <Briefcase weight="regular" className="mx-auto mb-3 h-12 w-12 text-muted-foreground/40" />
           <h3 className="text-base font-bold text-foreground">So'rov topilmadi</h3>
           <p className="mt-1 text-sm text-muted-foreground">
             Filtrlarni o'zgartirib qayta urinib ko'ring.
@@ -151,7 +151,7 @@ export function RequestsPage() {
           {filtered.map((req) => (
             <Card
               key={req.id}
-              className="border-border p-5 hover:-translate-y-0.5 hover:shadow-beautiful-sm hover:border-primary/30"
+              className="p-5 hover:-translate-y-0.5 hover:shadow-beautiful-md hover:border-accent/30"
             >
               <div className="flex flex-col gap-3 sm:flex-row sm:items-start">
                 <div className="flex-1">
@@ -161,18 +161,18 @@ export function RequestsPage() {
                     </Badge>
                     {req.isUrgent && (
                       <Badge className="bg-red-100 text-red-700 hover:bg-red-100 text-[11px]">
-                        <Flame className="mr-0.5 h-3 w-3" />
+                        <Fire weight="fill" className="mr-0.5 h-3 w-3" />
                         Shoshilinch
                       </Badge>
                     )}
                     <Badge variant="outline" className="text-[11px]">
                       {req.clientType === "business" ? (
                         <span className="flex items-center gap-1">
-                          <Building2 className="h-3 w-3" /> Biznes
+                          <BuildingOffice weight="regular" className="h-3 w-3" /> Biznes
                         </span>
                       ) : (
                         <span className="flex items-center gap-1">
-                          <User className="h-3 w-3" /> Jismoniy shaxs
+                          <User weight="regular" className="h-3 w-3" /> Jismoniy shaxs
                         </span>
                       )}
                     </Badge>
@@ -192,7 +192,7 @@ export function RequestsPage() {
 
                   {req.budgetUzs && (
                     <div className="mt-2.5 inline-flex items-center gap-2 rounded-md bg-emerald-50 px-3 py-1.5 text-xs">
-                      <Wallet className="h-4 w-4 text-emerald-700" />
+                      <Wallet weight="regular" className="h-4 w-4 text-emerald-700" />
                       <span className="font-semibold text-emerald-700">Byudjet:</span>
                       <span className="text-emerald-800">
                         {formatPrice(req.budgetUzs.min)} — {formatPrice(req.budgetUzs.max)}
@@ -203,31 +203,31 @@ export function RequestsPage() {
 
                 <div className="flex shrink-0 flex-col items-end gap-2 sm:w-44">
                   <Button size="sm" onClick={handleRespond} className="gap-1">
-                    <MessageSquare className="h-3.5 w-3.5" />
+                    <ChatCircle weight="regular" className="h-3.5 w-3.5" />
                     Javob berish
                   </Button>
                   <Button size="sm" variant="ghost" className="gap-1 text-xs text-primary">
                     Tafsilotlar
-                    <ArrowRight className="h-3 w-3" />
+                    <ArrowRight weight="bold" className="h-3 w-3" />
                   </Button>
                 </div>
               </div>
 
               <div className="mt-3 flex flex-wrap items-center gap-3 border-t border-border pt-3 text-xs text-muted-foreground">
                 <span className="flex items-center gap-1">
-                  <MapPin className="h-3.5 w-3.5" />
+                  <MapPin weight="regular" className="h-3.5 w-3.5" />
                   {REGIONS[req.region].uz}
                 </span>
                 <span className="flex items-center gap-1">
-                  <Clock className="h-3.5 w-3.5" />
+                  <Clock weight="regular" className="h-3.5 w-3.5" />
                   {req.postedAgo}
                 </span>
                 <span className="flex items-center gap-1">
-                  <Eye className="h-3.5 w-3.5" />
+                  <Eye weight="regular" className="h-3.5 w-3.5" />
                   {req.viewsCount} ko'rish
                 </span>
                 <span className="flex items-center gap-1">
-                  <MessageSquare className="h-3.5 w-3.5" />
+                  <ChatCircle weight="regular" className="h-3.5 w-3.5" />
                   {req.responsesCount} javob
                 </span>
               </div>

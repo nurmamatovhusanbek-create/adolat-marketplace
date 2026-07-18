@@ -1,9 +1,7 @@
 @import "tailwindcss";
 @import "tw-animate-css";
 
-/* Scope Tailwind content detection to the app source only — prevents
-   Tailwind from trying to parse class-like strings in research/skill
-   markdown files elsewhere in the repo (which caused CSS build warnings). */
+/* Scope Tailwind content detection to the app source only */
 @source "../../../src/**/*.{ts,tsx,js,jsx,mdx}";
 @source "../../../pages/**/*.{ts,tsx,js,jsx,mdx}";
 @source "../../../components/**/*.{ts,tsx,js,jsx,mdx}";
@@ -46,152 +44,136 @@
   --color-popover: var(--popover);
   --color-card-foreground: var(--card-foreground);
   --color-card: var(--card);
-  --radius-sm: calc(var(--radius) - 4px);
-  --radius-md: calc(var(--radius) - 2px);
-  --radius-lg: var(--radius);
-  --radius-xl: calc(var(--radius) + 4px);
+  --radius-sm: 8px;
+  --radius-md: 12px;
+  --radius-lg: 16px;
+  --radius-xl: 20px;
+  --radius-2xl: 24px;
 }
 
 /* ============================================================================
-   EDITORIAL TRUST — design system
-   Inspired by: Claude skill (warm parchment + clay accent),
-   Editorial skill (serif display + 8pt grid),
-   Enterprise skill (dark mode + glass panels),
-   LobeHub (4px spacing scale, semantic tokens, calm content-first)
+   EDITORIAL PREMIUM — complete redesign
+   Direction: warm ivory parchment + deep ember accent + ink blue secondary
+   Inspired by: Linear (density), Stripe (premium), Vercel (mono accents),
+   NYT/The Atlantic (editorial gravity)
    ============================================================================ */
 
 :root {
-  --radius: 0.5rem; /* 8px - per LobeHub default radius */
+  /* --- Radii: softer, more modern --- */
+  --radius: 0.75rem; /* 12px base */
 
-  /* --- Surfaces (warm parchment, never pure white) --- */
-  --background: oklch(0.985 0.008 75);           /* warm ivory parchment */
-  --foreground: oklch(0.18 0.015 60);            /* near-black ink */
+  /* --- Surfaces: warmer, with subtle hierarchy --- */
+  --background: oklch(0.99 0.005 75);           /* clean ivory */
+  --foreground: oklch(0.14 0.008 60);            /* deep ink, near-black */
 
-  --card: oklch(1 0.005 75);                      /* pure paper for cards */
-  --card-foreground: oklch(0.18 0.015 60);
-  --popover: oklch(1 0.005 75);
-  --popover-foreground: oklch(0.18 0.015 60);
+  --card: oklch(1 0 0);                          /* pure white — clean separation from bg */
+  --card-foreground: oklch(0.14 0.008 60);
 
-  /* --- Primary = near-black ink (LobeHub monochrome default) --- */
-  --primary: oklch(0.22 0.015 60);
-  --primary-foreground: oklch(0.985 0.008 75);
+  --popover: oklch(1 0 0);
+  --popover-foreground: oklch(0.14 0.008 60);
 
-  /* --- Secondary = warm parchment surfaces --- */
-  --secondary: oklch(0.96 0.01 75);
-  --secondary-foreground: oklch(0.22 0.015 60);
+  /* --- Primary: deep ink (monochrome default) --- */
+  --primary: oklch(0.16 0.008 60);
+  --primary-foreground: oklch(0.99 0.005 75);
 
-  --muted: oklch(0.95 0.008 75);
-  --muted-foreground: oklch(0.45 0.015 60);
+  /* --- Secondary: warm parchment surfaces --- */
+  --secondary: oklch(0.96 0.008 75);
+  --secondary-foreground: oklch(0.20 0.008 60);
 
-  /* --- Accent = earthy clay (the single chromatic moment) --- */
-  /* Used sparingly: hero underlines, key CTAs, "verified" badges */
-  --accent: oklch(0.62 0.13 45);                  /* terracotta clay */
-  --accent-foreground: oklch(0.985 0.008 75);
+  --muted: oklch(0.97 0.005 75);
+  --muted-foreground: oklch(0.48 0.008 60);
+
+  /* --- Accent: deep ember (more saturated than clay, more premium feel) --- */
+  --accent: oklch(0.55 0.16 28);                 /* deep ember */
+  --accent-foreground: oklch(0.99 0.005 75);
+
+  /* --- Secondary accent: ink blue (for links, secondary actions) --- */
+  --accent-2: oklch(0.45 0.10 245);              /* ink blue */
 
   /* --- Functional colors --- */
-  --destructive: oklch(0.55 0.21 27);
-  --border: oklch(0.88 0.01 75);                  /* warm hairline */
-  --input: oklch(0.88 0.01 75);
-  --ring: oklch(0.62 0.13 45);                    /* matches accent for focus */
+  --destructive: oklch(0.55 0.22 25);
+  --success: oklch(0.50 0.12 145);               /* sage */
+  --warning: oklch(0.70 0.14 75);                /* gold */
+  --info: oklch(0.55 0.10 240);                  /* ink blue lighter */
 
-  --chart-1: oklch(0.62 0.13 45);                 /* clay */
-  --chart-2: oklch(0.45 0.08 145);                /* sage */
-  --chart-3: oklch(0.5 0.1 240);                  /* ink blue */
-  --chart-4: oklch(0.7 0.12 80);                  /* gold */
-  --chart-5: oklch(0.4 0.05 60);                  /* graphite */
+  --border: oklch(0.93 0.005 75);                /* barely-there hairline */
+  --input: oklch(0.93 0.005 75);
+  --ring: oklch(0.55 0.16 28);                   /* matches accent */
 
-  --sidebar: oklch(0.97 0.008 75);
-  --sidebar-foreground: oklch(0.18 0.015 60);
-  --sidebar-primary: oklch(0.22 0.015 60);
-  --sidebar-primary-foreground: oklch(0.985 0.008 75);
-  --sidebar-accent: oklch(0.95 0.008 75);
-  --sidebar-accent-foreground: oklch(0.22 0.015 60);
-  --sidebar-border: oklch(0.88 0.01 75);
-  --sidebar-ring: oklch(0.62 0.13 45);
+  /* --- Chart palette --- */
+  --chart-1: oklch(0.55 0.16 28);                /* ember */
+  --chart-2: oklch(0.50 0.12 145);               /* sage */
+  --chart-3: oklch(0.45 0.10 245);               /* ink blue */
+  --chart-4: oklch(0.70 0.14 75);                /* gold */
+  --chart-5: oklch(0.40 0.05 60);                /* graphite */
 
-  /* --- Custom: trust signals --- */
-  --trust-verified: oklch(0.45 0.08 145);          /* sage green */
-  --trust-urgent: oklch(0.55 0.21 27);             /* terracotta red */
-  --trust-premium: oklch(0.7 0.12 80);             /* warm gold */
+  /* --- Sidebar (admin) --- */
+  --sidebar: oklch(0.16 0.008 60);               /* dark sidebar — premium contrast */
+  --sidebar-foreground: oklch(0.92 0.005 75);
+  --sidebar-primary: oklch(0.99 0.005 75);
+  --sidebar-primary-foreground: oklch(0.16 0.008 60);
+  --sidebar-accent: oklch(0.22 0.008 60);
+  --sidebar-accent-foreground: oklch(0.99 0.005 75);
+  --sidebar-border: oklch(1 0 0 / 8%);
+  --sidebar-ring: oklch(0.55 0.16 28);
 
-  /* --- Motion tokens (Material 3 standard) ---
-     Per animation-discipline.md: cubic-bezier(0.2, 0, 0, 1) is the M3 standard,
-     NOT the legacy (0.4, 0, 0.2, 1). Front-loaded curves feel more responsive. */
-  --ease-standard:   cubic-bezier(0.2, 0, 0, 1);   /* default state changes */
-  --ease-emphasized: cubic-bezier(0.3, 0, 0, 1);   /* entering UI: modals, sheets */
-  --ease-enter:      cubic-bezier(0, 0, 0.2, 1);   /* fast settle for content */
-  --ease-exit:       cubic-bezier(0.4, 0, 1, 1);   /* faster leave */
+  /* --- Trust signals --- */
+  --trust-verified: oklch(0.50 0.12 145);        /* sage */
+  --trust-urgent: oklch(0.55 0.22 25);           /* red */
+  --trust-premium: oklch(0.70 0.14 75);          /* gold */
 
-  /* --- Duration scale ---
-     Frequent animations (hover/press/toggle) must stay ≤200ms.
-     Non-navigation microinteractions must stay ≤500ms. */
-  --dur-instant: 100ms;  /* button press, toggle commit */
-  --dur-fast:    150ms;  /* hover, focus, default state-confirmation */
-  --dur-base:    250ms;  /* entering UI: modals, sheets, dropdowns */
-  --dur-slow:    400ms;  /* cross-screen transitions, hero entrance */
+  /* --- Motion tokens (Material 3 standard) --- */
+  --ease-standard:   cubic-bezier(0.2, 0, 0, 1);
+  --ease-emphasized: cubic-bezier(0.3, 0, 0, 1);
+  --ease-enter:      cubic-bezier(0, 0, 0.2, 1);
+  --ease-exit:       cubic-bezier(0.4, 0, 1, 1);
 
-  /* --- Beautiful soft shadow family (complements existing hard shadows) ---
-     Use shadow-hard for editorial flat color blocks; shadow-beautiful-* for
-     elevated surfaces like popovers, hover cards, and modals. */
-  --shadow-beautiful-sm:
-    0 2px 3px -1px oklch(0.18 0.015 60 / 0.10),
-    0 1px 0 0 oklch(0.18 0.015 60 / 0.04),
-    0 0 0 1px oklch(0.18 0.015 60 / 0.08);
-  --shadow-beautiful-md:
-    0 0 0 1px oklch(0.18 0.015 60 / 0.06),
-    0 1px 1px -0.5px oklch(0.18 0.015 60 / 0.06),
-    0 3px 3px -1.5px oklch(0.18 0.015 60 / 0.06),
-    0 6px 6px -3px oklch(0.18 0.015 60 / 0.06),
-    0 12px 12px -6px oklch(0.18 0.015 60 / 0.06),
-    0 24px 24px -12px oklch(0.18 0.015 60 / 0.06);
-  --shadow-beautiful-lg:
-    0 2.8px 2.2px oklch(0.18 0.015 60 / 0.034),
-    0 6.7px 5.3px oklch(0.18 0.015 60 / 0.048),
-    0 12.5px 10px oklch(0.18 0.015 60 / 0.06),
-    0 22.3px 17.9px oklch(0.18 0.015 60 / 0.072),
-    0 41.8px 33.4px oklch(0.18 0.015 60 / 0.086),
-    0 100px 80px oklch(0.18 0.015 60 / 0.12);
+  --dur-instant: 100ms;
+  --dur-fast:    150ms;
+  --dur-base:    250ms;
+  --dur-slow:    400ms;
+
+  /* --- Beautiful soft shadow family — layered, premium --- */
+  --shadow-xs: 0 1px 2px 0 oklch(0.14 0.008 60 / 0.04);
+  --shadow-sm: 0 1px 3px 0 oklch(0.14 0.008 60 / 0.06), 0 1px 2px -1px oklch(0.14 0.008 60 / 0.06);
+  --shadow-md: 0 4px 6px -1px oklch(0.14 0.008 60 / 0.06), 0 2px 4px -2px oklch(0.14 0.008 60 / 0.06);
+  --shadow-lg: 0 10px 15px -3px oklch(0.14 0.008 60 / 0.08), 0 4px 6px -4px oklch(0.14 0.008 60 / 0.06);
+  --shadow-xl: 0 20px 25px -5px oklch(0.14 0.008 60 / 0.10), 0 8px 10px -6px oklch(0.14 0.008 60 / 0.06);
+  --shadow-2xl: 0 25px 50px -12px oklch(0.14 0.008 60 / 0.15);
+  --shadow-inner: inset 0 2px 4px 0 oklch(0.14 0.008 60 / 0.04);
+
+  /* --- Legacy shadow aliases (kept for backward compat) --- */
+  --shadow-beautiful-sm: var(--shadow-sm);
+  --shadow-beautiful-md: var(--shadow-md);
+  --shadow-beautiful-lg: var(--shadow-lg);
 }
 
 .dark {
-  --background: oklch(0.14 0.01 60);              /* warm near-black */
+  --background: oklch(0.12 0.008 60);
   --foreground: oklch(0.96 0.005 75);
-  --card: oklch(0.18 0.01 60);
+  --card: oklch(0.16 0.008 60);
   --card-foreground: oklch(0.96 0.005 75);
-  --popover: oklch(0.2 0.012 60);
+  --popover: oklch(0.18 0.008 60);
   --popover-foreground: oklch(0.96 0.005 75);
   --primary: oklch(0.96 0.005 75);
-  --primary-foreground: oklch(0.18 0.015 60);
-  --secondary: oklch(0.25 0.01 60);
+  --primary-foreground: oklch(0.16 0.008 60);
+  --secondary: oklch(0.22 0.008 60);
   --secondary-foreground: oklch(0.96 0.005 75);
-  --muted: oklch(0.22 0.01 60);
-  --muted-foreground: oklch(0.7 0.01 60);
-  --accent: oklch(0.7 0.13 45);                    /* brighter clay in dark */
-  --accent-foreground: oklch(0.14 0.01 60);
-  --destructive: oklch(0.7 0.19 22);
+  --muted: oklch(0.20 0.008 60);
+  --muted-foreground: oklch(0.68 0.008 60);
+  --accent: oklch(0.68 0.16 28);
+  --accent-foreground: oklch(0.12 0.008 60);
+  --destructive: oklch(0.70 0.20 22);
   --border: oklch(1 0 0 / 8%);
   --input: oklch(1 0 0 / 12%);
-  --ring: oklch(0.7 0.13 45);
+  --ring: oklch(0.68 0.16 28);
 
-  /* Dark variants of beautiful shadows — use semi-transparent black */
-  --shadow-beautiful-sm:
-    0 2px 3px -1px oklch(0 0 0 / 0.4),
-    0 1px 0 0 oklch(0 0 0 / 0.2),
-    0 0 0 1px oklch(0 0 0 / 0.3);
-  --shadow-beautiful-md:
-    0 0 0 1px oklch(0 0 0 / 0.2),
-    0 1px 1px -0.5px oklch(0 0 0 / 0.2),
-    0 3px 3px -1.5px oklch(0 0 0 / 0.2),
-    0 6px 6px -3px oklch(0 0 0 / 0.2),
-    0 12px 12px -6px oklch(0 0 0 / 0.2),
-    0 24px 24px -12px oklch(0 0 0 / 0.2);
-  --shadow-beautiful-lg:
-    0 2.8px 2.2px oklch(0 0 0 / 0.2),
-    0 6.7px 5.3px oklch(0 0 0 / 0.3),
-    0 12.5px 10px oklch(0 0 0 / 0.4),
-    0 22.3px 17.9px oklch(0 0 0 / 0.5),
-    0 41.8px 33.4px oklch(0 0 0 / 0.6),
-    0 100px 80px oklch(0 0 0 / 0.7);
+  --shadow-xs: 0 1px 2px 0 oklch(0 0 0 / 0.3);
+  --shadow-sm: 0 1px 3px 0 oklch(0 0 0 / 0.4), 0 1px 2px -1px oklch(0 0 0 / 0.3);
+  --shadow-md: 0 4px 6px -1px oklch(0 0 0 / 0.4), 0 2px 4px -2px oklch(0 0 0 / 0.3);
+  --shadow-lg: 0 10px 15px -3px oklch(0 0 0 / 0.5), 0 4px 6px -4px oklch(0 0 0 / 0.3);
+  --shadow-xl: 0 20px 25px -5px oklch(0 0 0 / 0.5), 0 8px 10px -6px oklch(0 0 0 / 0.4);
+  --shadow-2xl: 0 25px 50px -12px oklch(0 0 0 / 0.6);
 }
 
 @layer base {
@@ -201,50 +183,69 @@
   body {
     @apply bg-background text-foreground;
     font-feature-settings: "ss01", "ss02", "cv01", "cv11";
+    /* Smoother font rendering */
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    text-rendering: optimizeLegibility;
   }
-  /* Serif display for headings - "Editorial Classic" inspired */
+  /* Serif display for headings - more dramatic */
   h1, h2, h3 {
     font-family: var(--font-serif), Georgia, "Times New Roman", serif;
-    letter-spacing: -0.02em;
+    letter-spacing: -0.025em;
+    font-feature-settings: "ss01", "ss02", "cv01", "cv11", "kern";
+  }
+  h4, h5, h6 {
+    font-family: var(--font-sans), system-ui, sans-serif;
+    letter-spacing: -0.01em;
+  }
+  /* Better default focus ring */
+  :focus-visible {
+    outline: 2px solid var(--ring);
+    outline-offset: 2px;
   }
 }
 
 @layer utilities {
-  /* Background grid - subtle parchment texture */
+  /* ============================================================================
+     BACKGROUNDS & TEXTURE
+     ============================================================================ */
   .bg-grid-pattern {
     background-image: linear-gradient(
         to right,
-        oklch(0.18 0.015 60 / 0.04) 1px,
+        oklch(0.14 0.008 60 / 0.04) 1px,
         transparent 1px
       ),
-      linear-gradient(to bottom, oklch(0.18 0.015 60 / 0.04) 1px, transparent 1px);
-    background-size: 32px 32px;
+      linear-gradient(to bottom, oklch(0.14 0.008 60 / 0.04) 1px, transparent 1px);
+    background-size: 40px 40px;
   }
 
-  /* Hero radial - warm parchment with clay glow */
   .bg-hero-radial {
     background:
-      radial-gradient(ellipse 60% 40% at 20% 20%, oklch(0.62 0.13 45 / 0.10), transparent 60%),
-      radial-gradient(ellipse 50% 50% at 85% 80%, oklch(0.45 0.08 145 / 0.06), transparent 60%),
-      linear-gradient(to bottom, oklch(0.985 0.008 75), oklch(0.97 0.008 75));
+      radial-gradient(ellipse 80% 50% at 50% -10%, oklch(0.55 0.16 28 / 0.08), transparent 60%),
+      radial-gradient(ellipse 60% 40% at 90% 10%, oklch(0.45 0.10 245 / 0.05), transparent 60%),
+      linear-gradient(to bottom, oklch(0.99 0.005 75), oklch(0.97 0.005 75));
   }
 
-  .text-balance {
-    text-wrap: balance;
+  .bg-noise {
+    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.4'/%3E%3C/svg%3E");
+    background-size: 200px 200px;
   }
 
-  /* Editorial drop-cap for first paragraph in long-form content */
+  .text-balance { text-wrap: balance; }
+  .text-pretty { text-wrap: pretty; }
+
+  /* Editorial drop-cap */
   .drop-cap::first-letter {
     font-family: var(--font-serif), Georgia, serif;
-    font-size: 3.5rem;
-    line-height: 1;
+    font-size: 4rem;
+    line-height: 0.9;
     font-weight: 700;
     float: left;
-    margin: 0.1em 0.1em 0 0;
+    margin: 0.05em 0.12em 0 0;
     color: var(--accent);
   }
 
-  /* Underline accent (Claude skill signature) */
+  /* Underline accent */
   .underline-accent {
     background-image: linear-gradient(to right, var(--accent), var(--accent));
     background-size: 100% 3px;
@@ -258,55 +259,45 @@
     height: 1px;
     background: linear-gradient(to right,
       transparent,
-      oklch(0.18 0.015 60 / 0.15) 20%,
-      oklch(0.18 0.015 60 / 0.15) 80%,
+      oklch(0.14 0.008 60 / 0.12) 15%,
+      oklch(0.14 0.008 60 / 0.12) 85%,
       transparent
     );
   }
 
-  /* Hard shadow (Claude/Editorial style - no soft shadows) */
-  .shadow-hard {
-    box-shadow: 4px 4px 0 0 oklch(0.18 0.015 60 / 0.08);
-  }
-  .shadow-hard-sm {
-    box-shadow: 2px 2px 0 0 oklch(0.18 0.015 60 / 0.06);
-  }
-  .shadow-hard-clay {
-    box-shadow: 4px 4px 0 0 oklch(0.62 0.13 45 / 0.18);
-  }
+  /* ============================================================================
+     SHADOWS — premium layered system
+     ============================================================================ */
+  .shadow-hard { box-shadow: 4px 4px 0 0 oklch(0.14 0.008 60 / 0.08); }
+  .shadow-hard-sm { box-shadow: 2px 2px 0 0 oklch(0.14 0.008 60 / 0.06); }
+  .shadow-hard-clay { box-shadow: 4px 4px 0 0 oklch(0.55 0.16 28 / 0.20); }
 
-  /* Beautiful soft shadow family — elevated surfaces (popovers, hover cards, modals).
-     Use ONE shadow strength per component state. Don't mix with shadow-hard on same element. */
-  .shadow-beautiful-sm { box-shadow: var(--shadow-beautiful-sm); }
-  .shadow-beautiful-md { box-shadow: var(--shadow-beautiful-md); }
-  .shadow-beautiful-lg { box-shadow: var(--shadow-beautiful-lg); }
+  .shadow-beautiful-xs { box-shadow: var(--shadow-xs); }
+  .shadow-beautiful-sm { box-shadow: var(--shadow-sm); }
+  .shadow-beautiful-md { box-shadow: var(--shadow-md); }
+  .shadow-beautiful-lg { box-shadow: var(--shadow-lg); }
+  .shadow-beautiful-xl { box-shadow: var(--shadow-xl); }
+  .shadow-beautiful-2xl { box-shadow: var(--shadow-2xl); }
 
-  /* Custom scrollbar (LobeHub style) */
-  .scrollbar-thin::-webkit-scrollbar {
-    width: 6px;
-    height: 6px;
-  }
-  .scrollbar-thin::-webkit-scrollbar-track {
-    background: transparent;
-  }
+  /* ============================================================================
+     SCROLLBAR
+     ============================================================================ */
+  .scrollbar-thin::-webkit-scrollbar { width: 6px; height: 6px; }
+  .scrollbar-thin::-webkit-scrollbar-track { background: transparent; }
   .scrollbar-thin::-webkit-scrollbar-thumb {
-    background: oklch(0.18 0.015 60 / 0.2);
+    background: oklch(0.14 0.008 60 / 0.15);
     border-radius: 9999px;
   }
   .scrollbar-thin::-webkit-scrollbar-thumb:hover {
-    background: oklch(0.62 0.13 45 / 0.4);
+    background: oklch(0.55 0.16 28 / 0.4);
   }
 
   /* ============================================================================
-     MICROANIMATIONS — per web-microanimations + animation-discipline skills
+     MICROANIMATIONS
      ============================================================================ */
-
-  /* Verified badge pulse — WCAG 2.2.2 (Level A) requires pause control for
-     motion >5s. Cap at 3 iterations (7.5s total) and pause on hover/focus.
-     Animation property order: name | duration | timing | delay | iteration-count */
   @keyframes verified-pulse {
     0%, 100% { opacity: 1; }
-    50%      { opacity: 0.7; }
+    50%      { opacity: 0.6; }
   }
   .verified-pulse {
     animation: verified-pulse 2.5s var(--ease-standard) 0s 3;
@@ -316,15 +307,7 @@
     animation-play-state: paused;
   }
 
-  /* Smooth focus ring (LobeHub) */
-  .focus-ring:focus-visible {
-    outline: 2px solid var(--ring);
-    outline-offset: 2px;
-  }
-
-  /* Hero entrance choreography — animation-discipline.md
-     Apply .rise + .rise-1..4 in visual order to hero elements.
-     ONE choreographed entrance is enough — don't also scatter scroll-reveals on hero. */
+  /* Hero entrance choreography */
   @keyframes riseIn {
     from { opacity: 0; transform: translateY(24px); }
     to   { opacity: 1; transform: translateY(0); }
@@ -336,14 +319,7 @@
   .rise-4     { animation-delay: 0.44s; }
   .rise-5     { animation-delay: 0.57s; }
 
-  /* Scroll-reveal — animation-on-scroll.md
-     Pairs with useInView hook (see src/hooks/use-in-view.ts).
-     Element starts hidden + offset; .in-view triggers animation.
-     Threshold ~20-30% visibility, fire once, don't replay. */
-  @keyframes scrollRevealIn {
-    from { opacity: 0; transform: translateY(20px); }
-    to   { opacity: 1; transform: translateY(0); }
-  }
+  /* Scroll-reveal */
   .reveal-on-scroll {
     opacity: 0;
     transform: translateY(20px);
@@ -356,7 +332,7 @@
     transform: translateY(0);
   }
 
-  /* Stagger helpers — apply to children of .reveal-on-scroll container */
+  /* Stagger */
   .reveal-stagger > * {
     opacity: 0;
     transform: translateY(16px);
@@ -375,9 +351,7 @@
   .reveal-stagger.in-view > *:nth-child(9) { transition-delay: 0.48s; }
   .reveal-stagger.in-view > *:nth-child(n+10) { transition-delay: 0.54s; }
 
-  /* Skeleton shimmer — state-coverage.md demands loading states.
-     Skeleton must stop when content lands — never run indefinitely.
-     Toggle .skeleton-loaded to halt animation. */
+  /* Skeleton shimmer */
   @keyframes shimmer {
     0%   { background-position: -200% 0; }
     100% { background-position:  200% 0; }
@@ -385,9 +359,9 @@
   .skeleton-shimmer {
     background: linear-gradient(
       90deg,
-      oklch(0.95 0.008 75) 0%,
-      oklch(0.90 0.008 75) 50%,
-      oklch(0.95 0.008 75) 100%
+      oklch(0.95 0.005 75) 0%,
+      oklch(0.90 0.005 75) 50%,
+      oklch(0.95 0.005 75) 100%
     );
     background-size: 200% 100%;
     animation: shimmer 1.6s var(--ease-standard) infinite;
@@ -396,28 +370,21 @@
   .dark .skeleton-shimmer {
     background: linear-gradient(
       90deg,
-      oklch(0.22 0.01 60) 0%,
-      oklch(0.28 0.01 60) 50%,
-      oklch(0.22 0.01 60) 100%
+      oklch(0.22 0.008 60) 0%,
+      oklch(0.28 0.008 60) 50%,
+      oklch(0.22 0.008 60) 100%
     );
     background-size: 200% 100%;
   }
   .skeleton-shimmer.skeleton-loaded { animation: none; }
 
-  /* Skeleton pulse — lighter weight alternative, minimal GPU cost.
-     Use for text-line placeholders, sidebar items, dense lists. */
   @keyframes skeleton-pulse {
     0%, 100% { opacity: 1; }
     50%      { opacity: 0.5; }
   }
-  .skeleton-pulse {
-    animation: skeleton-pulse 1.8s var(--ease-standard) infinite;
-  }
+  .skeleton-pulse { animation: skeleton-pulse 1.8s var(--ease-standard) infinite; }
 
-  /* ============================================================================
-     DIALOG / DROPDOWN / POPOVER BRAND EASING — overrides Radix defaults
-     Per animation-discipline.md: use --ease-emphasized for entering UI.
-     ============================================================================ */
+  /* Dialog/dropdown brand easing overrides */
   @keyframes dialog-overlay-in  { from { opacity: 0; } to { opacity: 1; } }
   @keyframes dialog-overlay-out { from { opacity: 1; } to { opacity: 0; } }
   @keyframes dialog-content-in {
@@ -428,7 +395,6 @@
     from { opacity: 1; transform: translate(-50%, -50%) scale(1); }
     to   { opacity: 0; transform: translate(-50%, -48%) scale(0.96); }
   }
-  /* Radix sets data-state="open" or "closed" on overlay/content elements */
   [data-state="open"][data-slot="dialog-overlay"] {
     animation: dialog-overlay-in var(--dur-base) var(--ease-standard);
   }
@@ -442,7 +408,6 @@
     animation: dialog-content-out var(--dur-fast) var(--ease-exit);
   }
 
-  /* Dropdown / popover / tooltip enter-exit */
   @keyframes dropdown-in {
     from { opacity: 0; transform: translateY(-4px) scale(0.98); }
     to   { opacity: 1; transform: translateY(0)    scale(1); }
@@ -464,10 +429,7 @@
     animation: dropdown-out var(--dur-instant) var(--ease-exit);
   }
 
-  /* ============================================================================
-     FORM UX — :user-invalid pattern (form-validation.md)
-     :user-invalid fires only after blur or submit, NOT on first keystroke.
-     ============================================================================ */
+  /* Form UX — :user-invalid */
   input:user-invalid,
   textarea:user-invalid,
   select:user-invalid {
@@ -476,21 +438,19 @@
   }
   input:user-valid:not(:placeholder-shown),
   textarea:user-valid:not(:placeholder-shown) {
-    border-color: oklch(0.45 0.08 145 / 0.4);  /* subtle sage confirmation */
+    border-color: oklch(0.50 0.12 145 / 0.4);
   }
 
-  /* Typing indicator dots — chat-panel polish */
+  /* Typing indicator */
   @keyframes typing-dot {
     0%, 60%, 100% { opacity: 0.3; transform: translateY(0); }
     30%           { opacity: 1;   transform: translateY(-3px); }
   }
-  .typing-dot {
-    animation: typing-dot 1.4s var(--ease-standard) infinite;
-  }
+  .typing-dot { animation: typing-dot 1.4s var(--ease-standard) infinite; }
   .typing-dot:nth-child(2) { animation-delay: 0.2s; }
   .typing-dot:nth-child(3) { animation-delay: 0.4s; }
 
-  /* Number counter pulse — for stat boxes that update */
+  /* Stat pop */
   @keyframes stat-pop {
     0%   { transform: scale(1); }
     50%  { transform: scale(1.08); color: var(--accent); }
@@ -498,10 +458,14 @@
   }
   .stat-pop { animation: stat-pop 600ms var(--ease-emphasized); }
 
+  /* Focus ring helper */
+  .focus-ring:focus-visible {
+    outline: 2px solid var(--ring);
+    outline-offset: 2px;
+  }
+
   /* ============================================================================
-     REDUCED MOTION — WCAG 2.2.2 + 2.3.3 compliance
-     Strip motion-on-an-axis (translate, scale, rotate, parallax).
-     Keep opacity/color crossfades as substitutes for state changes.
+     REDUCED MOTION
      ============================================================================ */
   @media (prefers-reduced-motion: reduce) {
     *, *::before, *::after {
@@ -510,14 +474,12 @@
       transition-duration: 0.01ms !important;
       scroll-behavior: auto !important;
     }
-    /* Explicit overrides for transform-based animations (vestibular triggers) */
     .rise, .reveal-on-scroll, .reveal-stagger > *,
     .typing-dot, .stat-pop, .verified-pulse {
       animation: none !important;
       opacity: 1 !important;
       transform: none !important;
     }
-    /* Skeletons: keep visible, no shimmer */
     .skeleton-shimmer, .skeleton-pulse { animation: none; opacity: 0.7; }
   }
 }

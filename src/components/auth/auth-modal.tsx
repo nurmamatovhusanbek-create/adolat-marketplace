@@ -13,7 +13,17 @@ import {
   DialogDescription,
 } from "@/components/ui/dialog";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
-import { Scale, Mail, Lock, User, Phone, Briefcase, Loader2, ShieldCheck, AlertCircle } from "lucide-react";
+import {
+  Briefcase,
+  Envelope,
+  Lock,
+  Phone,
+  Scales,
+  ShieldCheck,
+  Spinner,
+  User,
+  WarningCircle,
+} from "@phosphor-icons/react/dist/ssr";
 import { toast } from "sonner";
 
 interface AuthModalProps {
@@ -28,13 +38,13 @@ export function AuthModal({ open, onOpenChange, defaultMode = "signin", onSucces
 
   return (
     <Dialog open={open} onOpenChange={onOpenChange}>
-      <DialogContent className="max-w-md p-0">
+      <DialogContent size="sm" className="p-0">
         <Tabs value={mode} onValueChange={(v) => setMode(v as "signin" | "signup")}>
           <div className="border-b border-border p-6 pb-0">
             <DialogHeader>
-              <DialogTitle className="flex items-center gap-2 text-xl">
-                <div className="flex h-9 w-9 items-center justify-center rounded-lg bg-primary text-primary-foreground">
-                  <Scale className="h-5 w-5" />
+              <DialogTitle className="flex items-center gap-2.5 text-xl">
+                <div className="flex size-9 items-center justify-center rounded-xl bg-primary text-primary-foreground">
+                  <Scales weight="duotone" className="size-5" />
                 </div>
                 Adolat
               </DialogTitle>
@@ -105,7 +115,7 @@ function SignInForm({ onSuccess }: { onSuccess?: () => void }) {
           Email
         </Label>
         <div className="relative mt-1.5">
-          <Mail className="pointer-events-none absolute left-3 top-1/2 h-4 w-4 -translate-y-1/2 text-muted-foreground" />
+          <Envelope weight="regular" className="pointer-events-none absolute left-3 top-1/2 h-4 w-4 -translate-y-1/2 text-muted-foreground" />
           <Input
             id="signin-email"
             type="email"
@@ -125,7 +135,7 @@ function SignInForm({ onSuccess }: { onSuccess?: () => void }) {
           Parol
         </Label>
         <div className="relative mt-1.5">
-          <Lock className="pointer-events-none absolute left-3 top-1/2 h-4 w-4 -translate-y-1/2 text-muted-foreground" />
+          <Lock weight="regular" className="pointer-events-none absolute left-3 top-1/2 h-4 w-4 -translate-y-1/2 text-muted-foreground" />
           <Input
             id="signin-password"
             type="password"
@@ -142,13 +152,13 @@ function SignInForm({ onSuccess }: { onSuccess?: () => void }) {
 
       {error && (
         <div className="flex items-start gap-2 rounded-md border border-red-200 bg-red-50 p-3 text-xs text-red-700">
-          <AlertCircle className="mt-0.5 h-4 w-4 shrink-0" />
+          <WarningCircle weight="regular" className="mt-0.5 h-4 w-4 shrink-0" />
           {error}
         </div>
       )}
 
       <Button type="submit" disabled={loading} className="w-full gap-1.5">
-        {loading ? <Loader2 className="h-4 w-4 animate-spin" /> : <ShieldCheck className="h-4 w-4" />}
+        {loading ? <Spinner weight="regular" className="h-4 w-4 animate-spin" /> : <ShieldCheck weight="regular" className="h-4 w-4" />}
         Kirish
       </Button>
     </form>
@@ -219,14 +229,14 @@ function SignUpForm({ onSuccess }: { onSuccess?: () => void }) {
           <RoleButton
             selected={role === "CLIENT"}
             onClick={() => setRole("CLIENT")}
-            icon={<User className="h-4 w-4" />}
+            icon={<User weight="regular" className="h-4 w-4" />}
             label="Mijoz"
             description="Hujjat va advokat izlayman"
           />
           <RoleButton
             selected={role === "ADVOCATE"}
             onClick={() => setRole("ADVOCATE")}
-            icon={<Briefcase className="h-4 w-4" />}
+            icon={<Briefcase weight="regular" className="h-4 w-4" />}
             label="Advokat"
             description="Mijozlar izlayman"
           />
@@ -254,7 +264,7 @@ function SignUpForm({ onSuccess }: { onSuccess?: () => void }) {
             Email
           </Label>
           <div className="relative mt-1.5">
-            <Mail className="pointer-events-none absolute left-3 top-1/2 h-4 w-4 -translate-y-1/2 text-muted-foreground" />
+            <Envelope weight="regular" className="pointer-events-none absolute left-3 top-1/2 h-4 w-4 -translate-y-1/2 text-muted-foreground" />
             <Input
               id="signup-email"
               type="email"
@@ -273,7 +283,7 @@ function SignUpForm({ onSuccess }: { onSuccess?: () => void }) {
             Telefon
           </Label>
           <div className="relative mt-1.5">
-            <Phone className="pointer-events-none absolute left-3 top-1/2 h-4 w-4 -translate-y-1/2 text-muted-foreground" />
+            <Phone weight="regular" className="pointer-events-none absolute left-3 top-1/2 h-4 w-4 -translate-y-1/2 text-muted-foreground" />
             <Input
               id="signup-phone"
               type="tel"
@@ -293,7 +303,7 @@ function SignUpForm({ onSuccess }: { onSuccess?: () => void }) {
           Parol (min. 8 belgi, harf + raqam)
         </Label>
         <div className="relative mt-1.5">
-          <Lock className="pointer-events-none absolute left-3 top-1/2 h-4 w-4 -translate-y-1/2 text-muted-foreground" />
+          <Lock weight="regular" className="pointer-events-none absolute left-3 top-1/2 h-4 w-4 -translate-y-1/2 text-muted-foreground" />
           <Input
             id="signup-password"
             type="password"
@@ -311,13 +321,13 @@ function SignUpForm({ onSuccess }: { onSuccess?: () => void }) {
 
       {error && (
         <div className="flex items-start gap-2 rounded-md border border-red-200 bg-red-50 p-3 text-xs text-red-700">
-          <AlertCircle className="mt-0.5 h-4 w-4 shrink-0" />
+          <WarningCircle weight="regular" className="mt-0.5 h-4 w-4 shrink-0" />
           {error}
         </div>
       )}
 
       <Button type="submit" disabled={loading} className="w-full gap-1.5">
-        {loading ? <Loader2 className="h-4 w-4 animate-spin" /> : <ShieldCheck className="h-4 w-4" />}
+        {loading ? <Spinner weight="regular" className="h-4 w-4 animate-spin" /> : <ShieldCheck weight="regular" className="h-4 w-4" />}
         Ro'yxatdan o'tish
       </Button>
 

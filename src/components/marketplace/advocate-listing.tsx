@@ -2,20 +2,20 @@
 
 import { useMemo } from "react";
 import {
-  Star,
-  MapPin,
-  BadgeCheck,
-  Clock,
-  Zap,
-  MessageSquare,
-  Search,
-  SlidersHorizontal,
-  X,
   Briefcase,
+  ChatCircle,
+  Clock,
+  Lightning,
+  MagnifyingGlass,
+  MapPin,
+  SealCheck,
+  SlidersHorizontal,
+  Star,
+  TrendUp,
   Users,
-  TrendingUp,
   Wallet,
-} from "lucide-react";
+  X,
+} from "@phosphor-icons/react/dist/ssr";
 import { Card } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
@@ -132,7 +132,7 @@ export function AdvocateListing() {
       {/* Page header */}
       <div className="mb-6">
         <h1 className="flex items-center gap-2 text-2xl font-bold tracking-tight text-foreground sm:text-3xl">
-          <Users className="h-7 w-7 text-accent" />
+          <Users weight="regular" className="h-7 w-7 text-accent" />
           Advokatlar katalogi
         </h1>
         <p className="mt-1 text-sm text-muted-foreground">
@@ -143,7 +143,7 @@ export function AdvocateListing() {
       {/* Search bar */}
       <div className="mb-4 flex gap-2">
         <div className="relative flex-1">
-          <Search className="pointer-events-none absolute left-4 top-1/2 h-5 w-5 -translate-y-1/2 text-muted-foreground" />
+          <MagnifyingGlass weight="regular" className="pointer-events-none absolute left-4 top-1/2 h-5 w-5 -translate-y-1/2 text-muted-foreground" />
           <Input
             value={advocateSearch}
             onChange={(e) => setAdvocateSearch(e.target.value)}
@@ -156,7 +156,7 @@ export function AdvocateListing() {
         <Sheet>
           <SheetTrigger asChild>
             <Button variant="outline" className="lg:hidden" size="lg">
-              <SlidersHorizontal className="h-5 w-5" />
+              <SlidersHorizontal weight="regular" className="h-5 w-5" />
               {activeFiltersCount > 0 && (
                 <Badge className="ml-1 h-5 min-w-5 justify-center bg-foreground text-background text-xs">
                   {activeFiltersCount}
@@ -188,10 +188,10 @@ export function AdvocateListing() {
         {/* Sidebar - desktop */}
         <aside className="hidden lg:col-span-3 lg:block">
           <div className="sticky top-20">
-            <Card className="border-border p-4">
+            <Card className="p-5">
               <div className="mb-3 flex items-center justify-between">
                 <h2 className="flex items-center gap-1.5 text-sm font-bold">
-                  <SlidersHorizontal className="h-4 w-4 text-accent" />
+                  <SlidersHorizontal weight="regular" className="h-4 w-4 text-accent" />
                   Filtrlash
                 </h2>
                 {activeFiltersCount > 0 && (
@@ -199,7 +199,7 @@ export function AdvocateListing() {
                     onClick={resetAdvocateFilters}
                     className="flex items-center gap-1 text-xs text-accent hover:underline"
                   >
-                    <X className="h-3 w-3" />
+                    <X weight="regular" className="h-3 w-3" />
                     Tozalash ({activeFiltersCount})
                   </button>
                 )}
@@ -245,8 +245,8 @@ export function AdvocateListing() {
 
           {/* Results list */}
           {filtered.length === 0 ? (
-            <Card className="border-border p-12 text-center">
-              <Users className="mx-auto mb-3 h-12 w-12 text-muted-foreground/40" />
+            <Card className="p-12 text-center">
+              <Users weight="regular" className="mx-auto mb-3 h-12 w-12 text-muted-foreground/40" />
               <h3 className="text-base font-bold text-foreground">Advokat topilmadi</h3>
               <p className="mt-1 text-sm text-muted-foreground">
                 Filtrlarni o'zgartirib qayta urinib ko'ring.
@@ -271,7 +271,7 @@ export function AdvocateListing() {
 function AdvocateListItem({ adv, onSelect }: { adv: Advocate; onSelect: () => void }) {
   const spec = SPECIALTIES[adv.specialty];
   return (
-    <Card className="border-border p-4 hover:-translate-y-0.5 hover:shadow-beautiful-sm hover:border-foreground/30 sm:p-5">
+    <Card className="p-5 hover:-translate-y-0.5 hover:shadow-beautiful-md hover:border-accent/30 sm:p-6">
       <div className="flex flex-col gap-4 sm:flex-row">
         {/* Photo */}
         <div className="flex shrink-0 items-start gap-3 sm:flex-col sm:items-center">
@@ -298,7 +298,7 @@ function AdvocateListItem({ adv, onSelect }: { adv: Advocate; onSelect: () => vo
                 >
                   {adv.name}
                 </button>
-                {adv.verified && <BadgeCheck className="h-4 w-4 text-accent" />}
+                {adv.verified && <SealCheck weight="fill" className="h-4 w-4 text-accent" />}
                 {adv.topRated && (
                   <Badge className="bg-accent text-accent-foreground text-[10px]">TOP-10</Badge>
                 )}
@@ -306,20 +306,20 @@ function AdvocateListItem({ adv, onSelect }: { adv: Advocate; onSelect: () => vo
               <p className="text-sm text-muted-foreground">{adv.titleUz}</p>
               <div className="mt-1 flex flex-wrap items-center gap-3 text-xs text-muted-foreground">
                 <span className="flex items-center gap-0.5">
-                  <Star className="h-3.5 w-3.5 fill-accent text-accent" />
+                  <Star weight="fill" className="h-3.5 w-3.5 fill-accent text-accent" />
                   <strong className="text-foreground">{adv.rating}</strong>
                   <span>({adv.reviewsCount})</span>
                 </span>
                 <span className="flex items-center gap-0.5">
-                  <MapPin className="h-3.5 w-3.5" />
+                  <MapPin weight="regular" className="h-3.5 w-3.5" />
                   {adv.city}
                 </span>
                 <span className="flex items-center gap-0.5">
-                  <Clock className="h-3.5 w-3.5" />
+                  <Clock weight="regular" className="h-3.5 w-3.5" />
                   {adv.responseTimeHours} soat javob
                 </span>
                 <span className="flex items-center gap-0.5">
-                  <Briefcase className="h-3.5 w-3.5" />
+                  <Briefcase weight="regular" className="h-3.5 w-3.5" />
                   {adv.experienceYears} yil
                 </span>
               </div>
@@ -340,7 +340,7 @@ function AdvocateListItem({ adv, onSelect }: { adv: Advocate; onSelect: () => vo
                     : "bg-amber-50 text-amber-700"
                 )}
               >
-                <Zap className="h-2.5 w-2.5" />
+                <Lightning weight="fill" className="h-2.5 w-2.5" />
                 {adv.responseTimeHours} soat javob
               </div>
             </div>
@@ -368,12 +368,12 @@ function AdvocateListItem({ adv, onSelect }: { adv: Advocate; onSelect: () => vo
           <div className="mt-3 flex items-center justify-between border-t border-border pt-3">
             <div className="flex items-center gap-3 text-xs text-muted-foreground">
               <span className="flex items-center gap-1">
-                <TrendingUp className="h-3.5 w-3.5 text-emerald-600" />
+                <TrendUp weight="regular" className="h-3.5 w-3.5 text-emerald-600" />
                 {adv.successRate}% muvaffaqiyat
               </span>
               <span>{adv.casesResolved}+ ish</span>
               <span className="flex items-center gap-1">
-                <Wallet className="h-3.5 w-3.5" />
+                <Wallet weight="regular" className="h-3.5 w-3.5" />
                 {adv.languages.map((l) => l.toUpperCase()).join(" · ")}
               </span>
             </div>
@@ -382,7 +382,7 @@ function AdvocateListItem({ adv, onSelect }: { adv: Advocate; onSelect: () => vo
                 Profil
               </Button>
               <Button size="sm" onClick={() => openChatWith(adv.userId ?? adv.id, adv.name)} className="h-8 gap-1">
-                <MessageSquare className="h-3.5 w-3.5" />
+                <ChatCircle weight="regular" className="h-3.5 w-3.5" />
                 Bog'lanish
               </Button>
             </div>

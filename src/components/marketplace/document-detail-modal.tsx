@@ -1,18 +1,17 @@
 "use client";
 
 import {
-  Star,
-  Download,
-  Clock,
-  FileText,
-  Tag,
-  Sparkles,
-  CheckCircle2,
   BookOpen,
   Calendar,
+  CheckCircle,
+  Clock,
+  DownloadSimple,
   Eye,
-  FileCheck2,
-} from "lucide-react";
+  FileText,
+  Sparkle,
+  Star,
+  Tag,
+} from "@phosphor-icons/react/dist/ssr";
 import {
   Dialog,
   DialogContent,
@@ -55,7 +54,7 @@ export function DocumentDetailModal() {
 
   return (
     <Dialog open={isOpen} onOpenChange={(o) => !o && handleClose()}>
-      <DialogContent className="w-[98vw] max-w-[98vw] h-[95vh] max-h-[95vh] overflow-y-auto p-0 scrollbar-thin">
+      <DialogContent size="2xl" className="max-h-[90vh] overflow-hidden p-0">
         {doc && (
           <>
             {/* Header */}
@@ -85,23 +84,23 @@ export function DocumentDetailModal() {
 
                   <div className="mt-3 flex flex-wrap items-center gap-3 text-xs text-muted-foreground">
                     <span className="flex items-center gap-1">
-                      <Star className="h-3.5 w-3.5 fill-accent text-accent" />
+                      <Star weight="fill" className="h-3.5 w-3.5 fill-accent text-accent" />
                       <strong className="text-foreground">{doc.rating}</strong>
                     </span>
                     <span className="flex items-center gap-1">
-                      <Download className="h-3.5 w-3.5" />
+                      <DownloadSimple weight="regular" className="h-3.5 w-3.5" />
                       {formatDownloads(doc.downloads)} yuklash
                     </span>
                     <span className="flex items-center gap-1">
-                      <FileText className="h-3.5 w-3.5" />
+                      <FileText weight="regular" className="h-3.5 w-3.5" />
                       {doc.pages} bet
                     </span>
                     <span className="flex items-center gap-1">
-                      <Clock className="h-3.5 w-3.5" />
+                      <Clock weight="regular" className="h-3.5 w-3.5" />
                       {doc.estimatedFillMinutes} daqiqa
                     </span>
                     <span className="flex items-center gap-1">
-                      <Calendar className="h-3.5 w-3.5" />
+                      <Calendar weight="regular" className="h-3.5 w-3.5" />
                       Yangilangan: {doc.lastUpdated}
                     </span>
                   </div>
@@ -109,7 +108,7 @@ export function DocumentDetailModal() {
               </div>
             </div>
 
-            <div className="p-6">
+            <div className="overflow-y-auto p-6 scrollbar-thin max-h-[calc(90vh-12rem)]">
               {/* Pricing box */}
               <div className="rounded-xl border-2 border-primary/20 bg-primary/5 p-5">
                 <div className="flex flex-wrap items-end justify-between gap-3">
@@ -119,12 +118,12 @@ export function DocumentDetailModal() {
                     </div>
                     {doc.isFree ? (
                       <div className="mt-1 flex items-center gap-2 text-3xl font-bold text-emerald-700">
-                        <Sparkles className="h-6 w-6" />
+                        <Sparkle weight="fill" className="h-6 w-6" />
                         Bepul
                       </div>
                     ) : (
                       <div className="mt-1 flex items-center gap-2 text-3xl font-bold text-foreground">
-                        <Tag className="h-6 w-6 text-accent" />
+                        <Tag weight="regular" className="h-6 w-6 text-accent" />
                         {formatPrice(doc.priceUzs)}
                       </div>
                     )}
@@ -134,11 +133,11 @@ export function DocumentDetailModal() {
                   </div>
                   <div className="flex flex-col gap-2">
                     <Button onClick={handleDownload} size="lg" className="gap-1.5">
-                      <Download className="h-4 w-4" />
+                      <DownloadSimple weight="regular" className="h-4 w-4" />
                       {doc.isFree ? "To'ldirish va yuklab olish" : "To'ldirish va sotib olish"}
                     </Button>
                     <Button onClick={handlePreview} variant="outline" size="sm" className="gap-1.5">
-                      <Eye className="h-4 w-4" />
+                      <Eye weight="regular" className="h-4 w-4" />
                       Namunani ko'rish
                     </Button>
                   </div>
@@ -152,7 +151,7 @@ export function DocumentDetailModal() {
                       key={f}
                       className="flex items-center gap-1 rounded-md border border-border bg-card px-2 py-0.5 font-bold uppercase"
                     >
-                      <FileCheck2 className="h-3 w-3 text-primary" />
+                      <CheckCircle weight="regular" className="h-3 w-3 text-primary" />
                       {f}
                     </span>
                   ))}
@@ -165,7 +164,7 @@ export function DocumentDetailModal() {
               {/* What's included */}
               <DialogHeader className="mt-6 text-left">
                 <DialogTitle className="flex items-center gap-2 text-base">
-                  <CheckCircle2 className="h-4 w-4 text-primary" />
+                  <CheckCircle weight="regular" className="h-4 w-4 text-primary" />
                   Hujjatga nima kiradi
                 </DialogTitle>
               </DialogHeader>
@@ -190,7 +189,7 @@ export function DocumentDetailModal() {
                 </DialogTitle>
               </DialogHeader>
               <div className="mt-2 rounded-lg border border-border bg-secondary/40 p-3 text-sm">
-                <FileText className="mr-2 inline h-4 w-4 text-primary" />
+                <FileText weight="regular" className="mr-2 inline h-4 w-4 text-primary" />
                 {doc.legalBasisUz}
               </div>
 
@@ -219,7 +218,7 @@ export function DocumentDetailModal() {
 function Feature({ text }: { text: string }) {
   return (
     <li className="flex items-start gap-2 text-sm text-foreground/90">
-      <CheckCircle2 className="mt-0.5 h-4 w-4 shrink-0 text-emerald-600" />
+      <CheckCircle weight="regular" className="mt-0.5 h-4 w-4 shrink-0 text-emerald-600" />
       <span>{text}</span>
     </li>
   );

@@ -2,10 +2,19 @@
 
 import { useEffect, useState, useMemo } from "react";
 import {
-  Star, Download, Clock, FileText, Search, SlidersHorizontal, X,
-  Sparkles, Tag, ArrowRight,
-} from "lucide-react";
+  ArrowRight,
+  Clock,
+  DownloadSimple,
+  FileText,
+  MagnifyingGlass,
+  SlidersHorizontal,
+  Sparkle,
+  Star,
+  Tag,
+  X,
+} from "@phosphor-icons/react/dist/ssr";
 import { Card } from "@/components/ui/card";
+import { Skeleton } from "@/components/ui/skeleton";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
@@ -89,7 +98,7 @@ export function DocumentListing() {
       {/* Header */}
       <div className="mb-6">
         <h1 className="flex items-center gap-2 font-serif text-2xl font-bold tracking-tight text-foreground sm:text-3xl">
-          <FileText className="h-7 w-7 text-primary" />
+          <FileText weight="regular" className="h-7 w-7 text-primary" />
           Hujjat namunalari katalogi
         </h1>
         <p className="mt-1 text-sm text-muted-foreground">
@@ -100,7 +109,7 @@ export function DocumentListing() {
       {/* Search */}
       <div className="mb-4 flex gap-2">
         <div className="relative flex-1">
-          <Search className="pointer-events-none absolute left-4 top-1/2 h-5 w-5 -translate-y-1/2 text-muted-foreground" />
+          <MagnifyingGlass weight="regular" className="pointer-events-none absolute left-4 top-1/2 h-5 w-5 -translate-y-1/2 text-muted-foreground" />
           <Input value={documentSearch} onChange={(e) => setDocumentSearch(e.target.value)}
             placeholder="Hujjat nomi yoki kalit so'z bo'yicha qidiring..."
             className="h-12 pl-12 text-base" />
@@ -108,7 +117,7 @@ export function DocumentListing() {
         <Sheet>
           <SheetTrigger asChild>
             <Button variant="outline" className="lg:hidden" size="lg">
-              <SlidersHorizontal className="h-5 w-5" />
+              <SlidersHorizontal weight="regular" className="h-5 w-5" />
             </Button>
           </SheetTrigger>
           <SheetContent side="left" className="w-[300px] overflow-y-auto p-0">
@@ -146,14 +155,14 @@ export function DocumentListing() {
         {/* Sidebar */}
         <aside className="hidden lg:col-span-3 lg:block">
           <div className="sticky top-20">
-            <Card className="border-border p-4">
+            <Card className="p-5">
               <div className="mb-3 flex items-center justify-between">
                 <h2 className="flex items-center gap-1.5 text-sm font-bold">
-                  <SlidersHorizontal className="h-4 w-4 text-primary" /> Filtrlash
+                  <SlidersHorizontal weight="regular" className="h-4 w-4 text-primary" /> Filtrlash
                 </h2>
                 {(documentCategory !== "all" || documentPriceFilter !== "all" || documentSortBy !== "popular") && (
                   <button onClick={resetDocumentFilters} className="flex items-center gap-1 text-xs text-primary hover:underline">
-                    <X className="h-3 w-3" /> Tozalash
+                    <X weight="regular" className="h-3 w-3" /> Tozalash
                   </button>
                 )}
               </div>
@@ -185,11 +194,11 @@ export function DocumentListing() {
 
           {loading ? (
             <div className="grid grid-cols-1 gap-4 sm:grid-cols-2">
-              {[1,2,3,4].map(i => <Card key={i} className="h-64 animate-pulse border-border bg-secondary/40" />)}
+              {[1,2,3,4].map(i => <Card key={i} className="flex h-64 flex-col p-5"><Skeleton className="h-5 w-20 rounded-full" /><Skeleton className="mt-3 h-5 w-3/4" /><Skeleton className="mt-1.5 h-3 w-full" /><Skeleton className="mt-1.5 h-3 w-5/6" /><div className="mt-auto flex items-center justify-between border-t border-border pt-3"><Skeleton className="h-6 w-20" /><Skeleton className="h-9 w-24 rounded-lg" /></div></Card>)}
             </div>
           ) : filtered.length === 0 ? (
-            <Card className="border-border p-12 text-center">
-              <FileText className="mx-auto mb-3 h-10 w-10 text-muted-foreground/40" />
+            <Card className="p-12 text-center">
+              <FileText weight="regular" className="mx-auto mb-3 h-10 w-10 text-muted-foreground/40" />
               <h3 className="font-serif text-base font-bold">Hujjat topilmadi</h3>
               <p className="mt-1 text-sm text-muted-foreground">Filtrlarni o'zgartirib qayta urinib ko'ring.</p>
               <Button onClick={resetDocumentFilters} variant="outline" className="mt-4">Filtrlarni tozalash</Button>
@@ -200,7 +209,7 @@ export function DocumentListing() {
                 const cat = DOCUMENT_CATEGORIES.find(c => c.id === doc.category);
                 return (
                   <Card key={doc.id} onClick={() => setActiveDocument(doc as unknown as LegalDocument)}
-                    className="group relative flex cursor-pointer flex-col border-border bg-card p-5 hover:-translate-y-1 hover:shadow-beautiful-md hover:border-border/0">
+                    className="group relative flex cursor-pointer flex-col p-5 hover:-translate-y-1 hover:shadow-beautiful-lg hover:border-accent/30">
                     {idx < 3 && (
                       <div className="absolute -left-2 -top-2 flex h-7 w-7 items-center justify-center rounded-full bg-foreground font-serif text-xs font-bold text-background shadow-hard-sm">
                         {idx + 1}
@@ -209,17 +218,17 @@ export function DocumentListing() {
                     <div className="flex items-center justify-between">
                       <Badge variant="secondary" className="text-[11px]">{cat?.nameUz ?? doc.category}</Badge>
                       <div className="flex gap-1.5">
-                        {doc.isFree && <Badge className="bg-emerald-600 text-white text-[11px] hover:bg-emerald-600"><Sparkles className="mr-0.5 h-2.5 w-2.5" />Bepul</Badge>}
+                        {doc.isFree && <Badge className="bg-emerald-600 text-white text-[11px] hover:bg-emerald-600"><Sparkle weight="fill" className="mr-0.5 h-2.5 w-2.5" />Bepul</Badge>}
                         {doc.isNew && <Badge className="bg-accent text-accent-foreground text-[11px]">Yangi</Badge>}
                       </div>
                     </div>
                     <h3 className="mt-3 line-clamp-2 font-serif text-base font-bold leading-snug text-foreground group-hover:text-primary">{doc.titleUz}</h3>
                     <p className="mt-1.5 line-clamp-2 text-xs text-muted-foreground">{doc.descriptionUz}</p>
                     <div className="mt-4 flex items-center gap-3 font-mono text-[10px] uppercase tracking-wider text-muted-foreground">
-                      <span className="flex items-center gap-1"><FileText className="h-3 w-3" />{doc.pages}b</span>
-                      <span className="flex items-center gap-1"><Clock className="h-3 w-3" />{doc.estimatedFillMinutes}d</span>
-                      <span className="flex items-center gap-1"><Download className="h-3 w-3" />{formatDownloads(doc.downloads)}</span>
-                      <span className="ml-auto flex items-center gap-1"><Star className="h-3 w-3 fill-accent text-accent" /><span className="font-bold text-foreground">{doc.rating}</span></span>
+                      <span className="flex items-center gap-1"><FileText weight="regular" className="h-3 w-3" />{doc.pages}b</span>
+                      <span className="flex items-center gap-1"><Clock weight="regular" className="h-3 w-3" />{doc.estimatedFillMinutes}d</span>
+                      <span className="flex items-center gap-1"><DownloadSimple weight="regular" className="h-3 w-3" />{formatDownloads(doc.downloads)}</span>
+                      <span className="ml-auto flex items-center gap-1"><Star weight="fill" className="h-3 w-3 fill-accent text-accent" /><span className="font-bold text-foreground">{doc.rating}</span></span>
                     </div>
                     <div className="mt-3 flex items-center gap-1.5">
                       <span className="rounded border border-border bg-secondary/40 px-1.5 py-0.5 text-[10px] font-mono font-bold uppercase">PDF</span>
@@ -228,17 +237,17 @@ export function DocumentListing() {
                     </div>
                     <div className="mt-4 flex items-center justify-between border-t border-border pt-3">
                       {doc.isFree ? (
-                        <div className="flex items-center gap-1.5 font-serif text-base font-bold text-emerald-700"><Sparkles className="h-4 w-4" />Bepul</div>
+                        <div className="flex items-center gap-1.5 font-serif text-base font-bold text-emerald-700"><Sparkle weight="fill" className="h-4 w-4" />Bepul</div>
                       ) : (
-                        <div className="flex items-center gap-1.5 font-serif text-base font-bold text-foreground"><Tag className="h-4 w-4 text-accent" />{formatPrice(doc.priceUzs)}</div>
+                        <div className="flex items-center gap-1.5 font-serif text-base font-bold text-foreground"><Tag weight="regular" className="h-4 w-4 text-accent" />{formatPrice(doc.priceUzs)}</div>
                       )}
                       <Button size="sm" variant="outline" className="gap-1 transition-colors group-hover:bg-foreground group-hover:text-background">
-                        Ko'rish <ArrowRight className="h-3.5 w-3.5 transition-transform group-hover:translate-x-0.5" />
+                        Ko'rish <ArrowRight weight="bold" className="h-3.5 w-3.5 transition-transform group-hover:translate-x-0.5" />
                       </Button>
                     </div>
                     {doc.legalBasisUz && (
                       <div className="mt-3 flex items-start gap-1 border-t border-dashed border-border pt-2 text-[10px] text-muted-foreground">
-                        <FileText className="mt-0.5 h-3 w-3 shrink-0 text-primary" />
+                        <FileText weight="regular" className="mt-0.5 h-3 w-3 shrink-0 text-primary" />
                         <span className="line-clamp-1">{doc.legalBasisUz}</span>
                       </div>
                     )}

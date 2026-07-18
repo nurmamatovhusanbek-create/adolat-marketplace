@@ -1,6 +1,16 @@
 "use client";
 import { useEffect, useState, useRef, useCallback } from "react";
-import { Send, Paperclip, X, ArrowLeft, Loader2, CheckCheck, Check, FileText, Download } from "lucide-react";
+import {
+  ArrowLeft,
+  Check,
+  Checks,
+  DownloadSimple,
+  FileText,
+  PaperPlaneTilt,
+  Paperclip,
+  Spinner,
+  X,
+} from "@phosphor-icons/react/dist/ssr";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { ScrollArea } from "@/components/ui/scroll-area";
@@ -98,10 +108,10 @@ export function ChatPanel() {
 
   return (
     <Sheet open={state.open} onOpenChange={(o) => !o && closeChat()}>
-      <SheetContent side="right" className="w-screen h-screen p-0" style={{ maxWidth: "100vw", maxHeight: "100vh" }}>
+      <SheetContent side="right" className="w-full sm:w-[480px] lg:w-[560px] h-screen p-0 flex flex-col" style={{ maxWidth: "100vw", maxHeight: "100vh" }}>
         <SheetHeader className="border-b border-border p-4">
           <SheetTitle className="flex items-center gap-3">
-            <Button variant="ghost" size="icon" onClick={closeChat} className="h-8 w-8"><ArrowLeft className="h-4 w-4" /></Button>
+            <Button variant="ghost" size="icon" onClick={closeChat} className="h-8 w-8"><ArrowLeft weight="regular" className="h-4 w-4" /></Button>
             {otherUser && (<>
               <Avatar className="h-9 w-9"><AvatarImage src={`https://i.pravatar.cc/64?u=${otherUser.id}`} /><AvatarFallback className="bg-foreground/10 text-xs font-bold text-foreground">{otherUser.name?.slice(0, 2).toUpperCase()}</AvatarFallback></Avatar>
               <div className="min-w-0 flex-1"><div className="flex items-center gap-1.5"><span className="truncate font-serif text-sm font-bold">{otherUser.name}</span>{otherUser.advocateProfile?.verified && <Badge className="bg-accent/15 text-accent text-[9px] hover:bg-accent/15">Tasdiqlangan</Badge>}</div><div className="text-[10px] text-muted-foreground">{otherUser.advocateProfile?.titleUz ?? otherUser.email}</div></div>
@@ -110,12 +120,12 @@ export function ChatPanel() {
         </SheetHeader>
         <div className="flex h-[calc(100vh-9rem)] flex-col">
           <ScrollArea className="flex-1 bg-secondary/20 p-4">
-            {state.loading ? (<div className="flex h-full items-center justify-center"><Loader2 className="h-6 w-6 animate-spin text-muted-foreground" /></div>)
+            {state.loading ? (<div className="flex h-full items-center justify-center"><Spinner weight="regular" className="h-6 w-6 animate-spin text-muted-foreground" /></div>)
             : state.messages.length === 0 ? (
               /* Empty state — rise entrance for celebratory feel */
               <div className="rise rise-1 flex h-full flex-col items-center justify-center gap-2 text-center">
                 <div className="flex h-12 w-12 items-center justify-center rounded-full bg-accent/10">
-                  <Send className="h-6 w-6 text-accent" />
+                  <PaperPlaneTilt weight="regular" className="h-6 w-6 text-accent" />
                 </div>
                 <p className="font-serif text-sm font-bold">Suhbatni boshlang</p>
                 <p className="max-w-xs text-xs text-muted-foreground">Birinchi xabaringizni yuboring.</p>
@@ -135,7 +145,7 @@ export function ChatPanel() {
                   {msg.attachments?.length > 0 && <div className="mt-2 space-y-1.5">{msg.attachments.map((att) => <AttachmentChip key={att.filename} att={att} dark={isMine} />)}</div>}
                   <div className={cn("mt-1 flex items-center justify-end gap-1 text-[10px]", isMine ? "text-background/60" : "text-muted-foreground")}>
                     {new Date(msg.createdAt).toLocaleTimeString("uz-UZ", { hour: "2-digit", minute: "2-digit" })}
-                    {isMine && (msg.isRead ? <CheckCheck className="h-3 w-3" /> : <Check className="h-3 w-3" />)}
+                    {isMine && (msg.isRead ? <Checks weight="regular" className="h-3 w-3" /> : <Check weight="bold" className="h-3 w-3" />)}
                   </div>
                 </div>
               </div>); })}
@@ -153,13 +163,13 @@ export function ChatPanel() {
               <div ref={messagesEndRef} />
             </div>)}
           </ScrollArea>
-          {pendingAttachments.length > 0 && (<div className="border-t border-border bg-card p-2"><div className="flex flex-wrap gap-2">{pendingAttachments.map((att, i) => (<div key={att.filename} className="flex items-center gap-2 rounded-md border border-border bg-secondary/50 px-2 py-1"><FileText className="h-3 w-3 text-accent" /><span className="max-w-32 truncate text-[11px]">{att.originalName}</span><button onClick={() => setPendingAttachments(p => p.filter((_, idx) => idx !== i))} className="text-muted-foreground hover:text-destructive"><X className="h-3 w-3" /></button></div>))}</div></div>)}
+          {pendingAttachments.length > 0 && (<div className="border-t border-border bg-card p-2"><div className="flex flex-wrap gap-2">{pendingAttachments.map((att, i) => (<div key={att.filename} className="flex items-center gap-2 rounded-md border border-border bg-secondary/50 px-2 py-1"><FileText weight="regular" className="h-3 w-3 text-accent" /><span className="max-w-32 truncate text-[11px]">{att.originalName}</span><button onClick={() => setPendingAttachments(p => p.filter((_, idx) => idx !== i))} className="text-muted-foreground hover:text-destructive"><X weight="regular" className="h-3 w-3" /></button></div>))}</div></div>)}
           <div className="border-t border-border bg-card p-3">
             <div className="flex items-end gap-2">
               <input ref={fileInputRef} type="file" onChange={handleFileSelect} className="hidden" accept="image/jpeg,image/png,image/webp,image/gif,application/pdf,.doc,.docx,.txt" />
-              <Button variant="ghost" size="icon" onClick={() => fileInputRef.current?.click()} disabled={uploadingFile || state.sending} className="h-9 w-9 shrink-0" aria-label="Fayl biriktirish">{uploadingFile ? <Loader2 className="h-4 w-4 animate-spin" /> : <Paperclip className="h-4 w-4" />}</Button>
+              <Button variant="ghost" size="icon" onClick={() => fileInputRef.current?.click()} disabled={uploadingFile || state.sending} className="h-9 w-9 shrink-0" aria-label="Fayl biriktirish">{uploadingFile ? <Spinner weight="regular" className="h-4 w-4 animate-spin" /> : <Paperclip weight="regular" className="h-4 w-4" />}</Button>
               <Input value={input} onChange={(e) => setInput(e.target.value)} onKeyDown={(e) => { if (e.key === "Enter" && !e.shiftKey) { e.preventDefault(); void handleSend(); } }} placeholder="Xabar yozing..." disabled={state.sending || state.loading || !state.conversation} className="h-9 flex-1 resize-none" aria-label="Xabar matni" />
-              <Button onClick={handleSend} disabled={state.sending || (!input.trim() && pendingAttachments.length === 0) || !state.conversation} size="icon" className="h-9 w-9 shrink-0 bg-foreground text-background hover:bg-foreground/90" aria-label="Xabar yuborish">{state.sending ? <Loader2 className="h-4 w-4 animate-spin" /> : <Send className="h-4 w-4" />}</Button>
+              <Button onClick={handleSend} disabled={state.sending || (!input.trim() && pendingAttachments.length === 0) || !state.conversation} size="icon" className="h-9 w-9 shrink-0 bg-foreground text-background hover:bg-foreground/90" aria-label="Xabar yuborish">{state.sending ? <Spinner weight="regular" className="h-4 w-4 animate-spin" /> : <PaperPlaneTilt weight="regular" className="h-4 w-4" />}</Button>
             </div>
             <p className="mt-1.5 px-1 text-[10px] text-muted-foreground">Enter — yuborish · Shift+Enter — yangi qator · Maks 10 MB</p>
           </div>
@@ -173,5 +183,5 @@ function AttachmentChip({ att, dark }: { att: Attachment; dark: boolean }) {
   const isImage = att.mimeType.startsWith("image/");
   const fileUrl = att.url.startsWith("/api/") ? att.url : `/api/chat/files/${att.url.split("/").pop()}`;
   if (isImage) return <a href={fileUrl} target="_blank" rel="noopener noreferrer" className="block"><img src={fileUrl} alt={att.originalName} className="max-h-32 rounded border border-border/50" /></a>;
-  return <a href={fileUrl} download={att.originalName} className={cn("flex items-center gap-2 rounded border px-2 py-1.5 text-xs", dark ? "border-background/30 bg-background/10 text-background hover:bg-background/20" : "border-border bg-secondary/50 hover:bg-secondary")}><FileText className="h-3.5 w-3.5 shrink-0" /><span className="max-w-32 truncate">{att.originalName}</span><span className="text-[10px] opacity-60">({Math.round(att.size / 1024)}KB)</span><Download className="h-3 w-3 shrink-0" /></a>;
+  return <a href={fileUrl} download={att.originalName} className={cn("flex items-center gap-2 rounded border px-2 py-1.5 text-xs", dark ? "border-background/30 bg-background/10 text-background hover:bg-background/20" : "border-border bg-secondary/50 hover:bg-secondary")}><FileText weight="regular" className="h-3.5 w-3.5 shrink-0" /><span className="max-w-32 truncate">{att.originalName}</span><span className="text-[10px] opacity-60">({Math.round(att.size / 1024)}KB)</span><DownloadSimple weight="regular" className="h-3 w-3 shrink-0" /></a>;
 }

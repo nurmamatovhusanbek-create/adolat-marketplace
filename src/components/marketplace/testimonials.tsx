@@ -1,13 +1,17 @@
 "use client";
 
-import { Star, Quote } from "lucide-react";
+import { Star, Quotes } from "@phosphor-icons/react/dist/ssr";
 import { Card } from "@/components/ui/card";
 import { SectionHeader } from "./category-grid";
 import { TESTIMONIALS } from "@/lib/marketplace/data";
+import { useInView } from "@/hooks/use-in-view";
+import { cn } from "@/lib/utils";
 
 export function Testimonials() {
+  const [ref, inView] = useInView<HTMLDivElement>();
+
   return (
-    <section className="bg-secondary/30 py-20">
+    <section className="bg-secondary/30 py-20 lg:py-24">
       <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
         <SectionHeader
           eyebrow="Mijozlarimiz fikri"
@@ -15,27 +19,32 @@ export function Testimonials() {
           description="Advokatlar, yuristlar, tadbirkorlar va oddiy fuqarolar — minglab foydalanuvchilar Adolat platformasidan foydalanmoqda."
         />
 
-        <div className="mt-10 grid gap-5 sm:grid-cols-2 lg:grid-cols-4">
+        <div
+          ref={ref}
+          className={cn(
+            "reveal-stagger mt-10 grid gap-5 sm:grid-cols-2 lg:grid-cols-4",
+            inView && "in-view"
+          )}
+        >
           {TESTIMONIALS.map((t, i) => (
-            <Card key={t.id} className="group relative flex flex-col gap-3 border-border bg-card p-5 hover:-translate-y-0.5 hover:shadow-beautiful-sm">
-              {/* Editorial quote mark */}
-              <Quote className="absolute right-4 top-4 h-8 w-8 text-accent/15" />
+            <Card key={t.id} className="group relative flex flex-col gap-3 p-6 hover:-translate-y-0.5 hover:shadow-beautiful-md">
+              <Quotes className="absolute right-4 top-4 size-8 text-accent/20" weight="fill" />
               {i === 0 && (
-                <div className="absolute -left-2 -top-2 flex h-6 w-6 items-center justify-center rounded-full bg-accent font-serif text-[10px] font-bold text-accent-foreground">
+                <div className="absolute -left-2 -top-2 flex size-7 items-center justify-center rounded-full bg-accent font-serif text-xs font-bold text-accent-foreground shadow-beautiful-sm">
                   &ldquo;
                 </div>
               )}
 
               <div className="flex items-center justify-between">
                 <div className="flex items-center gap-0.5">
-                  {Array.from({ length: 5 }).map((_, i) => (
+                  {Array.from({ length: 5 }).map((_, idx) => (
                     <Star
-                      key={i}
-                      className={
-                        i < t.rating
-                          ? "h-3.5 w-3.5 fill-trust-premium text-trust-premium"
-                          : "h-3.5 w-3.5 text-border"
-                      }
+                      key={idx}
+                      className={cn(
+                        "size-3.5",
+                        idx < t.rating ? "text-warning" : "text-border"
+                      )}
+                      weight={idx < t.rating ? "fill" : "regular"}
                     />
                   ))}
                 </div>

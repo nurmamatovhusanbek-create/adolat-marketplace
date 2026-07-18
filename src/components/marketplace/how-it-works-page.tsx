@@ -1,19 +1,19 @@
 "use client";
 
 import {
-  FileText,
-  Users,
-  MessageSquare,
-  Download,
-  Search,
-  ShieldCheck,
-  Wallet,
-  Clock,
-  CheckCircle2,
-  Sparkles,
   ArrowRight,
-  HelpCircle,
-} from "lucide-react";
+  ChatCircle,
+  CheckCircle,
+  Clock,
+  DownloadSimple,
+  FileText,
+  MagnifyingGlass,
+  Question,
+  ShieldCheck,
+  Sparkle,
+  Users,
+  Wallet,
+} from "@phosphor-icons/react/dist/ssr";
 import { Card } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
@@ -56,7 +56,7 @@ export function HowItWorksPage() {
         <div className="absolute inset-0 bg-grid-pattern opacity-30" aria-hidden />
         <div className="relative mx-auto max-w-7xl px-4 py-16 text-center sm:px-6 lg:px-8 lg:py-20">
           <Badge className="mb-4 inline-flex items-center gap-1.5 bg-accent/15 text-accent-foreground">
-            <Sparkles className="h-3.5 w-3.5" />
+            <Sparkle weight="fill" className="h-3.5 w-3.5" />
             Qoidalar
           </Badge>
           <h1 className="mx-auto max-w-3xl text-balance text-3xl font-bold tracking-tight text-foreground sm:text-4xl lg:text-5xl">
@@ -77,7 +77,7 @@ export function HowItWorksPage() {
           <Card className="border-border p-6">
             <div className="mb-4 flex items-center gap-3">
               <div className="flex h-12 w-12 items-center justify-center rounded-xl bg-emerald-50 text-emerald-700">
-                <FileText className="h-6 w-6" />
+                <FileText weight="regular" className="h-6 w-6" />
               </div>
               <div>
                 <h2 className="text-lg font-bold text-foreground">Hujjat olish</h2>
@@ -88,7 +88,7 @@ export function HowItWorksPage() {
             <ol className="space-y-4">
               <PathwayStep
                 num={1}
-                icon={Search}
+                icon={MagnifyingGlass}
                 title="Hujjatni toping"
                 description="Kategoriyalar bo'ylab ko'ring yoki kalit so'z bilan qidiring. 700+ namunalar."
               />
@@ -100,7 +100,7 @@ export function HowItWorksPage() {
               />
               <PathwayStep
                 num={3}
-                icon={Download}
+                icon={DownloadSimple}
                 title="Yuklab oling"
                 description="PDF yoki DOCX formatida. Onlayn saqlab, keyin tahrir qilishingiz mumkin."
               />
@@ -112,7 +112,7 @@ export function HowItWorksPage() {
               className="mt-6 w-full gap-1 border-emerald-200 bg-emerald-50 text-emerald-700 hover:bg-emerald-100"
             >
               Hujjatlarga o'tish
-              <ArrowRight className="h-4 w-4" />
+              <ArrowRight weight="bold" className="h-4 w-4" />
             </Button>
           </Card>
 
@@ -120,7 +120,7 @@ export function HowItWorksPage() {
           <Card className="border-border p-6">
             <div className="mb-4 flex items-center gap-3">
               <div className="flex h-12 w-12 items-center justify-center rounded-xl bg-amber-50 text-amber-700">
-                <Users className="h-6 w-6" />
+                <Users weight="regular" className="h-6 w-6" />
               </div>
               <div>
                 <h2 className="text-lg font-bold text-foreground">Advokat topish</h2>
@@ -131,13 +131,13 @@ export function HowItWorksPage() {
             <ol className="space-y-4">
               <PathwayStep
                 num={1}
-                icon={Search}
+                icon={MagnifyingGlass}
                 title="Advokat tanlang"
                 description="Tajriba, reyting, narx va joylashuv bo'yicha filtrlang."
               />
               <PathwayStep
                 num={2}
-                icon={MessageSquare}
+                icon={ChatCircle}
                 title="Bog'laning"
                 description="Profil orqali xabar yuboring yoki konsultatsiya bron qiling."
               />
@@ -155,7 +155,7 @@ export function HowItWorksPage() {
               className="mt-6 w-full gap-1 border-amber-200 bg-amber-50 text-amber-700 hover:bg-amber-100"
             >
               Advokatlarga o'tish
-              <ArrowRight className="h-4 w-4" />
+              <ArrowRight weight="bold" className="h-4 w-4" />
             </Button>
           </Card>
 
@@ -163,7 +163,7 @@ export function HowItWorksPage() {
           <Card className="border-border p-6">
             <div className="mb-4 flex items-center gap-3">
               <div className="flex h-12 w-12 items-center justify-center rounded-xl bg-primary/10 text-primary">
-                <Sparkles className="h-6 w-6" />
+                <Sparkle weight="fill" className="h-6 w-6" />
               </div>
               <div>
                 <h2 className="text-lg font-bold text-foreground">So'rov joylash</h2>
@@ -174,7 +174,7 @@ export function HowItWorksPage() {
             <ol className="space-y-4">
               <PathwayStep
                 num={1}
-                icon={Sparkles}
+                icon={Sparkle}
                 title="So'rov turini tanlang"
                 description="Advokat yoki hujjat kerakligini ko'rsating."
               />
@@ -203,17 +203,17 @@ export function HowItWorksPage() {
               className="mt-6 w-full gap-1 bg-accent text-accent-foreground hover:bg-accent/90"
             >
               So'rov joylash
-              <ArrowRight className="h-4 w-4" />
+              <ArrowRight weight="bold" className="h-4 w-4" />
             </Button>
           </Card>
         </div>
 
         {/* Trust strip */}
         <div className="mt-10 grid grid-cols-2 gap-4 rounded-2xl border border-border bg-card p-6 sm:grid-cols-4">
-          <Trust icon={<CheckCircle2 className="h-5 w-5 text-primary" />} text="Litsenziyalangan advokatlar" />
-          <Trust icon={<ShieldCheck className="h-5 w-5 text-primary" />} text="Xavfsiz to'lov tizimi" />
-          <Trust icon={<FileText className="h-5 w-5 text-primary" />} text="Qonunchilikka muvofiq" />
-          <Trust icon={<Wallet className="h-5 w-5 text-primary" />} text="Shaffof narxlar" />
+          <Trust icon={<CheckCircle weight="regular" className="h-5 w-5 text-primary" />} text="Litsenziyalangan advokatlar" />
+          <Trust icon={<ShieldCheck weight="regular" className="h-5 w-5 text-primary" />} text="Xavfsiz to'lov tizimi" />
+          <Trust icon={<FileText weight="regular" className="h-5 w-5 text-primary" />} text="Qonunchilikka muvofiq" />
+          <Trust icon={<Wallet weight="regular" className="h-5 w-5 text-primary" />} text="Shaffof narxlar" />
         </div>
       </section>
 
@@ -231,7 +231,7 @@ export function HowItWorksPage() {
             {FAQS.map((faq) => (
               <Card key={faq.q} className="border-border p-5">
                 <div className="mb-2 flex items-start gap-2">
-                  <HelpCircle className="mt-0.5 h-4 w-4 shrink-0 text-primary" />
+                  <Question weight="regular" className="mt-0.5 h-4 w-4 shrink-0 text-primary" />
                   <h3 className="text-sm font-bold text-foreground">{faq.q}</h3>
                 </div>
                 <p className="pl-6 text-sm leading-relaxed text-muted-foreground">{faq.a}</p>
@@ -249,7 +249,7 @@ export function HowItWorksPage() {
               variant="outline"
               className="mt-4 border-white/30 bg-transparent text-primary-foreground hover:bg-white/10 hover:text-primary-foreground"
             >
-              <MessageSquare className="mr-1.5 h-4 w-4" />
+              <ChatCircle weight="regular" className="mr-1.5 h-4 w-4" />
               Biz bilan bog'laning
             </Button>
           </Card>

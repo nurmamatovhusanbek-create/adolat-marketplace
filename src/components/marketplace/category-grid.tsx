@@ -1,6 +1,6 @@
 "use client";
 
-import { ArrowRight } from "lucide-react";
+import { ArrowRight } from "@phosphor-icons/react/dist/ssr";
 import { Card } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { DynamicIcon } from "./dynamic-icon";
@@ -12,46 +12,45 @@ import { cn } from "@/lib/utils";
 
 const COLOR_MAP: Record<string, { bg: string; text: string; border: string; hoverBg: string }> = {
   emerald: {
-    bg: "bg-trust-verified/8",
-    text: "text-trust-verified",
-    border: "border-trust-verified/20",
-    hoverBg: "group-hover:bg-trust-verified/15",
+    bg: "bg-success/10",
+    text: "text-success",
+    border: "border-success/20",
+    hoverBg: "group-hover:bg-success/15",
   },
   amber: {
-    bg: "bg-trust-premium/10",
-    text: "text-trust-premium",
-    border: "border-trust-premium/25",
-    hoverBg: "group-hover:bg-trust-premium/20",
+    bg: "bg-warning/10",
+    text: "text-warning",
+    border: "border-warning/25",
+    hoverBg: "group-hover:bg-warning/20",
   },
   rose: {
-    bg: "bg-accent/8",
+    bg: "bg-accent/10",
     text: "text-accent",
     border: "border-accent/20",
     hoverBg: "group-hover:bg-accent/15",
   },
   violet: {
-    bg: "bg-chart-3/8",
-    text: "text-chart-3",
-    border: "border-chart-3/20",
-    hoverBg: "group-hover:bg-chart-3/15",
+    bg: "bg-info/10",
+    text: "text-info",
+    border: "border-info/20",
+    hoverBg: "group-hover:bg-info/15",
   },
   sky: {
-    bg: "bg-chart-3/8",
-    text: "text-chart-3",
-    border: "border-chart-3/20",
-    hoverBg: "group-hover:bg-chart-3/15",
+    bg: "bg-info/10",
+    text: "text-info",
+    border: "border-info/20",
+    hoverBg: "group-hover:bg-info/15",
   },
   teal: {
-    bg: "bg-trust-verified/8",
-    text: "text-trust-verified",
-    border: "border-trust-verified/20",
-    hoverBg: "group-hover:bg-trust-verified/15",
+    bg: "bg-success/10",
+    text: "text-success",
+    border: "border-success/20",
+    hoverBg: "group-hover:bg-success/15",
   },
 };
 
 export function CategoryGrid() {
   const { setView, setDocumentCategory } = useMarketplaceStore();
-  // Reveal-on-scroll for the grid container; children stagger in via .reveal-stagger CSS
   const [gridRef, gridInView] = useInView<HTMLDivElement>();
 
   const handleCategoryClick = (cat: DocumentCategory) => {
@@ -61,7 +60,7 @@ export function CategoryGrid() {
   };
 
   return (
-    <section className="mx-auto max-w-7xl px-4 py-20 sm:px-6 lg:px-8">
+    <section className="mx-auto max-w-7xl px-4 py-20 sm:px-6 lg:px-8 lg:py-24">
       <SectionHeader
         eyebrow="Hujjat katalogi"
         title="Hujjat namunalari bo'yicha kategoriyalar"
@@ -81,29 +80,27 @@ export function CategoryGrid() {
             <Card
               key={cat.id}
               onClick={() => handleCategoryClick(cat.id)}
-              // Refined hover: small lift + beautiful-md shadow (warm-editorial.md two-elevation rule)
-              className="group relative cursor-pointer overflow-hidden border-border bg-card p-6 hover:-translate-y-1 hover:shadow-beautiful-md hover:border-border/0"
+              className="group relative cursor-pointer overflow-hidden p-6 hover:-translate-y-1 hover:shadow-beautiful-md hover:border-accent/30"
             >
-              {/* Hard shadow accent line on hover */}
               <div className="absolute left-0 top-0 h-full w-1 bg-accent opacity-0 transition-opacity duration-200 ease-[cubic-bezier(0.2,0,0,1)] group-hover:opacity-100" />
 
               <div className="flex items-start justify-between">
                 <div
                   className={cn(
-                    "flex h-12 w-12 items-center justify-center rounded-lg transition-colors",
+                    "flex size-12 items-center justify-center rounded-xl transition-colors duration-200",
                     colors.bg,
                     colors.text,
                     colors.hoverBg
                   )}
                 >
-                  <DynamicIcon name={cat.icon} className="h-6 w-6" />
+                  <DynamicIcon name={cat.icon} className="size-6" />
                 </div>
-                <Badge variant="outline" className="border-border text-[10px] font-mono">
+                <Badge variant="soft" tone="neutral" size="sm" className="font-mono">
                   {cat.count} hujjat
                 </Badge>
               </div>
 
-              <h3 className="mt-5 font-serif text-lg font-bold text-foreground">{cat.nameUz}</h3>
+              <h3 className="mt-5 font-serif text-xl font-bold tracking-tight text-foreground">{cat.nameUz}</h3>
               <p className="mt-1.5 line-clamp-2 text-sm leading-relaxed text-muted-foreground">
                 {cat.descriptionUz}
               </p>
@@ -126,7 +123,7 @@ export function CategoryGrid() {
 
               <div className="mt-5 flex items-center gap-1 font-mono text-xs font-semibold uppercase tracking-wider text-accent opacity-0 transition-all duration-200 ease-[cubic-bezier(0.2,0,0,1)] group-hover:opacity-100">
                 Ko'rish
-                <ArrowRight className="h-3.5 w-3.5 transition-transform duration-200 ease-[cubic-bezier(0.2,0,0,1)] group-hover:translate-x-1" />
+                <ArrowRight className="size-3.5 transition-transform duration-200 ease-[cubic-bezier(0.2,0,0,1)] group-hover:translate-x-1" weight="bold" />
               </div>
             </Card>
           );
@@ -147,7 +144,6 @@ export function SectionHeader({
   description?: string;
   action?: React.ReactNode;
 }) {
-  // Scroll-reveal — fades up + settles. Respects prefers-reduced-motion (see hook).
   const [ref, inView] = useInView<HTMLDivElement>();
 
   return (
@@ -165,11 +161,11 @@ export function SectionHeader({
             {eyebrow}
           </p>
         </div>
-        <h2 className="text-balance font-serif text-2xl font-bold tracking-tight text-foreground sm:text-3xl lg:text-4xl">
+        <h2 className="text-balance font-serif text-3xl font-bold tracking-tight text-foreground sm:text-4xl lg:text-5xl">
           {title}
         </h2>
         {description && (
-          <p className="mt-3 text-balance text-sm leading-relaxed text-muted-foreground sm:text-base">
+          <p className="mt-3 text-pretty text-base leading-relaxed text-muted-foreground">
             {description}
           </p>
         )}

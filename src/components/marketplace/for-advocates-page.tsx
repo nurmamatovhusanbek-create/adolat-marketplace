@@ -1,19 +1,19 @@
 "use client";
 
 import {
-  Users,
-  TrendingUp,
-  Wallet,
-  ShieldCheck,
   ArrowRight,
-  CheckCircle2,
-  Sparkles,
-  UserPlus,
-  FileText,
-  Star,
-  Award,
   Briefcase,
-} from "lucide-react";
+  CheckCircle,
+  FileText,
+  Medal,
+  ShieldCheck,
+  Sparkle,
+  Star,
+  TrendUp,
+  UserPlus,
+  Users,
+  Wallet,
+} from "@phosphor-icons/react/dist/ssr";
 import { Card } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
@@ -26,7 +26,7 @@ import { useState } from "react";
 
 const BENEFITS = [
   {
-    icon: TrendingUp,
+    icon: TrendUp,
     title: "Doimiy mijozlar bazasi",
     description:
       "Oyiga o'rtacha 30+ yangi mijozga kiring. Mijozlar profilingizga keladi — siz izlashi shart emas.",
@@ -105,7 +105,7 @@ export function ForAdvocatesPage() {
           <div className="grid items-center gap-10 lg:grid-cols-2">
             <div>
               <Badge className="mb-4 inline-flex items-center gap-1.5 bg-accent/15 text-accent-foreground">
-                <Sparkles className="h-3.5 w-3.5" />
+                <Sparkle weight="fill" className="h-3.5 w-3.5" />
                 Advokatlar uchun
               </Badge>
               <h1 className="text-balance text-3xl font-bold leading-tight tracking-tight text-foreground sm:text-4xl lg:text-5xl">
@@ -119,7 +119,7 @@ export function ForAdvocatesPage() {
               <div className="mt-6 flex flex-wrap gap-3">
                 <Button size="lg" onClick={() => document.getElementById("signup")?.scrollIntoView({ behavior: "smooth" })}>
                   Bepul ro'yxatdan o'tish
-                  <ArrowRight className="ml-1.5 h-4 w-4" />
+                  <ArrowRight weight="bold" className="ml-1.5 h-4 w-4" />
                 </Button>
                 <Button size="lg" variant="outline" onClick={() => setView("home")}>
                   Bosh sahifaga qaytish
@@ -139,7 +139,7 @@ export function ForAdvocatesPage() {
                 <div className="mb-4 flex items-center justify-between">
                   <div className="flex items-center gap-2">
                     <div className="flex h-9 w-9 items-center justify-center rounded-lg bg-primary text-primary-foreground">
-                      <TrendingUp className="h-4 w-4" />
+                      <TrendUp weight="regular" className="h-4 w-4" />
                     </div>
                     <div>
                       <div className="text-sm font-bold">Mening dashboardim</div>
@@ -188,7 +188,7 @@ export function ForAdvocatesPage() {
               <div className="absolute -bottom-4 -right-4 hidden rounded-2xl border border-border bg-card p-4 shadow-lg sm:block">
                 <div className="flex items-center gap-2">
                   <div className="flex h-10 w-10 items-center justify-center rounded-lg bg-accent text-accent-foreground">
-                    <Award className="h-5 w-5" />
+                    <Medal weight="regular" className="h-5 w-5" />
                   </div>
                   <div>
                     <div className="text-xs text-muted-foreground">Bu oyda</div>
@@ -255,7 +255,7 @@ export function ForAdvocatesPage() {
         <Card className="border-border p-6 sm:p-8">
           <div className="mb-6 text-center">
             <div className="mx-auto mb-3 flex h-12 w-12 items-center justify-center rounded-xl bg-primary text-primary-foreground">
-              <UserPlus className="h-6 w-6" />
+              <UserPlus weight="regular" className="h-6 w-6" />
             </div>
             <h2 className="text-2xl font-bold tracking-tight text-foreground">Bepul ro'yxatdan o'tish</h2>
             <p className="mt-1 text-sm text-muted-foreground">
@@ -323,13 +323,13 @@ export function ForAdvocatesPage() {
             </div>
 
             <div className="rounded-lg bg-secondary/50 p-3 text-xs text-muted-foreground">
-              <CheckCircle2 className="mr-1 inline h-3.5 w-3.5 text-emerald-600" />
+              <CheckCircle weight="regular" className="mr-1 inline h-3.5 w-3.5 text-emerald-600" />
               Keyingi bosqichda litsenziya raqami, diplomlar va ish tajribangiz haqida
               ma'lumot so'raymiz.
             </div>
 
             <Button type="submit" size="lg" className="w-full gap-1.5">
-              <UserPlus className="h-4 w-4" />
+              <UserPlus weight="regular" className="h-4 w-4" />
               Ro'yxatdan o'tish
             </Button>
 

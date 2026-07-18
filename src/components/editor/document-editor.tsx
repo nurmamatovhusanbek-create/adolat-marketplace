@@ -22,20 +22,19 @@ import {
   SheetTitle,
 } from "@/components/ui/sheet";
 import {
+  ArrowCounterClockwise,
   ArrowLeft,
-  Download,
-  Save,
-  FileText,
-  CheckCircle2,
-  Loader2,
-  Eye,
-  AlertCircle,
-  Lock,
-  Sparkles,
+  CheckCircle,
   Clock,
-  FileCheck2,
-  RotateCcw,
-} from "lucide-react";
+  DownloadSimple,
+  Eye,
+  FileText,
+  FloppyDisk,
+  Lock,
+  Sparkle,
+  Spinner,
+  WarningCircle,
+} from "@phosphor-icons/react/dist/ssr";
 import { toast } from "sonner";
 import { useMarketplaceStore } from "@/lib/marketplace/store";
 import { useAppUser } from "@/lib/auth/user-provider";
@@ -351,7 +350,7 @@ export function DocumentEditor() {
         <div className="sticky top-0 z-10 flex items-center justify-between border-b border-border bg-background/95 px-4 py-3 backdrop-blur">
           <div className="flex min-w-0 items-center gap-3">
             <Button variant="ghost" size="icon" onClick={handleClose} className="shrink-0">
-              <ArrowLeft className="h-5 w-5" />
+              <ArrowLeft weight="regular" className="h-5 w-5" />
             </Button>
             {doc && (
               <div className="min-w-0">
@@ -365,18 +364,18 @@ export function DocumentEditor() {
           <div className="flex items-center gap-2">
             {saving && (
               <span className="hidden items-center gap-1 text-xs text-muted-foreground sm:flex">
-                <Loader2 className="h-3 w-3 animate-spin" />
+                <Spinner weight="regular" className="h-3 w-3 animate-spin" />
                 Saqlanmoqda...
               </span>
             )}
             {user?.id && editorDraftId && (
               <Badge variant="outline" className="hidden items-center gap-1 text-emerald-700 sm:flex">
-                <CheckCircle2 className="h-3 w-3" />
+                <CheckCircle weight="regular" className="h-3 w-3" />
                 Draf saqlangan
               </Badge>
             )}
             <Button variant="outline" size="sm" onClick={() => setShowPreview(true)} className="gap-1.5">
-              <Eye className="h-4 w-4" />
+              <Eye weight="regular" className="h-4 w-4" />
               <span className="hidden sm:inline">Namuna</span>
             </Button>
             <Button
@@ -385,7 +384,7 @@ export function DocumentEditor() {
               disabled={downloading !== null || loading}
               className="gap-1.5"
             >
-              {downloading === "pdf" ? <Loader2 className="h-4 w-4 animate-spin" /> : <Download className="h-4 w-4" />}
+              {downloading === "pdf" ? <Spinner weight="regular" className="h-4 w-4 animate-spin" /> : <DownloadSimple weight="regular" className="h-4 w-4" />}
               PDF
             </Button>
             <Button
@@ -395,7 +394,7 @@ export function DocumentEditor() {
               disabled={downloading !== null || loading}
               className="gap-1.5"
             >
-              {downloading === "docx" ? <Loader2 className="h-4 w-4 animate-spin" /> : <FileText className="h-4 w-4" />}
+              {downloading === "docx" ? <Spinner weight="regular" className="h-4 w-4 animate-spin" /> : <FileText weight="regular" className="h-4 w-4" />}
               <span className="hidden sm:inline">DOCX</span>
             </Button>
           </div>
@@ -413,7 +412,7 @@ export function DocumentEditor() {
         <div className="h-[calc(100vh-9rem)] overflow-y-auto scrollbar-thin">
           {loading ? (
             <div className="flex h-full items-center justify-center">
-              <Loader2 className="h-8 w-8 animate-spin text-primary" />
+              <Spinner weight="regular" className="h-8 w-8 animate-spin text-primary" />
             </div>
           ) : doc && template ? (
             <div className="mx-auto max-w-4xl px-4 py-6 sm:px-6">
@@ -433,7 +432,7 @@ export function DocumentEditor() {
                   <div className="text-right">
                     {doc.isFree ? (
                       <Badge className="bg-emerald-600 text-white hover:bg-emerald-600">
-                        <Sparkles className="mr-1 h-3 w-3" /> Bepul
+                        <Sparkle weight="fill" className="mr-1 h-3 w-3" /> Bepul
                       </Badge>
                     ) : (
                       <Badge variant="secondary">{doc.priceUzs.toLocaleString("ru-RU")} so'm</Badge>
@@ -442,15 +441,15 @@ export function DocumentEditor() {
                 </div>
                 <div className="mt-4 flex flex-wrap items-center gap-4 text-xs text-muted-foreground">
                   <span className="flex items-center gap-1">
-                    <FileText className="h-3.5 w-3.5" />
+                    <FileText weight="regular" className="h-3.5 w-3.5" />
                     {doc.pages} bet
                   </span>
                   <span className="flex items-center gap-1">
-                    <Clock className="h-3.5 w-3.5" />
+                    <Clock weight="regular" className="h-3.5 w-3.5" />
                     {doc.template.estimatedFillMinutes} daqiqa
                   </span>
                   <span className="flex items-center gap-1">
-                    <FileCheck2 className="h-3.5 w-3.5" />
+                    <CheckCircle weight="regular" className="h-3.5 w-3.5" />
                     {totalFieldsCount} maydon
                   </span>
                 </div>
@@ -458,7 +457,7 @@ export function DocumentEditor() {
 
               {!user?.id && (
                 <div className="mb-6 flex items-start gap-3 rounded-lg border border-amber-200 bg-amber-50 p-4 text-sm">
-                  <Lock className="mt-0.5 h-5 w-5 shrink-0 text-amber-700" />
+                  <Lock weight="regular" className="mt-0.5 h-5 w-5 shrink-0 text-amber-700" />
                   <div className="flex-1">
                     <strong className="text-amber-900">Draf saqlash va yuklab olish uchun tizimga kiring</strong>
                     <p className="mt-0.5 text-xs text-amber-800">
@@ -511,7 +510,7 @@ export function DocumentEditor() {
               {/* Reset + actions */}
               <div className="mb-8 flex flex-col items-center gap-3 sm:flex-row sm:justify-between">
                 <Button variant="ghost" onClick={handleReset} className="gap-1.5 text-muted-foreground">
-                  <RotateCcw className="h-4 w-4" />
+                  <ArrowCounterClockwise weight="regular" className="h-4 w-4" />
                   Formani tozalash
                 </Button>
                 <div className="flex gap-2">
@@ -521,7 +520,7 @@ export function DocumentEditor() {
                     disabled={downloading !== null}
                     className="gap-1.5"
                   >
-                    {downloading === "docx" ? <Loader2 className="h-4 w-4 animate-spin" /> : <FileText className="h-4 w-4" />}
+                    {downloading === "docx" ? <Spinner weight="regular" className="h-4 w-4 animate-spin" /> : <FileText weight="regular" className="h-4 w-4" />}
                     DOCX yuklab olish
                   </Button>
                   <Button
@@ -529,7 +528,7 @@ export function DocumentEditor() {
                     disabled={downloading !== null}
                     className="gap-1.5"
                   >
-                    {downloading === "pdf" ? <Loader2 className="h-4 w-4 animate-spin" /> : <Download className="h-4 w-4" />}
+                    {downloading === "pdf" ? <Spinner weight="regular" className="h-4 w-4 animate-spin" /> : <DownloadSimple weight="regular" className="h-4 w-4" />}
                     PDF yuklab olish
                   </Button>
                 </div>
@@ -539,7 +538,7 @@ export function DocumentEditor() {
               {Object.keys(errors).length > 0 && (
                 <Card className="mb-6 border-red-200 bg-red-50 p-4">
                   <div className="flex items-start gap-2 text-sm text-red-800">
-                    <AlertCircle className="mt-0.5 h-4 w-4 shrink-0" />
+                    <WarningCircle weight="regular" className="mt-0.5 h-4 w-4 shrink-0" />
                     <div>
                       <strong>{Object.keys(errors).length} ta maydonda xato bor.</strong>
                       <p className="mt-0.5 text-xs">Qizil ramkali maydonlarni to'g'rilang va qayta urinib ko'ring.</p>
@@ -556,7 +555,7 @@ export function DocumentEditor() {
           <SheetContent side="right" className="w-screen h-screen overflow-y-auto p-0" style={{ maxWidth: "100vw", maxHeight: "100vh" }}>
             <SheetHeader className="border-b p-4">
               <SheetTitle className="flex items-center gap-2">
-                <Eye className="h-4 w-4 text-primary" />
+                <Eye weight="regular" className="h-4 w-4 text-primary" />
                 Hujjat namunasi
               </SheetTitle>
             </SheetHeader>
@@ -649,7 +648,7 @@ function FieldRenderer({
       )}
       {error && (
         <p className="mt-1 flex items-center gap-1 text-[11px] text-red-600">
-          <AlertCircle className="h-3 w-3" />
+          <WarningCircle weight="regular" className="h-3 w-3" />
           {error}
         </p>
       )}

@@ -2,9 +2,18 @@
 
 import { useEffect, useState } from "react";
 import {
-  Briefcase, MessageSquare, Star, TrendingUp, Eye, Clock,
-  CheckCircle2, AlertCircle, Loader2, ArrowRight, Users,
-} from "lucide-react";
+  ArrowRight,
+  Briefcase,
+  ChatCircle,
+  CheckCircle,
+  Clock,
+  Eye,
+  Spinner,
+  Star,
+  TrendUp,
+  Users,
+  WarningCircle,
+} from "@phosphor-icons/react/dist/ssr";
 import { Card } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
@@ -79,7 +88,7 @@ export function AdvocateDashboard() {
   if (loading) {
     return (
       <div className="flex h-64 items-center justify-center">
-        <Loader2 className="h-8 w-8 animate-spin text-accent" />
+        <Spinner weight="regular" className="h-8 w-8 animate-spin text-accent" />
       </div>
     );
   }
@@ -90,7 +99,7 @@ export function AdvocateDashboard() {
       <div className="mx-auto max-w-2xl px-4 py-12">
         <Card className="border-amber-200 bg-amber-50 p-8 text-center">
           <div className="mx-auto mb-4 flex h-16 w-16 items-center justify-center rounded-full bg-amber-100">
-            <Clock className="h-8 w-8 text-amber-600" />
+            <Clock weight="regular" className="h-8 w-8 text-amber-600" />
           </div>
           <h2 className="font-serif text-xl font-bold text-amber-900">Tasdiqlash kutilmoqda</h2>
           <p className="mt-2 text-sm text-amber-700">
@@ -113,7 +122,7 @@ export function AdvocateDashboard() {
       <div className="mb-6 flex items-center justify-between">
         <div>
           <h1 className="flex items-center gap-2 font-serif text-2xl font-bold tracking-tight text-foreground sm:text-3xl">
-            <Briefcase className="h-7 w-7 text-accent" />
+            <Briefcase weight="regular" className="h-7 w-7 text-accent" />
             Advokat kabineti
           </h1>
           <p className="mt-1 text-sm text-muted-foreground">
@@ -121,7 +130,7 @@ export function AdvocateDashboard() {
           </p>
         </div>
         <Button variant="outline" onClick={() => setDashboardOpen(true)} className="gap-1.5">
-          <MessageSquare className="h-4 w-4" />
+          <ChatCircle weight="regular" className="h-4 w-4" />
           Mijoz kabineti
         </Button>
       </div>
@@ -129,25 +138,25 @@ export function AdvocateDashboard() {
       <Tabs value={tab} onValueChange={setTab}>
         <TabsList className="grid w-full grid-cols-3 sm:w-auto sm:grid-cols-4">
           <TabsTrigger value="overview" className="gap-1.5">
-            <TrendingUp className="h-3.5 w-3.5" />
+            <TrendUp weight="regular" className="h-3.5 w-3.5" />
             <span className="hidden sm:inline">Umumiy</span>
           </TabsTrigger>
           <TabsTrigger value="requests" className="gap-1.5">
-            <Briefcase className="h-3.5 w-3.5" />
+            <Briefcase weight="regular" className="h-3.5 w-3.5" />
             <span className="hidden sm:inline">So'rovlar</span>
             {s.matchingRequests > 0 && (
               <Badge className="bg-accent text-accent-foreground text-[9px]">{s.matchingRequests}</Badge>
             )}
           </TabsTrigger>
           <TabsTrigger value="messages" className="gap-1.5">
-            <MessageSquare className="h-3.5 w-3.5" />
+            <ChatCircle weight="regular" className="h-3.5 w-3.5" />
             <span className="hidden sm:inline">Xabarlar</span>
             {s.unreadMessages > 0 && (
               <Badge className="bg-accent text-accent-foreground text-[9px]">{s.unreadMessages}</Badge>
             )}
           </TabsTrigger>
           <TabsTrigger value="profile" className="gap-1.5">
-            <Star className="h-3.5 w-3.5" />
+            <Star weight="fill" className="h-3.5 w-3.5" />
             <span className="hidden sm:inline">Profil</span>
           </TabsTrigger>
         </TabsList>
@@ -156,22 +165,22 @@ export function AdvocateDashboard() {
         <TabsContent value="overview" className="mt-6">
           <div className="grid grid-cols-2 gap-4 lg:grid-cols-4">
             <StatCard
-              icon={<Briefcase className="h-5 w-5 text-accent" />}
+              icon={<Briefcase weight="regular" className="h-5 w-5 text-accent" />}
               value={String(s.totalResponses)}
               label="Javob berilgan so'rovlar"
             />
             <StatCard
-              icon={<CheckCircle2 className="h-5 w-5 text-trust-verified" />}
+              icon={<CheckCircle weight="regular" className="h-5 w-5 text-trust-verified" />}
               value={String(s.acceptedResponses)}
               label="Qabul qilingan"
             />
             <StatCard
-              icon={<MessageSquare className="h-5 w-5 text-trust-premium" />}
+              icon={<ChatCircle weight="regular" className="h-5 w-5 text-trust-premium" />}
               value={String(s.conversations)}
               label="Faol suhbatlar"
             />
             <StatCard
-              icon={<Star className="h-5 w-5 fill-trust-premium text-trust-premium" />}
+              icon={<Star weight="fill" className="h-5 w-5 fill-trust-premium text-trust-premium" />}
               value={s.rating > 0 ? s.rating.toFixed(1) : "—"}
               label={`Reyting (${s.reviewsCount} sharh)`}
             />
@@ -180,7 +189,7 @@ export function AdvocateDashboard() {
           <div className="mt-6 grid gap-4 lg:grid-cols-2">
             <Card className="border-border p-5">
               <h3 className="mb-3 flex items-center gap-2 font-serif text-base font-bold">
-                <TrendingUp className="h-4 w-4 text-accent" />
+                <TrendUp weight="regular" className="h-4 w-4 text-accent" />
                 Muvaffaqiyat ko'rsatkichlari
               </h3>
               <div className="space-y-3">
@@ -192,7 +201,7 @@ export function AdvocateDashboard() {
 
             <Card className="border-border p-5">
               <h3 className="mb-3 flex items-center gap-2 font-serif text-base font-bold">
-                <Clock className="h-4 w-4 text-accent" />
+                <Clock weight="regular" className="h-4 w-4 text-accent" />
                 So'nggi so'rovlar
               </h3>
               {requests.length === 0 ? (
@@ -262,7 +271,7 @@ function RequestList({ requests }: { requests: AdvocateRequest[]; advocateId: st
   if (requests.length === 0) {
     return (
       <Card className="border-border p-12 text-center">
-        <Briefcase className="mx-auto mb-3 h-10 w-10 text-muted-foreground/40" />
+        <Briefcase weight="regular" className="mx-auto mb-3 h-10 w-10 text-muted-foreground/40" />
         <h3 className="font-serif text-base font-bold">So'rovlar yo'q</h3>
         <p className="mt-1 text-sm text-muted-foreground">
           Sizning sohangizga mos so'rovlar paydo bo'lganda bu yerda ko'rinadi.
@@ -288,7 +297,7 @@ function RequestList({ requests }: { requests: AdvocateRequest[]; advocateId: st
                 )}
                 {r.hasResponded && (
                   <Badge className="bg-trust-verified/15 text-trust-verified hover:bg-trust-verified/15 text-[11px] gap-1">
-                    <CheckCircle2 className="h-2.5 w-2.5" />
+                    <CheckCircle weight="regular" className="h-2.5 w-2.5" />
                     Javob berildi
                   </Badge>
                 )}
@@ -330,12 +339,12 @@ function MessagesTab({ unreadCount }: { unreadCount: number }) {
       .finally(() => setLoading(false));
   }, []);
 
-  if (loading) return <div className="flex justify-center py-8"><Loader2 className="h-6 w-6 animate-spin" /></div>;
+  if (loading) return <div className="flex justify-center py-8"><Spinner weight="regular" className="h-6 w-6 animate-spin" /></div>;
 
   if (conversations.length === 0) {
     return (
       <Card className="border-border p-12 text-center">
-        <MessageSquare className="mx-auto mb-3 h-10 w-10 text-muted-foreground/40" />
+        <ChatCircle weight="regular" className="mx-auto mb-3 h-10 w-10 text-muted-foreground/40" />
         <h3 className="font-serif text-base font-bold">Suhbatlar yo'q</h3>
         <p className="mt-1 text-sm text-muted-foreground">Mijozlar siz bilan bog'langanda suhbatlar bu yerda ko'rinadi.</p>
       </Card>
@@ -362,7 +371,7 @@ function MessagesTab({ unreadCount }: { unreadCount: number }) {
               </div>
               <Button size="sm" variant="outline" className="gap-1"
                 onClick={() => other && openChatWith(other.id, other.name)}>
-                <MessageSquare className="h-3.5 w-3.5" />
+                <ChatCircle weight="regular" className="h-3.5 w-3.5" />
                 Ochish
               </Button>
             </div>

@@ -12,17 +12,17 @@ import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import {
-  FileText,
+  Pulse,
   Briefcase,
-  MessageSquare,
+  ChatCircle,
   Clock,
-  Download,
-  Trash2,
-  Loader2,
-  Inbox,
-  FileCheck2,
-  Activity,
-} from "lucide-react";
+  DownloadSimple,
+  CheckCircle,
+  FileText,
+  Tray,
+  Spinner,
+  Trash,
+} from "@phosphor-icons/react/dist/ssr";
 import { useMarketplaceStore } from "@/lib/marketplace/store";
 import { useAppUser } from "@/lib/auth/user-provider";
 import { toast } from "sonner";
@@ -128,7 +128,7 @@ export function Dashboard() {
       <SheetContent side="right" className="w-screen h-screen overflow-y-auto p-0" style={{ maxWidth: "100vw", maxHeight: "100vh" }}>
         <SheetHeader className="border-b p-6">
           <SheetTitle className="flex items-center gap-2 text-xl">
-            <Activity className="h-5 w-5 text-primary" />
+            <Pulse weight="regular" className="h-5 w-5 text-primary" />
             Mening kabinetim
           </SheetTitle>
           {user && (
@@ -143,17 +143,17 @@ export function Dashboard() {
           {user && (
             <div className="mb-6 grid grid-cols-3 gap-3">
               <StatCard
-                icon={<FileText className="h-4 w-4 text-primary" />}
+                icon={<FileText weight="regular" className="h-4 w-4 text-primary" />}
                 value={user.counts.drafts}
                 label="Saqlangan draflar"
               />
               <StatCard
-                icon={<Briefcase className="h-4 w-4 text-emerald-600" />}
+                icon={<Briefcase weight="regular" className="h-4 w-4 text-emerald-600" />}
                 value={user.counts.activeRequests}
                 label="Faol so'rovlar"
               />
               <StatCard
-                icon={<MessageSquare className="h-4 w-4 text-amber-600" />}
+                icon={<ChatCircle weight="regular" className="h-4 w-4 text-amber-600" />}
                 value={user.counts.unreadMessages}
                 label="O'qilmagan xabarlar"
               />
@@ -163,11 +163,11 @@ export function Dashboard() {
           <Tabs value={tab} onValueChange={setTab}>
             <TabsList className="grid w-full grid-cols-2">
               <TabsTrigger value="drafts" className="gap-1.5">
-                <FileText className="h-3.5 w-3.5" />
+                <FileText weight="regular" className="h-3.5 w-3.5" />
                 Mening draflarim
               </TabsTrigger>
               <TabsTrigger value="requests" className="gap-1.5">
-                <Briefcase className="h-3.5 w-3.5" />
+                <Briefcase weight="regular" className="h-3.5 w-3.5" />
                 So'rovlarim
               </TabsTrigger>
             </TabsList>
@@ -175,11 +175,11 @@ export function Dashboard() {
             <TabsContent value="drafts" className="mt-4">
               {loading ? (
                 <div className="flex h-32 items-center justify-center">
-                  <Loader2 className="h-6 w-6 animate-spin text-primary" />
+                  <Spinner weight="regular" className="h-6 w-6 animate-spin text-primary" />
                 </div>
               ) : drafts.length === 0 ? (
                 <EmptyState
-                  icon={<Inbox className="h-10 w-10" />}
+                  icon={<Tray className="h-10 w-10" />}
                   title="Draflar yo'q"
                   description="Hujjat to'ldirib, draf sifatida saqlang. Bu yerda ko'rinadi."
                 />
@@ -190,7 +190,7 @@ export function Dashboard() {
                       <div className="flex items-start justify-between gap-3">
                         <div className="min-w-0 flex-1">
                           <div className="flex items-center gap-2">
-                            <FileCheck2 className="h-4 w-4 shrink-0 text-primary" />
+                            <CheckCircle weight="regular" className="h-4 w-4 shrink-0 text-primary" />
                             <h3 className="truncate text-sm font-bold text-foreground">
                               {d.document.titleUz}
                             </h3>
@@ -206,11 +206,11 @@ export function Dashboard() {
                           </div>
                           <div className="mt-1 flex flex-wrap items-center gap-3 text-xs text-muted-foreground">
                             <span className="flex items-center gap-1">
-                              <Clock className="h-3 w-3" />
+                              <Clock weight="regular" className="h-3 w-3" />
                               {new Date(d.updatedAt).toLocaleString("uz-UZ")}
                             </span>
                             <span className="flex items-center gap-1">
-                              <Download className="h-3 w-3" />
+                              <DownloadSimple weight="regular" className="h-3 w-3" />
                               {d.downloadCount} yuklash
                             </span>
                             <span>v{d.version}</span>
@@ -224,11 +224,11 @@ export function Dashboard() {
                           onClick={() => handleDeleteDraft(d.id)}
                           className="gap-1 text-red-600 hover:bg-red-50 hover:text-red-700"
                         >
-                          <Trash2 className="h-3.5 w-3.5" />
+                          <Trash weight="regular" className="h-3.5 w-3.5" />
                           O'chirish
                         </Button>
                         <Button size="sm" onClick={() => handleResumeDraft(d)} className="gap-1">
-                          <FileText className="h-3.5 w-3.5" />
+                          <FileText weight="regular" className="h-3.5 w-3.5" />
                           Davom ettirish
                         </Button>
                       </div>
@@ -241,11 +241,11 @@ export function Dashboard() {
             <TabsContent value="requests" className="mt-4">
               {loading ? (
                 <div className="flex h-32 items-center justify-center">
-                  <Loader2 className="h-6 w-6 animate-spin text-primary" />
+                  <Spinner weight="regular" className="h-6 w-6 animate-spin text-primary" />
                 </div>
               ) : requests.length === 0 ? (
                 <EmptyState
-                  icon={<Inbox className="h-10 w-10" />}
+                  icon={<Tray className="h-10 w-10" />}
                   title="So'rovlar yo'q"
                   description="Huquqiy so'rovingizni joylang va advokatlardan javob oling."
                 />
@@ -278,7 +278,7 @@ export function Dashboard() {
                           <p className="mt-1 line-clamp-2 text-xs text-muted-foreground">{r.description}</p>
                           <div className="mt-2 flex flex-wrap items-center gap-3 text-xs text-muted-foreground">
                             <span className="flex items-center gap-1">
-                              <Clock className="h-3 w-3" />
+                              <Clock weight="regular" className="h-3 w-3" />
                               {new Date(r.createdAt).toLocaleDateString("uz-UZ")}
                             </span>
                             <span>{r.responsesCount} javob</span>
