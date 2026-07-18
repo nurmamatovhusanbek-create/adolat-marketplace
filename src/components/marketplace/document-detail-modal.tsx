@@ -55,7 +55,7 @@ export function DocumentDetailModal() {
 
   return (
     <Dialog open={isOpen} onOpenChange={(o) => !o && handleClose()}>
-      <DialogContent className="max-h-[92vh] max-w-3xl overflow-y-auto p-0 scrollbar-thin">
+      <DialogContent className="max-h-[90vh] w-[95vw] max-w-5xl overflow-y-auto p-0 scrollbar-thin">
         {doc && (
           <>
             {/* Header */}

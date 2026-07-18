@@ -240,7 +240,7 @@ export function ChatPanel() {
 
   return (
     <Sheet open={state.open} onOpenChange={(o) => !o && closeChat()}>
-      <SheetContent side="right" className="w-full p-0 sm:max-w-lg lg:max-w-xl">
+      <SheetContent side="right" className="w-full p-0 sm:max-w-xl lg:max-w-2xl">
         <SheetHeader className="border-b border-border p-4">
           <SheetTitle className="flex items-center gap-3">
             <Button variant="ghost" size="icon" onClick={closeChat} className="h-8 w-8">

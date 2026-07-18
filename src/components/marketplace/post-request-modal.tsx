@@ -129,7 +129,7 @@ export function PostRequestModal() {
 
   return (
     <Dialog open={isPostRequestOpen} onOpenChange={(o) => !o && handleClose()}>
-      <DialogContent className="max-h-[92vh] max-w-2xl overflow-y-auto p-0 scrollbar-thin">
+      <DialogContent className="max-h-[90vh] w-[95vw] max-w-3xl overflow-y-auto p-0 scrollbar-thin">
         {submitted ? (
           <div className="flex flex-col items-center gap-4 p-8 text-center">
             <div className="flex h-16 w-16 items-center justify-center rounded-full bg-emerald-100">
