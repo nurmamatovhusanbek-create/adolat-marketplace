@@ -9,8 +9,8 @@ async function main() {
     const admin = await db.user.upsert({where:{email:"admin@adolat.uz"},update:{},create:{id:nanoid(),email:"admin@adolat.uz",phone:"+998901234567",name:"Admin User",passwordHash:h,role:"ADMIN",status:"ACTIVE"}});
     const client = await db.user.upsert({where:{email:"client@demo.uz"},update:{},create:{id:nanoid(),email:"client@demo.uz",phone:"+998901111111",name:"Demo Mijoz",passwordHash:h,role:"CLIENT",status:"ACTIVE"}});
     console.log("[startup] Users OK");
-    let advCount = await db.advocateProfile.count();
-    console.log("[startup] Advocate count:", advCount);
+    const advCount = await db.advocateProfile.count();
+    console.log("[startup] Advocates:", advCount);
     if (advCount === 0) {
       const advs = [
         {n:"Akmal Rashidov",e:"akmal@adolat.uz",p:"+998902222201",s:"akmal-rashidov",t:"Senior advokat, Oilaviy huquq",l:"ADV-2011-0438",sp:"family",ss:["civil","real-estate"],r:"tashkent-city",ci:"Toshkent",ex:14,ra:4.9,rv:287,ca:412,su:92,rh:1,cf:150000,hf:500000,la:["uz","ru","en"],tr:1,b:"14 yillik tajriba",ep:["Ajralish","Aliment","Mulk bo'linishi"],ed:[{degree:"Bakalavr",institution:"TDYU",year:2010}]},
@@ -30,7 +30,7 @@ async function main() {
       }
       console.log("[startup] Advocates seeded:", await db.advocateProfile.count());
     }
-    let reqCount = await db.legalRequest.count();
+    const reqCount = await db.legalRequest.count();
     if (reqCount === 0) {
       const reqs = [{t:"AJ ro'yxatdan o'tkazish",d:"AJ ro'yxatdan o'tkazish kerak.",c:"corporate",r:"tashkent-city",b1:3000000,b2:5000000,u:true},{t:"Ajrashish bo'yicha yordam",d:"Ajrashish va aliment.",c:"family",r:"samarkand",b1:1500000,b2:2500000,u:false},{t:"Mehnat nizosi",d:"Ishdan bo'shatish.",c:"labor",r:"tashkent-city",b1:800000,b2:1500000,u:false},{t:"Brend ro'yxatga olish",d:"Tovar belgisi.",c:"intellectual",r:"tashkent-city",b1:2000000,b2:3500000,u:false}];
       for (const r of reqs) { try {await db.legalRequest.create({data:{id:nanoid(),userId:client.id,title:r.t,description:r.d,category:r.c,region:r.r,city:"Toshkent",clientType:"individual",isUrgent:!!r.u,status:"OPEN",budgetMin:r.b1,budgetMax:r.b2,viewsCount:Math.floor(Math.random()*200),responsesCount:0,contactName:client.name,contactPhone:client.phone,contactEmail:client.email,expiresAt:new Date(Date.now()+30*86400000)}});} catch(e){} }
