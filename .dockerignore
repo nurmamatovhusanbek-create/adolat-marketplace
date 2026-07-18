@@ -9,5 +9,6 @@ examples
 .zscripts
 download
 *.log
+*.md
 mini-services/chat-service/node_modules
 mini-services/chat-service/storage

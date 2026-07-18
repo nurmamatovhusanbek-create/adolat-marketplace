@@ -125,7 +125,7 @@ export function Dashboard() {
 
   return (
     <Sheet open={isDashboardOpen} onOpenChange={setDashboardOpen}>
-      <SheetContent side="right" className="w-full overflow-y-auto p-0 sm:max-w-4xl lg:max-w-5xl">
+      <SheetContent side="right" className="w-full overflow-y-auto p-0 sm:max-w-5xl lg:max-w-6xl">
         <SheetHeader className="border-b p-6">
           <SheetTitle className="flex items-center gap-2 text-xl">
             <Activity className="h-5 w-5 text-primary" />

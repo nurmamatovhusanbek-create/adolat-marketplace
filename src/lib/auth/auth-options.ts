@@ -43,7 +43,7 @@ export const authOptions: NextAuthOptions = {
     updateAge: 1 * 60 * 60, // refresh JWT every 1h
   },
   jwt: {
-    secret: process.env.NEXTAUTH_SECRET || "adolat-fallback-secret-change-in-production",
+    secret: process.env.NEXTAUTH_SECRET || "adolat-fallback-secret-for-development-only-change-in-production",
     maxAge: 24 * 60 * 60,
   },
   cookies: {

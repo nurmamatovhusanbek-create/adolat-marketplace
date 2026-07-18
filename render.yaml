@@ -19,9 +19,9 @@ services:
           name: adolat-db
           property: connectionString
       - key: NEXTAUTH_URL
-        value: https://adolat-marketplace.onrender.com
+        sync: false  # Set manually: https://adolat-marketplace.onrender.com
       - key: NEXTAUTH_SECRET
-        generateValue: true  # Auto-generate on first deploy
+        sync: false  # Set manually — any 32+ char random string
       - key: ENABLE_SIGNUP
         value: "true"
       - key: ENABLE_ADVOCATE_SIGNUP

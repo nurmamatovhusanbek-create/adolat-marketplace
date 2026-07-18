@@ -1,12 +1,18 @@
 <svg version="1.1" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32">
   <rect width="32" height="32" rx="6" fill="#1a1a1a"/>
   <g fill="none" stroke="#faf9f6" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+    <!-- Vertical beam -->
     <line x1="16" y1="6" x2="16" y2="24"/>
+    <!-- Top knob -->
     <circle cx="16" cy="6" r="1.5" fill="#faf9f6"/>
+    <!-- Horizontal beam -->
     <line x1="7" y1="10" x2="25" y2="10"/>
+    <!-- Base -->
     <line x1="11" y1="26" x2="21" y2="26"/>
     <line x1="16" y1="24" x2="16" y2="26"/>
+    <!-- Left scale pan -->
     <path d="M7 10 L4 16 Q4 19 7 19 Q10 19 10 16 Z" fill="#faf9f6" fill-opacity="0.15"/>
+    <!-- Right scale pan -->
     <path d="M25 10 L22 16 Q22 19 25 19 Q28 19 28 16 Z" fill="#faf9f6" fill-opacity="0.15"/>
   </g>
 </svg>

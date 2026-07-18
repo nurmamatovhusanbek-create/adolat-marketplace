@@ -77,6 +77,8 @@ export function AdminPanel() {
   const [approvals, setApprovals] = useState<Approval[]>([]);
   const [users, setUsers] = useState<AdminUser[]>([]);
   const [logs, setLogs] = useState<AuditLog[]>([]);
+  const [auditPage, setAuditPage] = useState(1);
+  const [auditTotal, setAuditTotal] = useState(0);
   const [loading, setLoading] = useState(true);
   const [processing, setProcessing] = useState<string | null>(null);
 
@@ -93,9 +95,9 @@ export function AdminPanel() {
       fetch("/api/admin/users?page=1&pageSize=50", { credentials: "same-origin" })
         .then(r => r.json()).then(d => setUsers(d.users ?? [])).catch(() => {});
     }
-    if (tabName === "audit" && logs.length === 0) {
-      fetch("/api/admin/audit-logs?page=1&pageSize=50", { credentials: "same-origin" })
-        .then(r => r.json()).then(d => setLogs(d.logs ?? [])).catch(() => {});
+    if (tabName === "audit") {
+      fetch(`/api/admin/audit-logs?page=${auditPage}&pageSize=30`, { credentials: "same-origin" })
+        .then(r => r.json()).then(d => { setLogs(d.logs ?? []); setAuditTotal(d.pagination?.total ?? 0); }).catch(() => {});
     }
   };
 
@@ -395,9 +397,25 @@ export function AdminPanel() {
               </table>
             </div>
           </Card>
+          {/* Pagination */}
+          {auditTotal > 30 && (
+            <div className="mt-4 flex items-center justify-between">
+              <p className="text-xs text-muted-foreground">
+                Sahifa {auditPage} / {Math.ceil(auditTotal / 30)} · Jami {auditTotal} yozuv
+              </p>
+              <div className="flex gap-2">
+                <Button size="sm" variant="outline" disabled={auditPage <= 1}
+                  onClick={() => { const p = auditPage - 1; setAuditPage(p); fetch(`/api/admin/audit-logs?page=${p}&pageSize=30`, { credentials: "same-origin" }).then(r => r.json()).then(d => { setLogs(d.logs ?? []); setAuditTotal(d.pagination?.total ?? 0); }); }}>
+                  Oldingi
+                </Button>
+                <Button size="sm" variant="outline" disabled={auditPage >= Math.ceil(auditTotal / 30)}
+                  onClick={() => { const p = auditPage + 1; setAuditPage(p); fetch(`/api/admin/audit-logs?page=${p}&pageSize=30`, { credentials: "same-origin" }).then(r => r.json()).then(d => { setLogs(d.logs ?? []); setAuditTotal(d.pagination?.total ?? 0); }); }}>
+                  Keyingi
+                </Button>
+              </div>
+            </div>
+          )}
         </TabsContent>
-
-        {/* === DOCUMENTS === */}
         <TabsContent value="documents" className="mt-6">
           <Card className="border-border p-6 text-center">
             <FileCheck2 className="mx-auto mb-3 h-10 w-10 text-muted-foreground/40" />

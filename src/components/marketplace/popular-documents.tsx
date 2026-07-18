@@ -8,6 +8,7 @@ import { Button } from "@/components/ui/button";
 import { SectionHeader } from "./category-grid";
 import { DOCUMENT_CATEGORIES } from "@/lib/marketplace/data";
 import { useMarketplaceStore } from "@/lib/marketplace/store";
+import type { LegalDocument } from "@/lib/marketplace/types";
 import { formatDownloads, formatPrice } from "@/lib/marketplace/format";
 
 interface ApiDoc {
@@ -79,7 +80,7 @@ export function PopularDocuments() {
             return (
               <Card
                 key={doc.id}
-                onClick={() => setActiveDocument(doc as never)}
+                onClick={() => setActiveDocument(doc as LegalDocument)}
                 className="group relative flex cursor-pointer flex-col border-border bg-card p-5 transition-all hover:-translate-y-1 hover:shadow-hard"
               >
                 {/* Editorial rank badge for top 3 */}

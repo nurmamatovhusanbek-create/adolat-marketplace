@@ -1,9 +1,9 @@
 // Adolat — Huquqiy marketplace
-// Prisma schema (SQLite for development; production-ready structure)
+// Prisma schema (PostgreSQL for production, SQLite for dev)
 
 generator client {
+  provider      = "prisma-client-js"
   binaryTargets = ["native", "debian-openssl-3.0.x", "debian-openssl-1.1.x"]
-  provider = "prisma-client-js"
 }
 
 datasource db {

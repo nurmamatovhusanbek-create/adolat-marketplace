@@ -40,6 +40,7 @@ import { ADVOCATES, SPECIALTIES, REGIONS } from "@/lib/marketplace/data";
 import { useMarketplaceStore } from "@/lib/marketplace/store";
 import { formatPrice } from "@/lib/marketplace/format";
 import type { Advocate, Specialty, Region } from "@/lib/marketplace/types";
+import { openChatWith } from "@/components/chat/chat-panel";
 import { cn } from "@/lib/utils";
 
 export function AdvocateListing() {
@@ -380,7 +381,7 @@ function AdvocateListItem({ adv, onSelect }: { adv: Advocate; onSelect: () => vo
               <Button size="sm" variant="outline" onClick={onSelect} className="h-8">
                 Profil
               </Button>
-              <Button size="sm" onClick={onSelect} className="h-8 gap-1">
+              <Button size="sm" onClick={() => openChatWith(adv.userId ?? adv.id, adv.name)} className="h-8 gap-1">
                 <MessageSquare className="h-3.5 w-3.5" />
                 Bog'lanish
               </Button>

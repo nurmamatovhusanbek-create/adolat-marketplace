@@ -18,6 +18,7 @@ import { SPECIALTIES } from "@/lib/marketplace/data";
 import { useMarketplaceStore } from "@/lib/marketplace/store";
 import { formatPrice } from "@/lib/marketplace/format";
 import type { Advocate } from "@/lib/marketplace/types";
+import { openChatWith } from "@/components/chat/chat-panel";
 import { cn } from "@/lib/utils";
 
 interface ApiAdvocate {
@@ -199,7 +200,7 @@ export function FeaturedAdvocates() {
                       </Button>
                       <Button
                         size="sm"
-                        onClick={() => setActiveAdvocate(adv as Advocate)}
+                        onClick={() => openChatWith(adv.userId ?? adv.id, adv.name)}
                         className="h-8 gap-1 bg-foreground text-background hover:bg-foreground/90"
                       >
                         <MessageSquare className="h-3.5 w-3.5" />

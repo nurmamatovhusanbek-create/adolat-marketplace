@@ -1,3 +1,5 @@
+# Adolat Marketplace — Production Dockerfile (Node.js)
+
 FROM node:20-slim AS deps
 WORKDIR /app
 COPY package.json package-lock.json* ./
@@ -18,25 +20,37 @@ FROM node:20-slim AS runner
 WORKDIR /app
 RUN addgroup --system --gid 1001 nodejs && adduser --system --uid 1001 nextjs
 
+# Copy standalone Next.js (includes its own node_modules trace)
 COPY --from=builder /app/.next/standalone ./
 COPY --from=builder /app/.next/static ./.next/static
 COPY --from=builder /app/public ./public
 COPY --from=builder /app/prisma ./prisma
+
+# Copy startup script
 COPY --from=builder /app/startup.js ./startup.js
 
+# Copy Prisma client + engine (NOT the CLI — it has broken deps after prune)
 COPY --from=builder /app/node_modules/.prisma ./node_modules/.prisma
 COPY --from=builder /app/node_modules/@prisma ./node_modules/@prisma
+
+# Copy bcryptjs + nanoid (needed by startup.js for seeding)
 COPY --from=builder /app/node_modules/bcryptjs ./node_modules/bcryptjs
 COPY --from=builder /app/node_modules/nanoid ./node_modules/nanoid
 
+# Create storage
 RUN mkdir -p storage/uploads && chown -R nextjs:nodejs storage /app
+
+# Install curl for healthcheck
 RUN apt-get update -qq && apt-get install -y -qq curl > /dev/null 2>&1 && rm -rf /var/lib/apt/lists/*
 
 ENV NODE_ENV=production
 ENV PORT=3000
 ENV HOSTNAME=0.0.0.0
+
 USER nextjs
 EXPOSE 3000
+
 HEALTHCHECK --interval=30s --timeout=5s --start-period=40s --retries=3 \
     CMD curl -f http://localhost:3000/api/health || exit 1
+
 CMD ["node", "startup.js"]
