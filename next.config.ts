@@ -24,8 +24,6 @@ const nextConfig: NextConfig = {
     // Don't fail the build on type errors — we catch them in dev
     ignoreBuildErrors: true,
   },
-  // Note: `eslint` config is no longer supported in Next.js 16.
-  // Linting is handled separately via `npm run lint` (eslint.config.mjs).
   // Turbopack is default in Next.js 16 — empty config to silence migration warning
   turbopack: {},
   // Security headers — applied to every response

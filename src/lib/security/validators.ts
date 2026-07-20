@@ -80,7 +80,8 @@ export const advocateSignupSchema = z.object({
 export const documentFieldSchema = z.object({
   id: z.string().regex(/^[a-z0-9_]+$/i, "Noto'g'ri maydon ID").max(50),
   label: safeString(200),
-  type: z.enum(["text", "textarea", "number", "date", "select", "checkbox"]),
+  // v4.0 extended: money + boolean added
+  type: z.enum(["text", "textarea", "number", "date", "select", "checkbox", "money", "boolean"]),
   required: z.boolean().default(false),
   maxLength: z.number().int().min(1).max(2000).optional(),
   defaultValue: z.string().max(2000).optional(),
@@ -189,4 +190,59 @@ export const documentSearchSchema = z.object({
   sortBy: z.enum(["popular", "rating", "newest"]).optional(),
   page: z.coerce.number().int().min(1).max(1000).default(1),
   pageSize: z.coerce.number().int().min(1).max(50).default(24),
+});
+
+// ============================================================================
+// v4.0 Court Claims Library — extended schema for the 54-template library
+// ============================================================================
+
+export const courtClaimFieldSchema = z.object({
+  id: z.string().regex(/^[a-z0-9_]+$/i, "Noto'g'ri maydon ID").max(50),
+  label_uz: safeString(300),
+  label: safeString(300).optional(), // alias for label_uz (legacy compat)
+  type: z.enum(["text", "textarea", "number", "date", "select", "money", "boolean"]),
+  required: z.boolean().default(false),
+  hint: safeString(500).optional(),
+  options: z.array(safeString(200)).max(50).optional(),
+  placeholder: safeString(200).optional(),
+  defaultValue: z.string().max(2000).optional(),
+  maxLength: z.number().int().min(1).max(2000).optional(),
+});
+
+export const courtClaimTemplateSchema = z.object({
+  id: z.string().regex(/^[a-z0-9_]+$/i).min(3).max(80),
+  name_uz: safeString(500).min(5),
+  category_path: z.union([
+    z.array(safeString(200)),
+    safeString(500),
+  ]),
+  forum: safeString(500),
+  legal_basis: z.array(safeString(500)).max(20).optional(),
+  plaintiff_group: safeString(100).optional(),
+  defendant_group: safeString(100).optional(),
+  uses_common_groups: z.array(safeString(100)).max(20),
+  content_fields: z.array(courtClaimFieldSchema).max(50),
+  relief_items: z.array(safeLongText(2000)).max(20),
+  attachments: z.array(safeString(500)).max(20).optional(),
+  notes: safeLongText(3000).optional(),
+  body_template: safeLongText(20000),
+});
+
+export const courtClaimsLibrarySchema = z.object({
+  meta: z.object({
+    title: safeString(300),
+    description: safeString(1000),
+    version: safeString(20),
+    source_inspiration: z.string().url().optional().or(safeString(500)),
+    field_types: z.array(z.string()),
+    placeholder_syntax: safeString(500),
+    usage_note: safeLongText(2000),
+    legal_disclaimer: safeLongText(3000),
+    party_name_aliases: safeLongText(3000).optional(),
+  }),
+  common_field_groups: z.record(
+    z.string().regex(/^[a-z0-9_]+$/i).max(50),
+    z.array(courtClaimFieldSchema).max(50),
+  ),
+  templates: z.array(courtClaimTemplateSchema).max(200),
 });
