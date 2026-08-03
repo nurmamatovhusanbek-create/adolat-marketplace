@@ -55,14 +55,12 @@ const HIDE_NAV_VIEWS: ViewType[] = ["admin-panel", "advocate-dashboard"];
 export function Header() {
   const { currentView, setView, setPostRequestOpen, setAuthOpen, setDashboardOpen } = useMarketplaceStore();
   const { user, loading: userLoading } = useAppUser();
-  const [mobileOpen, setMobileOpen] = useState(false);
   const [quickSearch, setQuickSearch] = useState("");
 
   const hideNav = HIDE_NAV_VIEWS.includes(currentView);
 
   const handleNav = (view: ViewType) => {
     setView(view);
-    setMobileOpen(false);
     if (typeof window !== "undefined") {
       window.scrollTo({ top: 0, behavior: "smooth" });
     }
@@ -277,117 +275,8 @@ export function Header() {
             </Button>
           )}
 
-          {/* Mobile sheet */}
-          <Sheet open={mobileOpen} onOpenChange={setMobileOpen}>
-            <SheetTrigger asChild>
-              <Button variant="ghost" size="icon" className="md:hidden" aria-label="Menyu">
-                <List className="size-5" weight="regular" />
-              </Button>
-            </SheetTrigger>
-            <SheetContent side="right" className="w-[300px] p-0">
-              <SheetHeader className="border-b border-border p-4">
-                <SheetTitle className="flex items-center gap-2">
-                  <div className="flex size-8 items-center justify-center rounded-lg bg-foreground text-background">
-                    <Scales className="size-4" weight="duotone" />
-                  </div>
-                  <span className="font-serif text-base font-bold">Adolat</span>
-                </SheetTitle>
-              </SheetHeader>
-              <div className="flex flex-col gap-1 p-3">
-                {NAV_ITEMS.map((item) => {
-                  const Icon = item.icon;
-                  const active = currentView === item.view;
-                  return (
-                    <button
-                      key={item.view}
-                      onClick={() => handleNav(item.view)}
-                      className={cn(
-                        "flex items-center gap-3 rounded-lg px-3 py-2.5 text-left text-sm font-medium",
-                        "transition-colors duration-150 ease-[cubic-bezier(0.2,0,0,1)]",
-                        active
-                          ? "bg-secondary text-foreground"
-                          : "text-foreground hover:bg-secondary/60"
-                      )}
-                    >
-                      <Icon className="size-4 text-accent" weight={active ? "fill" : "regular"} />
-                      {item.label}
-                    </button>
-                  );
-                })}
-                <div className="my-2 h-px bg-border" />
-                <button
-                  onClick={() => handleNav("for-advocates")}
-                  className="flex items-center gap-3 rounded-lg px-3 py-2.5 text-left text-sm font-medium text-foreground hover:bg-secondary/60 transition-colors"
-                >
-                  <Users className="size-4 text-accent" weight="regular" />
-                  Advokat sifatida ro'yxatdan o'tish
-                </button>
-                {user ? (
-                  <>
-                    <button
-                      onClick={() => {
-                        setMobileOpen(false);
-                        setDashboardOpen(true);
-                      }}
-                      className="flex items-center gap-3 rounded-lg px-3 py-2.5 text-left text-sm font-medium text-foreground hover:bg-secondary/60 transition-colors"
-                    >
-                      <SquaresFour className="size-4 text-accent" weight="regular" />
-                      Mening kabinetim
-                    </button>
-                    {user.role === "ADVOCATE" && (
-                      <button
-                        onClick={() => handleNav("advocate-dashboard")}
-                        className="flex items-center gap-3 rounded-lg px-3 py-2.5 text-left text-sm font-medium text-foreground hover:bg-secondary/60 transition-colors"
-                      >
-                        <Briefcase className="size-4 text-accent" weight="regular" />
-                        Advokat kabineti
-                      </button>
-                    )}
-                    {user.role === "ADMIN" && (
-                      <button
-                        onClick={() => handleNav("admin-panel")}
-                        className="flex items-center gap-3 rounded-lg px-3 py-2.5 text-left text-sm font-medium text-foreground hover:bg-secondary/60 transition-colors"
-                      >
-                        <Shield className="size-4 text-accent" weight="regular" />
-                        Admin panel
-                      </button>
-                    )}
-                    <button
-                      onClick={handleSignOut}
-                      className="flex items-center gap-3 rounded-lg px-3 py-2.5 text-left text-sm font-medium text-destructive hover:bg-destructive/5 transition-colors"
-                    >
-                      <SignOut className="size-4" weight="regular" />
-                      Tizimdan chiqish
-                    </button>
-                  </>
-                ) : (
-                  <Button
-                    onClick={() => {
-                      setMobileOpen(false);
-                      setAuthOpen(true, "signin");
-                    }}
-                    variant="outline"
-                    className="mt-2"
-                  >
-                    <SignIn className="size-4" weight="regular" />
-                    Kirish / Ro'yxatdan o'tish
-                  </Button>
-                )}
-                <Button
-                  onClick={() => {
-                    setMobileOpen(false);
-                    setPostRequestOpen(true);
-                  }}
-                  variant="primary"
-                  tone="brand"
-                  className="mt-2"
-                >
-                  <Plus className="size-4" weight="bold" />
-                  So'rov joylash
-                </Button>
-              </div>
-            </SheetContent>
-          </Sheet>
+          {/* Mobile menu trigger - hidden, handled by MobileNavSheet */}
+          <div className="md:hidden" />
         </div>
       </div>
     </header>

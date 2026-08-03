@@ -25,6 +25,8 @@ import { Dashboard } from "@/components/dashboard/dashboard";
 import { ChatPanel } from "@/components/chat/chat-panel";
 import { AdvocateDashboard } from "@/components/advocate/advocate-dashboard";
 import { AdminPanel } from "@/components/admin/admin-panel";
+import { NavigationDock } from "@/components/marketplace/navigation-dock";
+import { MobileNavSheet } from "@/components/marketplace/mobile-nav-sheet";
 
 export default function Home() {
   const { currentView, isAuthOpen, authMode, setAuthOpen } = useMarketplaceStore();
@@ -32,8 +34,9 @@ export default function Home() {
   return (
     <div className="flex min-h-screen flex-col bg-background">
       <Header />
+      <MobileNavSheet />
 
-      <main className="flex-1">
+      <main className="flex-1 pb-20 md:pb-0">
         {currentView === "home" && (
           <>
             <Hero />
@@ -57,6 +60,9 @@ export default function Home() {
       </main>
 
       <Footer />
+
+      {/* Desktop Navigation Dock */}
+      <NavigationDock />
 
       {/* Modals */}
       <AdvocateDetailModal />
