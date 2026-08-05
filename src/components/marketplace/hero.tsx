@@ -10,6 +10,8 @@ import {
   Star,
   SealCheck,
   ShieldCheck,
+  Lightning,
+  Waveform,
 } from "@phosphor-icons/react/dist/ssr";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
@@ -39,33 +41,39 @@ export function Hero() {
 
   return (
     <section className="relative overflow-hidden bg-hero-radial">
+      {/* Grid pattern overlay */}
       <div className="absolute inset-0 bg-grid-pattern opacity-40" aria-hidden />
-      <div className="pointer-events-none absolute -left-32 top-32 hidden size-96 rounded-full bg-accent/8 blur-3xl lg:block" aria-hidden />
-      <div className="pointer-events-none absolute -right-32 top-64 hidden size-96 rounded-full bg-info/8 blur-3xl lg:block" aria-hidden />
 
-      <div className="relative mx-auto max-w-7xl px-4 py-20 sm:px-6 lg:px-8 lg:py-32">
-        <div className="grid items-center gap-12 lg:grid-cols-12 lg:gap-16">
-          {/* Left: editorial copy + search (7/12) */}
+      {/* Animated gradient orbs — pulsing with staggered delays */}
+      <div className="pointer-events-none absolute -left-20 top-20 h-64 w-64 rounded-full bg-primary/15 blur-3xl animate-pulse" aria-hidden />
+      <div className="pointer-events-none absolute -right-32 top-40 h-80 w-80 rounded-full bg-accent/12 blur-3xl animate-pulse [animation-delay:700ms]" aria-hidden />
+      <div className="pointer-events-none absolute bottom-0 left-1/2 h-96 w-96 -translate-x-1/2 rounded-full bg-accent-2/10 blur-3xl" aria-hidden />
+
+      <div className="relative mx-auto max-w-7xl px-4 py-24 sm:px-6 lg:px-8 lg:py-36">
+        <div className="grid items-center gap-14 lg:grid-cols-12 lg:gap-20">
+          {/* Left: editorial copy + search */}
           <div className="lg:col-span-7">
-            {/* Eyebrow */}
-            <div className="rise rise-1 mb-6 flex items-center gap-3 text-xs">
-              <span className="font-mono uppercase tracking-[0.2em] text-muted-foreground">
+            {/* Eyebrow — prominent badge with separator */}
+            <div className="mb-6 flex items-center gap-3">
+              <Badge variant="soft" tone="brand" size="sm" className="h-8 px-4 text-xs font-semibold shadow-glow">
+                <Sparkle className="size-3.5" weight="fill" />
+                O'zbekiston #1 huquqiy platforma
+              </Badge>
+              <span className="hidden h-px w-12 bg-border sm:block" />
+              <span className="hidden font-mono text-xs font-medium uppercase tracking-[0.2em] text-muted-foreground sm:block">
                 {new Date().toLocaleDateString("uz-UZ", { day: "numeric", month: "long", year: "numeric" })}
               </span>
-              <span className="h-px flex-1 bg-border" />
-              <Badge variant="soft" tone="brand" size="sm">
-                <Sparkle className="size-3" weight="fill" />
-                O'zbekiston #1 huquqiy marketplace
-              </Badge>
             </div>
 
-            {/* Headline */}
-            <h1 className="rise rise-2 text-balance font-serif text-5xl font-bold leading-[1.05] tracking-tight text-foreground sm:text-6xl lg:text-7xl">
+            {/* Dramatic headline with gradient text */}
+            <h1 className="text-balance font-serif text-5xl font-black leading-[1.05] tracking-tight text-foreground sm:text-6xl lg:text-7xl xl:text-8xl">
               Huquqiy masalalarni{" "}
               <span className="relative inline-block whitespace-nowrap">
-                <span className="italic text-accent">bir joyda</span>
+                <span className="bg-gradient-to-r from-primary via-accent to-accent-2 bg-clip-text text-transparent italic">
+                  bir joyda
+                </span>
                 <svg
-                  className="absolute -bottom-1 left-0 w-full text-accent"
+                  className="absolute -bottom-1 left-0 w-full text-primary"
                   viewBox="0 0 200 8"
                   fill="none"
                   aria-hidden
@@ -73,7 +81,7 @@ export function Hero() {
                   <path
                     d="M2 5.5C50 2.5 150 2.5 198 5.5"
                     stroke="currentColor"
-                    strokeWidth="2.5"
+                    strokeWidth="3"
                     strokeLinecap="round"
                   />
                 </svg>
@@ -81,15 +89,14 @@ export function Hero() {
               yeching
             </h1>
 
-            {/* Subtitle */}
-            <p className="rise rise-3 mt-7 max-w-xl text-pretty text-lg leading-relaxed text-muted-foreground">
+            <p className="mt-8 max-w-xl text-pretty text-lg leading-relaxed text-muted-foreground sm:text-xl">
               Tasdiqlangan advokatlarni toping, 700+ tayyor huquqiy hujjat namunalarini
               yuklab oling yoki huquqiy so'rovingizni joylang va bir necha soat ichida
               mutaxassislar javob bersin.
             </p>
 
-            {/* Search */}
-            <form onSubmit={handleSearch} className="rise rise-4 mt-10">
+            {/* Dual search — enhanced toggle */}
+            <form onSubmit={handleSearch} className="mt-12">
               <div className="mb-3 flex items-center gap-2">
                 <span className="text-xs font-semibold uppercase tracking-wider text-muted-foreground">
                   Qidiruv turi:
@@ -99,28 +106,26 @@ export function Hero() {
                     type="button"
                     onClick={() => setMode("advocates")}
                     className={cn(
-                      "inline-flex items-center gap-1.5 rounded-lg px-3.5 py-1.5 text-xs font-medium",
-                      "transition-colors duration-150 ease-[cubic-bezier(0.2,0,0,1)]",
+                      "flex items-center gap-1.5 rounded-lg px-4 py-2 text-sm font-semibold transition-all duration-200 ease-[cubic-bezier(0.4,0,0.2,1)]",
                       mode === "advocates"
-                        ? "bg-foreground text-background shadow-sm"
-                        : "text-muted-foreground hover:text-foreground"
+                        ? "bg-gradient-to-r from-primary to-primary/80 text-primary-foreground shadow-lg scale-105"
+                        : "text-muted-foreground hover:text-foreground hover:bg-secondary/50"
                     )}
                   >
-                    <Users className="size-3.5" weight={mode === "advocates" ? "fill" : "regular"} />
+                    <Users className="size-4" weight={mode === "advocates" ? "fill" : "regular"} />
                     Advokat
                   </button>
                   <button
                     type="button"
                     onClick={() => setMode("documents")}
                     className={cn(
-                      "inline-flex items-center gap-1.5 rounded-lg px-3.5 py-1.5 text-xs font-medium",
-                      "transition-colors duration-150 ease-[cubic-bezier(0.2,0,0,1)]",
+                      "flex items-center gap-1.5 rounded-lg px-4 py-2 text-sm font-semibold transition-all duration-200 ease-[cubic-bezier(0.4,0,0.2,1)]",
                       mode === "documents"
-                        ? "bg-foreground text-background shadow-sm"
-                        : "text-muted-foreground hover:text-foreground"
+                        ? "bg-gradient-to-r from-primary to-primary/80 text-primary-foreground shadow-lg scale-105"
+                        : "text-muted-foreground hover:text-foreground hover:bg-secondary/50"
                     )}
                   >
-                    <FileText className="size-3.5" weight={mode === "documents" ? "fill" : "regular"} />
+                    <FileText className="size-4" weight={mode === "documents" ? "fill" : "regular"} />
                     Hujjat
                   </button>
                 </div>
@@ -141,21 +146,21 @@ export function Hero() {
                         : "Masalan: mehnat shartnomasi, ijara..."
                     }
                     size="lg"
-                    className="pl-12 shadow-beautiful-sm focus-visible:shadow-beautiful-md"
+                    className="h-14 rounded-xl border-2 bg-card/80 pl-12 text-base backdrop-blur-sm shadow-lg transition-all duration-200 focus-visible:border-primary focus-visible:shadow-xl"
                   />
                 </div>
                 <Button
                   type="submit"
                   size="lg"
                   tone="brand"
-                  className="h-12 px-8 text-base shadow-beautiful-md hover:shadow-beautiful-lg"
+                  className="h-14 px-8 text-base font-semibold rounded-xl shadow-lg transition-all duration-200 ease-[cubic-bezier(0.4,0,0.2,1)] hover:scale-105 hover:shadow-xl"
                 >
                   Qidirish
                   <ArrowRight className="size-4" weight="bold" />
                 </Button>
               </div>
 
-              {/* Popular tags */}
+              {/* Popular tags — with bounce easing */}
               <div className="mt-4 flex flex-wrap items-center gap-2 text-xs">
                 <span className="font-mono uppercase tracking-wider text-muted-foreground">Mashhur:</span>
                 {["Ajrashish", "Mehnat shartnomasi", "MChJ ochish", "Ijara shartnomasi"].map((tag, i) => (
@@ -167,12 +172,10 @@ export function Hero() {
                       setMode(tag.includes("shartnoma") || tag.includes("hujjat") ? "documents" : "advocates");
                     }}
                     className={cn(
-                      "rounded-full border px-3 py-1 text-xs font-medium",
-                      "transition-colors duration-150 ease-[cubic-bezier(0.2,0,0,1)]",
-                      "active:scale-[0.98]",
+                      "rounded-full border px-3 py-1.5 text-xs font-medium transition-all duration-200 ease-[cubic-bezier(0.4,0,0.2,1)] active:scale-95",
                       i === 0
-                        ? "border-accent/40 bg-accent/8 text-accent hover:bg-accent/12"
-                        : "border-border bg-card text-muted-foreground hover:border-accent/40 hover:text-accent"
+                        ? "border-primary/40 bg-primary/10 text-primary hover:bg-primary/15"
+                        : "border-border bg-card text-muted-foreground hover:border-primary/40 hover:text-primary hover:bg-primary/5"
                     )}
                   >
                     {tag}
@@ -181,66 +184,73 @@ export function Hero() {
               </div>
             </form>
 
-            {/* Trust badges */}
-            <div className="rise rise-5 mt-10 flex flex-wrap items-center gap-x-6 gap-y-3 border-t border-border pt-6 text-xs text-muted-foreground">
-              <div className="flex items-center gap-1.5">
-                <SealCheck className="size-4 text-accent" weight="fill" />
-                Barcha advokatlar litsenziyalangan
+            {/* Trust badges — larger icons, semantic colors */}
+            <div className="mt-10 flex flex-wrap items-center gap-x-6 gap-y-3 border-t border-border pt-6 text-xs text-muted-foreground">
+              <div className="flex items-center gap-2">
+                <SealCheck className="size-5 text-primary" weight="fill" />
+                <span className="font-medium">Litsenziyalangan advokatlar</span>
               </div>
-              <div className="flex items-center gap-1.5">
-                <ShieldCheck className="size-4 text-success" weight="fill" />
-                Adliya vazirligi tomonidan tasdiqlangan
+              <div className="flex items-center gap-2">
+                <ShieldCheck className="size-5 text-success" weight="fill" />
+                <span className="font-medium">Adliya vazirligi tomonidan tasdiqlangan</span>
               </div>
-              <div className="flex items-center gap-1.5">
-                <Star className="size-4 text-warning" weight="fill" />
-                {PLATFORM_STATS.satisfactionRate}% mijozlar mamnunligi
+              <div className="flex items-center gap-2">
+                <Star className="size-5 text-warning" weight="fill" />
+                <span className="font-medium">{PLATFORM_STATS.satisfactionRate}% mijozlar mamnunligi</span>
               </div>
             </div>
           </div>
 
-          {/* Right: stat panel (5/12) */}
-          <div className="rise rise-3 lg:col-span-5">
+          {/* Right: stats panel — glass morphism + dramatic */}
+          <div className="lg:col-span-5">
             <div className="relative">
+              {/* Editorial label with live indicator */}
               <div className="mb-3 flex items-center justify-between">
                 <span className="font-mono text-[10px] font-semibold uppercase tracking-[0.25em] text-muted-foreground">
                   Jonli statistika
                 </span>
                 <span className="flex items-center gap-1.5 text-[10px] font-medium text-success">
-                  <span className="size-1.5 rounded-full bg-success verified-pulse" />
+                  <Waveform className="size-3" weight="fill" />
+                  <span className="size-2 rounded-full bg-success shadow-glow verified-pulse" />
                   onlayn
                 </span>
               </div>
 
-              <div className="rounded-2xl border border-border/60 bg-card p-6 shadow-beautiful-md">
-                <div className="grid grid-cols-2 gap-x-6 gap-y-5">
+              {/* Stats card — rounded-3xl, backdrop-blur, shadow-2xl, decorative orb */}
+              <div className="relative overflow-hidden rounded-3xl border border-border/60 bg-card/80 p-6 shadow-2xl backdrop-blur-xl">
+                {/* Decorative gradient orb inside card */}
+                <div className="pointer-events-none absolute -right-16 -top-16 h-40 w-40 rounded-full bg-primary/10 blur-3xl" aria-hidden />
+
+                <div className="relative grid grid-cols-2 gap-x-6 gap-y-5">
                   <StatBox
                     value={PLATFORM_STATS.advocatesCount.toLocaleString("ru-RU") + "+"}
                     label="Tasdiqlangan advokatlar"
-                    icon={<Users className="size-4 text-accent" weight="duotone" />}
+                    icon={<Users className="size-5 text-primary" weight="duotone" />}
                   />
                   <StatBox
                     value={PLATFORM_STATS.documentsCount + "+"}
                     label="Hujjat namunalari"
-                    icon={<FileText className="size-4 text-accent" weight="duotone" />}
+                    icon={<FileText className="size-5 text-accent" weight="duotone" />}
                   />
                   <StatBox
                     value={PLATFORM_STATS.requestsResolved.toLocaleString("ru-RU") + "+"}
                     label="Yechilgan so'rovlar"
-                    icon={<ShieldCheck className="size-4 text-success" weight="duotone" />}
+                    icon={<ShieldCheck className="size-5 text-success" weight="duotone" />}
                   />
                   <StatBox
                     value={PLATFORM_STATS.avgResponseHours + " soat"}
                     label="O'rtacha javob"
-                    icon={<Star className="size-4 text-warning" weight="duotone" />}
+                    icon={<Lightning className="size-5 text-warning" weight="duotone" />}
                   />
                 </div>
 
-                <div className="mt-6 border-t border-border pt-5">
+                {/* Mini list of online advocates */}
+                <div className="relative mt-6 border-t border-border pt-5">
                   <div className="mb-3 flex items-center justify-between">
                     <p className="font-mono text-[10px] font-semibold uppercase tracking-[0.2em] text-muted-foreground">
                       Hozir onlayn advokatlar
                     </p>
-                    <span className="text-xs font-bold text-foreground font-mono">52</span>
+                    <span className="text-xs font-bold text-foreground">52</span>
                   </div>
                   <div className="flex items-center gap-3">
                     <div className="flex -space-x-2">
@@ -249,7 +259,7 @@ export function Hero() {
                           key={n}
                           src={`https://i.pravatar.cc/64?img=${n}`}
                           alt="Advokat"
-                          className="size-9 rounded-full border-2 border-card object-cover"
+                          className="size-10 rounded-full border-2 border-card object-cover transition-transform duration-200 hover:scale-110 hover:-translate-y-1"
                           style={{ zIndex: 10 - i }}
                         />
                       ))}
@@ -286,13 +296,15 @@ function StatBox({
   icon: React.ReactNode;
 }) {
   return (
-    <div>
-      <div className="mb-1.5 flex items-center justify-between">
-        {icon}
-        <span className="size-1.5 rounded-full bg-success" aria-hidden />
+    <div className="group">
+      <div className="mb-2 flex items-center justify-between">
+        <div className="rounded-lg bg-secondary/50 p-2 transition-colors group-hover:bg-primary/10">
+          {icon}
+        </div>
+        <span className="size-2 rounded-full bg-success shadow-glow" aria-hidden />
       </div>
-      <div className="font-serif text-3xl font-bold tracking-tight text-foreground">{value}</div>
-      <div className="mt-0.5 text-[11px] leading-tight text-muted-foreground">{label}</div>
+      <div className="font-serif text-3xl font-black tracking-tight text-foreground">{value}</div>
+      <div className="mt-1 text-[11px] font-medium leading-tight text-muted-foreground">{label}</div>
     </div>
   );
 }

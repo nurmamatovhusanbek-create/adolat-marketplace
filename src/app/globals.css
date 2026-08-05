@@ -44,129 +44,130 @@
   --color-popover: var(--popover);
   --color-card-foreground: var(--card-foreground);
   --color-card: var(--card);
-  --radius-sm: 8px;
-  --radius-md: 12px;
-  --radius-lg: 16px;
-  --radius-xl: 20px;
-  --radius-2xl: 24px;
+  --radius-sm: 6px;
+  --radius-md: 10px;
+  --radius-lg: 14px;
+  --radius-xl: 18px;
+  --radius-2xl: 28px;
 }
 
 /* ============================================================================
-   EDITORIAL PREMIUM — complete redesign
-   Direction: warm ivory parchment + deep ember accent + ink blue secondary
-   Inspired by: Linear (density), Stripe (premium), Vercel (mono accents),
-   NYT/The Atlantic (editorial gravity)
+   COSMIC PREMIUM — design system
+   Direction: Deep cosmic navy + electric violet + vibrant coral accents
+   Inspiration: Linear's depth, Stripe's gradients, Vercel's geometry,
+                modern SaaS landing pages with bold typography + micro-interactions
    ============================================================================ */
 
 :root {
-  /* --- Radii: softer, more modern --- */
-  --radius: 0.75rem; /* 12px base */
+  /* --- Radii: sharper for more geometric, modern feel --- */
+  --radius: 0.625rem; /* 10px base */
 
-  /* --- Surfaces: warmer, with subtle hierarchy --- */
-  --background: oklch(0.99 0.005 75);           /* clean ivory */
-  --foreground: oklch(0.14 0.008 60);            /* deep ink, near-black */
+  /* --- Surfaces: cool navy-tinted (not warm parchment anymore) --- */
+  --background: oklch(0.97 0.008 260);              /* cool navy-tinted */
+  --foreground: oklch(0.18 0.01 260);               /* cosmic navy */
 
-  --card: oklch(1 0 0);                          /* pure white — clean separation from bg */
-  --card-foreground: oklch(0.14 0.008 60);
+  --card: oklch(0.99 0.004 260);                    /* near-white with cool tint */
+  --card-foreground: oklch(0.18 0.01 260);
 
-  --popover: oklch(1 0 0);
-  --popover-foreground: oklch(0.14 0.008 60);
+  --popover: oklch(0.99 0.004 260);
+  --popover-foreground: oklch(0.18 0.01 260);
 
-  /* --- Primary: deep ink (monochrome default) --- */
-  --primary: oklch(0.16 0.008 60);
-  --primary-foreground: oklch(0.99 0.005 75);
+  /* --- Primary: electric violet (the bold accent) --- */
+  --primary: oklch(0.55 0.22 280);                  /* electric violet */
+  --primary-foreground: oklch(0.99 0.004 260);
 
-  /* --- Secondary: warm parchment surfaces --- */
-  --secondary: oklch(0.96 0.008 75);
-  --secondary-foreground: oklch(0.20 0.008 60);
+  /* --- Secondary: soft lavender --- */
+  --secondary: oklch(0.94 0.015 280);               /* soft lavender */
+  --secondary-foreground: oklch(0.25 0.02 280);
 
-  --muted: oklch(0.97 0.005 75);
-  --muted-foreground: oklch(0.48 0.008 60);
+  --muted: oklch(0.95 0.01 260);
+  --muted-foreground: oklch(0.48 0.015 260);
 
-  /* --- Accent: deep ember (more saturated than clay, more premium feel) --- */
-  --accent: oklch(0.55 0.16 28);                 /* deep ember */
-  --accent-foreground: oklch(0.99 0.005 75);
+  /* --- Accent: vibrant coral (warm contrast to cool violet) --- */
+  --accent: oklch(0.65 0.18 25);                    /* vibrant coral */
+  --accent-foreground: oklch(0.99 0.004 260);
 
-  /* --- Secondary accent: ink blue (for links, secondary actions) --- */
-  --accent-2: oklch(0.45 0.10 245);              /* ink blue */
+  /* --- Accent-2: cyan spark (for tertiary highlights) --- */
+  --accent-2: oklch(0.70 0.12 200);                 /* cyan spark */
 
   /* --- Functional colors --- */
   --destructive: oklch(0.55 0.22 25);
-  --success: oklch(0.50 0.12 145);               /* sage */
-  --warning: oklch(0.70 0.14 75);                /* gold */
-  --info: oklch(0.55 0.10 240);                  /* ink blue lighter */
+  --success: oklch(0.50 0.12 145);                  /* sage */
+  --warning: oklch(0.70 0.14 75);                   /* gold */
+  --info: oklch(0.55 0.10 240);                     /* ink blue */
 
-  --border: oklch(0.93 0.005 75);                /* barely-there hairline */
-  --input: oklch(0.93 0.005 75);
-  --ring: oklch(0.55 0.16 28);                   /* matches accent */
+  --border: oklch(0.90 0.008 260);                  /* cool hairline */
+  --input: oklch(0.90 0.008 260);
+  --ring: oklch(0.55 0.22 280);                     /* electric violet for focus */
 
   /* --- Chart palette --- */
-  --chart-1: oklch(0.55 0.16 28);                /* ember */
-  --chart-2: oklch(0.50 0.12 145);               /* sage */
-  --chart-3: oklch(0.45 0.10 245);               /* ink blue */
-  --chart-4: oklch(0.70 0.14 75);                /* gold */
-  --chart-5: oklch(0.40 0.05 60);                /* graphite */
+  --chart-1: oklch(0.55 0.22 280);                  /* electric violet */
+  --chart-2: oklch(0.65 0.18 25);                   /* coral */
+  --chart-3: oklch(0.70 0.12 200);                  /* cyan */
+  --chart-4: oklch(0.70 0.14 75);                   /* gold */
+  --chart-5: oklch(0.40 0.05 260);                  /* graphite */
 
   /* --- Sidebar (admin) --- */
-  --sidebar: oklch(0.16 0.008 60);               /* dark sidebar — premium contrast */
-  --sidebar-foreground: oklch(0.92 0.005 75);
-  --sidebar-primary: oklch(0.99 0.005 75);
-  --sidebar-primary-foreground: oklch(0.16 0.008 60);
-  --sidebar-accent: oklch(0.22 0.008 60);
-  --sidebar-accent-foreground: oklch(0.99 0.005 75);
+  --sidebar: oklch(0.16 0.01 260);                  /* deep cosmic navy */
+  --sidebar-foreground: oklch(0.92 0.005 260);
+  --sidebar-primary: oklch(0.99 0.004 260);
+  --sidebar-primary-foreground: oklch(0.16 0.01 260);
+  --sidebar-accent: oklch(0.22 0.01 260);
+  --sidebar-accent-foreground: oklch(0.99 0.004 260);
   --sidebar-border: oklch(1 0 0 / 8%);
-  --sidebar-ring: oklch(0.55 0.16 28);
+  --sidebar-ring: oklch(0.55 0.22 280);
 
   /* --- Trust signals --- */
-  --trust-verified: oklch(0.50 0.12 145);        /* sage */
-  --trust-urgent: oklch(0.55 0.22 25);           /* red */
-  --trust-premium: oklch(0.70 0.14 75);          /* gold */
+  --trust-verified: oklch(0.50 0.12 145);           /* sage */
+  --trust-urgent: oklch(0.55 0.22 25);              /* red */
+  --trust-premium: oklch(0.70 0.14 75);             /* gold */
 
-  /* --- Motion tokens (Material 3 standard) --- */
-  --ease-standard:   cubic-bezier(0.2, 0, 0, 1);
-  --ease-emphasized: cubic-bezier(0.3, 0, 0, 1);
-  --ease-enter:      cubic-bezier(0, 0, 0.2, 1);
-  --ease-exit:       cubic-bezier(0.4, 0, 1, 1);
+  /* --- Motion tokens --- */
+  --ease-standard:   cubic-bezier(0.4, 0, 0.2, 1);   /* smooth, modern */
+  --ease-emphasized: cubic-bezier(0.3, 0, 0, 1);     /* entering UI */
+  --ease-enter:      cubic-bezier(0, 0, 0.2, 1);     /* fast settle */
+  --ease-exit:       cubic-bezier(0.4, 0, 1, 1);     /* faster leave */
+  --ease-bounce:     cubic-bezier(0.68, -0.55, 0.265, 1.55); /* playful bounce */
 
+  /* --- Duration scale --- */
   --dur-instant: 100ms;
   --dur-fast:    150ms;
-  --dur-base:    250ms;
+  --dur-base:    200ms;
   --dur-slow:    400ms;
+  --dur-slower:  500ms;
 
-  /* --- Beautiful soft shadow family — layered, premium --- */
-  --shadow-xs: 0 1px 2px 0 oklch(0.14 0.008 60 / 0.04);
-  --shadow-sm: 0 1px 3px 0 oklch(0.14 0.008 60 / 0.06), 0 1px 2px -1px oklch(0.14 0.008 60 / 0.06);
-  --shadow-md: 0 4px 6px -1px oklch(0.14 0.008 60 / 0.06), 0 2px 4px -2px oklch(0.14 0.008 60 / 0.06);
-  --shadow-lg: 0 10px 15px -3px oklch(0.14 0.008 60 / 0.08), 0 4px 6px -4px oklch(0.14 0.008 60 / 0.06);
-  --shadow-xl: 0 20px 25px -5px oklch(0.14 0.008 60 / 0.10), 0 8px 10px -6px oklch(0.14 0.008 60 / 0.06);
-  --shadow-2xl: 0 25px 50px -12px oklch(0.14 0.008 60 / 0.15);
-  --shadow-inner: inset 0 2px 4px 0 oklch(0.14 0.008 60 / 0.04);
+  /* --- Beautiful soft shadow family --- */
+  --shadow-xs: 0 1px 2px 0 oklch(0.18 0.01 260 / 0.04);
+  --shadow-sm: 0 1px 3px 0 oklch(0.18 0.01 260 / 0.06), 0 1px 2px -1px oklch(0.18 0.01 260 / 0.06);
+  --shadow-md: 0 4px 6px -1px oklch(0.18 0.01 260 / 0.06), 0 2px 4px -2px oklch(0.18 0.01 260 / 0.06);
+  --shadow-lg: 0 10px 15px -3px oklch(0.18 0.01 260 / 0.08), 0 4px 6px -4px oklch(0.18 0.01 260 / 0.06);
+  --shadow-xl: 0 20px 25px -5px oklch(0.18 0.01 260 / 0.10), 0 8px 10px -6px oklch(0.18 0.01 260 / 0.06);
+  --shadow-2xl: 0 25px 50px -12px oklch(0.18 0.01 260 / 0.15);
+  --shadow-inner: inset 0 2px 4px 0 oklch(0.18 0.01 260 / 0.04);
 
-  /* --- Legacy shadow aliases (kept for backward compat) --- */
-  --shadow-beautiful-sm: var(--shadow-sm);
-  --shadow-beautiful-md: var(--shadow-md);
-  --shadow-beautiful-lg: var(--shadow-lg);
+  /* --- Glow shadow (violet aura for interactive elements) --- */
+  --shadow-glow: 0 0 40px 10px oklch(0.55 0.22 280 / 0.15);
 }
 
 .dark {
-  --background: oklch(0.12 0.008 60);
-  --foreground: oklch(0.96 0.005 75);
-  --card: oklch(0.16 0.008 60);
-  --card-foreground: oklch(0.96 0.005 75);
-  --popover: oklch(0.18 0.008 60);
-  --popover-foreground: oklch(0.96 0.005 75);
-  --primary: oklch(0.96 0.005 75);
-  --primary-foreground: oklch(0.16 0.008 60);
-  --secondary: oklch(0.22 0.008 60);
-  --secondary-foreground: oklch(0.96 0.005 75);
-  --muted: oklch(0.20 0.008 60);
-  --muted-foreground: oklch(0.68 0.008 60);
-  --accent: oklch(0.68 0.16 28);
-  --accent-foreground: oklch(0.12 0.008 60);
+  --background: oklch(0.12 0.008 260);
+  --foreground: oklch(0.96 0.005 260);
+  --card: oklch(0.16 0.01 260);
+  --card-foreground: oklch(0.96 0.005 260);
+  --popover: oklch(0.18 0.01 260);
+  --popover-foreground: oklch(0.96 0.005 260);
+  --primary: oklch(0.65 0.22 280);                  /* brighter violet in dark */
+  --primary-foreground: oklch(0.12 0.008 260);
+  --secondary: oklch(0.22 0.01 260);
+  --secondary-foreground: oklch(0.96 0.005 260);
+  --muted: oklch(0.20 0.01 260);
+  --muted-foreground: oklch(0.68 0.01 260);
+  --accent: oklch(0.70 0.18 25);                    /* brighter coral in dark */
+  --accent-foreground: oklch(0.12 0.008 260);
   --destructive: oklch(0.70 0.20 22);
   --border: oklch(1 0 0 / 8%);
   --input: oklch(1 0 0 / 12%);
-  --ring: oklch(0.68 0.16 28);
+  --ring: oklch(0.65 0.22 280);
 
   --shadow-xs: 0 1px 2px 0 oklch(0 0 0 / 0.3);
   --shadow-sm: 0 1px 3px 0 oklch(0 0 0 / 0.4), 0 1px 2px -1px oklch(0 0 0 / 0.3);
@@ -174,6 +175,7 @@
   --shadow-lg: 0 10px 15px -3px oklch(0 0 0 / 0.5), 0 4px 6px -4px oklch(0 0 0 / 0.3);
   --shadow-xl: 0 20px 25px -5px oklch(0 0 0 / 0.5), 0 8px 10px -6px oklch(0 0 0 / 0.4);
   --shadow-2xl: 0 25px 50px -12px oklch(0 0 0 / 0.6);
+  --shadow-glow: 0 0 40px 10px oklch(0.65 0.22 280 / 0.25);
 }
 
 @layer base {
@@ -183,12 +185,10 @@
   body {
     @apply bg-background text-foreground;
     font-feature-settings: "ss01", "ss02", "cv01", "cv11";
-    /* Smoother font rendering */
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
     text-rendering: optimizeLegibility;
   }
-  /* Serif display for headings - more dramatic */
   h1, h2, h3 {
     font-family: var(--font-serif), Georgia, "Times New Roman", serif;
     letter-spacing: -0.025em;
@@ -198,7 +198,6 @@
     font-family: var(--font-sans), system-ui, sans-serif;
     letter-spacing: -0.01em;
   }
-  /* Better default focus ring */
   :focus-visible {
     outline: 2px solid var(--ring);
     outline-offset: 2px;
@@ -212,18 +211,20 @@
   .bg-grid-pattern {
     background-image: linear-gradient(
         to right,
-        oklch(0.14 0.008 60 / 0.04) 1px,
+        oklch(0.18 0.01 260 / 0.04) 1px,
         transparent 1px
       ),
-      linear-gradient(to bottom, oklch(0.14 0.008 60 / 0.04) 1px, transparent 1px);
+      linear-gradient(to bottom, oklch(0.18 0.01 260 / 0.04) 1px, transparent 1px);
     background-size: 40px 40px;
   }
 
+  /* Hero radial — cosmic with violet + coral + cyan glows */
   .bg-hero-radial {
     background:
-      radial-gradient(ellipse 80% 50% at 50% -10%, oklch(0.55 0.16 28 / 0.08), transparent 60%),
-      radial-gradient(ellipse 60% 40% at 90% 10%, oklch(0.45 0.10 245 / 0.05), transparent 60%),
-      linear-gradient(to bottom, oklch(0.99 0.005 75), oklch(0.97 0.005 75));
+      radial-gradient(ellipse 80% 50% at 50% -10%, oklch(0.55 0.22 280 / 0.12), transparent 60%),
+      radial-gradient(ellipse 60% 40% at 90% 10%, oklch(0.65 0.18 25 / 0.08), transparent 60%),
+      radial-gradient(ellipse 50% 50% at 10% 90%, oklch(0.70 0.12 200 / 0.06), transparent 60%),
+      linear-gradient(to bottom, oklch(0.97 0.008 260), oklch(0.95 0.01 260));
   }
 
   .bg-noise {
@@ -234,20 +235,20 @@
   .text-balance { text-wrap: balance; }
   .text-pretty { text-wrap: pretty; }
 
-  /* Editorial drop-cap */
+  /* Drop-cap */
   .drop-cap::first-letter {
     font-family: var(--font-serif), Georgia, serif;
     font-size: 4rem;
     line-height: 0.9;
-    font-weight: 700;
+    font-weight: 900;
     float: left;
     margin: 0.05em 0.12em 0 0;
-    color: var(--accent);
+    color: var(--primary);
   }
 
-  /* Underline accent */
+  /* Underline accent — now uses primary violet */
   .underline-accent {
-    background-image: linear-gradient(to right, var(--accent), var(--accent));
+    background-image: linear-gradient(to right, var(--primary), var(--primary));
     background-size: 100% 3px;
     background-repeat: no-repeat;
     background-position: 0 100%;
@@ -259,18 +260,18 @@
     height: 1px;
     background: linear-gradient(to right,
       transparent,
-      oklch(0.14 0.008 60 / 0.12) 15%,
-      oklch(0.14 0.008 60 / 0.12) 85%,
+      oklch(0.18 0.01 260 / 0.12) 15%,
+      oklch(0.18 0.01 260 / 0.12) 85%,
       transparent
     );
   }
 
   /* ============================================================================
-     SHADOWS — premium layered system
+     SHADOWS — premium layered system + glow
      ============================================================================ */
-  .shadow-hard { box-shadow: 4px 4px 0 0 oklch(0.14 0.008 60 / 0.08); }
-  .shadow-hard-sm { box-shadow: 2px 2px 0 0 oklch(0.14 0.008 60 / 0.06); }
-  .shadow-hard-clay { box-shadow: 4px 4px 0 0 oklch(0.55 0.16 28 / 0.20); }
+  .shadow-hard { box-shadow: 4px 4px 0 0 oklch(0.18 0.01 260 / 0.08); }
+  .shadow-hard-sm { box-shadow: 2px 2px 0 0 oklch(0.18 0.01 260 / 0.06); }
+  .shadow-hard-clay { box-shadow: 4px 4px 0 0 oklch(0.65 0.18 25 / 0.20); }
 
   .shadow-beautiful-xs { box-shadow: var(--shadow-xs); }
   .shadow-beautiful-sm { box-shadow: var(--shadow-sm); }
@@ -279,17 +280,20 @@
   .shadow-beautiful-xl { box-shadow: var(--shadow-xl); }
   .shadow-beautiful-2xl { box-shadow: var(--shadow-2xl); }
 
+  /* Glow — violet aura for interactive elements */
+  .shadow-glow { box-shadow: var(--shadow-glow); }
+
   /* ============================================================================
      SCROLLBAR
      ============================================================================ */
   .scrollbar-thin::-webkit-scrollbar { width: 6px; height: 6px; }
   .scrollbar-thin::-webkit-scrollbar-track { background: transparent; }
   .scrollbar-thin::-webkit-scrollbar-thumb {
-    background: oklch(0.14 0.008 60 / 0.15);
+    background: oklch(0.18 0.01 260 / 0.15);
     border-radius: 9999px;
   }
   .scrollbar-thin::-webkit-scrollbar-thumb:hover {
-    background: oklch(0.55 0.16 28 / 0.4);
+    background: oklch(0.55 0.22 280 / 0.4);
   }
 
   /* ============================================================================
@@ -359,9 +363,9 @@
   .skeleton-shimmer {
     background: linear-gradient(
       90deg,
-      oklch(0.95 0.005 75) 0%,
-      oklch(0.90 0.005 75) 50%,
-      oklch(0.95 0.005 75) 100%
+      oklch(0.95 0.01 260) 0%,
+      oklch(0.90 0.01 260) 50%,
+      oklch(0.95 0.01 260) 100%
     );
     background-size: 200% 100%;
     animation: shimmer 1.6s var(--ease-standard) infinite;
@@ -370,9 +374,9 @@
   .dark .skeleton-shimmer {
     background: linear-gradient(
       90deg,
-      oklch(0.22 0.008 60) 0%,
-      oklch(0.28 0.008 60) 50%,
-      oklch(0.22 0.008 60) 100%
+      oklch(0.22 0.01 260) 0%,
+      oklch(0.28 0.01 260) 50%,
+      oklch(0.22 0.01 260) 100%
     );
     background-size: 200% 100%;
   }
@@ -453,7 +457,7 @@
   /* Stat pop */
   @keyframes stat-pop {
     0%   { transform: scale(1); }
-    50%  { transform: scale(1.08); color: var(--accent); }
+    50%  { transform: scale(1.08); color: var(--primary); }
     100% { transform: scale(1); }
   }
   .stat-pop { animation: stat-pop 600ms var(--ease-emphasized); }
