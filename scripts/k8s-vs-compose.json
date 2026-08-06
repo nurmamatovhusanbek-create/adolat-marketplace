@@ -1,0 +1,47 @@
+[
+  {
+    "url": "https://codingprotocols.com/blog/kubernetes-vs-docker-compose",
+    "name": "Kubernetes vs Docker Compose: When to Use Which (2026)",
+    "snippet": "A practical guide to choosing between Kubernetes and Docker Compose — what each solves, where each breaks down, and the signals that tell ...",
+    "host_name": "codingprotocols.com",
+    "rank": 0,
+    "date": "",
+    "favicon": ""
+  },
+  {
+    "url": "https://dev.to/amenibensaada/docker-compose-vs-kubernetes-which-one-do-you-actually-need-5cfc",
+    "name": "Docker Compose vs Kubernetes: Which One Do You Actually Need?",
+    "snippet": "When to Use Docker Compose. Perfect for: Small projects (1-5 services); Development environments; Simple production deployments; Single-server ...",
+    "host_name": "dev.to",
+    "rank": 1,
+    "date": "",
+    "favicon": ""
+  },
+  {
+    "url": "https://northflank.com/blog/kubernetes-vs-docker",
+    "name": "Kubernetes vs Docker: What you need to know in 2026 | Blog - Northflank",
+    "snippet": "Use Docker when: You are building and testing apps locally You need consistent environments across teams You are running a small app or side ...\nFor simple apps or internal tools, Docker alone might be enough. For complex distributed systems, Kubernetes is a better fit. Do you need to ...",
+    "host_name": "northflank.com",
+    "rank": 2,
+    "date": "",
+    "favicon": ""
+  },
+  {
+    "url": "https://www.reddit.com/r/programming/comments/1t4bcud/should_i_run_plain_docker_compose_in_production",
+    "name": "Should I Run Plain Docker Compose in Production in 2026? - Reddit",
+    "snippet": "Docker compose is not production ready. It won't be able to make sure your containers keep running unless you slap cron jobs or whatever on top ... Rebuild homelab, like to here your opinion (Kubernetes vs Docker ... I'd like to transition my small web app which uses docker-compose to ... More results from www.reddit.com\nDocker compose is not production ready. It won't be able to make sure your containers keep running unless you slap cron jobs or whatever on top ... Docker Swarm vs Kubernetes in 2026 : r/docker_dev - Reddit I'd like to transition my small web app which uses docker-compose to ... More results from www.reddit.com Missing: small | Show results with: small",
+    "host_name": "www.reddit.com",
+    "rank": 3,
+    "date": "",
+    "favicon": ""
+  },
+  {
+    "url": "https://tech-insider.org/docker-vs-kubernetes-2026",
+    "name": "Docker vs Kubernetes in 2026: When to Use Each (With Decision Chart)",
+    "snippet": "1. Solo Developer or Small Startup (1-10 engineers, single product): Use Docker with Docker Compose. You do not need Kubernetes. A single well- ...",
+    "host_name": "tech-insider.org",
+    "rank": 4,
+    "date": "",
+    "favicon": ""
+  }
+]

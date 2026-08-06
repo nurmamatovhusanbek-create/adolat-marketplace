@@ -6,7 +6,7 @@ import { Heading, Text } from "@/components/primitives/typography";
 import { Button } from "@/components/primitives/button";
 import { Skeleton } from "@/components/ui/skeleton";
 import { AdvocateCard, type AdvocateCardData } from "@/components/cards/advocate-card";
-import { SectionHeader } from "@/components/marketplace/category-grid";
+import { SectionHeader } from "@/components/marketplace/section-header";
 import { SPECIALTIES } from "@/lib/marketplace/data";
 import { useMarketplaceStore } from "@/lib/marketplace/store";
 import { openChatWith } from "@/components/chat/chat-panel";

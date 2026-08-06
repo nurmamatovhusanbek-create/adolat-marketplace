@@ -16,9 +16,9 @@ import {
   Wallet,
   X,
 } from "@phosphor-icons/react/dist/ssr";
-import { Card } from "@/components/ui/card";
+import { Card } from "@/components/primitives/card";
 import { Badge } from "@/components/ui/badge";
-import { Button } from "@/components/ui/button";
+import { Button } from "@/components/primitives/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Switch } from "@/components/ui/switch";
@@ -40,7 +40,6 @@ import { ADVOCATES, SPECIALTIES, REGIONS } from "@/lib/marketplace/data";
 import { useMarketplaceStore } from "@/lib/marketplace/store";
 import { formatPrice } from "@/lib/marketplace/format";
 import type { Advocate, Specialty, Region } from "@/lib/marketplace/types";
-import { openChatWith } from "@/components/chat/chat-panel";
 import { cn } from "@/lib/utils";
 
 export function AdvocateListing() {
@@ -188,7 +187,7 @@ export function AdvocateListing() {
         {/* Sidebar - desktop */}
         <aside className="hidden lg:col-span-3 lg:block">
           <div className="sticky top-20">
-            <Card className="p-5">
+            <Card className="border-border p-4">
               <div className="mb-3 flex items-center justify-between">
                 <h2 className="flex items-center gap-1.5 text-sm font-bold">
                   <SlidersHorizontal weight="regular" className="h-4 w-4 text-accent" />
@@ -245,7 +244,7 @@ export function AdvocateListing() {
 
           {/* Results list */}
           {filtered.length === 0 ? (
-            <Card className="p-12 text-center">
+            <Card className="border-border p-12 text-center">
               <Users weight="regular" className="mx-auto mb-3 h-12 w-12 text-muted-foreground/40" />
               <h3 className="text-base font-bold text-foreground">Advokat topilmadi</h3>
               <p className="mt-1 text-sm text-muted-foreground">
@@ -271,7 +270,7 @@ export function AdvocateListing() {
 function AdvocateListItem({ adv, onSelect }: { adv: Advocate; onSelect: () => void }) {
   const spec = SPECIALTIES[adv.specialty];
   return (
-    <Card className="p-5 hover:-translate-y-0.5 hover:shadow-beautiful-md hover:border-accent/30 sm:p-6">
+    <Card className="border-border p-4 transition-all hover:border-foreground/30 hover:shadow-md sm:p-5">
       <div className="flex flex-col gap-4 sm:flex-row">
         {/* Photo */}
         <div className="flex shrink-0 items-start gap-3 sm:flex-col sm:items-center">
@@ -298,7 +297,7 @@ function AdvocateListItem({ adv, onSelect }: { adv: Advocate; onSelect: () => vo
                 >
                   {adv.name}
                 </button>
-                {adv.verified && <SealCheck weight="fill" className="h-4 w-4 text-accent" />}
+                {adv.verified && <SealCheck className="h-4 w-4 text-accent" />}
                 {adv.topRated && (
                   <Badge className="bg-accent text-accent-foreground text-[10px]">TOP-10</Badge>
                 )}
@@ -381,8 +380,8 @@ function AdvocateListItem({ adv, onSelect }: { adv: Advocate; onSelect: () => vo
               <Button size="sm" variant="outline" onClick={onSelect} className="h-8">
                 Profil
               </Button>
-              <Button size="sm" onClick={() => openChatWith(adv.userId ?? adv.id, adv.name)} className="h-8 gap-1">
-                <ChatCircle weight="regular" className="h-3.5 w-3.5" />
+              <Button size="sm" onClick={onSelect} className="h-8 gap-1">
+                <ChatCircle className="h-3.5 w-3.5" />
                 Bog'lanish
               </Button>
             </div>

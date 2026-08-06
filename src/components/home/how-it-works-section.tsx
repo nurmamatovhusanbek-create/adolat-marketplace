@@ -4,7 +4,15 @@ import { Container, Section, Grid, Stack } from "@/components/primitives/layout"
 import { Heading, Text } from "@/components/primitives/typography";
 import { Card, CardBody } from "@/components/primitives/card";
 import { Button } from "@/components/primitives/button";
-import { MagnifyingGlass, FileText, DownloadSimple, Users, ChatCircle, ShieldCheck, CheckCircle } from "@phosphor-icons/react/dist/ssr";
+import {
+  ChatCircle,
+  CheckCircle,
+  DownloadSimple,
+  FileText,
+  MagnifyingGlass,
+  ShieldCheck,
+  Users,
+} from "@phosphor-icons/react/dist/ssr";
 import { useMarketplaceStore } from "@/lib/marketplace/store";
 
 export function HowItWorksSection() {

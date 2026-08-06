@@ -18,7 +18,7 @@ import {
   DialogHeader,
   DialogTitle,
 } from "@/components/ui/dialog";
-import { Button } from "@/components/ui/button";
+import { Button } from "@/components/primitives/button";
 import { Badge } from "@/components/ui/badge";
 import { Separator } from "@/components/ui/separator";
 import { useMarketplaceStore } from "@/lib/marketplace/store";
@@ -54,7 +54,7 @@ export function DocumentDetailModal() {
 
   return (
     <Dialog open={isOpen} onOpenChange={(o) => !o && handleClose()}>
-      <DialogContent size="2xl" className="max-h-[90vh] overflow-hidden p-0">
+      <DialogContent className="max-h-[92vh] max-w-3xl overflow-y-auto p-0 scrollbar-thin">
         {doc && (
           <>
             {/* Header */}
@@ -108,7 +108,7 @@ export function DocumentDetailModal() {
               </div>
             </div>
 
-            <div className="overflow-y-auto p-6 scrollbar-thin max-h-[calc(90vh-12rem)]">
+            <div className="p-6">
               {/* Pricing box */}
               <div className="rounded-xl border-2 border-primary/20 bg-primary/5 p-5">
                 <div className="flex flex-wrap items-end justify-between gap-3">
@@ -151,7 +151,7 @@ export function DocumentDetailModal() {
                       key={f}
                       className="flex items-center gap-1 rounded-md border border-border bg-card px-2 py-0.5 font-bold uppercase"
                     >
-                      <CheckCircle weight="regular" className="h-3 w-3 text-primary" />
+                      <CheckCircle className="h-3 w-3 text-primary" />
                       {f}
                     </span>
                   ))}

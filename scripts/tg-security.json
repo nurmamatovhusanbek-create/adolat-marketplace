@@ -1,0 +1,47 @@
+[
+  {
+    "url": "https://dl.acm.org/doi/10.1145/3727641",
+    "name": "A Systematic Literature Review of Secure Instant Messaging Applications from a Digital Forensics Perspective | ACM Computing Surveys",
+    "snippet": "Telegram's MTProto encryption protocol has had vulnerabilities, including a man-in-the-middle attack [128], and the application has been rated ...",
+    "host_name": "dl.acm.org",
+    "rank": 0,
+    "date": "",
+    "favicon": ""
+  },
+  {
+    "url": "https://www.linkedin.com/posts/luis-oria-seidel-%F0%9F%87%BB%F0%9F%87%AA-301a758a_cybersecurity-ethicalhacking-telegram-activity-7395663404008361985-Bows",
+    "name": "\"Analyzing Telegram's MTProto Encryption and Vulnerabilities\" | Luis Oria Seidel posted on the topic | LinkedIn",
+    "snippet": "Recently, a researcher detailed how he exploited a flaw in a Telegram bot, revealing risks that could affect thousands of users. abling ... Missing: hijacking | Show results with: hijacking",
+    "host_name": "www.linkedin.com",
+    "rank": 1,
+    "date": "",
+    "favicon": ""
+  },
+  {
+    "url": "https://hackers-arise.com/python-for-hackers-building-a-custom-telegram-osint-toolkit-for-automated-intelligence-gathering",
+    "name": "Python for Hackers: Building a Custom Telegram OSINT Toolkit for Automated Intelligence Gathering",
+    "snippet": "In this article, we'll explore how to start building your own Telegram OSINT toolkit to gather information such as recent messages, ...",
+    "host_name": "hackers-arise.com",
+    "rank": 2,
+    "date": "",
+    "favicon": ""
+  },
+  {
+    "url": "http://www.journal-iiie-india.com/1_may_25/3.3_may.pdf",
+    "name": "[PDF] UGC CARE Group-1 15 DECODING SECURITY: AN EVALUATIVE STUDY OF WHATSAPP AND TELEGRAM",
+    "snippet": "Telegram enjoys popularity but presents E2EE optionally (in. \"Secret Chats\" only) and uses MTProto 2.0, criticized for the risks of server-side key storage [2].",
+    "host_name": "www.journal-iiie-india.com",
+    "rank": 3,
+    "date": "",
+    "favicon": ""
+  },
+  {
+    "url": "https://www.linkedin.com/posts/luis-oria-seidel-%F0%9F%87%BB%F0%9F%87%AA-301a758a_cybersecurity-telegrambot-hacking-activity-7402232826823352320-myw-",
+    "name": "Telegram Bot Hacked: Lessons in Security Vulnerabilities | Luis Oria Seidel posted on the topic | LinkedIn",
+    "snippet": "Discovering Vulnerabilities in Telegram Bots: Lessons from a Real Hack In the world of Telegram bot development, security is crucial.",
+    "host_name": "www.linkedin.com",
+    "rank": 4,
+    "date": "",
+    "favicon": ""
+  }
+]

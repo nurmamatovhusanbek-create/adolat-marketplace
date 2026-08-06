@@ -1,7 +1,17 @@
 "use client";
 
 import * as React from "react";
-import { Sparkle, SealCheck, ShieldCheck, Star, Lightning, Waveform, Users, FileText, ArrowRight } from "@phosphor-icons/react/dist/ssr";
+import {
+  ArrowRight,
+  FileText,
+  Lightning,
+  SealCheck,
+  ShieldCheck,
+  Sparkle,
+  Star,
+  Users,
+  Waveform,
+} from "@phosphor-icons/react/dist/ssr";
 import { Container, Section, Grid, Stack } from "@/components/primitives/layout";
 import { Heading, Text } from "@/components/primitives/typography";
 import { Badge } from "@/components/ui/badge";

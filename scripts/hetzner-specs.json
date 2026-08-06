@@ -1,0 +1,47 @@
+[
+  {
+    "url": "https://www.hetzner.com/cloud/regular-performance",
+    "name": "Hetzner Virtual Private Server: Best Price-Performance Ratio",
+    "snippet": "€ 0.0192 /hr. Servers have both a monthly price cap and a price per hour. you can expect about 300-500 Mbits. 2026 Hetzner Online GmbH. Prices incl. 19 % VAT",
+    "host_name": "www.hetzner.com",
+    "rank": 0,
+    "date": "",
+    "favicon": ""
+  },
+  {
+    "url": "https://www.hetzner.com/pressroom/new-cx-plans",
+    "name": "Hetzner introduces new shared vCPU cloud servers",
+    "snippet": "CX22, comes with. CX32, which has 4 vCPUs, 8 GB of RAM, and 80 GB of disk space for just € 6.80 per month (€ 0.0113 per hour).",
+    "host_name": "www.hetzner.com",
+    "rank": 1,
+    "date": "",
+    "favicon": ""
+  },
+  {
+    "url": "https://www.hetzner.com/cloud/cost-optimized",
+    "name": "Cost-Optimized: Cheap Entry Level - Hetzner",
+    "snippet": "Shared cloud servers . € 0.0096 /hr. 2 Intel®/AMD 4 GB € 6.49 max/mo. € 0.0104 /hr. its monthly price cap. ere® 4 GB for test environments … 2026 Hetzner ...",
+    "host_name": "www.hetzner.com",
+    "rank": 2,
+    "date": "",
+    "favicon": ""
+  },
+  {
+    "url": "https://www.hostaccent.com/blog/best-vps-under-20-per-month",
+    "name": "Best VPS Under 20 Per Month in 2026: Real Value Without Hidden Costs",
+    "snippet": "Hetzner CX32 — ~$15/month (best raw value). Specs: 4 vCPU / 8GB RAM / 80GB NVMe. Hetzner is the benchmark for price-performance. Their CX32 at ...",
+    "host_name": "www.hostaccent.com",
+    "rank": 3,
+    "date": "Jul 14, 2026",
+    "favicon": ""
+  },
+  {
+    "url": "https://www.hetzner.com/cloud",
+    "name": "Cloud-hosting provider for developers & teams - Hetzner",
+    "snippet": "starting from € 5 mo. These plans offer the best price-performance ratio, Cost per hour € 0.0088 excl. VAT. 2026 Hetzner Online GmbH. Prices incl. 19 % VAT",
+    "host_name": "www.hetzner.com",
+    "rank": 4,
+    "date": "",
+    "favicon": ""
+  }
+]

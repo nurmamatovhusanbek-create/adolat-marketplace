@@ -12,6 +12,7 @@ import { ForAdvocatesPage } from "@/components/marketplace/for-advocates-page";
 import { RecentRequests } from "@/components/marketplace/recent-requests";
 import { PopularDocuments } from "@/components/marketplace/popular-documents";
 
+// New home sections — UI Revolution Plan Phase 3
 import { HeroSection } from "@/components/home/hero-section";
 import { TrustBar } from "@/components/home/trust-bar";
 import { DocumentCategoriesSection } from "@/components/home/document-categories-section";
@@ -20,6 +21,7 @@ import { HowItWorksSection } from "@/components/home/how-it-works-section";
 import { TestimonialsSection } from "@/components/home/testimonials-section";
 import { CTASection } from "@/components/home/cta-section";
 
+// Modals
 import { AdvocateDetailModal } from "@/components/marketplace/advocate-detail-modal";
 import { DocumentDetailModal } from "@/components/marketplace/document-detail-modal";
 import { PostRequestModal } from "@/components/marketplace/post-request-modal";
@@ -27,6 +29,7 @@ import { AuthModal } from "@/components/auth/auth-modal";
 import { DocumentEditor } from "@/components/editor/document-editor";
 import { Dashboard } from "@/components/dashboard/dashboard";
 
+// Phase 6: Dynamic imports for heavy components (code splitting)
 const ChatPanel = lazy(() => import("@/components/chat/chat-panel").then(m => ({ default: m.ChatPanel })));
 const AdvocateDashboard = lazy(() => import("@/components/advocate/advocate-dashboard").then(m => ({ default: m.AdvocateDashboard })));
 const AdminPanel = lazy(() => import("@/components/admin/admin-panel").then(m => ({ default: m.AdminPanel })));
@@ -85,6 +88,7 @@ export default function Home() {
 
       <Footer />
 
+      {/* Modals */}
       <AdvocateDetailModal />
       <DocumentDetailModal />
       <PostRequestModal />
@@ -99,6 +103,7 @@ export default function Home() {
       <DocumentEditor />
       <Dashboard />
 
+      {/* Phase 6: Lazy-loaded chat panel */}
       <Suspense fallback={null}>
         <ChatPanel />
       </Suspense>

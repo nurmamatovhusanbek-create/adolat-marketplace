@@ -14,9 +14,9 @@ import {
   Users,
   Wallet,
 } from "@phosphor-icons/react/dist/ssr";
-import { Card } from "@/components/ui/card";
+import { Card } from "@/components/primitives/card";
 import { Badge } from "@/components/ui/badge";
-import { Button } from "@/components/ui/button";
+import { Button } from "@/components/primitives/button";
 import { useMarketplaceStore } from "@/lib/marketplace/store";
 
 const FAQS = [
@@ -112,7 +112,7 @@ export function HowItWorksPage() {
               className="mt-6 w-full gap-1 border-emerald-200 bg-emerald-50 text-emerald-700 hover:bg-emerald-100"
             >
               Hujjatlarga o'tish
-              <ArrowRight weight="bold" className="h-4 w-4" />
+              <ArrowRight weight="regular" className="h-4 w-4" />
             </Button>
           </Card>
 
@@ -155,7 +155,7 @@ export function HowItWorksPage() {
               className="mt-6 w-full gap-1 border-amber-200 bg-amber-50 text-amber-700 hover:bg-amber-100"
             >
               Advokatlarga o'tish
-              <ArrowRight weight="bold" className="h-4 w-4" />
+              <ArrowRight weight="regular" className="h-4 w-4" />
             </Button>
           </Card>
 
@@ -203,7 +203,7 @@ export function HowItWorksPage() {
               className="mt-6 w-full gap-1 bg-accent text-accent-foreground hover:bg-accent/90"
             >
               So'rov joylash
-              <ArrowRight weight="bold" className="h-4 w-4" />
+              <ArrowRight weight="regular" className="h-4 w-4" />
             </Button>
           </Card>
         </div>
@@ -249,7 +249,7 @@ export function HowItWorksPage() {
               variant="outline"
               className="mt-4 border-white/30 bg-transparent text-primary-foreground hover:bg-white/10 hover:text-primary-foreground"
             >
-              <ChatCircle weight="regular" className="mr-1.5 h-4 w-4" />
+              <ChatCircle className="mr-1.5 h-4 w-4" />
               Biz bilan bog'laning
             </Button>
           </Card>

@@ -14,9 +14,9 @@ import {
   Users,
   WarningCircle,
 } from "@phosphor-icons/react/dist/ssr";
-import { Card } from "@/components/ui/card";
+import { Card } from "@/components/primitives/card";
 import { Badge } from "@/components/ui/badge";
-import { Button } from "@/components/ui/button";
+import { Button } from "@/components/primitives/button";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { useMarketplaceStore } from "@/lib/marketplace/store";
 import { useAppUser } from "@/lib/auth/user-provider";
@@ -130,7 +130,7 @@ export function AdvocateDashboard() {
           </p>
         </div>
         <Button variant="outline" onClick={() => setDashboardOpen(true)} className="gap-1.5">
-          <ChatCircle weight="regular" className="h-4 w-4" />
+          <ChatCircle className="h-4 w-4" />
           Mijoz kabineti
         </Button>
       </div>
@@ -149,7 +149,7 @@ export function AdvocateDashboard() {
             )}
           </TabsTrigger>
           <TabsTrigger value="messages" className="gap-1.5">
-            <ChatCircle weight="regular" className="h-3.5 w-3.5" />
+            <ChatCircle className="h-3.5 w-3.5" />
             <span className="hidden sm:inline">Xabarlar</span>
             {s.unreadMessages > 0 && (
               <Badge className="bg-accent text-accent-foreground text-[9px]">{s.unreadMessages}</Badge>
@@ -175,7 +175,7 @@ export function AdvocateDashboard() {
               label="Qabul qilingan"
             />
             <StatCard
-              icon={<ChatCircle weight="regular" className="h-5 w-5 text-trust-premium" />}
+              icon={<ChatCircle className="h-5 w-5 text-trust-premium" />}
               value={String(s.conversations)}
               label="Faol suhbatlar"
             />
@@ -344,7 +344,7 @@ function MessagesTab({ unreadCount }: { unreadCount: number }) {
   if (conversations.length === 0) {
     return (
       <Card className="border-border p-12 text-center">
-        <ChatCircle weight="regular" className="mx-auto mb-3 h-10 w-10 text-muted-foreground/40" />
+        <ChatCircle className="mx-auto mb-3 h-10 w-10 text-muted-foreground/40" />
         <h3 className="font-serif text-base font-bold">Suhbatlar yo'q</h3>
         <p className="mt-1 text-sm text-muted-foreground">Mijozlar siz bilan bog'langanda suhbatlar bu yerda ko'rinadi.</p>
       </Card>
@@ -371,7 +371,7 @@ function MessagesTab({ unreadCount }: { unreadCount: number }) {
               </div>
               <Button size="sm" variant="outline" className="gap-1"
                 onClick={() => other && openChatWith(other.id, other.name)}>
-                <ChatCircle weight="regular" className="h-3.5 w-3.5" />
+                <ChatCircle className="h-3.5 w-3.5" />
                 Ochish
               </Button>
             </div>

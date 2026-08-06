@@ -14,9 +14,9 @@ import {
   Users,
   Wallet,
 } from "@phosphor-icons/react/dist/ssr";
-import { Card } from "@/components/ui/card";
+import { Card } from "@/components/primitives/card";
 import { Badge } from "@/components/ui/badge";
-import { Button } from "@/components/ui/button";
+import { Button } from "@/components/primitives/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { useMarketplaceStore } from "@/lib/marketplace/store";
@@ -119,7 +119,7 @@ export function ForAdvocatesPage() {
               <div className="mt-6 flex flex-wrap gap-3">
                 <Button size="lg" onClick={() => document.getElementById("signup")?.scrollIntoView({ behavior: "smooth" })}>
                   Bepul ro'yxatdan o'tish
-                  <ArrowRight weight="bold" className="ml-1.5 h-4 w-4" />
+                  <ArrowRight weight="regular" className="ml-1.5 h-4 w-4" />
                 </Button>
                 <Button size="lg" variant="outline" onClick={() => setView("home")}>
                   Bosh sahifaga qaytish
@@ -255,7 +255,7 @@ export function ForAdvocatesPage() {
         <Card className="border-border p-6 sm:p-8">
           <div className="mb-6 text-center">
             <div className="mx-auto mb-3 flex h-12 w-12 items-center justify-center rounded-xl bg-primary text-primary-foreground">
-              <UserPlus weight="regular" className="h-6 w-6" />
+              <UserPlus className="h-6 w-6" />
             </div>
             <h2 className="text-2xl font-bold tracking-tight text-foreground">Bepul ro'yxatdan o'tish</h2>
             <p className="mt-1 text-sm text-muted-foreground">
@@ -329,7 +329,7 @@ export function ForAdvocatesPage() {
             </div>
 
             <Button type="submit" size="lg" className="w-full gap-1.5">
-              <UserPlus weight="regular" className="h-4 w-4" />
+              <UserPlus className="h-4 w-4" />
               Ro'yxatdan o'tish
             </Button>
 

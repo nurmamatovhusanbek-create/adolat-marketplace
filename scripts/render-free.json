@@ -1,0 +1,47 @@
+[
+  {
+    "url": "https://render.com/articles/platforms-with-a-real-free-tier-for-developers-in-2026",
+    "name": "Platforms with a real free tier for developers in 2026 - Render",
+    "snippet": "Free PostgreSQL databases have a fixed storage capacity of 1 GB and. Render also grants 750 free instance hours per workspace per calendar ...",
+    "host_name": "render.com",
+    "rank": 0,
+    "date": "",
+    "favicon": ""
+  },
+  {
+    "url": "https://render.com/docs/free",
+    "name": "Deploy for Free – Render Docs",
+    "snippet": "Free Render Postgres databases have a fixed storage capacity of 1 GB. 30-day limit. Free Render Postgres databases expire 30 days after creation. An expired ...",
+    "host_name": "render.com",
+    "rank": 1,
+    "date": "",
+    "favicon": ""
+  },
+  {
+    "url": "https://kuberns.com/blogs/render-postgres-pricing-setup-limits",
+    "name": "Render Postgres 2026: Pricing, Limits & Alternatives - Kuberns",
+    "snippet": "Render Postgres free tier deletes data after 30 days. No connection pooling at any tier. Pricing breakdown, real limits, deletes your data ...",
+    "host_name": "kuberns.com",
+    "rank": 2,
+    "date": "",
+    "favicon": ""
+  },
+  {
+    "url": "https://render.com/docs/postgresql-refresh",
+    "name": "Flexible Plans for Render Postgres",
+    "snippet": "Render Postgres now offers four tiers of instance types: Free databases have a fixed storage of 1 GB, and they expire after 30 days. Learn more about free ...",
+    "host_name": "render.com",
+    "rank": 3,
+    "date": "",
+    "favicon": ""
+  },
+  {
+    "url": "https://www.srvrlss.io/provider/render",
+    "name": "Render Pricing 2026: Free Tier, RAM Limits & Alternatives - srvrlss",
+    "snippet": "Free · Developer Mar 11, 2025 · Render Postgres: free 30-day database, paid tiers from $6/mo. PostgreSQL databases, free web service instance has 512 MB RAM and 0.1 CPU.  ...",
+    "host_name": "www.srvrlss.io",
+    "rank": 4,
+    "date": "",
+    "favicon": ""
+  }
+]

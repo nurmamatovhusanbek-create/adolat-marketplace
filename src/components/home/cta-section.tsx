@@ -3,7 +3,14 @@
 import { Container, Section, Stack, Grid } from "@/components/primitives/layout";
 import { Heading, Text } from "@/components/primitives/typography";
 import { Button } from "@/components/primitives/button";
-import { Sparkle, ArrowRight, TrendUp, Wallet, ShieldCheck, Users } from "@phosphor-icons/react/dist/ssr";
+import {
+  ArrowRight,
+  ShieldCheck,
+  Sparkle,
+  TrendUp,
+  Users,
+  Wallet,
+} from "@phosphor-icons/react/dist/ssr";
 import { useMarketplaceStore } from "@/lib/marketplace/store";
 
 export function CTASection() {

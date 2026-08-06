@@ -1,0 +1,47 @@
+[
+  {
+    "url": "https://github.com/tdlib/telegram-bot-api/issues/583",
+    "name": "Does telegram-bot-api still not support uploading files up to 4G? #583",
+    "snippet": "Bot API server supports uploading of files of any size allowed by Telegram, but the user must be a Premium user to be able to upload files bigger than 2000 MB. Missing: storage | Show results with: storage",
+    "host_name": "github.com",
+    "rank": 0,
+    "date": "",
+    "favicon": ""
+  },
+  {
+    "url": "https://stackoverflow.com/questions/70825763/avoid-telegrams-file-size-limit",
+    "name": "Avoid Telegram's file size limit - python - Stack Overflow",
+    "snippet": "Telegram bots have a 20MB size limit for files, These file size limits are set for the Telegram Bot API. This allows for maximum file sizes of ... How to send large file with Telegram Bot API? - Stack Overflow How to send large files to user? node-telegram-bot-api More results from stackoverflow.com Missing: 20GB | Show results with: 20GB",
+    "host_name": "stackoverflow.com",
+    "rank": 1,
+    "date": "",
+    "favicon": ""
+  },
+  {
+    "url": "https://core.telegram.org/bots/faq",
+    "name": "Bots FAQ - Telegram APIs",
+    "snippet": "How do I create a bot? · Long polling problems Missing: storage 2GB 20GB",
+    "host_name": "core.telegram.org",
+    "rank": 2,
+    "date": "",
+    "favicon": ""
+  },
+  {
+    "url": "https://grokipedia.com/page/Telegram_Bot_API_Limitations",
+    "name": "Telegram Bot API Limitations - Grokipedia",
+    "snippet": "bots can only download files up to 20 MB and send files up to 50 MB, with larger sizes unsupported to maintain performance efficiency.",
+    "host_name": "grokipedia.com",
+    "rank": 3,
+    "date": "",
+    "favicon": ""
+  },
+  {
+    "url": "https://community.latenode.com/t/telegram-bot-file-upload-limitations-sending-big-files-from-local-machine-without-server-hosting/34565",
+    "name": "sending big files from local machine without server hosting - Telegram bot",
+    "snippet": "Telegram's API enforces that 50MB limit server-side - there's no way around it, doesn't matter where your bot runs. What works for me: split ...",
+    "host_name": "community.latenode.com",
+    "rank": 4,
+    "date": "",
+    "favicon": ""
+  }
+]

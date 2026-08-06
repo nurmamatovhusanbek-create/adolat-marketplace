@@ -1,8 +1,21 @@
 "use client";
 
 import { useState } from "react";
-import { Scales, MagnifyingGlass, List, FileText, Users, Briefcase, Plus, Question, SignIn, SignOut, SquaresFour, Shield } from "@phosphor-icons/react/dist/ssr";
-import { Button } from "@/components/ui/button";
+import {
+  Briefcase,
+  FileText,
+  List,
+  MagnifyingGlass,
+  Plus,
+  Question,
+  Scales,
+  Shield,
+  SignIn,
+  SignOut,
+  SquaresFour,
+  Users,
+} from "@phosphor-icons/react/dist/ssr";
+import { Button } from "@/components/primitives/button";
 import { Input } from "@/components/ui/input";
 import {
   Sheet,

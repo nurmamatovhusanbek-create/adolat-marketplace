@@ -1,7 +1,13 @@
 "use client";
 
 import * as React from "react";
-import { MagnifyingGlass, Users, FileText, Briefcase, ArrowRight } from "@phosphor-icons/react/dist/ssr";
+import {
+  ArrowRight,
+  Briefcase,
+  FileText,
+  MagnifyingGlass,
+  Users,
+} from "@phosphor-icons/react/dist/ssr";
 import { Input, InputGroup } from "@/components/primitives/input";
 import { Button } from "@/components/primitives/button";
 import { cn } from "@/lib/utils";

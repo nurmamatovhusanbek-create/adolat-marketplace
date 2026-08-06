@@ -21,7 +21,7 @@ import {
   DialogHeader,
   DialogTitle,
 } from "@/components/ui/dialog";
-import { Button } from "@/components/ui/button";
+import { Button } from "@/components/primitives/button";
 import { Badge } from "@/components/ui/badge";
 import { Separator } from "@/components/ui/separator";
 import { useMarketplaceStore } from "@/lib/marketplace/store";
@@ -66,7 +66,7 @@ export function AdvocateDetailModal() {
 
   return (
     <Dialog open={isOpen} onOpenChange={(o) => !o && handleClose()}>
-      <DialogContent size="2xl" className="max-h-[90vh] overflow-hidden p-0">
+      <DialogContent className="max-h-[92vh] max-w-3xl overflow-y-auto p-0 scrollbar-thin">
         {adv && (
           <>
             {/* Header banner */}
@@ -91,7 +91,7 @@ export function AdvocateDetailModal() {
                       {adv.name}
                     </DialogTitle>
                     {adv.verified && (
-                      <SealCheck weight="fill" className="h-5 w-5 text-accent" aria-label="Tasdiqlangan" />
+                      <SealCheck className="h-5 w-5 text-accent" aria-label="Tasdiqlangan" />
                     )}
                     {adv.topRated && (
                       <Badge className="bg-accent text-accent-foreground text-xs">TOP-10</Badge>
@@ -120,7 +120,7 @@ export function AdvocateDetailModal() {
               </div>
             </div>
 
-            <div className="overflow-y-auto p-6 scrollbar-thin max-h-[calc(90vh-12rem)]">
+            <div className="p-6">
               {/* Quick stats */}
               <div className="grid grid-cols-3 gap-3">
                 <StatBox value={`${adv.experienceYears}`} label="Yil tajriba" />
@@ -135,7 +135,7 @@ export function AdvocateDetailModal() {
                   className="flex-1 gap-1.5"
                   size="lg"
                 >
-                  <ChatCircle weight="regular" className="h-4 w-4" />
+                  <ChatCircle className="h-4 w-4" />
                   To'g'ridan-to'g'ri bog'lanish
                 </Button>
                 <Button
@@ -218,7 +218,7 @@ export function AdvocateDetailModal() {
               <div className="mt-6 grid grid-cols-1 gap-4 sm:grid-cols-2">
                 <div className="rounded-lg border border-border bg-card p-3">
                   <div className="mb-2 flex items-center gap-1.5 text-xs font-semibold uppercase tracking-wider text-muted-foreground">
-                    <Globe className="h-3.5 w-3.5" />
+                    <Globe weight="regular" className="h-3.5 w-3.5" />
                     Tillar
                   </div>
                   <div className="flex flex-wrap gap-1.5">
@@ -231,7 +231,7 @@ export function AdvocateDetailModal() {
                 </div>
                 <div className="rounded-lg border border-border bg-card p-3">
                   <div className="mb-2 flex items-center gap-1.5 text-xs font-semibold uppercase tracking-wider text-muted-foreground">
-                    <SealCheck weight="fill" className="h-3.5 w-3.5" />
+                    <SealCheck className="h-3.5 w-3.5" />
                     Litsenziya
                   </div>
                   <div className="text-sm font-mono font-semibold text-foreground">

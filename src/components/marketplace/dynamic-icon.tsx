@@ -10,6 +10,7 @@ import {
   Lightbulb,
   Receipt,
   Scales,
+  ShieldWarning,
   Stamp,
   UserCheck,
   Users,
@@ -24,6 +25,7 @@ type IconType = React.ForwardRefExoticComponent<
 
 const ICONS: Record<string, IconType> = {
   Users,
+  ShieldWarning,
   Scales,
   BuildingOffice,
   Receipt,

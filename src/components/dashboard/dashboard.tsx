@@ -7,21 +7,21 @@ import {
   SheetHeader,
   SheetTitle,
 } from "@/components/ui/sheet";
-import { Card } from "@/components/ui/card";
-import { Button } from "@/components/ui/button";
+import { Card } from "@/components/primitives/card";
+import { Button } from "@/components/primitives/button";
 import { Badge } from "@/components/ui/badge";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import {
-  Pulse,
   Briefcase,
   ChatCircle,
+  CheckCircle,
   Clock,
   DownloadSimple,
-  CheckCircle,
   FileText,
-  Tray,
+  Pulse,
   Spinner,
   Trash,
+  Tray,
 } from "@phosphor-icons/react/dist/ssr";
 import { useMarketplaceStore } from "@/lib/marketplace/store";
 import { useAppUser } from "@/lib/auth/user-provider";
@@ -125,7 +125,7 @@ export function Dashboard() {
 
   return (
     <Sheet open={isDashboardOpen} onOpenChange={setDashboardOpen}>
-      <SheetContent side="right" className="w-screen h-screen overflow-y-auto p-0" style={{ maxWidth: "100vw", maxHeight: "100vh" }}>
+      <SheetContent side="right" className="w-full overflow-y-auto p-0 sm:max-w-3xl">
         <SheetHeader className="border-b p-6">
           <SheetTitle className="flex items-center gap-2 text-xl">
             <Pulse weight="regular" className="h-5 w-5 text-primary" />
@@ -153,7 +153,7 @@ export function Dashboard() {
                 label="Faol so'rovlar"
               />
               <StatCard
-                icon={<ChatCircle weight="regular" className="h-4 w-4 text-amber-600" />}
+                icon={<ChatCircle className="h-4 w-4 text-amber-600" />}
                 value={user.counts.unreadMessages}
                 label="O'qilmagan xabarlar"
               />
@@ -179,7 +179,7 @@ export function Dashboard() {
                 </div>
               ) : drafts.length === 0 ? (
                 <EmptyState
-                  icon={<Tray className="h-10 w-10" />}
+                  icon={<Tray weight="regular" className="h-10 w-10" />}
                   title="Draflar yo'q"
                   description="Hujjat to'ldirib, draf sifatida saqlang. Bu yerda ko'rinadi."
                 />
@@ -190,7 +190,7 @@ export function Dashboard() {
                       <div className="flex items-start justify-between gap-3">
                         <div className="min-w-0 flex-1">
                           <div className="flex items-center gap-2">
-                            <CheckCircle weight="regular" className="h-4 w-4 shrink-0 text-primary" />
+                            <CheckCircle className="h-4 w-4 shrink-0 text-primary" />
                             <h3 className="truncate text-sm font-bold text-foreground">
                               {d.document.titleUz}
                             </h3>
@@ -245,7 +245,7 @@ export function Dashboard() {
                 </div>
               ) : requests.length === 0 ? (
                 <EmptyState
-                  icon={<Tray className="h-10 w-10" />}
+                  icon={<Tray weight="regular" className="h-10 w-10" />}
                   title="So'rovlar yo'q"
                   description="Huquqiy so'rovingizni joylang va advokatlardan javob oling."
                 />

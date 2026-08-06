@@ -1,7 +1,17 @@
 "use client";
 
 import * as React from "react";
-import { MapPin, Clock, Eye, ChatCircle, ArrowRight, Fire, Wallet, BuildingOffice, User } from "@phosphor-icons/react/dist/ssr";
+import {
+  ArrowRight,
+  BuildingOffice,
+  ChatCircle,
+  Clock,
+  Eye,
+  Fire,
+  MapPin,
+  User,
+  Wallet,
+} from "@phosphor-icons/react/dist/ssr";
 import { Card, CardBody, CardFooter } from "@/components/primitives/card";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/primitives/button";

@@ -1,0 +1,47 @@
+[
+  {
+    "url": "https://makerkit.dev/blog/tutorials/best-hosting-nextjs",
+    "name": "10 Best Next.js Hosting Providers in 2026 - MakerKit",
+    "snippet": "Self-host with Coolify on Hetzner VPS ($5-6/month) 5,000/month Pro $20/month + usage. Run Next.js on a VPS from Hetzner, Digital Ocean, or ...",
+    "host_name": "makerkit.dev",
+    "rank": 0,
+    "date": "",
+    "favicon": ""
+  },
+  {
+    "url": "https://temps.sh/blog/nextjs-deployment-cost-calculator",
+    "name": "Next.js Deployment Cost Calculator 2026: Vercel vs Self-Hosted (Real",
+    "snippet": "The cheapest way to host Next.js in 2026: a $4/mo Hetzner VPS with a self-hosted PaaS like Temps. Vercel Pro runs $100-505/mo for a 5-person ... Missing: Supabase | Show results with: Supabase",
+    "host_name": "temps.sh",
+    "rank": 1,
+    "date": "Jul 12, 2026",
+    "favicon": ""
+  },
+  {
+    "url": "https://www.reddit.com/r/Supabase/comments/1sv3vrw/selfhosting_supabase_on_a_12mo_hetzner_box_4",
+    "name": "self-hosting Supabase on a $12/mo hetzner box — 4 months update",
+    "snippet": "$12/mo hetzner box. RAM, 40GB SSD) — €4.51/mo, roughly $5. 50GB block storage volume for postgres data — €2.40/mo. real total: ~$12/mo ... Hetzner vs DigitalOcean in 2026: reliability + real-world experience? Love Supabase, but the $25/mo pricing tier killed my side projects ... More results from www.reddit.com Missing: Next. js DigitalOcean 2026",
+    "host_name": "www.reddit.com",
+    "rank": 2,
+    "date": "",
+    "favicon": ""
+  },
+  {
+    "url": "https://servercompass.app/blog/deploy-nextjs-to-vps-complete-guide",
+    "name": "Deploy Next.js to VPS: Complete Guide (2026) | PM2, Docker, Nginx",
+    "snippet": "works: Hetzner, DigitalOcean, Self-Hosted VPS Base cost $20/month $20/user/month $5–$10/month. Hetzner offers the best value in Europe, $29 one ...",
+    "host_name": "servercompass.app",
+    "rank": 3,
+    "date": "",
+    "favicon": ""
+  },
+  {
+    "url": "https://contabo.com/blog/best-vps-hosting-providers",
+    "name": "Best VPS Hosting Providers in 2026 | Contabo Blog",
+    "snippet": "Hetzner and DigitalOcean lead the developer-tooling camp, loads ~€4.50/mo 8. Hetzner Price-to-performance in the EU ~€5.49/mo 4 GB $2.50/mo+ 0. ...",
+    "host_name": "contabo.com",
+    "rank": 4,
+    "date": "",
+    "favicon": ""
+  }
+]

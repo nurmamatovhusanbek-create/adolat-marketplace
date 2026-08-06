@@ -2,7 +2,7 @@
 
 import { useState } from "react";
 import { signIn } from "next-auth/react";
-import { Button } from "@/components/ui/button";
+import { Button } from "@/components/primitives/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import {
@@ -38,13 +38,13 @@ export function AuthModal({ open, onOpenChange, defaultMode = "signin", onSucces
 
   return (
     <Dialog open={open} onOpenChange={onOpenChange}>
-      <DialogContent size="sm" className="p-0">
+      <DialogContent className="max-w-md p-0">
         <Tabs value={mode} onValueChange={(v) => setMode(v as "signin" | "signup")}>
           <div className="border-b border-border p-6 pb-0">
             <DialogHeader>
-              <DialogTitle className="flex items-center gap-2.5 text-xl">
-                <div className="flex size-9 items-center justify-center rounded-xl bg-primary text-primary-foreground">
-                  <Scales weight="duotone" className="size-5" />
+              <DialogTitle className="flex items-center gap-2 text-xl">
+                <div className="flex h-9 w-9 items-center justify-center rounded-lg bg-primary text-primary-foreground">
+                  <Scales weight="regular" className="h-5 w-5" />
                 </div>
                 Adolat
               </DialogTitle>

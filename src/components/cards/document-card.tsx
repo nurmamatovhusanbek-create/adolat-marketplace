@@ -1,7 +1,16 @@
 "use client";
 
 import * as React from "react";
-import { Star, Clock, FileText, ArrowDown, ArrowRight, Sparkle, Tag, ShieldCheck } from "@phosphor-icons/react/dist/ssr";
+import {
+  ArrowDown,
+  ArrowRight,
+  Clock,
+  FileText,
+  ShieldCheck,
+  Sparkle,
+  Star,
+  Tag,
+} from "@phosphor-icons/react/dist/ssr";
 import { Card, CardBody, CardFooter } from "@/components/primitives/card";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/primitives/button";

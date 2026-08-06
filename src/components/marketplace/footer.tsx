@@ -1,13 +1,13 @@
 "use client";
 
 import {
-  Scales,
   Envelope,
-  Phone,
-  MapPin,
-  TelegramLogo,
-  InstagramLogo,
   FacebookLogo,
+  InstagramLogo,
+  MapPin,
+  PaperPlaneTilt,
+  Phone,
+  Scales,
   YoutubeLogo,
 } from "@phosphor-icons/react/dist/ssr";
 import { useMarketplaceStore } from "@/lib/marketplace/store";
@@ -64,13 +64,13 @@ export function Footer() {
         <div className="grid gap-10 lg:grid-cols-12">
           {/* Brand column */}
           <div className="lg:col-span-4">
-            <div className="flex items-center gap-2.5">
-              <div className="flex size-10 items-center justify-center rounded-xl bg-foreground text-background">
-                <Scales className="size-5" weight="duotone" />
+            <div className="flex items-center gap-2">
+              <div className="flex h-9 w-9 items-center justify-center rounded-lg bg-foreground text-background">
+                <Scales weight="regular" className="h-5 w-5" />
               </div>
               <div>
-                <div className="font-serif text-lg font-bold tracking-tight text-foreground">Adolat</div>
-                <div className="font-mono text-[10px] uppercase tracking-[0.18em] text-muted-foreground mt-0.5">
+                <div className="font-serif text-base font-bold text-foreground">Adolat</div>
+                <div className="font-mono text-[9px] uppercase tracking-[0.2em] text-muted-foreground">
                   Huquqiy marketplace
                 </div>
               </div>
@@ -80,28 +80,28 @@ export function Footer() {
               namunalarini bir joyda toping. Vaqtingiz va pulingizni tejang.
             </p>
 
-            <div className="mt-5 space-y-2.5 text-xs text-muted-foreground">
-              <div className="flex items-center gap-2.5">
-                <Envelope className="size-3.5 text-accent" weight="regular" />
-                <a href="mailto:info@adolat.uz" className="hover:text-foreground transition-colors">
+            <div className="mt-5 space-y-2 text-xs text-muted-foreground">
+              <div className="flex items-center gap-2">
+                <Envelope weight="regular" className="h-3.5 w-3.5 text-accent" />
+                <a href="mailto:info@adolat.uz" className="hover:text-foreground">
                   info@adolat.uz
                 </a>
               </div>
-              <div className="flex items-center gap-2.5">
-                <Phone className="size-3.5 text-accent" weight="regular" />
-                <a href="tel:+998712020202" className="hover:text-foreground transition-colors">
+              <div className="flex items-center gap-2">
+                <Phone weight="regular" className="h-3.5 w-3.5 text-accent" />
+                <a href="tel:+998712020202" className="hover:text-foreground">
                   +998 71 202 02 02
                 </a>
               </div>
-              <div className="flex items-center gap-2.5">
-                <MapPin className="size-3.5 text-accent" weight="regular" />
+              <div className="flex items-center gap-2">
+                <MapPin weight="regular" className="h-3.5 w-3.5 text-accent" />
                 Toshkent sh., Amir Temur ko'ch., 15
               </div>
             </div>
 
             <div className="mt-5 flex gap-2">
               {[
-                { Icon: TelegramLogo, label: "Telegram" },
+                { Icon: PaperPlaneTilt, label: "Telegram" },
                 { Icon: InstagramLogo, label: "Instagram" },
                 { Icon: FacebookLogo, label: "Facebook" },
                 { Icon: YoutubeLogo, label: "YouTube" },
@@ -110,9 +110,9 @@ export function Footer() {
                   key={label}
                   href="#"
                   aria-label={label}
-                  className="flex size-9 items-center justify-center rounded-lg border border-border bg-card text-muted-foreground transition-colors duration-150 ease-[cubic-bezier(0.2,0,0,1)] hover:border-accent/40 hover:text-accent active:scale-[0.98]"
+                  className="flex h-9 w-9 items-center justify-center rounded-lg border border-border bg-card text-muted-foreground transition-all hover:border-accent/40 hover:text-accent"
                 >
-                  <Icon className="size-4" weight="regular" />
+                  <Icon className="h-4 w-4" />
                 </a>
               ))}
             </div>

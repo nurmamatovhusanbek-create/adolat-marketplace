@@ -2,7 +2,12 @@
 
 import { Container, Stack } from "@/components/primitives/layout";
 import { Text } from "@/components/primitives/typography";
-import { Users, FileText, ShieldCheck, MapPin } from "@phosphor-icons/react/dist/ssr";
+import {
+  FileText,
+  MapPin,
+  ShieldCheck,
+  Users,
+} from "@phosphor-icons/react/dist/ssr";
 
 export function TrustBar({ stats }: { stats: { advocatesCount: number; documentsCount: number; requestsResolved: number; citiesCovered: number } }) {
   return (

@@ -13,9 +13,9 @@ import {
   User,
   Wallet,
 } from "@phosphor-icons/react/dist/ssr";
-import { Card } from "@/components/ui/card";
+import { Card } from "@/components/primitives/card";
 import { Badge } from "@/components/ui/badge";
-import { Button } from "@/components/ui/button";
+import { Button } from "@/components/primitives/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import {
@@ -139,7 +139,7 @@ export function RequestsPage() {
 
       {/* List */}
       {filtered.length === 0 ? (
-        <Card className="p-12 text-center">
+        <Card className="border-border p-12 text-center">
           <Briefcase weight="regular" className="mx-auto mb-3 h-12 w-12 text-muted-foreground/40" />
           <h3 className="text-base font-bold text-foreground">So'rov topilmadi</h3>
           <p className="mt-1 text-sm text-muted-foreground">
@@ -151,7 +151,7 @@ export function RequestsPage() {
           {filtered.map((req) => (
             <Card
               key={req.id}
-              className="p-5 hover:-translate-y-0.5 hover:shadow-beautiful-md hover:border-accent/30"
+              className="border-border p-5 transition-all hover:border-primary/30 hover:shadow-md"
             >
               <div className="flex flex-col gap-3 sm:flex-row sm:items-start">
                 <div className="flex-1">
@@ -203,12 +203,12 @@ export function RequestsPage() {
 
                 <div className="flex shrink-0 flex-col items-end gap-2 sm:w-44">
                   <Button size="sm" onClick={handleRespond} className="gap-1">
-                    <ChatCircle weight="regular" className="h-3.5 w-3.5" />
+                    <ChatCircle className="h-3.5 w-3.5" />
                     Javob berish
                   </Button>
                   <Button size="sm" variant="ghost" className="gap-1 text-xs text-primary">
                     Tafsilotlar
-                    <ArrowRight weight="bold" className="h-3 w-3" />
+                    <ArrowRight weight="regular" className="h-3 w-3" />
                   </Button>
                 </div>
               </div>
@@ -227,7 +227,7 @@ export function RequestsPage() {
                   {req.viewsCount} ko'rish
                 </span>
                 <span className="flex items-center gap-1">
-                  <ChatCircle weight="regular" className="h-3.5 w-3.5" />
+                  <ChatCircle className="h-3.5 w-3.5" />
                   {req.responsesCount} javob
                 </span>
               </div>
