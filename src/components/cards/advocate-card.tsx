@@ -102,15 +102,15 @@ export function AdvocateCard({ advocate, onSelect, onContact, className }: Advoc
 
         <div className="mt-4 grid grid-cols-3 gap-2 border-t border-border pt-3 text-center">
           <div>
-            <div className="font-serif text-lg font-bold text-foreground">{advocate.experienceYears}</div>
+            <div className="font-display text-lg font-bold text-foreground">{advocate.experienceYears}</div>
             <div className="text-[9px] font-mono uppercase tracking-wider text-muted-foreground">Yil tajriba</div>
           </div>
           <div className="border-x border-border">
-            <div className="font-serif text-lg font-bold text-foreground">{advocate.casesResolved}</div>
+            <div className="font-display text-lg font-bold text-foreground">{advocate.casesResolved}</div>
             <div className="text-[9px] font-mono uppercase tracking-wider text-muted-foreground">Ishlar</div>
           </div>
           <div>
-            <div className="font-serif text-lg font-bold text-success">{advocate.successRate}%</div>
+            <div className="font-display text-lg font-bold text-success">{advocate.successRate}%</div>
             <div className="text-[9px] font-mono uppercase tracking-wider text-muted-foreground">Muvaffaqiyat</div>
           </div>
         </div>
@@ -119,7 +119,7 @@ export function AdvocateCard({ advocate, onSelect, onContact, className }: Advoc
       <CardFooter className="justify-between">
         <div>
           <div className="text-[9px] font-mono uppercase tracking-wider text-muted-foreground">Konsultatsiya</div>
-          <div className="font-serif text-sm font-bold text-foreground">dan {advocate.consultationFee.toLocaleString("ru-RU")} so'm</div>
+          <div className="font-display text-sm font-bold text-foreground">dan {advocate.consultationFee.toLocaleString("ru-RU")} so'm</div>
         </div>
         <Stack direction="row" gap="sm">
           <Button size="sm" variant="outline" onClick={() => onSelect?.(advocate)}>Profil</Button>

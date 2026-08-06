@@ -278,7 +278,7 @@ function AdvocateListItem({ adv, onSelect }: { adv: Advocate; onSelect: () => vo
             <img
               src={adv.photo}
               alt={adv.name}
-              className="h-16 w-16 rounded-xl border border-border object-cover"
+              className="h-16 w-16 rounded-md border border-border object-cover"
             />
             {adv.online && (
               <span className="absolute -bottom-0.5 -right-0.5 h-3.5 w-3.5 rounded-full border-2 border-card bg-emerald-500" />

@@ -159,7 +159,7 @@ export function AdminPanel() {
     <div className="mx-auto max-w-7xl px-4 py-8 sm:px-6 lg:px-8">
       {/* Header */}
       <div className="mb-6">
-        <h1 className="flex items-center gap-2 font-serif text-2xl font-bold tracking-tight text-foreground sm:text-3xl">
+        <h1 className="flex items-center gap-2 font-display text-2xl font-bold tracking-tight text-foreground sm:text-3xl">
           <Shield weight="regular" className="h-7 w-7 text-accent" />
           Admin panel
         </h1>
@@ -208,7 +208,7 @@ export function AdminPanel() {
 
               <div className="mt-6 grid gap-4 lg:grid-cols-2">
                 <Card className="border-border p-5">
-                  <h3 className="mb-3 flex items-center gap-2 font-serif text-base font-bold">
+                  <h3 className="mb-3 flex items-center gap-2 font-display text-base font-bold">
                     <Pulse weight="regular" className="h-4 w-4 text-accent" />
                     So'nggi faollik (7 kun)
                   </h3>
@@ -221,7 +221,7 @@ export function AdminPanel() {
                 </Card>
 
                 <Card className="border-border p-5">
-                  <h3 className="mb-3 flex items-center gap-2 font-serif text-base font-bold">
+                  <h3 className="mb-3 flex items-center gap-2 font-display text-base font-bold">
                     <Shield weight="regular" className="h-4 w-4 text-accent" />
                     Foydalanuvchilar tarkibi
                   </h3>
@@ -244,7 +244,7 @@ export function AdminPanel() {
           {approvals.length === 0 ? (
             <Card className="border-border p-12 text-center">
               <CheckCircle weight="regular" className="mx-auto mb-3 h-10 w-10 text-trust-verified" />
-              <h3 className="font-serif text-base font-bold">Tasdiqlash kutilayotgan advokatlar yo'q</h3>
+              <h3 className="font-display text-base font-bold">Tasdiqlash kutilayotgan advokatlar yo'q</h3>
               <p className="mt-1 text-sm text-muted-foreground">Barcha yangi ro'yxatdan o'tgan advokatlar tasdiqlangan.</p>
             </Card>
           ) : (
@@ -254,7 +254,7 @@ export function AdminPanel() {
                   <div className="flex flex-col gap-4 sm:flex-row sm:items-start">
                     <div className="min-w-0 flex-1">
                       <div className="mb-2 flex flex-wrap items-center gap-2">
-                        <h3 className="font-serif text-base font-bold text-foreground">{a.name}</h3>
+                        <h3 className="font-display text-base font-bold text-foreground">{a.name}</h3>
                         <Badge variant="secondary" className="text-[11px]">
                           {SPECIALTIES[a.specialty as keyof typeof SPECIALTIES]?.uz ?? a.specialty}
                         </Badge>
@@ -328,7 +328,7 @@ export function AdminPanel() {
                   {users.map((u) => (
                     <tr key={u.id} className="border-b border-border/50 hover:bg-secondary/30">
                       <td className="px-4 py-3">
-                        <div className="font-serif font-bold text-foreground">{u.name}</div>
+                        <div className="font-display font-bold text-foreground">{u.name}</div>
                         <div className="text-[10px] text-muted-foreground">{u.email}</div>
                       </td>
                       <td className="px-4 py-3">
@@ -412,7 +412,7 @@ export function AdminPanel() {
         <TabsContent value="documents" className="mt-6">
           <Card className="border-border p-6 text-center">
             <CheckCircle className="mx-auto mb-3 h-10 w-10 text-muted-foreground/40" />
-            <h3 className="font-serif text-base font-bold">Hujjat boshqaruvi</h3>
+            <h3 className="font-display text-base font-bold">Hujjat boshqaruvi</h3>
             <p className="mt-1 text-sm text-muted-foreground">
               Hujjat shablonlarini qo'shish, tahrirlash va o'chirish funksiyasi keyingi versiyada qo'shiladi.
             </p>
@@ -430,7 +430,7 @@ function StatCard({ icon, value, label, sub }: { icon: React.ReactNode; value: s
   return (
     <Card className="border-border p-4">
       <div className="mb-2">{icon}</div>
-      <div className="font-serif text-2xl font-bold text-foreground">{value}</div>
+      <div className="font-display text-2xl font-bold text-foreground">{value}</div>
       <div className="text-[10px] font-mono uppercase tracking-wider text-muted-foreground">{label}</div>
       {sub && <div className="mt-1 text-[10px] text-accent">{sub}</div>}
     </Card>
@@ -441,7 +441,7 @@ function Metric({ label, value }: { label: string; value: string }) {
   return (
     <div className="flex items-center justify-between border-b border-border pb-2">
       <span className="text-sm text-muted-foreground">{label}</span>
-      <span className="font-serif font-bold text-foreground">{value}</span>
+      <span className="font-display font-bold text-foreground">{value}</span>
     </div>
   );
 }

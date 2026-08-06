@@ -185,7 +185,7 @@ export function ForAdvocatesPage() {
                 </div>
               </Card>
 
-              <div className="absolute -bottom-4 -right-4 hidden rounded-2xl border border-border bg-card p-4 shadow-lg sm:block">
+              <div className="absolute -bottom-4 -right-4 hidden rounded-lg border border-border bg-card p-4 shadow-lg sm:block">
                 <div className="flex items-center gap-2">
                   <div className="flex h-10 w-10 items-center justify-center rounded-lg bg-accent text-accent-foreground">
                     <Medal weight="regular" className="h-5 w-5" />
@@ -254,7 +254,7 @@ export function ForAdvocatesPage() {
       <section id="signup" className="mx-auto max-w-3xl px-4 py-16 sm:px-6 lg:px-8">
         <Card className="border-border p-6 sm:p-8">
           <div className="mb-6 text-center">
-            <div className="mx-auto mb-3 flex h-12 w-12 items-center justify-center rounded-xl bg-primary text-primary-foreground">
+            <div className="mx-auto mb-3 flex h-12 w-12 items-center justify-center rounded-md bg-primary text-primary-foreground">
               <UserPlus className="h-6 w-6" />
             </div>
             <h2 className="text-2xl font-bold tracking-tight text-foreground">Bepul ro'yxatdan o'tish</h2>
@@ -353,7 +353,7 @@ export function ForAdvocatesPage() {
 
 function StatBox({ value, label }: { value: string; label: string }) {
   return (
-    <div className="rounded-xl border border-border bg-card p-3 text-center">
+    <div className="rounded-md border border-border bg-card p-3 text-center">
       <div className="text-lg font-bold text-foreground sm:text-2xl">{value}</div>
       <div className="text-[10px] uppercase tracking-wider text-muted-foreground">{label}</div>
     </div>

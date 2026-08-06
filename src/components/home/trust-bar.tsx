@@ -29,7 +29,7 @@ function TrustItem({ icon, value, label }: { icon: React.ReactNode; value: strin
     <Stack direction="row" gap="sm" align="center" justify="center" className="px-4">
       {icon}
       <div>
-        <div className="font-serif text-xl font-bold text-foreground">{value}</div>
+        <div className="font-display text-xl font-bold text-foreground">{value}</div>
         <Text size="xs" tone="secondary">{label}</Text>
       </div>
     </Stack>

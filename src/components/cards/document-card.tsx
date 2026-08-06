@@ -47,7 +47,7 @@ export function DocumentCard({ document: doc, rank, onSelect, className }: Docum
   return (
     <Card variant="interactive" padding="none" className={cn("group relative overflow-hidden", className)}>
       {rank !== undefined && rank < 3 && (
-        <div className="absolute -left-2 -top-2 z-10 flex size-8 items-center justify-center rounded-full bg-foreground font-serif text-xs font-bold text-background shadow-elevation-2">
+        <div className="absolute -left-2 -top-2 z-10 flex size-8 items-center justify-center rounded-full bg-foreground font-display text-xs font-bold text-background shadow-md">
           {rank + 1}
         </div>
       )}
@@ -107,12 +107,12 @@ export function DocumentCard({ document: doc, rank, onSelect, className }: Docum
 
       <CardFooter className="justify-between">
         {doc.isFree ? (
-          <div className="flex items-center gap-1.5 font-serif text-base font-bold text-success">
+          <div className="flex items-center gap-1.5 font-display text-base font-bold text-success">
             <Sparkle className="size-4" weight="fill" />
             Bepul
           </div>
         ) : (
-          <div className="flex items-center gap-1.5 font-serif text-base font-bold text-foreground">
+          <div className="flex items-center gap-1.5 font-display text-base font-bold text-foreground">
             <Tag className="size-4 text-primary" weight="regular" />
             {doc.priceUzs.toLocaleString("ru-RU")} so'm
           </div>

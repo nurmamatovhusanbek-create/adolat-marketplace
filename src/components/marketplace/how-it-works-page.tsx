@@ -76,7 +76,7 @@ export function HowItWorksPage() {
           {/* Path 1: Documents */}
           <Card className="border-border p-6">
             <div className="mb-4 flex items-center gap-3">
-              <div className="flex h-12 w-12 items-center justify-center rounded-xl bg-emerald-50 text-emerald-700">
+              <div className="flex h-12 w-12 items-center justify-center rounded-md bg-emerald-50 text-emerald-700">
                 <FileText weight="regular" className="h-6 w-6" />
               </div>
               <div>
@@ -119,7 +119,7 @@ export function HowItWorksPage() {
           {/* Path 2: Advocates */}
           <Card className="border-border p-6">
             <div className="mb-4 flex items-center gap-3">
-              <div className="flex h-12 w-12 items-center justify-center rounded-xl bg-amber-50 text-amber-700">
+              <div className="flex h-12 w-12 items-center justify-center rounded-md bg-amber-50 text-amber-700">
                 <Users weight="regular" className="h-6 w-6" />
               </div>
               <div>
@@ -162,7 +162,7 @@ export function HowItWorksPage() {
           {/* Path 3: Post request */}
           <Card className="border-border p-6">
             <div className="mb-4 flex items-center gap-3">
-              <div className="flex h-12 w-12 items-center justify-center rounded-xl bg-primary/10 text-primary">
+              <div className="flex h-12 w-12 items-center justify-center rounded-md bg-primary/10 text-primary">
                 <Sparkle weight="fill" className="h-6 w-6" />
               </div>
               <div>
@@ -209,7 +209,7 @@ export function HowItWorksPage() {
         </div>
 
         {/* Trust strip */}
-        <div className="mt-10 grid grid-cols-2 gap-4 rounded-2xl border border-border bg-card p-6 sm:grid-cols-4">
+        <div className="mt-10 grid grid-cols-2 gap-4 rounded-lg border border-border bg-card p-6 sm:grid-cols-4">
           <Trust icon={<CheckCircle weight="regular" className="h-5 w-5 text-primary" />} text="Litsenziyalangan advokatlar" />
           <Trust icon={<ShieldCheck weight="regular" className="h-5 w-5 text-primary" />} text="Xavfsiz to'lov tizimi" />
           <Trust icon={<FileText weight="regular" className="h-5 w-5 text-primary" />} text="Qonunchilikka muvofiq" />

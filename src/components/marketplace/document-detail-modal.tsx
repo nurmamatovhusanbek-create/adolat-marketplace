@@ -110,7 +110,7 @@ export function DocumentDetailModal() {
 
             <div className="p-6">
               {/* Pricing box */}
-              <div className="rounded-xl border-2 border-primary/20 bg-primary/5 p-5">
+              <div className="rounded-md border-2 border-primary/20 bg-primary/5 p-5">
                 <div className="flex flex-wrap items-end justify-between gap-3">
                   <div>
                     <div className="text-xs font-semibold uppercase tracking-wider text-primary">

@@ -34,9 +34,9 @@ export function HowItWorksSection() {
         <Grid cols={{ base: 1, lg: 2 }} gap="lg">
           {/* Documents flow */}
           <Card variant="elevated" padding="lg" className="relative overflow-hidden">
-            <div className="absolute right-6 top-6 font-serif text-8xl font-bold text-success/10">01</div>
+            <div className="absolute right-6 top-6 font-display text-8xl font-bold text-success/10">01</div>
             <div className="mb-5 flex items-center gap-3">
-              <div className="flex size-12 items-center justify-center rounded-xl bg-success/10 text-success">
+              <div className="flex size-12 items-center justify-center rounded-md bg-success/10 text-success">
                 <FileText className="size-6" weight="duotone" />
               </div>
               <div>
@@ -54,9 +54,9 @@ export function HowItWorksSection() {
 
           {/* Advocates flow */}
           <Card variant="elevated" padding="lg" className="relative overflow-hidden">
-            <div className="absolute right-6 top-6 font-serif text-8xl font-bold text-primary/10">02</div>
+            <div className="absolute right-6 top-6 font-display text-8xl font-bold text-primary/10">02</div>
             <div className="mb-5 flex items-center gap-3">
-              <div className="flex size-12 items-center justify-center rounded-xl bg-primary/10 text-primary">
+              <div className="flex size-12 items-center justify-center rounded-md bg-primary/10 text-primary">
                 <Users className="size-6" weight="duotone" />
               </div>
               <div>
@@ -91,7 +91,7 @@ function Step({ num, title, description, icon, onClick }: { num: number; title: 
   return (
     <li>
       <button onClick={onClick} disabled={!onClick} className="group flex w-full items-start gap-3 text-left disabled:cursor-default">
-        <div className="flex size-9 items-center justify-center rounded-full border-2 border-foreground bg-background font-serif text-sm font-bold text-foreground transition-colors group-hover:border-primary group-hover:text-primary">
+        <div className="flex size-9 items-center justify-center rounded-full border-2 border-foreground bg-background font-display text-sm font-bold text-foreground transition-colors group-hover:border-primary group-hover:text-primary">
           {num}
         </div>
         <div className="flex-1 pt-1">

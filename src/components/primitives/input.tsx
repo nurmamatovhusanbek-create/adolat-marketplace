@@ -13,7 +13,7 @@ import { cn } from "@/lib/utils";
  *
  * Design principles:
  * - 3 sizes: sm (h-9), md (h-11), lg (h-14)
- * - rounded-xl (12px) — modern, not too round
+ * - rounded-md (12px) — modern, not too round
  * - Focus state: border-primary + ring-primary/40
  * - :user-invalid fires only after blur/submit (WCAG-friendly)
  * - InputGroup wrapper for prefix/suffix icons
@@ -21,7 +21,7 @@ import { cn } from "@/lib/utils";
 
 export const inputVariants = cva(
   [
-    "flex w-full min-w-0 rounded-xl border bg-card text-foreground",
+    "flex w-full min-w-0 rounded-md border bg-card text-foreground",
     "px-3.5 py-2 text-base shadow-sm outline-none",
     "transition-[color,box-shadow,border-color,background-color] duration-200 ease-[cubic-bezier(0.4,0,0.2,1)]",
     "placeholder:text-muted-foreground/60",

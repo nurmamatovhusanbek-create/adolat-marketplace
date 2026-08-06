@@ -69,7 +69,7 @@ export function Footer() {
                 <Scales weight="regular" className="h-5 w-5" />
               </div>
               <div>
-                <div className="font-serif text-base font-bold text-foreground">Adolat</div>
+                <div className="font-display text-base font-bold text-foreground">Adolat</div>
                 <div className="font-mono text-[9px] uppercase tracking-[0.2em] text-muted-foreground">
                   Huquqiy marketplace
                 </div>

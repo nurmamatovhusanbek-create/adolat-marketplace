@@ -264,7 +264,7 @@ export function ChatPanel() {
                 </Avatar>
                 <div className="min-w-0 flex-1">
                   <div className="flex items-center gap-1.5">
-                    <span className="truncate font-serif text-sm font-bold">{otherUser.name}</span>
+                    <span className="truncate font-display text-sm font-bold">{otherUser.name}</span>
                     {otherUser.advocateProfile?.verified && (
                       <Badge className="bg-accent/15 text-accent text-[9px] hover:bg-accent/15">Tasdiqlangan</Badge>
                     )}
@@ -289,7 +289,7 @@ export function ChatPanel() {
                 <div className="flex h-12 w-12 items-center justify-center rounded-full bg-accent/10">
                   <PaperPlaneTilt weight="regular" className="h-6 w-6 text-accent" />
                 </div>
-                <p className="font-serif text-sm font-bold">Suhbatni boshlang</p>
+                <p className="font-display text-sm font-bold">Suhbatni boshlang</p>
                 <p className="max-w-xs text-xs text-muted-foreground">
                   Birinchi xabaringizni yuboring. Barcha xabarlar saqlanadi va istalgan vaqtda davom ettirishingiz mumkin.
                 </p>

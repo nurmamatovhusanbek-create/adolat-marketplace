@@ -41,7 +41,7 @@ export function CategoryCard({ category: cat, onSelect, className }: CategoryCar
       <div className="absolute left-0 top-0 h-full w-1 bg-primary opacity-0 transition-opacity duration-200 group-hover:opacity-100" />
 
       <div className="flex items-start justify-between">
-        <div className={cn("flex size-12 items-center justify-center rounded-xl transition-colors duration-200", colors.bg, colors.text, colors.hoverBg)}>
+        <div className={cn("flex size-12 items-center justify-center rounded-md transition-colors duration-200", colors.bg, colors.text, colors.hoverBg)}>
           <DynamicIcon name={cat.icon} className="size-6" />
         </div>
         <Badge variant="soft" tone="neutral" size="sm" className="font-mono">{cat.count} hujjat</Badge>

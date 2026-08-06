@@ -267,7 +267,7 @@ function DocumentCard({ doc, onSelect }: { doc: LegalDocument; onSelect: () => v
   return (
     <Card
       onClick={onSelect}
-      className="group flex cursor-pointer flex-col border-border p-5 transition-all hover:-translate-y-1 hover:shadow-lg hover:shadow-primary/5"
+      className="group flex cursor-pointer flex-col border-border p-5 transition-all  hover:shadow-lg hover:shadow-primary/5"
     >
       <div className="flex items-start justify-between gap-2">
         <div

@@ -69,7 +69,7 @@ export function Heading({
     font === "display"
       ? "font-sans"
       : font === "accent"
-        ? "font-serif"
+        ? "font-display"
         : "";
 
   return (

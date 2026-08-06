@@ -23,7 +23,7 @@ import { cn } from "@/lib/utils";
 
 export const buttonVariants = cva(
   [
-    "inline-flex items-center justify-center gap-2 whitespace-nowrap rounded-xl",
+    "inline-flex items-center justify-center gap-2 whitespace-nowrap rounded-md",
     "font-medium tracking-tight",
     "transition-[background-color,color,border-color,box-shadow,transform] duration-200 ease-[cubic-bezier(0.4,0,0.2,1)]",
     "active:scale-[0.98]",
@@ -37,7 +37,7 @@ export const buttonVariants = cva(
       variant: {
         // Primary: solid brand color — main CTAs
         primary:
-          "bg-primary text-primary-foreground shadow-elevation-1 hover:bg-primary/90 hover:shadow-elevation-2",
+          "bg-primary text-primary-foreground shadow-sm hover:bg-primary/90 hover:shadow-md",
         // Secondary: subtle surface — supporting actions
         secondary:
           "bg-secondary text-secondary-foreground hover:bg-secondary/70",
@@ -49,7 +49,7 @@ export const buttonVariants = cva(
           "bg-transparent hover:bg-secondary/60 text-foreground",
         // Destructive: red — dangerous actions
         destructive:
-          "bg-destructive text-white shadow-elevation-1 hover:bg-destructive/90",
+          "bg-destructive text-white shadow-sm hover:bg-destructive/90",
         // Link: text-only with underline
         link:
           "bg-transparent text-primary underline-offset-4 hover:underline rounded-none p-0 h-auto",

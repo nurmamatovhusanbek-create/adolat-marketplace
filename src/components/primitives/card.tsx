@@ -13,7 +13,7 @@ import { cn } from "@/lib/utils";
  *
  * Design principles:
  * - 4 variants: flat, elevated, overlay, interactive
- * - rounded-2xl (16px) by default — modern, friendly
+ * - rounded-lg (16px) by default — modern, friendly
  * - border-subtle hairline by default — barely visible
  * - Interactive variant lifts on hover with elevation-2
  * - Composable: use CardHeader, CardBody, CardFooter for structure
@@ -21,7 +21,7 @@ import { cn } from "@/lib/utils";
 
 const cardVariants = cva(
   [
-    "rounded-2xl border border-border bg-card text-card-foreground",
+    "rounded-lg border border-border bg-card text-card-foreground",
     "transition-[transform,box-shadow,border-color] duration-200 ease-[cubic-bezier(0.4,0,0.2,1)]",
   ].join(" "),
   {
@@ -30,12 +30,12 @@ const cardVariants = cva(
         // Flat: no shadow, just border — for dense layouts
         flat: "shadow-none",
         // Elevated: subtle shadow — default for most cards
-        elevated: "shadow-elevation-1",
+        elevated: "shadow-sm",
         // Overlay: higher shadow — for modals, popovers
-        overlay: "shadow-elevation-3",
+        overlay: "shadow-md",
         // Interactive: lifts on hover — for clickable cards
         interactive:
-          "shadow-elevation-1 hover:-translate-y-0.5 hover:shadow-elevation-2 hover:border-primary/30 cursor-pointer",
+          "shadow-sm hover:-translate-y-0.5 hover:shadow-md hover:border-primary/30 cursor-pointer",
       },
       padding: {
         none: "",

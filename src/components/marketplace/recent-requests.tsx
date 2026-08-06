@@ -99,7 +99,7 @@ export function RecentRequests() {
             {requests.map((req, idx) => (
               <Card
                 key={req.id}
-                className="group relative flex flex-col gap-3 border-border bg-card p-5 transition-all hover:border-accent/30 hover:shadow-hard-sm"
+                className="group relative flex flex-col gap-3 border-border bg-card p-5 transition-all hover:border-accent/30 hover:shadow-sm"
               >
                 {/* Editorial rank number */}
                 <div className="absolute right-4 top-4 font-mono text-[10px] font-bold uppercase tracking-wider text-muted-foreground">
@@ -130,7 +130,7 @@ export function RecentRequests() {
                         )}
                       </Badge>
                     </div>
-                    <h3 className="font-serif text-base font-bold leading-snug text-foreground group-hover:text-accent">
+                    <h3 className="font-display text-base font-bold leading-snug text-foreground group-hover:text-accent">
                       {req.title}
                     </h3>
                   </div>

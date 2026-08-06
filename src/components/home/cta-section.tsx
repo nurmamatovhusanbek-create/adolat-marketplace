@@ -19,7 +19,7 @@ export function CTASection() {
   return (
     <Section spacing="lg" variant="default">
       <Container size="xl">
-        <div className="relative overflow-hidden rounded-3xl bg-foreground px-6 py-12 text-background shadow-elevation-5 sm:px-12 lg:py-16">
+        <div className="relative overflow-hidden rounded-lg bg-foreground px-6 py-12 text-background shadow-lg sm:px-12 lg:py-16">
           <div className="pointer-events-none absolute inset-0 bg-grid-pattern opacity-10" aria-hidden />
           <div className="pointer-events-none absolute -right-32 -top-32 size-96 rounded-full bg-primary/20 blur-3xl" aria-hidden />
           <div className="pointer-events-none absolute -bottom-24 -left-24 size-72 rounded-full bg-accent/15 blur-3xl" aria-hidden />
@@ -64,9 +64,9 @@ export function CTASection() {
 
 function StatCard({ icon, value, label, accent }: { icon: React.ReactNode; value: string; label: string; accent?: boolean }) {
   return (
-    <div className={`rounded-2xl border p-5 backdrop-blur-sm ${accent ? "border-primary/30 bg-primary/10" : "border-background/15 bg-background/5"}`}>
+    <div className={`rounded-lg border p-5 backdrop-blur-sm ${accent ? "border-primary/30 bg-primary/10" : "border-background/15 bg-background/5"}`}>
       <div className={`mb-3 flex size-9 items-center justify-center rounded-lg ${accent ? "bg-primary/20 text-primary" : "bg-background/15 text-background"}`}>{icon}</div>
-      <div className="font-serif text-xl font-bold text-background">{value}</div>
+      <div className="font-display text-xl font-bold text-background">{value}</div>
       <div className="mt-1 text-xs text-background/70">{label}</div>
     </div>
   );

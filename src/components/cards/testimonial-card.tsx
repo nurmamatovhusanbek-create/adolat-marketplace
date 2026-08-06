@@ -26,7 +26,7 @@ export function TestimonialCard({ testimonial: t, featured, className }: Testimo
     <Card variant="elevated" padding="md" className={cn("group relative flex flex-col", className)}>
       <Quotes className="absolute right-4 top-4 size-8 text-primary/20" weight="fill" />
       {featured && (
-        <div className="absolute -left-2 -top-2 flex size-7 items-center justify-center rounded-full bg-primary font-serif text-xs font-bold text-primary-foreground shadow-elevation-2">
+        <div className="absolute -left-2 -top-2 flex size-7 items-center justify-center rounded-full bg-primary font-display text-xs font-bold text-primary-foreground shadow-md">
           &ldquo;
         </div>
       )}

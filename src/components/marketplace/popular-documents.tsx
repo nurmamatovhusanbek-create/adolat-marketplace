@@ -89,11 +89,11 @@ export function PopularDocuments() {
               <Card
                 key={doc.id}
                 onClick={() => setActiveDocument(doc as never)}
-                className="group relative flex cursor-pointer flex-col border-border bg-card p-5 transition-all hover:-translate-y-1 hover:shadow-hard"
+                className="group relative flex cursor-pointer flex-col border-border bg-card p-5 transition-all  hover:shadow-sm"
               >
                 {/* Editorial rank badge for top 3 */}
                 {idx < 3 && (
-                  <div className="absolute -left-2 -top-2 flex h-7 w-7 items-center justify-center rounded-full bg-foreground font-serif text-xs font-bold text-background shadow-hard-sm">
+                  <div className="absolute -left-2 -top-2 flex h-7 w-7 items-center justify-center rounded-full bg-foreground font-display text-xs font-bold text-background shadow-sm">
                     {idx + 1}
                   </div>
                 )}
@@ -115,7 +115,7 @@ export function PopularDocuments() {
                   </div>
                 </div>
 
-                <h3 className="mt-3 line-clamp-2 font-serif text-base font-bold leading-snug text-foreground group-hover:text-accent">
+                <h3 className="mt-3 line-clamp-2 font-display text-base font-bold leading-snug text-foreground group-hover:text-accent">
                   {doc.titleUz}
                 </h3>
                 <p className="mt-1.5 line-clamp-2 text-xs leading-relaxed text-muted-foreground">{doc.descriptionUz}</p>
@@ -159,12 +159,12 @@ export function PopularDocuments() {
                 <div className="mt-4 flex items-center justify-between border-t border-border pt-3">
                   <div>
                     {doc.isFree ? (
-                      <div className="flex items-center gap-1.5 font-serif text-base font-bold text-trust-verified">
+                      <div className="flex items-center gap-1.5 font-display text-base font-bold text-trust-verified">
                         <Sparkle weight="fill" className="h-4 w-4" />
                         Bepul
                       </div>
                     ) : (
-                      <div className="flex items-center gap-1.5 font-serif text-base font-bold text-foreground">
+                      <div className="flex items-center gap-1.5 font-display text-base font-bold text-foreground">
                         <Tag weight="regular" className="h-4 w-4 text-accent" />
                         {formatPrice(doc.priceUzs)}
                       </div>

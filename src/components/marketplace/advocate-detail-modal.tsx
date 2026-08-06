@@ -77,7 +77,7 @@ export function AdvocateDetailModal() {
                   <img
                     src={adv.photo}
                     alt={adv.name}
-                    className="h-20 w-20 rounded-2xl border-2 border-white/30 object-cover"
+                    className="h-20 w-20 rounded-lg border-2 border-white/30 object-cover"
                   />
                   {adv.online && (
                     <span className="absolute -bottom-1 -right-1 flex h-5 w-5 items-center justify-center rounded-full border-2 border-primary bg-emerald-500 text-[10px] font-bold text-white">

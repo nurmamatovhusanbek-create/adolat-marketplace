@@ -101,7 +101,7 @@ export function AdvocateDashboard() {
           <div className="mx-auto mb-4 flex h-16 w-16 items-center justify-center rounded-full bg-amber-100">
             <Clock weight="regular" className="h-8 w-8 text-amber-600" />
           </div>
-          <h2 className="font-serif text-xl font-bold text-amber-900">Tasdiqlash kutilmoqda</h2>
+          <h2 className="font-display text-xl font-bold text-amber-900">Tasdiqlash kutilmoqda</h2>
           <p className="mt-2 text-sm text-amber-700">
             {stats.message || "Profilingiz administrator tomonidan ko'rib chiqilmoqda. Odatda bu 24 soat ichida sodir bo'ladi."}
           </p>
@@ -121,7 +121,7 @@ export function AdvocateDashboard() {
       {/* Header */}
       <div className="mb-6 flex items-center justify-between">
         <div>
-          <h1 className="flex items-center gap-2 font-serif text-2xl font-bold tracking-tight text-foreground sm:text-3xl">
+          <h1 className="flex items-center gap-2 font-display text-2xl font-bold tracking-tight text-foreground sm:text-3xl">
             <Briefcase weight="regular" className="h-7 w-7 text-accent" />
             Advokat kabineti
           </h1>
@@ -188,7 +188,7 @@ export function AdvocateDashboard() {
 
           <div className="mt-6 grid gap-4 lg:grid-cols-2">
             <Card className="border-border p-5">
-              <h3 className="mb-3 flex items-center gap-2 font-serif text-base font-bold">
+              <h3 className="mb-3 flex items-center gap-2 font-display text-base font-bold">
                 <TrendUp weight="regular" className="h-4 w-4 text-accent" />
                 Muvaffaqiyat ko'rsatkichlari
               </h3>
@@ -200,7 +200,7 @@ export function AdvocateDashboard() {
             </Card>
 
             <Card className="border-border p-5">
-              <h3 className="mb-3 flex items-center gap-2 font-serif text-base font-bold">
+              <h3 className="mb-3 flex items-center gap-2 font-display text-base font-bold">
                 <Clock weight="regular" className="h-4 w-4 text-accent" />
                 So'nggi so'rovlar
               </h3>
@@ -252,7 +252,7 @@ function StatCard({ icon, value, label }: { icon: React.ReactNode; value: string
   return (
     <Card className="border-border p-4">
       <div className="mb-2">{icon}</div>
-      <div className="font-serif text-2xl font-bold text-foreground">{value}</div>
+      <div className="font-display text-2xl font-bold text-foreground">{value}</div>
       <div className="text-[10px] font-mono uppercase tracking-wider text-muted-foreground">{label}</div>
     </Card>
   );
@@ -262,7 +262,7 @@ function Metric({ label, value }: { label: string; value: string }) {
   return (
     <div className="flex items-center justify-between border-b border-border pb-2">
       <span className="text-sm text-muted-foreground">{label}</span>
-      <span className="font-serif font-bold text-foreground">{value}</span>
+      <span className="font-display font-bold text-foreground">{value}</span>
     </div>
   );
 }
@@ -272,7 +272,7 @@ function RequestList({ requests }: { requests: AdvocateRequest[]; advocateId: st
     return (
       <Card className="border-border p-12 text-center">
         <Briefcase weight="regular" className="mx-auto mb-3 h-10 w-10 text-muted-foreground/40" />
-        <h3 className="font-serif text-base font-bold">So'rovlar yo'q</h3>
+        <h3 className="font-display text-base font-bold">So'rovlar yo'q</h3>
         <p className="mt-1 text-sm text-muted-foreground">
           Sizning sohangizga mos so'rovlar paydo bo'lganda bu yerda ko'rinadi.
         </p>
@@ -302,7 +302,7 @@ function RequestList({ requests }: { requests: AdvocateRequest[]; advocateId: st
                   </Badge>
                 )}
               </div>
-              <h3 className="font-serif text-base font-bold text-foreground">{r.title}</h3>
+              <h3 className="font-display text-base font-bold text-foreground">{r.title}</h3>
               <p className="mt-1 line-clamp-2 text-sm text-muted-foreground">{r.description}</p>
               <div className="mt-3 flex flex-wrap items-center gap-3 font-mono text-[10px] uppercase tracking-wider text-muted-foreground">
                 <span>{REGIONS[r.region as keyof typeof REGIONS]?.uz ?? r.city}</span>
@@ -345,7 +345,7 @@ function MessagesTab({ unreadCount }: { unreadCount: number }) {
     return (
       <Card className="border-border p-12 text-center">
         <ChatCircle className="mx-auto mb-3 h-10 w-10 text-muted-foreground/40" />
-        <h3 className="font-serif text-base font-bold">Suhbatlar yo'q</h3>
+        <h3 className="font-display text-base font-bold">Suhbatlar yo'q</h3>
         <p className="mt-1 text-sm text-muted-foreground">Mijozlar siz bilan bog'langanda suhbatlar bu yerda ko'rinadi.</p>
       </Card>
     );
@@ -360,7 +360,7 @@ function MessagesTab({ unreadCount }: { unreadCount: number }) {
             <div className="flex items-center justify-between gap-3">
               <div className="min-w-0 flex-1">
                 <div className="flex items-center gap-2">
-                  <span className="truncate font-serif text-sm font-bold">{other?.name ?? "Noma'lum"}</span>
+                  <span className="truncate font-display text-sm font-bold">{other?.name ?? "Noma'lum"}</span>
                   {c.unreadCount > 0 && (
                     <Badge className="bg-accent text-accent-foreground text-[9px]">{c.unreadCount}</Badge>
                   )}
@@ -385,19 +385,19 @@ function MessagesTab({ unreadCount }: { unreadCount: number }) {
 function ProfileTab({ user, stats }: { user: any; stats: any }) {
   return (
     <Card className="border-border p-6">
-      <h3 className="mb-4 font-serif text-lg font-bold">Mening profilim</h3>
+      <h3 className="mb-4 font-display text-lg font-bold">Mening profilim</h3>
       <div className="grid grid-cols-1 gap-4 sm:grid-cols-2">
         <div>
           <label className="text-[10px] font-mono uppercase tracking-wider text-muted-foreground">Ism</label>
-          <p className="font-serif font-bold text-foreground">{user.name}</p>
+          <p className="font-display font-bold text-foreground">{user.name}</p>
         </div>
         <div>
           <label className="text-[10px] font-mono uppercase tracking-wider text-muted-foreground">Email</label>
-          <p className="font-serif font-bold text-foreground">{user.email}</p>
+          <p className="font-display font-bold text-foreground">{user.email}</p>
         </div>
         <div>
           <label className="text-[10px] font-mono uppercase tracking-wider text-muted-foreground">Telefon</label>
-          <p className="font-serif font-bold text-foreground">{user.phone ?? "—"}</p>
+          <p className="font-display font-bold text-foreground">{user.phone ?? "—"}</p>
         </div>
         <div>
           <label className="text-[10px] font-mono uppercase tracking-wider text-muted-foreground">Rol</label>
@@ -405,7 +405,7 @@ function ProfileTab({ user, stats }: { user: any; stats: any }) {
         </div>
       </div>
       <div className="mt-6 border-t border-border pt-4">
-        <h4 className="mb-3 font-serif text-sm font-bold">Statistika</h4>
+        <h4 className="mb-3 font-display text-sm font-bold">Statistika</h4>
         <div className="grid grid-cols-2 gap-3 sm:grid-cols-4">
           <Metric label="Reyting" value={stats.rating > 0 ? stats.rating.toFixed(1) : "—"} />
           <Metric label="Sharhlar" value={String(stats.reviewsCount)} />

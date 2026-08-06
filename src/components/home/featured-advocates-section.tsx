@@ -70,9 +70,9 @@ export function FeaturedAdvocatesSection({ limit = 6 }: { limit?: number }) {
         {loading ? (
           <Grid cols={{ base: 1, sm: 2, lg: 3 }} gap="md" className="mt-10">
             {Array.from({ length: limit }).map((_, i) => (
-              <div key={i} className="rounded-2xl border border-border bg-card p-6">
+              <div key={i} className="rounded-lg border border-border bg-card p-6">
                 <div className="flex items-start gap-3">
-                  <Skeleton className="size-14 rounded-xl" />
+                  <Skeleton className="size-14 rounded-md" />
                   <div className="flex-1 space-y-2">
                     <Skeleton className="h-4 w-3/4" />
                     <Skeleton className="h-3 w-full" />

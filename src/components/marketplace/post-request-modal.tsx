@@ -558,7 +558,7 @@ function TypeCard({
   return (
     <button
       onClick={onClick}
-      className={`flex flex-col items-start gap-1.5 rounded-xl border-2 p-4 text-left transition-all ${
+      className={`flex flex-col items-start gap-1.5 rounded-md border-2 p-4 text-left transition-all ${
         selected
           ? "border-primary bg-primary/5 shadow-sm"
           : "border-border bg-card hover:border-primary/40"
