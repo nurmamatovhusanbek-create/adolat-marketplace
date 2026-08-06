@@ -55,7 +55,7 @@ export function DocumentCard({ document: doc, rank, onSelect, className }: Docum
       <CardBody className="pb-3">
         <div className="flex items-center justify-between">
           <Badge variant="soft" tone="neutral" size="sm">{doc.categoryNameUz ?? doc.category}</Badge>
-          <div className="flex gap-1.5">
+          <div className="flex items-center gap-1.5">
             {doc.isFree && (
               <Badge variant="soft" tone="success" size="sm">
                 <Sparkle className="size-3" weight="fill" />
@@ -65,6 +65,9 @@ export function DocumentCard({ document: doc, rank, onSelect, className }: Docum
             {doc.isNew && (
               <Badge variant="soft" tone="brand" size="sm">Yangi</Badge>
             )}
+            <span className="font-mono text-[9px] font-bold uppercase tracking-wider text-muted-foreground">
+              SHR·{String(doc.slug).slice(0, 4).toUpperCase()}
+            </span>
           </div>
         </div>
 

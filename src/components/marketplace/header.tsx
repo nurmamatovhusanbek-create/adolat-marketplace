@@ -81,46 +81,49 @@ export function Header() {
   };
 
   return (
-    <header className="sticky top-0 z-50 w-full border-b border-border/80 bg-background/90 shadow-sm backdrop-blur-xl">
-      {/* Top thin accent strip — gradient violet to coral */}
-      <div className="h-0.5 w-full bg-gradient-to-r from-primary via-accent to-accent-2" aria-hidden />
+    <header className="sticky top-0 z-50 w-full border-b border-border bg-background/95 backdrop-blur-md">
+      {/* Top accent strip — solid registry blue */}
+      <div className="h-px w-full bg-primary" aria-hidden />
 
       <div className="mx-auto flex h-16 max-w-7xl items-center gap-3 px-4 sm:px-6 lg:px-8">
         {/* Logo */}
         <button
           onClick={() => handleNav("home")}
-          className="group flex shrink-0 items-center gap-3 rounded-xl p-1.5 transition-all duration-200 hover:bg-secondary/80 hover:shadow-md"
+          className="group flex shrink-0 items-center gap-2.5 rounded-md p-1 transition-colors hover:bg-secondary/60"
           aria-label="Adolat bosh sahifa"
         >
-          <div className="flex size-10 items-center justify-center rounded-xl bg-gradient-to-br from-primary to-primary/80 text-primary-foreground shadow-md transition-transform group-hover:scale-105 group-hover:shadow-lg">
+          <div className="flex size-9 items-center justify-center rounded-md bg-primary text-primary-foreground">
             <Scales className="size-5" weight="fill" />
           </div>
           <div className="hidden flex-col leading-tight sm:flex">
-            <span className="font-serif text-lg font-black tracking-tight text-foreground">Adolat</span>
-            <span className="text-[10px] font-bold uppercase tracking-[0.2em] text-muted-foreground mt-0.5">
-              Huquqiy platforma
+            <span className="font-display text-base font-bold tracking-tight text-foreground">Adolat</span>
+            <span className="font-mono text-[9px] uppercase tracking-[0.15em] text-muted-foreground mt-0.5">
+              Huquqiy regist'r
             </span>
           </div>
         </button>
 
-        {/* Desktop nav — editorial section-divider style */}
-        <nav className="ml-2 hidden items-center gap-0 md:flex">
-          {NAV_ITEMS.map((item, i) => (
-            <div key={item.view} className="flex items-center">
-              {i > 0 && <span className="text-border" aria-hidden>·</span>}
+        {/* Desktop nav */}
+        <nav className="ml-2 hidden items-center gap-0.5 md:flex">
+          {NAV_ITEMS.map((item) => {
+            const Icon = item.icon;
+            const active = currentView === item.view;
+            return (
               <button
+                key={item.view}
                 onClick={() => handleNav(item.view)}
                 className={cn(
-                  "rounded-md px-3 py-2 text-sm font-medium transition-colors",
-                  currentView === item.view
-                    ? "text-foreground underline-accent"
-                    : "text-muted-foreground hover:text-foreground"
+                  "inline-flex h-9 items-center gap-1.5 rounded-md px-3 text-sm font-medium transition-colors",
+                  active
+                    ? "bg-primary/10 text-primary"
+                    : "text-muted-foreground hover:bg-secondary/60 hover:text-foreground"
                 )}
               >
+                <Icon className="size-4" weight={active ? "fill" : "regular"} />
                 {item.label}
               </button>
-            </div>
-          ))}
+            );
+          })}
         </nav>
 
         {/* Quick search — LobeHub style minimal */}
@@ -148,11 +151,11 @@ export function Header() {
             Advokat uchun
           </Button>
           <Button
+            variant="primary"
             size="sm"
             onClick={() => setPostRequestOpen(true)}
-            className="gap-1.5 bg-foreground text-background hover:bg-foreground/90"
           >
-            <Plus className="h-3.5 w-3.5" />
+            <Plus className="size-3.5" weight="regular" />
             <span className="hidden sm:inline">So'rov joylash</span>
             <span className="sm:hidden">So'rov</span>
           </Button>

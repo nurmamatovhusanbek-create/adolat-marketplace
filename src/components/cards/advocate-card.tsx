@@ -47,9 +47,9 @@ export function AdvocateCard({ advocate, onSelect, onContact, className }: Advoc
   return (
     <Card variant="interactive" padding="none" className={cn("group relative overflow-hidden", className)}>
       {advocate.online && (
-        <div className="absolute right-3 top-3 z-10 flex items-center gap-1.5 rounded-full bg-success/10 px-2.5 py-1 text-[10px] font-semibold uppercase tracking-wider text-success">
-          <span className="size-1.5 rounded-full bg-success verified-pulse" />
-          onlayn
+        <div className="absolute right-3 top-3 z-10 flex items-center gap-1 rounded bg-stamp-green/10 px-1.5 py-0.5 font-mono text-[9px] font-semibold uppercase tracking-wider text-stamp-green">
+          <span className="size-1 rounded-full bg-stamp-green" />
+          ONLAYN
         </div>
       )}
 
@@ -59,16 +59,21 @@ export function AdvocateCard({ advocate, onSelect, onContact, className }: Advoc
             <img
               src={advocate.photo}
               alt={advocate.name}
-              className="size-14 rounded-xl border border-border object-cover"
+              className="size-14 rounded-md border border-border object-cover"
             />
             {advocate.verified && (
-              <div className="absolute -bottom-1 -right-1 flex size-5 items-center justify-center rounded-full border-2 border-card bg-primary text-primary-foreground">
+              <div className="absolute -bottom-1 -right-1 flex size-5 items-center justify-center rounded-full border-2 border-card bg-stamp-green text-white">
                 <SealCheck className="size-3" weight="fill" />
               </div>
             )}
           </div>
           <div className="min-w-0 flex-1">
-            <Heading level={3} size="3" className="truncate">{advocate.name}</Heading>
+            <div className="flex items-center gap-1.5">
+              <Heading level={3} size="3" className="truncate">{advocate.name}</Heading>
+              <span className="font-mono text-[9px] font-bold uppercase tracking-wider text-muted-foreground">
+                ADV·{String(advocate.id).slice(-4).toUpperCase()}
+              </span>
+            </div>
             <Text size="xs" tone="secondary" className="mt-0.5 line-clamp-2">{advocate.titleUz}</Text>
             <div className="mt-1.5 flex items-center gap-2 text-xs text-muted-foreground">
               <span className="flex items-center gap-0.5">

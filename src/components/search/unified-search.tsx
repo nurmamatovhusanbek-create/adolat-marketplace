@@ -48,7 +48,7 @@ export function UnifiedSearch({
       {modes.length > 1 && (
         <div className="mb-3 flex items-center gap-2">
           <span className="text-xs font-semibold uppercase tracking-wider text-muted-foreground">Qidiruv turi:</span>
-          <div className="inline-flex rounded-xl border border-border bg-card p-1 shadow-elevation-1">
+          <div className="inline-flex rounded-md border border-border bg-card p-1 shadow-sm">
             {modes.map((m) => {
               const { label, icon: Icon } = MODE_LABELS[m];
               const active = mode === m;
@@ -58,10 +58,10 @@ export function UnifiedSearch({
                   type="button"
                   onClick={() => setMode(m)}
                   className={cn(
-                    "flex items-center gap-1.5 rounded-lg px-4 py-2 text-sm font-semibold transition-all duration-200 ease-[cubic-bezier(0.4,0,0.2,1)]",
+                    "flex items-center gap-1.5 rounded px-3 py-1.5 text-sm font-medium transition-colors",
                     active
-                      ? "bg-primary text-primary-foreground shadow-elevation-2 scale-105"
-                      : "text-muted-foreground hover:text-foreground hover:bg-secondary/50"
+                      ? "bg-primary text-primary-foreground"
+                      : "text-muted-foreground hover:text-foreground hover:bg-secondary/60"
                   )}
                 >
                   <Icon className="size-4" weight={active ? "fill" : "regular"} />
@@ -80,10 +80,10 @@ export function UnifiedSearch({
             onChange={(e) => setQuery(e.target.value)}
             placeholder={placeholder}
             size="lg"
-            className="h-14 border-2 bg-card/80 backdrop-blur-sm shadow-elevation-2 focus-visible:shadow-elevation-3 focus-visible:border-primary"
+            className="h-12 border-border bg-card shadow-sm focus-visible:border-primary"
           />
         </InputGroup>
-        <Button type="submit" size="lg" tone="brand" className="h-14 px-8 shadow-elevation-2 hover:shadow-elevation-3 hover:scale-105">
+        <Button type="submit" size="lg" tone="brand" className="h-12 px-6">
           Qidirish
           <ArrowRight className="size-4" weight="bold" />
         </Button>
