@@ -1,0 +1,31 @@
+# Render.com deployment configuration
+# Docs: https://render.com/docs/blueprint-spec
+#
+# IMPORTANT: DATABASE_URL is set via Render dashboard (not in this file)
+# to avoid leaking credentials to GitHub.
+# In Render → your web service → Environment → add:
+#   DATABASE_URL = postgresql://adolat_admin:y9yOdl8yGtQ8iLvQpL29X7puisrMFohm@dpg-d9dgotbrjlhs73ak7bp0-a/adolat
+
+services:
+  # === Web service (Next.js app) ===
+  - type: web
+    name: adolat-marketplace
+    runtime: docker
+    plan: free  # Upgrade to 'starter' ($7/mo) for no sleep + more RAM
+    region: singapore  # Closest to Uzbekistan
+    dockerfilePath: ./Dockerfile
+    healthCheckPath: /api/health
+    autoDeploy: true
+    envVars:
+      - key: NODE_ENV
+        value: production
+      - key: NEXTAUTH_URL
+        value: https://adolat-marketplace.onrender.com
+      - key: NEXTAUTH_SECRET
+        generateValue: true  # Auto-generate on first deploy
+      - key: ENABLE_SIGNUP
+        value: "true"
+      - key: ENABLE_ADVOCATE_SIGNUP
+        value: "true"
+      # DATABASE_URL must be set manually in Render dashboard → Environment tab
+      # Value: postgresql://adolat_admin:y9yOdl8yGtQ8iLvQpL29X7puisrMFohm@dpg-d9dgotbrjlhs73ak7bp0-a/adolat

@@ -1,0 +1,417 @@
+@import "tailwindcss";
+@import "tw-animate-css";
+
+@source "../../../src/**/*.{ts,tsx,js,jsx,mdx}";
+@source "../../../pages/**/*.{ts,tsx,js,jsx,mdx}";
+@source "../../../components/**/*.{ts,tsx,js,jsx,mdx}";
+@source "../../../app/**/*.{ts,tsx,js,jsx,mdx}";
+
+@custom-variant dark (&:is(.dark *));
+
+/* ============================================================================
+   REGISTRY — design system
+   Direction: Every entity in the marketplace is a filed record, not a
+   marketing card. Reference codes (ADV·0231, SHR·014), stamp verification
+   marks, document-edge card shapes, ink-on-paper palette.
+
+   Palette: paper #F6F5F2, ink #14161C, registry-blue #1E3A5F,
+   seal-red #7A2731, stamp-green #1F5C4E
+   ============================================================================ */
+
+@theme inline {
+  /* Colors — mapped to Tailwind */
+  --color-background: var(--paper);
+  --color-foreground: var(--ink);
+  --color-card: var(--surface-card);
+  --color-card-foreground: var(--ink);
+  --color-popover: var(--surface-card);
+  --color-popover-foreground: var(--ink);
+  --color-primary: var(--registry);
+  --color-primary-foreground: #FFFFFF;
+  --color-secondary: var(--surface-sunken);
+  --color-secondary-foreground: var(--ink);
+  --color-muted: var(--surface-sunken);
+  --color-muted-foreground: var(--ink-muted);
+  --color-accent: var(--seal);
+  --color-accent-foreground: #FFFFFF;
+  --color-destructive: var(--seal);
+  --color-success: var(--stamp-green);
+  --color-warning: #B8860B;
+  --color-info: #2B6CB0;
+  --color-border: var(--hairline);
+  --color-input: var(--hairline);
+  --color-ring: var(--registry);
+  --color-sidebar: var(--ink);
+  --color-sidebar-foreground: #E5E7EB;
+  --color-sidebar-primary: #FFFFFF;
+  --color-sidebar-primary-foreground: var(--ink);
+  --color-sidebar-accent: #2A2D35;
+  --color-sidebar-accent-foreground: #FFFFFF;
+  --color-sidebar-border: rgba(255,255,255,0.08);
+  --color-sidebar-ring: var(--registry);
+  --color-chart-1: var(--registry);
+  --color-chart-2: var(--seal);
+  --color-chart-3: var(--stamp-green);
+  --color-chart-4: #B8860B;
+  --color-chart-5: #6B7280;
+
+  /* Typography */
+  --font-sans: var(--font-body), system-ui, sans-serif;
+  --font-serif: var(--font-display), system-ui, sans-serif;
+  --font-mono: var(--font-mono), ui-monospace, monospace;
+
+  /* Radius — 4px default, 8px for larger surfaces, 999px for pills/avatars only */
+  --radius-sm: 4px;
+  --radius-md: 4px;
+  --radius-lg: 8px;
+  --radius-xl: 8px;
+  --radius-2xl: 8px;
+}
+
+:root {
+  /* --- Core palette --- */
+  --paper: #F6F5F2;           /* page background — warm paper */
+  --ink: #14161C;             /* primary text — near-black ink */
+  --ink-muted: #5B5E68;       /* secondary text */
+  --registry: #1E3A5F;        /* primary actions, links — registry blue */
+  --seal: #7A2731;            /* accent — seal red (verification stamps, urgent) */
+  --stamp-green: #1F5C4E;     /* success — verified states */
+  --hairline: rgba(20, 22, 28, 0.12); /* borders */
+
+  /* --- New additive tokens (§4.1) --- */
+  --ink-2: #1E212A;           /* lifted near-black for solid-fill internal elevation */
+  --seal-tint: rgba(122, 39, 49, 0.08); /* seal-colored bg tint */
+  --stamp-tint: rgba(31, 92, 78, 0.08); /* stamp-green bg tint */
+
+  /* --- Surfaces --- */
+  --surface-card: #FFFFFF;    /* cards — pure white on paper */
+  --surface-sunken: #EFEEEA;  /* inset/sunken areas */
+  --surface-elevated: #FAFAF8;
+
+  /* --- Radius --- */
+  --radius: 4px;              /* default — sharp document edge */
+  --radius-lg: 8px;           /* modals, larger surfaces */
+  --radius-pill: 999px;       /* avatars, pills only */
+
+  /* --- Shadows — exactly 3 real tokens --- */
+  --shadow-sm: 0 1px 2px rgba(20, 22, 28, 0.06);
+  --shadow-md: 0 2px 8px rgba(20, 22, 28, 0.08), 0 1px 2px rgba(20, 22, 28, 0.04);
+  --shadow-lg: 0 8px 24px rgba(20, 22, 28, 0.10), 0 2px 8px rgba(20, 22, 28, 0.06);
+
+  /* --- Motion --- */
+  --ease-standard: cubic-bezier(0.4, 0, 0.2, 1);
+  --ease-emphasized: cubic-bezier(0.3, 0, 0, 1);
+  --dur-fast: 150ms;
+  --dur-base: 200ms;
+  --dur-slow: 300ms;
+
+  /* --- Legacy token aliases (for components that still reference them) --- */
+  --accent-2: var(--registry);
+  --trust-verified: var(--stamp-green);
+  --trust-urgent: var(--seal);
+  --trust-premium: #B8860B;
+  --background: var(--paper);
+  --foreground: var(--ink);
+  --card: var(--surface-card);
+  --card-foreground: var(--ink);
+  --popover: var(--surface-card);
+  --popover-foreground: var(--ink);
+  --primary: var(--registry);
+  --primary-foreground: #FFFFFF;
+  --secondary: var(--surface-sunken);
+  --secondary-foreground: var(--ink);
+  --muted: var(--surface-sunken);
+  --muted-foreground: var(--ink-muted);
+  --accent: var(--seal);
+  --accent-foreground: #FFFFFF;
+  --destructive: var(--seal);
+  --success: var(--stamp-green);
+  --warning: #B8860B;
+  --info: #2B6CB0;
+  --border: var(--hairline);
+  --input: var(--hairline);
+  --ring: var(--registry);
+}
+
+.dark {
+  --paper: #0F1115;
+  --ink: #E5E7EB;
+  --ink-muted: #9CA3AF;
+  --registry: #4A7FB5;
+  --seal: #C17585;
+  --stamp-green: #4A9D7E;
+  --hairline: rgba(255, 255, 255, 0.10);
+  --surface-card: #1A1D24;
+  --surface-sunken: #15171C;
+  --surface-elevated: #1F222A;
+  --background: var(--paper);
+  --foreground: var(--ink);
+  --card: var(--surface-card);
+  --card-foreground: var(--ink);
+  --popover: var(--surface-card);
+  --popover-foreground: var(--ink);
+  --primary: var(--registry);
+  --primary-foreground: var(--paper);
+  --secondary: var(--surface-sunken);
+  --secondary-foreground: var(--ink);
+  --muted: var(--surface-sunken);
+  --muted-foreground: var(--ink-muted);
+  --accent: var(--seal);
+  --accent-foreground: var(--paper);
+  --destructive: var(--seal);
+  --success: var(--stamp-green);
+  --border: var(--hairline);
+  --input: var(--hairline);
+  --ring: var(--registry);
+}
+
+@layer base {
+  * {
+    @apply border-border outline-ring/50;
+  }
+  body {
+    @apply bg-background text-foreground;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    text-rendering: optimizeLegibility;
+  }
+  /* Headings use display font (IBM Plex Sans) */
+  h1, h2, h3, h4, h5, h6 {
+    font-family: var(--font-display), system-ui, sans-serif;
+    letter-spacing: -0.02em;
+  }
+  :focus-visible {
+    outline: 2px solid var(--ring);
+    outline-offset: 2px;
+  }
+}
+
+@layer utilities {
+  /* ============================================================================
+     ============================================================================ */
+  .shadow-sm { box-shadow: var(--shadow-sm); }
+  .shadow-md { box-shadow: var(--shadow-md); }
+  .shadow-lg { box-shadow: var(--shadow-lg); }
+
+  /* ============================================================================
+     FONT UTILITIES — explicit font-family classes
+     next/font exposes --font-body (Inter), --font-display (IBM Plex Sans),
+     --font-mono (JetBrains Mono) as CSS vars on <html>. These utilities make
+     font-display / font-body / font-mono usable as Tailwind-style classes so
+     non-heading elements (spans, divs) can opt into the display font.
+     ============================================================================ */
+  .font-display { font-family: var(--font-display), system-ui, sans-serif; }
+  .font-body    { font-family: var(--font-body), system-ui, sans-serif; }
+  .font-mono    { font-family: var(--font-mono), ui-monospace, monospace; }
+
+  /* Tint backgrounds — map the additive §4.1 tokens to usable bg utilities */
+  .bg-seal-tint  { background-color: var(--seal-tint); }
+  .bg-stamp-tint { background-color: var(--stamp-tint); }
+  .border-emphasis { border-color: var(--ink-muted); }
+
+  /* ============================================================================
+     BACKGROUNDS
+     ============================================================================ */
+  .bg-grid-pattern {
+    background-image: linear-gradient(to right, rgba(20,22,28,0.03) 1px, transparent 1px),
+      linear-gradient(to bottom, rgba(20,22,28,0.03) 1px, transparent 1px);
+    background-size: 40px 40px;
+  }
+
+  .bg-hero-radial {
+    background:
+      radial-gradient(ellipse 80% 50% at 50% -10%, rgba(30, 58, 95, 0.06), transparent 60%),
+      radial-gradient(ellipse 60% 40% at 90% 10%, rgba(122, 39, 49, 0.04), transparent 60%),
+      var(--paper);
+  }
+
+  .bg-noise {
+    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.3'/%3E%3C/svg%3E");
+    background-size: 200px 200px;
+  }
+
+  .text-balance { text-wrap: balance; }
+  .text-pretty { text-wrap: pretty; }
+
+  /* Drop-cap — uses registry blue */
+  .drop-cap::first-letter {
+    font-family: var(--font-display), sans-serif;
+    font-size: 3.5rem;
+    line-height: 0.9;
+    font-weight: 700;
+    float: left;
+    margin: 0.05em 0.12em 0 0;
+    color: var(--registry);
+  }
+
+  .underline-accent {
+    background-image: linear-gradient(to right, var(--registry), var(--registry));
+    background-size: 100% 2px;
+    background-repeat: no-repeat;
+    background-position: 0 100%;
+    padding-bottom: 2px;
+  }
+
+  .editorial-divider {
+    height: 1px;
+    background: linear-gradient(to right, transparent, var(--hairline) 15%, var(--hairline) 85%, transparent);
+  }
+
+  /* ============================================================================
+     SCROLLBAR
+     ============================================================================ */
+  .scrollbar-thin::-webkit-scrollbar { width: 4px; height: 4px; }
+  .scrollbar-thin::-webkit-scrollbar-track { background: transparent; }
+  .scrollbar-thin::-webkit-scrollbar-thumb {
+    background: var(--hairline);
+    border-radius: 999px;
+  }
+  .scrollbar-thin::-webkit-scrollbar-thumb:hover {
+    background: var(--ink-muted);
+  }
+
+  /* ============================================================================
+     MICROANIMATIONS — consolidated (merged fade-up/fadeUp, pulse/pulse-dot)
+     ============================================================================ */
+  @keyframes verified-pulse {
+    0%, 100% { opacity: 1; }
+    50% { opacity: 0.5; }
+  }
+  .verified-pulse {
+    animation: verified-pulse 2s var(--ease-standard) infinite;
+  }
+
+  /* The Seal — one-shot stamp entrance animation */
+  @keyframes stamp-in {
+    0%   { transform: scale(1.15) rotate(-8deg); opacity: 0; }
+    60%  { transform: scale(0.95) rotate(2deg); opacity: 1; }
+    100% { transform: scale(1) rotate(0deg); opacity: 1; }
+  }
+  .stamp-in {
+    animation: stamp-in 220ms var(--ease-emphasized) forwards;
+  }
+
+  @keyframes riseIn {
+    from { opacity: 0; transform: translateY(16px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+  .rise { opacity: 0; animation: riseIn var(--dur-slow) var(--ease-emphasized) forwards; }
+  .rise-1 { animation-delay: 0.05s; }
+  .rise-2 { animation-delay: 0.15s; }
+  .rise-3 { animation-delay: 0.25s; }
+  .rise-4 { animation-delay: 0.35s; }
+  .rise-5 { animation-delay: 0.45s; }
+
+  /* Scroll-reveal */
+  .reveal-on-scroll {
+    opacity: 0;
+    transform: translateY(16px);
+    transition: opacity var(--dur-slow) var(--ease-emphasized),
+                transform var(--dur-slow) var(--ease-emphasized);
+  }
+  .reveal-on-scroll.in-view {
+    opacity: 1;
+    transform: translateY(0);
+  }
+
+  .reveal-stagger > * {
+    opacity: 0;
+    transform: translateY(12px);
+    transition: opacity var(--dur-base) var(--ease-emphasized),
+                transform var(--dur-base) var(--ease-emphasized);
+  }
+  .reveal-stagger.in-view > * { opacity: 1; transform: translateY(0); }
+  .reveal-stagger.in-view > *:nth-child(1) { transition-delay: 0s; }
+  .reveal-stagger.in-view > *:nth-child(2) { transition-delay: 0.06s; }
+  .reveal-stagger.in-view > *:nth-child(3) { transition-delay: 0.12s; }
+  .reveal-stagger.in-view > *:nth-child(4) { transition-delay: 0.18s; }
+  .reveal-stagger.in-view > *:nth-child(5) { transition-delay: 0.24s; }
+  .reveal-stagger.in-view > *:nth-child(6) { transition-delay: 0.30s; }
+  .reveal-stagger.in-view > *:nth-child(n+7) { transition-delay: 0.36s; }
+
+  /* Skeleton shimmer */
+  @keyframes shimmer {
+    0% { background-position: -200% 0; }
+    100% { background-position: 200% 0; }
+  }
+  .skeleton-shimmer {
+    background: linear-gradient(90deg, var(--surface-sunken) 0%, var(--surface-elevated) 50%, var(--surface-sunken) 100%);
+    background-size: 200% 100%;
+    animation: shimmer 1.5s var(--ease-standard) infinite;
+    border-radius: var(--radius);
+  }
+  .skeleton-pulse { animation: verified-pulse 1.5s var(--ease-standard) infinite; }
+
+  /* Dialog/dropdown brand easing — enter AND exit animations.
+     Exit animations mirror riseIn timing/easing per §5 so backdrop+panel
+     animate out cleanly instead of hard-unmounting. */
+  [data-state="open"][data-slot="dialog-overlay"] {
+    animation: fadeIn var(--dur-base) var(--ease-standard);
+  }
+  [data-state="closed"][data-slot="dialog-overlay"] {
+    animation: fadeIn var(--dur-fast) var(--ease-standard) reverse;
+  }
+  [data-state="open"][data-slot="dialog-content"] {
+    animation: riseIn var(--dur-base) var(--ease-emphasized);
+  }
+  [data-state="closed"][data-slot="dialog-content"] {
+    animation: riseOut var(--dur-fast) var(--ease-emphasized);
+  }
+  [data-state="open"][data-slot="popover-content"],
+  [data-state="open"][data-slot="dropdown-menu-content"],
+  [data-state="open"][data-slot="tooltip-content"],
+  [data-state="open"][data-slot="select-content"] {
+    animation: riseIn var(--dur-fast) var(--ease-standard);
+  }
+
+  @keyframes fadeIn {
+    from { opacity: 0; }
+    to   { opacity: 1; }
+  }
+  @keyframes riseOut {
+    from { opacity: 1; transform: translateY(0); }
+    to   { opacity: 0; transform: translateY(8px); }
+  }
+
+  /* Form UX — :user-invalid */
+  input:user-invalid, textarea:user-invalid, select:user-invalid {
+    border-color: var(--seal);
+  }
+  input:user-valid:not(:placeholder-shown),
+  textarea:user-valid:not(:placeholder-shown) {
+    border-color: rgba(31, 92, 78, 0.3);
+  }
+
+  /* Typing indicator */
+  @keyframes typing-dot {
+    0%, 60%, 100% { opacity: 0.3; transform: translateY(0); }
+    30% { opacity: 1; transform: translateY(-3px); }
+  }
+  .typing-dot { animation: typing-dot 1.4s var(--ease-standard) infinite; }
+  .typing-dot:nth-child(2) { animation-delay: 0.2s; }
+  .typing-dot:nth-child(3) { animation-delay: 0.4s; }
+
+  /* Focus ring */
+  .focus-ring:focus-visible {
+    outline: 2px solid var(--ring);
+    outline-offset: 2px;
+  }
+
+  /* ============================================================================
+     REDUCED MOTION
+     ============================================================================ */
+  @media (prefers-reduced-motion: reduce) {
+    *, *::before, *::after {
+      animation-duration: 0.01ms !important;
+      animation-iteration-count: 1 !important;
+      transition-duration: 0.01ms !important;
+      scroll-behavior: auto !important;
+    }
+    .rise, .reveal-on-scroll, .reveal-stagger > *,
+    .typing-dot, .verified-pulse, .stamp-in {
+      animation: none !important;
+      opacity: 1 !important;
+      transform: none !important;
+    }
+  }
+}

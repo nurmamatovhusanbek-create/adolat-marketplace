@@ -1,0 +1,373 @@
+"use client";
+
+import { useMemo } from "react";
+import {
+  FileText,
+  MagnifyingGlass,
+  SlidersHorizontal,
+  X,
+} from "@phosphor-icons/react/dist/ssr";
+import { Container, Section, Grid } from "@/components/primitives/layout";
+import { Card } from "@/components/primitives/card";
+import { Badge } from "@/components/ui/badge";
+import { Button } from "@/components/primitives/button";
+import { Input } from "@/components/ui/input";
+import { Label } from "@/components/ui/label";
+import {
+  Select,
+  SelectTrigger,
+  SelectValue,
+  SelectContent,
+  SelectItem,
+} from "@/components/ui/select";
+import { ToggleGroup, ToggleGroupItem } from "@/components/ui/toggle-group";
+import {
+  Sheet,
+  SheetContent,
+  SheetHeader,
+  SheetTitle,
+  SheetTrigger,
+} from "@/components/ui/sheet";
+import { DocumentCard, type DocumentCardData } from "@/components/cards/document-card";
+import { LEGAL_DOCUMENTS, DOCUMENT_CATEGORIES } from "@/lib/marketplace/data";
+import { useMarketplaceStore } from "@/lib/marketplace/store";
+import type { DocumentCategory, LegalDocument } from "@/lib/marketplace/types";
+import { DynamicIcon } from "./dynamic-icon";
+import { cn } from "@/lib/utils";
+
+/** Map a LegalDocument (full domain type) to the shared DocumentCardData shape. */
+function toCardData(doc: LegalDocument): DocumentCardData {
+  const cat = DOCUMENT_CATEGORIES.find((c) => c.id === doc.category);
+  return {
+    id: doc.id,
+    slug: doc.slug,
+    titleUz: doc.titleUz,
+    category: doc.category,
+    categoryNameUz: cat?.nameUz,
+    descriptionUz: doc.descriptionUz,
+    pages: doc.pages,
+    downloads: doc.downloads,
+    rating: doc.rating,
+    priceUzs: doc.priceUzs,
+    isFree: doc.isFree,
+    isNew: doc.isNew,
+    legalBasisUz: doc.legalBasisUz,
+    estimatedFillMinutes: doc.estimatedFillMinutes,
+    fieldsCount: doc.fieldsCount,
+    formats: doc.formats,
+  };
+}
+
+export function DocumentListing() {
+  const store = useMarketplaceStore();
+  const {
+    documentSearch,
+    documentCategory,
+    documentPriceFilter,
+    documentSortBy,
+    setDocumentSearch,
+    setDocumentCategory,
+    setDocumentPriceFilter,
+    setDocumentSortBy,
+    resetDocumentFilters,
+    setActiveDocument,
+  } = store;
+
+  const filtered = useMemo(() => {
+    let list = [...LEGAL_DOCUMENTS];
+
+    if (documentSearch.trim()) {
+      const q = documentSearch.toLowerCase();
+      list = list.filter(
+        (d) =>
+          d.titleUz.toLowerCase().includes(q) ||
+          d.titleRu.toLowerCase().includes(q) ||
+          d.descriptionUz.toLowerCase().includes(q) ||
+          d.tags.some((t) => t.toLowerCase().includes(q))
+      );
+    }
+
+    if (documentCategory !== "all") {
+      list = list.filter((d) => d.category === documentCategory);
+    }
+
+    if (documentPriceFilter === "free") list = list.filter((d) => d.isFree);
+    if (documentPriceFilter === "paid") list = list.filter((d) => !d.isFree);
+
+    switch (documentSortBy) {
+      case "popular":
+        list.sort((a, b) => b.downloads - a.downloads);
+        break;
+      case "rating":
+        list.sort((a, b) => b.rating - a.rating);
+        break;
+      case "newest":
+        list.sort((a, b) => new Date(b.lastUpdated).getTime() - new Date(a.lastUpdated).getTime());
+        break;
+    }
+
+    return list;
+  }, [documentSearch, documentCategory, documentPriceFilter, documentSortBy]);
+
+  const activeFiltersCount =
+    (documentCategory !== "all" ? 1 : 0) +
+    (documentPriceFilter !== "all" ? 1 : 0) +
+    (documentSortBy !== "popular" ? 1 : 0);
+
+  return (
+    <Section spacing="md" variant="default" className="!py-8">
+      <Container size="xl">
+      {/* Page header */}
+      <div className="mb-6">
+        <h1 className="flex items-center gap-2 text-2xl font-bold tracking-tight text-foreground sm:text-3xl">
+          <FileText weight="regular" className="h-7 w-7 text-accent" />
+          Hujjat namunalari katalogi
+        </h1>
+        <p className="mt-1 text-sm text-muted-foreground">
+          {LEGAL_DOCUMENTS.length}+ huquqiy hujjat namunalari. O'zbekiston qonunchiligiga
+          muvofiq tayyorlangan, advokat ishtirokisiz to'ldirishingiz mumkin.
+        </p>
+      </div>
+
+      {/* Search bar */}
+      <div className="mb-4 flex gap-2">
+        <div className="relative flex-1">
+          <MagnifyingGlass weight="regular" className="pointer-events-none absolute left-4 top-1/2 h-5 w-5 -translate-y-1/2 text-muted-foreground" />
+          <Input
+            value={documentSearch}
+            onChange={(e) => setDocumentSearch(e.target.value)}
+            placeholder="Hujjat nomi yoki kalit so'z bo'yicha qidiring..."
+            className="h-12 pl-12 text-base"
+          />
+        </div>
+
+        {/* Mobile filter trigger */}
+        <Sheet>
+          <SheetTrigger asChild>
+            <Button variant="outline" className="lg:hidden" size="lg">
+              <SlidersHorizontal weight="regular" className="h-5 w-5" />
+              {activeFiltersCount > 0 && (
+                <Badge className="ml-1 h-5 min-w-5 justify-center bg-foreground text-background text-xs">
+                  {activeFiltersCount}
+                </Badge>
+              )}
+            </Button>
+          </SheetTrigger>
+          <SheetContent side="left" className="w-[300px] overflow-y-auto p-0">
+            <SheetHeader className="border-b p-4">
+              <SheetTitle>Filtrlar</SheetTitle>
+            </SheetHeader>
+            <FilterPanel
+              category={documentCategory}
+              priceFilter={documentPriceFilter}
+              sortBy={documentSortBy}
+              onCategory={setDocumentCategory}
+              onPriceFilter={setDocumentPriceFilter}
+              onSortBy={setDocumentSortBy}
+              onReset={resetDocumentFilters}
+            />
+          </SheetContent>
+        </Sheet>
+      </div>
+
+      {/* Category quick chips */}
+      <div className="mb-6 flex flex-wrap gap-2">
+        <button
+          onClick={() => setDocumentCategory("all")}
+          className={cn(
+            "rounded-full border px-3 py-1.5 text-xs font-medium transition-colors",
+            documentCategory === "all"
+              ? "border-foreground bg-foreground text-background"
+              : "border-border bg-card text-muted-foreground hover:border-foreground/40 hover:text-accent"
+          )}
+        >
+          Barchasi
+        </button>
+        {DOCUMENT_CATEGORIES.map((cat) => (
+          <button
+            key={cat.id}
+            onClick={() => setDocumentCategory(cat.id)}
+            className={cn(
+              "flex items-center gap-1.5 rounded-full border px-3 py-1.5 text-xs font-medium transition-colors",
+              documentCategory === cat.id
+                ? "border-foreground bg-foreground text-background"
+                : "border-border bg-card text-muted-foreground hover:border-foreground/40 hover:text-accent"
+            )}
+          >
+            <DynamicIcon name={cat.icon} className="h-3.5 w-3.5" />
+            {cat.nameUz}
+            <span className="ml-1 text-[10px] opacity-70">{cat.count}</span>
+          </button>
+        ))}
+      </div>
+
+      {/* Layout */}
+      <div className="grid gap-6 lg:grid-cols-12">
+        {/* Sidebar - desktop */}
+        <aside className="hidden lg:col-span-3 lg:block">
+          <div className="sticky top-20">
+            <Card className="border-border p-4">
+              <div className="mb-3 flex items-center justify-between">
+                <h2 className="flex items-center gap-1.5 text-sm font-bold">
+                  <SlidersHorizontal weight="regular" className="h-4 w-4 text-accent" />
+                  Filtrlash
+                </h2>
+                {activeFiltersCount > 0 && (
+                  <button
+                    onClick={resetDocumentFilters}
+                    className="flex items-center gap-1 text-xs text-accent hover:underline"
+                  >
+                    <X weight="regular" className="h-3 w-3" />
+                    Tozalash
+                  </button>
+                )}
+              </div>
+              <FilterPanel
+                category={documentCategory}
+                priceFilter={documentPriceFilter}
+                sortBy={documentSortBy}
+                onCategory={setDocumentCategory}
+                onPriceFilter={setDocumentPriceFilter}
+                onSortBy={setDocumentSortBy}
+                onReset={resetDocumentFilters}
+              />
+            </Card>
+          </div>
+        </aside>
+
+        {/* Results */}
+        <div className="lg:col-span-9">
+          {/* Sort bar */}
+          <div className="mb-4 flex items-center justify-between gap-3">
+            <p className="text-sm text-muted-foreground">
+              Topildi: <strong className="text-foreground">{filtered.length}</strong> hujjat
+            </p>
+            <div className="flex items-center gap-2">
+              <Label className="text-xs text-muted-foreground">Saralash:</Label>
+              <Select value={documentSortBy} onValueChange={(v) => setDocumentSortBy(v as typeof documentSortBy)}>
+                <SelectTrigger className="h-9 w-44">
+                  <SelectValue />
+                </SelectTrigger>
+                <SelectContent>
+                  <SelectItem value="popular">Mashhur</SelectItem>
+                  <SelectItem value="rating">Reyting</SelectItem>
+                  <SelectItem value="newest">Yangilar</SelectItem>
+                </SelectContent>
+              </Select>
+            </div>
+          </div>
+
+          {filtered.length === 0 ? (
+            <Card className="border-border p-12 text-center">
+              <FileText weight="regular" className="mx-auto mb-3 h-12 w-12 text-muted-foreground/40" />
+              <h3 className="text-base font-bold text-foreground">Hujjat topilmadi</h3>
+              <p className="mt-1 text-sm text-muted-foreground">
+                Filtrlarni o'zgartirib qayta urinib ko'ring.
+              </p>
+              <Button onClick={resetDocumentFilters} variant="outline" className="mt-4">
+                Filtrlarni tozalash
+              </Button>
+            </Card>
+          ) : (
+            <Grid cols={{ base: 1, sm: 2 }} gap="md">
+              {filtered.map((doc) => (
+                <DocumentCard
+                  key={doc.id}
+                  document={toCardData(doc)}
+                  onSelect={() => setActiveDocument(doc)}
+                />
+              ))}
+            </Grid>
+          )}
+        </div>
+      </div>
+      </Container>
+    </Section>
+  );
+}
+
+function FilterPanel({
+  category,
+  priceFilter,
+  sortBy,
+  onCategory,
+  onPriceFilter,
+  onSortBy,
+  onReset,
+}: {
+  category: DocumentCategory | "all";
+  priceFilter: "all" | "free" | "paid";
+  sortBy: "popular" | "rating" | "newest";
+  onCategory: (c: DocumentCategory | "all") => void;
+  onPriceFilter: (f: "all" | "free" | "paid") => void;
+  onSortBy: (s: "popular" | "rating" | "newest") => void;
+  onReset: () => void;
+}) {
+  return (
+    <div className="space-y-5">
+      {/* Category */}
+      <div>
+        <Label className="mb-2 text-xs font-semibold uppercase tracking-wider text-muted-foreground">
+          Kategoriya
+        </Label>
+        <Select value={category} onValueChange={(v) => onCategory(v as DocumentCategory | "all")}>
+          <SelectTrigger className="h-9 w-full">
+            <SelectValue />
+          </SelectTrigger>
+          <SelectContent className="max-h-72">
+            <SelectItem value="all">Barchasi</SelectItem>
+            {DOCUMENT_CATEGORIES.map((c) => (
+              <SelectItem key={c.id} value={c.id}>
+                {c.nameUz} ({c.count})
+              </SelectItem>
+            ))}
+          </SelectContent>
+        </Select>
+      </div>
+
+      {/* Price */}
+      <div>
+        <Label className="mb-2 text-xs font-semibold uppercase tracking-wider text-muted-foreground">
+          Narx
+        </Label>
+        <ToggleGroup
+          type="single"
+          value={priceFilter}
+          onValueChange={(v) => onPriceFilter((v as typeof priceFilter) || "all")}
+          className="flex w-full justify-stretch"
+        >
+          <ToggleGroupItem value="all" className="flex-1 text-xs">
+            Hammasi
+          </ToggleGroupItem>
+          <ToggleGroupItem value="free" className="flex-1 text-xs">
+            Bepul
+          </ToggleGroupItem>
+          <ToggleGroupItem value="paid" className="flex-1 text-xs">
+            Pullik
+          </ToggleGroupItem>
+        </ToggleGroup>
+      </div>
+
+      {/* Sort */}
+      <div>
+        <Label className="mb-2 text-xs font-semibold uppercase tracking-wider text-muted-foreground">
+          Saralash
+        </Label>
+        <Select value={sortBy} onValueChange={(v) => onSortBy(v as typeof sortBy)}>
+          <SelectTrigger className="h-9 w-full">
+            <SelectValue />
+          </SelectTrigger>
+          <SelectContent>
+            <SelectItem value="popular">Mashhur</SelectItem>
+            <SelectItem value="rating">Reyting</SelectItem>
+            <SelectItem value="newest">Yangilar</SelectItem>
+          </SelectContent>
+        </Select>
+      </div>
+
+      <Button variant="outline" size="sm" onClick={onReset} className="w-full">
+        Filtrlarni tozalash
+      </Button>
+    </div>
+  );
+}

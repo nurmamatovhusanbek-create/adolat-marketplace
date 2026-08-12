@@ -1,0 +1,3795 @@
+{
+  "meta": {
+    "title": "O'zbekiston sud arizalari va davo arizalari — shablonlar kutubxonasi",
+    "description": "Davo ariza va boshqa ariza turlari uchun forma maydonlari (fields) va matn shablonlari (body_template). yurxizmat.uz taksonomiyasi va FPK/IPK talablariga asoslangan.",
+    "version": "4.0",
+    "source_inspiration": "https://yurxizmat.uz/oz/category/court-claims",
+    "field_types": [
+      "text",
+      "textarea",
+      "date",
+      "number",
+      "money",
+      "select",
+      "boolean"
+    ],
+    "placeholder_syntax": "{{field_id}} — body_template va relief_items ichida shu field qiymati bilan almashtiriladi",
+    "usage_note": "Har bir shablon 'uses_common_groups' orqali quyidagi common_field_groups dan foydalanadi. Renderda: court + plaintiff_* + defendant_* + content_fields ketma-ketligida forma chiqariladi, so'ng relief_items va attachments bilan hujjat matni yig'iladi.",
+    "legal_disclaimer": "Modda raqamlari qonunchilikning tez-tez o'zgarishi sababli faqat yo'naltiruvchi xarakterga ega — har bir hujjatni sudga topshirishdan oldin lex.uz dagi joriy tahrirdan tekshiring.",
+    "party_name_aliases": "Agar shablonning plaintiff_group yoki defendant_group qiymati '..._individual_or_legal' bo'lsa, body_template va relief_items ichida {{plaintiff_name}} / {{defendant_name}} (hamda {{plaintiff_address}} / {{defendant_address}}) kabi normallashtirilgan placeholderlar ishlatiladi. Render qatlami buni foydalanuvchi tanlagan turga qarab (jismoniy shaxs: *_full_name maydonlaridan, yuridik shaxs: *_org_name maydonlaridan) avtomatik moslashtiradi. Agar plaintiff_group/defendant_group qat'iy belgilangan bo'lsa (masalan faqat 'plaintiff_individual' yoki 'plaintiff_legal'), aniq field id ({{plaintiff_full_name}} yoki {{plaintiff_org_name}}) to'g'ridan-to'g'ri ishlatiladi — bu holatda normallashtirish shart emas, chunki tur bir xil."
+  },
+  "common_field_groups": {
+    "court": [
+      {
+        "id": "court_name",
+        "label_uz": "Sud nomi (to'liq)",
+        "type": "text",
+        "required": true,
+        "hint": "Masalan: Toshkent shahar Mirzo Ulug'bek tumani fuqarolik ishlari bo'yicha sudi / Toshkent shahar iqtisodiy sudi"
+      },
+      {
+        "id": "court_type",
+        "label_uz": "Sud turi",
+        "type": "select",
+        "required": true,
+        "options": [
+          "fuqarolik ishlari bo'yicha sud",
+          "iqtisodiy sud",
+          "ma'muriy sud",
+          "notarius",
+          "boshqa (davlat organi/ish beruvchi)"
+        ]
+      },
+      {
+        "id": "filing_date",
+        "label_uz": "Ariza berilayotgan sana",
+        "type": "date",
+        "required": true
+      }
+    ],
+    "plaintiff_individual": [
+      {
+        "id": "plaintiff_full_name",
+        "label_uz": "Da'vogar F.I.Sh.",
+        "type": "text",
+        "required": true
+      },
+      {
+        "id": "plaintiff_address",
+        "label_uz": "Da'vogarning doimiy/vaqtinchalik yashash manzili",
+        "type": "text",
+        "required": true
+      },
+      {
+        "id": "plaintiff_pinfl",
+        "label_uz": "JSHSHIR",
+        "type": "text",
+        "required": false
+      },
+      {
+        "id": "plaintiff_passport",
+        "label_uz": "Pasport seriya va raqami (yoki ID karta)",
+        "type": "text",
+        "required": false
+      },
+      {
+        "id": "plaintiff_phone",
+        "label_uz": "Aloqa telefon raqami",
+        "type": "text",
+        "required": true
+      },
+      {
+        "id": "plaintiff_email",
+        "label_uz": "Elektron pochta",
+        "type": "text",
+        "required": false
+      }
+    ],
+    "plaintiff_legal": [
+      {
+        "id": "plaintiff_org_name",
+        "label_uz": "Tashkilot nomi va tashkiliy-huquqiy shakli",
+        "type": "text",
+        "required": true,
+        "hint": "Masalan: \"Artikul Aziya Kabel\" QK MChJ"
+      },
+      {
+        "id": "plaintiff_org_address",
+        "label_uz": "Tashkilotning yuridik manzili",
+        "type": "text",
+        "required": true
+      },
+      {
+        "id": "plaintiff_org_tin",
+        "label_uz": "STIR (soliq to'lovchining identifikatsion raqami)",
+        "type": "text",
+        "required": true
+      },
+      {
+        "id": "plaintiff_org_bank_details",
+        "label_uz": "Bank rekvizitlari (h/r, MFO, bank nomi)",
+        "type": "textarea",
+        "required": false
+      },
+      {
+        "id": "plaintiff_org_director",
+        "label_uz": "Rahbar F.I.Sh. va lavozimi (ariza kim nomidan imzolanadi)",
+        "type": "text",
+        "required": true
+      },
+      {
+        "id": "plaintiff_org_phone",
+        "label_uz": "Aloqa telefon raqami",
+        "type": "text",
+        "required": true
+      }
+    ],
+    "defendant_individual": [
+      {
+        "id": "defendant_full_name",
+        "label_uz": "Javobgar F.I.Sh.",
+        "type": "text",
+        "required": true
+      },
+      {
+        "id": "defendant_address",
+        "label_uz": "Javobgarning yashash manzili (ma'lum bo'lsa)",
+        "type": "text",
+        "required": false
+      },
+      {
+        "id": "defendant_pinfl",
+        "label_uz": "JSHSHIR (ma'lum bo'lsa)",
+        "type": "text",
+        "required": false
+      },
+      {
+        "id": "defendant_phone",
+        "label_uz": "Telefon raqami (ma'lum bo'lsa)",
+        "type": "text",
+        "required": false
+      }
+    ],
+    "defendant_legal": [
+      {
+        "id": "defendant_org_name",
+        "label_uz": "Javobgar tashkilot nomi va tashkiliy-huquqiy shakli",
+        "type": "text",
+        "required": true
+      },
+      {
+        "id": "defendant_org_address",
+        "label_uz": "Javobgar tashkilotning yuridik manzili",
+        "type": "text",
+        "required": true
+      },
+      {
+        "id": "defendant_org_tin",
+        "label_uz": "STIR (ma'lum bo'lsa)",
+        "type": "text",
+        "required": false
+      }
+    ],
+    "representative": [
+      {
+        "id": "rep_full_name",
+        "label_uz": "Vakil F.I.Sh.",
+        "type": "text",
+        "required": false
+      },
+      {
+        "id": "rep_poa_details",
+        "label_uz": "Ishonchnoma raqami, sanasi va uni bergan notarius",
+        "type": "text",
+        "required": false
+      }
+    ],
+    "claim_value_and_duty": [
+      {
+        "id": "claim_value_amount",
+        "label_uz": "Da'vo bahosi (undiriladigan umumiy summa, so'm)",
+        "type": "money",
+        "required": false,
+        "hint": "Mulkiy talab bo'lmasa bo'sh qoldiring"
+      },
+      {
+        "id": "state_duty_amount",
+        "label_uz": "To'langan davlat boji miqdori (so'm)",
+        "type": "money",
+        "required": false
+      },
+      {
+        "id": "state_duty_receipt",
+        "label_uz": "Davlat boji to'lov hujjati rekvizitlari (kvitansiya/plastik chek raqami, sana)",
+        "type": "text",
+        "required": false
+      }
+    ],
+    "evidence": [
+      {
+        "id": "evidence_list",
+        "label_uz": "Ish uchun ahamiyatga ega dalillar ro'yxati (shartnoma, dalolatnoma, xat-xabar va h.k.)",
+        "type": "textarea",
+        "required": true
+      }
+    ],
+    "case_reference": [
+      {
+        "id": "case_court_name",
+        "label_uz": "Ish ko'rilgan/ko'rilayotgan sud nomi",
+        "type": "text",
+        "required": true
+      },
+      {
+        "id": "case_number",
+        "label_uz": "Ish (yoki ijro ishi) raqami",
+        "type": "text",
+        "required": false
+      },
+      {
+        "id": "case_decision_date",
+        "label_uz": "Hal qiluv qarori / ajrim / sud buyrug'i chiqarilgan sana",
+        "type": "date",
+        "required": true
+      },
+      {
+        "id": "case_plaintiff_name",
+        "label_uz": "Ish bo'yicha da'vogar (undiruvchi) F.I.Sh./nomi",
+        "type": "text",
+        "required": true
+      },
+      {
+        "id": "case_defendant_name",
+        "label_uz": "Ish bo'yicha javobgar (qarzdor) F.I.Sh./nomi",
+        "type": "text",
+        "required": true
+      }
+    ],
+    "notary_block": [
+      {
+        "id": "notary_office_name",
+        "label_uz": "Notarius idorasi / notarial okrug nomi",
+        "type": "text",
+        "required": true
+      },
+      {
+        "id": "notary_full_name",
+        "label_uz": "Notarius F.I.Sh. (ma'lum bo'lsa)",
+        "type": "text",
+        "required": false
+      },
+      {
+        "id": "application_date",
+        "label_uz": "Ariza berilayotgan sana",
+        "type": "date",
+        "required": true
+      }
+    ],
+    "foreign_worker": [
+      {
+        "id": "fw_full_name",
+        "label_uz": "Chet ellik fuqaroning F.I.Sh. (pasportga muvofiq, lotin harflarida)",
+        "type": "text",
+        "required": true
+      },
+      {
+        "id": "fw_citizenship",
+        "label_uz": "Fuqaroligi (davlati)",
+        "type": "text",
+        "required": true
+      },
+      {
+        "id": "fw_birth_date",
+        "label_uz": "Tug'ilgan sana",
+        "type": "date",
+        "required": true
+      },
+      {
+        "id": "fw_passport_number",
+        "label_uz": "Xorijiy pasport seriya va raqami",
+        "type": "text",
+        "required": true
+      },
+      {
+        "id": "fw_passport_validity",
+        "label_uz": "Pasport amal qilish muddati",
+        "type": "date",
+        "required": true
+      }
+    ],
+    "legal_fact_petitioner": [
+      {
+        "id": "fact_purpose",
+        "label_uz": "Faktni belgilashning maqsadi (qayerga taqdim etish uchun kerak — meros, pensiya, ro'yxatdan o'tkazish va h.k.)",
+        "type": "textarea",
+        "required": true
+      },
+      {
+        "id": "cannot_obtain_otherwise",
+        "label_uz": "Ushbu faktni sud tashqarisida (idoraviy tartibda) tasdiqlab bo'lmasligi sababi",
+        "type": "textarea",
+        "required": true
+      }
+    ]
+  },
+  "templates": [
+    {
+      "id": "davo_umumiy_fuqarolik",
+      "name_uz": "Umumiy da'vo ariza (fuqarolik ishlari bo'yicha sudga)",
+      "category_path": "Sudga oid hujjatlar > Da'vo arizalar > Boshqa nizolar bo'yicha",
+      "forum": "fuqarolik sudi",
+      "legal_basis": [
+        "FPK 148-bob / 20-bob, 189-modda (arizaning mazmuni)",
+        "FPK 190-modda (ko'chirma nusxalar)",
+        "FPK 191-modda (ilova qilinadigan hujjatlar)",
+        "FPK 128-130-moddalar (davlat boji va da'vo bahosi)"
+      ],
+      "plaintiff_group": "plaintiff_individual_or_legal",
+      "defendant_group": "defendant_individual_or_legal",
+      "uses_common_groups": [
+        "court",
+        "plaintiff_individual",
+        "plaintiff_legal",
+        "defendant_individual",
+        "defendant_legal",
+        "representative",
+        "claim_value_and_duty",
+        "evidence"
+      ],
+      "content_fields": [
+        {
+          "id": "legal_relationship",
+          "label_uz": "Taraflar o'rtasidagi huquqiy munosabat asosi (shartnoma, qonun, boshqa asos)",
+          "type": "textarea",
+          "required": true
+        },
+        {
+          "id": "dispute_circumstances",
+          "label_uz": "Nizoning kelib chiqish holatlari (voqealar tartibida)",
+          "type": "textarea",
+          "required": true
+        },
+        {
+          "id": "defendant_violation",
+          "label_uz": "Javobgar tomonidan buzilgan aniq majburiyat/huquq",
+          "type": "textarea",
+          "required": true
+        },
+        {
+          "id": "pretrial_attempt",
+          "label_uz": "Sudgacha muomala (pretenziya/talabnoma) yuborilganmi va natijasi",
+          "type": "textarea",
+          "required": false
+        },
+        {
+          "id": "claim_subject",
+          "label_uz": "Talab qilinayotgan narsa (nima to'g'risida qaror so'ralmoqda)",
+          "type": "textarea",
+          "required": true
+        }
+      ],
+      "relief_items": [
+        "{{defendant_name}}dan {{claim_subject}} to'g'risida qaror qabul qilishni",
+        "Sud xarajatlarini javobgar zimmasiga yuklashni"
+      ],
+      "attachments": [
+        "Ariza va unga ilova qilingan hujjatlarning javobgar (javobgarlar) soniga qarab ko'chirma nusxalari",
+        "Davlat boji to'langanligini tasdiqlovchi hujjat",
+        "Da'vo asosini tasdiqlovchi hujjatlar (shartnoma, dalolatnoma va h.k.)",
+        "Vakolatni tasdiqlovchi hujjat (ariza vakil orqali berilsa)"
+      ],
+      "notes": "Bu — boshqa barcha maxsus da'vo arizalar tuzilishining bazaviy skeleti. Maxsus turi bo'lmagan har qanday fuqarolik-huquqiy nizo uchun ishlatiladi.",
+      "body_template": "{{plaintiff_name}} bilan {{defendant_name}} o'rtasida {{legal_relationship}} asosida huquqiy munosabat yuzaga kelgan edi. {{dispute_circumstances}} natijasida javobgar tomonidan {{defendant_violation}} sodir etildi. {{pretrial_attempt}} Yuqorida bayon etilgan holatlar javobgarning mening huquq va qonuniy manfaatlarimni buzganligini tasdiqlaydi."
+    },
+    {
+      "id": "davo_qarzdorlik_iqtisodiy",
+      "name_uz": "Iqtisodiy sudga da'vo ariza — shartnoma bo'yicha qarzdorlik, penya va jarimani undirish",
+      "category_path": "Sudga oid hujjatlar > Da'vo arizalar > Boshqa nizolar bo'yicha (xo'jalik nizolari)",
+      "forum": "iqtisodiy sud",
+      "legal_basis": [
+        "Fuqarolik kodeksi 324-modda (majburiyat bajarilmaganligi uchun javobgarlik)",
+        "IPK 26, 32, 176-178-moddalari",
+        "\"Xo'jalik yurituvchi subyektlar faoliyatining shartnomaviy-huquqiy bazasi to'g'risida\"gi Qonun 24, 32, 36-moddalari"
+      ],
+      "plaintiff_group": "plaintiff_legal",
+      "defendant_group": "defendant_legal",
+      "uses_common_groups": [
+        "court",
+        "plaintiff_legal",
+        "defendant_legal",
+        "representative",
+        "claim_value_and_duty"
+      ],
+      "content_fields": [
+        {
+          "id": "contract_date",
+          "label_uz": "Asos bo'lgan shartnoma tuzilgan sana",
+          "type": "date",
+          "required": true
+        },
+        {
+          "id": "contract_number",
+          "label_uz": "Shartnoma raqami",
+          "type": "text",
+          "required": true
+        },
+        {
+          "id": "contract_subject",
+          "label_uz": "Shartnoma predmeti (tovar/xizmat/ish nomi va miqdori)",
+          "type": "textarea",
+          "required": true
+        },
+        {
+          "id": "contract_value",
+          "label_uz": "Shartnoma qiymati (so'm)",
+          "type": "money",
+          "required": true
+        },
+        {
+          "id": "delivery_act_date",
+          "label_uz": "Topshirish-qabul qilish dalolatnomasi/yuk xati sanasi",
+          "type": "date",
+          "required": false
+        },
+        {
+          "id": "payment_clause_number",
+          "label_uz": "To'lov muddati belgilangan shartnoma bandi raqami",
+          "type": "text",
+          "required": true
+        },
+        {
+          "id": "payment_deadline_days",
+          "label_uz": "Shartnomaga ko'ra to'lov necha ish kunida amalga oshirilishi kerak",
+          "type": "number",
+          "required": false
+        },
+        {
+          "id": "debt_amount",
+          "label_uz": "Asosiy qarz summasi (so'm)",
+          "type": "money",
+          "required": true
+        },
+        {
+          "id": "penalty_amount",
+          "label_uz": "Jarima summasi (so'm)",
+          "type": "money",
+          "required": false
+        },
+        {
+          "id": "penya_amount",
+          "label_uz": "Penya summasi (so'm)",
+          "type": "money",
+          "required": false
+        },
+        {
+          "id": "demand_letter_date",
+          "label_uz": "Qarzdorlikni to'lash haqida talabnoma/pretenziya yuborilgan sana",
+          "type": "date",
+          "required": false
+        }
+      ],
+      "relief_items": [
+        "{{defendant_org_name}}dan {{plaintiff_org_name}} foydasiga {{debt_amount}} so'm qarzdorlikni undirish to'g'risida qaror qabul qilishni",
+        "{{defendant_org_name}}dan {{penya_amount}} so'm penya va {{penalty_amount}} so'm jarimani undirib berishni",
+        "Ish ko'riladigan kun va vaqt to'g'risida xabar berishni"
+      ],
+      "attachments": [
+        "Shartnoma nusxasi",
+        "Topshirish-qabul qilish dalolatnomasi / yuk xati nusxasi",
+        "Talabnoma (pretenziya) nusxasi va unga javob (bo'lsa)",
+        "Davlat boji to'langanligini tasdiqlovchi hujjat",
+        "Ariza javobgar soniga ko'ra ko'chirma nusxalari"
+      ],
+      "notes": "AAK kabi yuridik shaxslar uchun eng ko'p ishlatiladigan shablon — yetkazib berish, ijara, xizmat ko'rsatish shartnomalari bo'yicha qarzdorlikni undirishda universal.",
+      "body_template": "{{plaintiff_org_name}} va {{defendant_org_name}} o'rtasida {{contract_date}}da {{contract_number}}-sonli shartnoma tuzilgan bo'lib, unga ko'ra {{contract_subject}} yetkazib berish (bajarish) va uning evaziga {{contract_value}} so'm to'lov amalga oshirilishi lozim edi. Da'vogar tomonidan shartnoma majburiyatlari {{delivery_act_date}}dagi dalolatnoma/yuk xati asosida to'liq bajarilgan bo'lsa-da, javobgar shartnomaning {{payment_clause_number}}-bandida belgilangan {{payment_deadline_days}} kunlik muddatda to'lovni amalga oshirmadi. Natijada javobgarning {{debt_amount}} so'm miqdoridagi qarzdorligi yuzaga keldi, shuningdek shartnomaga muvofiq {{penya_amount}} so'm penya va {{penalty_amount}} so'm jarima hisoblab chiqildi. {{demand_letter_date}}da javobgarga yuborilgan talabnoma (pretenziya) qondirilmadi, shu sababli ushbu da'vo ariza bilan sudga murojaat qilishga majbur bo'ldik."
+    },
+    {
+      "id": "davo_zarar_undirish",
+      "name_uz": "Yetkazilgan zararni va penyani undirish to'g'risida da'vo ariza",
+      "category_path": "Sudga oid hujjatlar > Da'vo arizalar > Zarar yetkazishdan kelib chiqadigan nizolar bo'yicha",
+      "forum": "fuqarolik sudi yoki iqtisodiy sud (taraflarga qarab)",
+      "legal_basis": [
+        "Fuqarolik kodeksi (zarar yetkazish oqibatida majburiyatlar bo'limi)",
+        "FPK 189-191-moddalar"
+      ],
+      "plaintiff_group": "plaintiff_individual_or_legal",
+      "defendant_group": "defendant_individual_or_legal",
+      "uses_common_groups": [
+        "court",
+        "plaintiff_individual",
+        "plaintiff_legal",
+        "defendant_individual",
+        "defendant_legal",
+        "representative",
+        "claim_value_and_duty",
+        "evidence"
+      ],
+      "content_fields": [
+        {
+          "id": "harm_event_date",
+          "label_uz": "Zarar yetkazilgan sana/voqea",
+          "type": "date",
+          "required": true
+        },
+        {
+          "id": "harm_description",
+          "label_uz": "Zararning tavsifi va sabab-oqibat bog'liqligi",
+          "type": "textarea",
+          "required": true
+        },
+        {
+          "id": "harm_amount_calc",
+          "label_uz": "Zarar miqdori qanday hisoblab chiqilgani (baholovchi xulosasi, hisob-kitob)",
+          "type": "textarea",
+          "required": true
+        },
+        {
+          "id": "harm_amount",
+          "label_uz": "Undiriladigan zarar summasi (so'm)",
+          "type": "money",
+          "required": true
+        },
+        {
+          "id": "moral_damage_amount",
+          "label_uz": "Ma'naviy zarar summasi (so'm, agar talab qilinsa)",
+          "type": "money",
+          "required": false
+        }
+      ],
+      "relief_items": [
+        "{{defendant_name}}dan {{harm_amount}} so'm miqdoridagi moddiy zararni undirishni",
+        "{{moral_damage_amount}} so'm ma'naviy zararni undirishni (agar talab qilinsa)"
+      ],
+      "attachments": [
+        "Zararni tasdiqlovchi hujjatlar (dalolatnoma, ekspertiza xulosasi, baholash hisoboti)",
+        "Voqea joyidagi rasm/video dalillar (bo'lsa)",
+        "Davlat boji to'langanligini tasdiqlovchi hujjat"
+      ],
+      "body_template": "{{harm_event_date}}da yuz bergan voqea natijasida {{harm_description}}. Yetkazilgan zarar quyidagicha hisoblab chiqildi: {{harm_amount_calc}}. Ushbu zarar bevosita javobgarning huquqqa xilof xatti-harakati (harakatsizligi) natijasida yuzaga kelgan bo'lib, sabab-oqibat bog'liqligi mavjud."
+    },
+    {
+      "id": "davo_ish_haqi_undirish",
+      "name_uz": "To'lanmagan ish haqini undirish to'g'risida da'vo ariza",
+      "category_path": "Sudga oid hujjatlar > Da'vo arizalar > Mehnat nizolari bo'yicha",
+      "forum": "fuqarolik sudi",
+      "legal_basis": [
+        "Mehnat kodeksi (ish haqi to'lash bo'yicha ish beruvchi majburiyatlari)",
+        "FPK 189-191-moddalar"
+      ],
+      "plaintiff_group": "plaintiff_individual",
+      "defendant_group": "defendant_legal",
+      "uses_common_groups": [
+        "court",
+        "plaintiff_individual",
+        "defendant_legal",
+        "representative"
+      ],
+      "content_fields": [
+        {
+          "id": "employment_start_date",
+          "label_uz": "Ish boshlangan sana",
+          "type": "date",
+          "required": true
+        },
+        {
+          "id": "position",
+          "label_uz": "Lavozim",
+          "type": "text",
+          "required": true
+        },
+        {
+          "id": "salary_amount",
+          "label_uz": "Belgilangan oylik ish haqi miqdori (so'm)",
+          "type": "money",
+          "required": true
+        },
+        {
+          "id": "unpaid_period",
+          "label_uz": "To'lanmagan davr (oy/kunlar)",
+          "type": "text",
+          "required": true
+        },
+        {
+          "id": "unpaid_amount",
+          "label_uz": "Undiriladigan ish haqi summasi (so'm)",
+          "type": "money",
+          "required": true
+        },
+        {
+          "id": "delay_interest_amount",
+          "label_uz": "Kechiktirilgan kunlar uchun foiz/penya summasi (so'm)",
+          "type": "money",
+          "required": false
+        },
+        {
+          "id": "employer_explanation",
+          "label_uz": "Ish beruvchining to'lamaslik sababi bo'yicha bergan izohi (bo'lsa)",
+          "type": "textarea",
+          "required": false
+        }
+      ],
+      "relief_items": [
+        "{{defendant_org_name}}dan {{plaintiff_full_name}} foydasiga {{unpaid_amount}} so'm to'lanmagan ish haqini undirishni",
+        "{{delay_interest_amount}} so'm kechiktirilgan kunlar uchun foizni undirishni",
+        "Ma'naviy zarar undirishni (agar talab qilinsa)"
+      ],
+      "attachments": [
+        "Mehnat shartnomasi/mehnat daftarchasi nusxasi",
+        "Ish haqi hisob-varag'i yoki bank ko'chirmasi",
+        "Ish beruvchiga yuborilgan murojaat va javobi (bo'lsa)"
+      ],
+      "notes": "Mehnat nizolari bo'yicha da'vogar davlat bojidan ozod qilinishi mumkin — platformada bu holatni eslatma sifatida ko'rsating.",
+      "body_template": "{{plaintiff_full_name}} {{employment_start_date}}dan boshlab {{defendant_org_name}}da {{position}} lavozimida ishlab kelmoqda (ishlagan), oylik ish haqi miqdori {{salary_amount}} so'm etib belgilangan edi. Biroq ish beruvchi {{unpaid_period}} davr uchun ish haqini to'lamadi, natijada {{unpaid_amount}} so'm miqdorida qarzdorlik yuzaga keldi. {{employer_explanation}} Kechiktirilgan har bir kun uchun qonunda belgilangan tartibda {{delay_interest_amount}} so'm foiz hisoblanadi."
+    },
+    {
+      "id": "davo_ishga_tiklash",
+      "name_uz": "Noqonuniy ishdan bo'shatilganlik sababli ishga tiklash to'g'risida da'vo ariza",
+      "category_path": "Sudga oid hujjatlar > Da'vo arizalar > Mehnat nizolari bo'yicha",
+      "forum": "fuqarolik sudi",
+      "legal_basis": [
+        "Mehnat kodeksi (ishdan bo'shatish asoslari va tartibi)",
+        "FPK 189-191-moddalar"
+      ],
+      "plaintiff_group": "plaintiff_individual",
+      "defendant_group": "defendant_legal",
+      "uses_common_groups": [
+        "court",
+        "plaintiff_individual",
+        "defendant_legal",
+        "representative"
+      ],
+      "content_fields": [
+        {
+          "id": "position",
+          "label_uz": "Lavozim",
+          "type": "text",
+          "required": true
+        },
+        {
+          "id": "dismissal_date",
+          "label_uz": "Ishdan bo'shatilgan sana",
+          "type": "date",
+          "required": true
+        },
+        {
+          "id": "dismissal_order_number",
+          "label_uz": "Ishdan bo'shatish buyrug'i raqami",
+          "type": "text",
+          "required": false
+        },
+        {
+          "id": "dismissal_reason_stated",
+          "label_uz": "Buyruqda ko'rsatilgan bo'shatish asosi",
+          "type": "text",
+          "required": true
+        },
+        {
+          "id": "why_unlawful",
+          "label_uz": "Bo'shatish nima sababdan noqonuniy deb hisoblanadi",
+          "type": "textarea",
+          "required": true
+        },
+        {
+          "id": "average_salary",
+          "label_uz": "O'rtacha oylik ish haqi (majburiy progul davri uchun hisoblash uchun)",
+          "type": "money",
+          "required": true
+        }
+      ],
+      "relief_items": [
+        "{{plaintiff_full_name}}ni {{position}} lavozimiga tiklashni",
+        "Majburiy progul davri uchun o'rtacha ish haqini undirishni",
+        "Ma'naviy zarar undirishni (agar talab qilinsa)"
+      ],
+      "attachments": [
+        "Ishga qabul qilish va ishdan bo'shatish buyruqlari nusxasi",
+        "Mehnat daftarchasi nusxasi",
+        "Ish haqi to'g'risidagi ma'lumotnoma"
+      ],
+      "body_template": "{{plaintiff_full_name}} {{defendant_org_name}}da {{position}} lavozimida ishlab kelgan bo'lib, {{dismissal_date}}da {{dismissal_order_number}}-sonli buyruq bilan \"{{dismissal_reason_stated}}\" asosida ishdan bo'shatildi. Biroq {{why_unlawful}}, shu sababli ushbu bo'shatish noqonuniy hisoblanadi. Da'vogarning o'rtacha oylik ish haqi {{average_salary}} so'mni tashkil etadi va noqonuniy bo'shatilgan kundan e'tiboran majburiy progul davri uchun undirilishi lozim."
+    },
+    {
+      "id": "davo_nikohni_bekor_qilish",
+      "name_uz": "Nikohni bekor qilish (ajrashish) to'g'risida da'vo ariza",
+      "category_path": "Sudga oid hujjatlar > Da'vo arizalar > Nikoh, aliment va boshqa oilaviy nizolar bo'yicha",
+      "forum": "fuqarolik sudi",
+      "legal_basis": [
+        "Oila kodeksi (nikohni bekor qilish bobi)",
+        "FPK 185-186-moddalar (nikohni bekor qilish ishi bilan birga ko'riladigan nizolar)"
+      ],
+      "plaintiff_group": "plaintiff_individual",
+      "defendant_group": "defendant_individual",
+      "uses_common_groups": [
+        "court",
+        "plaintiff_individual",
+        "defendant_individual",
+        "representative"
+      ],
+      "content_fields": [
+        {
+          "id": "marriage_date",
+          "label_uz": "Nikoh ro'yxatdan o'tgan sana",
+          "type": "date",
+          "required": true
+        },
+        {
+          "id": "marriage_reg_office",
+          "label_uz": "Nikohni ro'yxatga olgan FHDYo bo'limi",
+          "type": "text",
+          "required": true
+        },
+        {
+          "id": "separation_reason",
+          "label_uz": "Ajrashish sababi",
+          "type": "textarea",
+          "required": true
+        },
+        {
+          "id": "has_minor_children",
+          "label_uz": "Balog'atga yetmagan farzandlar bormi",
+          "type": "boolean",
+          "required": true
+        },
+        {
+          "id": "children_details",
+          "label_uz": "Farzandlar to'g'risida ma'lumot (F.I.Sh., tug'ilgan sana) — agar bo'lsa",
+          "type": "textarea",
+          "required": false
+        },
+        {
+          "id": "children_residence_agreement",
+          "label_uz": "Farzandlar kim bilan qolishi bo'yicha kelishuv bormi",
+          "type": "textarea",
+          "required": false
+        },
+        {
+          "id": "property_dispute_exists",
+          "label_uz": "Mol-mulk bo'yicha nizo bormi (alohida talab sifatida qo'shilsinmi)",
+          "type": "boolean",
+          "required": false
+        }
+      ],
+      "relief_items": [
+        "{{plaintiff_full_name}} bilan {{defendant_full_name}} o'rtasidagi {{marriage_date}}da ro'yxatdan o'tgan nikohni bekor qilishni",
+        "Farzandning kim bilan qolishi va aliment to'g'risidagi masalani hal qilishni (agar talab qilinsa)"
+      ],
+      "attachments": [
+        "Nikoh guvohnomasi nusxasi",
+        "Farzandlarning tug'ilganlik guvohnomasi nusxalari (bo'lsa)",
+        "Davlat boji to'langanligini tasdiqlovchi hujjat"
+      ],
+      "body_template": "{{plaintiff_full_name}} bilan {{defendant_full_name}} o'rtasidagi nikoh {{marriage_date}}da {{marriage_reg_office}}da davlat ro'yxatidan o'tkazilgan. {{separation_reason}} sababli oilaviy hayot davom eta olmayapti, taraflar o'rtasida yarashish imkoniyati yo'q. {{has_minor_children}} {{children_details}} {{children_residence_agreement}}"
+    },
+    {
+      "id": "davo_aliment_undirish",
+      "name_uz": "Bolalar uchun aliment undirish to'g'risida da'vo ariza",
+      "category_path": "Sudga oid hujjatlar > Da'vo arizalar > Nikoh, aliment va boshqa oilaviy nizolar bo'yicha",
+      "forum": "fuqarolik sudi",
+      "legal_basis": [
+        "Oila kodeksi (aliment undirish bobi)",
+        "FPK 186-187-moddalar (aliment ishlari bo'yicha o'ziga xoslik)"
+      ],
+      "plaintiff_group": "plaintiff_individual",
+      "defendant_group": "defendant_individual",
+      "uses_common_groups": [
+        "court",
+        "plaintiff_individual",
+        "defendant_individual",
+        "representative"
+      ],
+      "content_fields": [
+        {
+          "id": "children_details",
+          "label_uz": "Farzand(lar) F.I.Sh. va tug'ilgan sanasi",
+          "type": "textarea",
+          "required": true
+        },
+        {
+          "id": "children_count",
+          "label_uz": "Farzandlar soni",
+          "type": "number",
+          "required": true
+        },
+        {
+          "id": "defendant_income_known",
+          "label_uz": "Javobgarning daromadi ma'lummi",
+          "type": "boolean",
+          "required": false
+        },
+        {
+          "id": "aliment_form",
+          "label_uz": "Aliment turi",
+          "type": "select",
+          "options": [
+            "daromadning ulushi (foizda)",
+            "qat'iy pul summasida"
+          ],
+          "required": true
+        },
+        {
+          "id": "aliment_fixed_amount",
+          "label_uz": "Qat'iy summa talab qilinsa — miqdori (so'm)",
+          "type": "money",
+          "required": false
+        },
+        {
+          "id": "arrears_period",
+          "label_uz": "Aliment o'tmishga nisbatan undirilishi so'ralsa — davri",
+          "type": "text",
+          "required": false
+        }
+      ],
+      "relief_items": [
+        "{{defendant_full_name}}dan {{children_details}} foydasiga aliment undirishni (hal qiluv qarori qonuniy kuchga kirguniga qadar {{plaintiff_full_name}} foydasiga)",
+        "Aliment to'g'risidagi hal qiluv qarorining darhol ijro etilishini ta'minlashni"
+      ],
+      "attachments": [
+        "Farzandning tug'ilganlik guvohnomasi nusxasi",
+        "Nikoh/nikohni bekor qilish to'g'risidagi hujjat (bo'lsa)",
+        "Javobgarning daromadi to'g'risida ma'lumot (mavjud bo'lsa)"
+      ],
+      "notes": "Aliment ishlari bo'yicha da'vogar davlat bojidan ozod. Sud hal qiluv qarori qabul qilinguniga qadar ham aliment undirishi mumkinligini eslatma sifatida ko'rsating (FPK 187-modda).",
+      "body_template": "{{plaintiff_full_name}} {{children_details}} ({{children_count}} nafar farzand)ni tarbiyalab, ularning moddiy ta'minoti bilan mustaqil shug'ullanmoqda, biroq bolalar otasi (onasi) {{defendant_full_name}} farzandlar ta'minotiga ixtiyoriy ravishda hissa qo'shmayapti. {{defendant_income_known}} Shu sababli {{aliment_form}} tartibida aliment undirilishini so'rayman. {{arrears_period}}"
+    },
+    {
+      "id": "ariza_meros_muddatini_tiklash",
+      "name_uz": "Merosni qabul qilib olish muddatini tiklash to'g'risida ariza",
+      "category_path": "Sudga oid hujjatlar > Da'vo arizalar > Meros, vasiyatnoma bo'yicha",
+      "forum": "fuqarolik sudi (alohida ish yurituv tartibida)",
+      "legal_basis": [
+        "Fuqarolik kodeksi (meros huquqi bo'limi, meros qabul qilish muddati)",
+        "FPK (alohida ish yurituv tartibidagi ishlar)"
+      ],
+      "plaintiff_group": "plaintiff_individual",
+      "defendant_group": "defendant_individual",
+      "uses_common_groups": [
+        "court",
+        "plaintiff_individual",
+        "defendant_individual",
+        "representative"
+      ],
+      "content_fields": [
+        {
+          "id": "testator_full_name",
+          "label_uz": "Vafot etgan shaxs (meros qoldiruvchi) F.I.Sh.",
+          "type": "text",
+          "required": true
+        },
+        {
+          "id": "death_date",
+          "label_uz": "Vafot etgan sana",
+          "type": "date",
+          "required": true
+        },
+        {
+          "id": "relation_to_testator",
+          "label_uz": "Ariza beruvchining meros qoldiruvchiga qarindoshlik/huquqiy munosabati",
+          "type": "text",
+          "required": true
+        },
+        {
+          "id": "missed_deadline_reason",
+          "label_uz": "Muddat o'tkazib yuborilishining uzrli sababi",
+          "type": "textarea",
+          "required": true
+        },
+        {
+          "id": "estate_description",
+          "label_uz": "Meros mulkining tavsifi",
+          "type": "textarea",
+          "required": true
+        },
+        {
+          "id": "other_heirs",
+          "label_uz": "Boshqa merosxo'rlar (bo'lsa, ular javobgar sifatida ko'rsatiladi)",
+          "type": "textarea",
+          "required": false
+        }
+      ],
+      "relief_items": [
+        "{{plaintiff_full_name}}ga {{testator_full_name}}dan qolgan merosni qabul qilib olish muddatini tiklashni",
+        "Meros mulkidagi ulushni tan olishni"
+      ],
+      "attachments": [
+        "Vafot etganlik guvohnomasi nusxasi",
+        "Qarindoshlik/munosabatni tasdiqlovchi hujjat",
+        "Muddat o'tkazib yuborilganligining uzrli sababini tasdiqlovchi hujjatlar (kasalxona ma'lumotnomasi va h.k.)",
+        "Meros mulkiga oid hujjatlar"
+      ],
+      "body_template": "{{testator_full_name}} {{death_date}}da vafot etgan bo'lib, men uning {{relation_to_testator}}iman. Meros massasi {{estate_description}}dan iborat. Men qonunda belgilangan 6 oylik muddat ichida merosni qabul qilib ololmadim, chunki {{missed_deadline_reason}}. {{other_heirs}}"
+    },
+    {
+      "id": "ariza_sud_buyrugi",
+      "name_uz": "Sud buyrug'ini berish to'g'risida ariza (buyruq ish yurituvi)",
+      "category_path": "Sudga oid hujjatlar > Arizalar > Sud qarorining ijrosi bo'yicha",
+      "forum": "fuqarolik sudi (soddalashtirilgan, buyruq ish yurituvi tartibida)",
+      "legal_basis": [
+        "FPK 170-172-moddalar (sud buyrug'iga oid umumiy qoidalar, berish talablari, arizaning shakli va mazmuni)",
+        "FPK 173-modda (ilova qilinadigan hujjatlar)"
+      ],
+      "plaintiff_group": "plaintiff_individual_or_legal",
+      "defendant_group": "defendant_individual_or_legal",
+      "uses_common_groups": [
+        "court",
+        "plaintiff_individual",
+        "plaintiff_legal",
+        "defendant_individual",
+        "defendant_legal",
+        "claim_value_and_duty"
+      ],
+      "content_fields": [
+        {
+          "id": "claim_basis_type",
+          "label_uz": "Talab asosi turi",
+          "type": "select",
+          "options": [
+            "notarial tasdiqlangan bitim bo'yicha",
+            "yozma bitim (shartnoma) bo'yicha",
+            "veksel bo'yicha protest",
+            "aliment undirish (nizosiz)",
+            "ish haqi/boshqa to'lovlarni undirish",
+            "boshqa"
+          ],
+          "required": true
+        },
+        {
+          "id": "debt_amount",
+          "label_uz": "Undiriladigan summa (so'm)",
+          "type": "money",
+          "required": true
+        },
+        {
+          "id": "basis_document_details",
+          "label_uz": "Talab asosidagi hujjat rekvizitlari (shartnoma/bitim raqami, sanasi)",
+          "type": "textarea",
+          "required": true
+        }
+      ],
+      "relief_items": [
+        "{{defendant_name}}dan {{plaintiff_name}} foydasiga {{debt_amount}} so'm undirish to'g'risida sud buyrug'i chiqarishni"
+      ],
+      "attachments": [
+        "Talab asosini tasdiqlovchi hujjatlar nusxasi",
+        "Davlat boji to'langanligini tasdiqlovchi hujjat"
+      ],
+      "notes": "Sud buyrug'i — to'liq da'vo ishi yurituvisiz, tortishuvsiz talablar uchun tezlashtirilgan yo'l. Agar qarzdor e'tiroz bildirsa, buyruq bekor qilinadi va oddiy da'vo tartibida ko'riladi.",
+      "body_template": "{{basis_document_details}} asosida {{defendant_name}} oldida {{claim_basis_type}} bo'yicha {{plaintiff_name}} foydasiga {{debt_amount}} so'm miqdorida qarzdorlik mavjud. Ushbu talab tortishuvsiz bo'lib, uni tasdiqlovchi hujjatlar ariza ilovasida keltirilgan."
+    },
+    {
+      "id": "iltimosnoma_umumiy",
+      "name_uz": "Sudga iltimosnoma (ish yurituvi davomida)",
+      "category_path": "Sudga oid hujjatlar > Iltimosnomalar",
+      "forum": "ishni ko'rayotgan sud",
+      "legal_basis": [
+        "FPK 219-modda (ishda ishtirok etuvchi shaxslarning iltimosnomalarini hal qilishi)",
+        "FPK 155-modda (protsessual muddatlarni uzaytirish va tiklash) — muddat tiklash iltimosnomasi uchun"
+      ],
+      "plaintiff_group": "plaintiff_individual_or_legal",
+      "defendant_group": null,
+      "uses_common_groups": [
+        "court",
+        "plaintiff_individual",
+        "plaintiff_legal"
+      ],
+      "content_fields": [
+        {
+          "id": "case_number",
+          "label_uz": "Fuqarolik ishi raqami",
+          "type": "text",
+          "required": true
+        },
+        {
+          "id": "petitioner_role",
+          "label_uz": "Ariza beruvchining ishdagi maqomi",
+          "type": "select",
+          "options": [
+            "da'vogar",
+            "javobgar",
+            "uchinchi shaxs",
+            "vakil"
+          ],
+          "required": true
+        },
+        {
+          "id": "petition_type",
+          "label_uz": "Iltimosnoma turi",
+          "type": "select",
+          "options": [
+            "muddatni tiklash/uzaytirish",
+            "hujjatlar nusxasini berish",
+            "ekspertiza tayinlash",
+            "guvohni chaqirish",
+            "da'voni ta'minlash choralarini qo'llash",
+            "ish yuritishni kechiktirish",
+            "boshqa"
+          ],
+          "required": true
+        },
+        {
+          "id": "petition_justification",
+          "label_uz": "Iltimosnoma asoslanishi (nima uchun zarur)",
+          "type": "textarea",
+          "required": true
+        }
+      ],
+      "relief_items": [
+        "{{petition_type}} to'g'risidagi iltimosnomamni qondirishni so'rayman"
+      ],
+      "attachments": [
+        "Iltimosnomani asoslovchi hujjatlar (agar bo'lsa)"
+      ],
+      "notes": "Bu — ish yurituvi ichidagi barcha oraliq iltimosnomalar (muddat tiklash, nusxa olish, ta'minlash choralari va h.k.) uchun umumiy skelet. petition_type maydoniga qarab platformada tegishli qo'shimcha maydonlar ko'rsatilishi mumkin (masalan, muddat tiklashda 'o'tkazib yuborilgan harakat' va 'uzrli sabab').",
+      "body_template": "{{court_name}}da ko'rilayotgan {{case_number}}-sonli fuqarolik ishi bo'yicha men {{petitioner_role}} sifatida ishtirok etaman. {{petition_justification}}"
+    },
+    {
+      "id": "shikoyat_apellyatsiya",
+      "name_uz": "Apellyatsiya shikoyati (birinchi instansiya hal qiluv qarori ustidan)",
+      "category_path": "Sudga oid hujjatlar > Appelyatsiya, kassatsiya shikoyatlari",
+      "forum": "apellyatsiya instansiyasi sudi",
+      "legal_basis": [
+        "FPK (apellyatsiya shikoyati berish tartibi va muddatlari, shikoyatning shakli va mazmuni bobi)"
+      ],
+      "plaintiff_group": "plaintiff_individual_or_legal",
+      "defendant_group": "defendant_individual_or_legal",
+      "uses_common_groups": [
+        "court",
+        "plaintiff_individual",
+        "plaintiff_legal",
+        "defendant_individual",
+        "defendant_legal",
+        "representative"
+      ],
+      "content_fields": [
+        {
+          "id": "first_instance_court",
+          "label_uz": "Birinchi instansiya sudi nomi",
+          "type": "text",
+          "required": true
+        },
+        {
+          "id": "decision_date",
+          "label_uz": "Hal qiluv qarori chiqarilgan sana",
+          "type": "date",
+          "required": true
+        },
+        {
+          "id": "case_number",
+          "label_uz": "Ish raqami",
+          "type": "text",
+          "required": true
+        },
+        {
+          "id": "decision_summary",
+          "label_uz": "Hal qiluv qarorining qisqacha mazmuni",
+          "type": "textarea",
+          "required": true
+        },
+        {
+          "id": "disagreement_grounds",
+          "label_uz": "Qaror bilan norozilik asoslari (huquqiy va/yoki faktik xatolar)",
+          "type": "textarea",
+          "required": true
+        },
+        {
+          "id": "requested_outcome",
+          "label_uz": "So'ralayotgan natija",
+          "type": "select",
+          "options": [
+            "qarorni to'liq bekor qilish",
+            "qarorni qisman bekor qilish",
+            "qarorni o'zgartirish",
+            "ishni qayta ko'rib chiqishga yuborish"
+          ],
+          "required": true
+        }
+      ],
+      "relief_items": [
+        "{{first_instance_court}}ning {{decision_date}}dagi hal qiluv qarorini {{requested_outcome}}ni",
+        "Ishni to'liq hajmda qayta ko'rib chiqishni"
+      ],
+      "attachments": [
+        "Birinchi instansiya sudi hal qiluv qarorining nusxasi",
+        "Apellyatsiya shikoyati uchun davlat boji to'langanligini tasdiqlovchi hujjat",
+        "Shikoyat asoslarini tasdiqlovchi qo'shimcha hujjatlar (bo'lsa)"
+      ],
+      "notes": "Apellyatsiya muddati odatda hal qiluv qarori qonuniy kuchga kirishidan oldin qat'iy belgilangan — platformada muddat hisoblagichini ko'rsatish foydali bo'ladi.",
+      "body_template": "{{first_instance_court}} tomonidan {{decision_date}}da {{case_number}}-sonli ish bo'yicha quyidagi mazmunda hal qiluv qarori chiqarilgan: {{decision_summary}}. Ushbu qaror bilan rozi emasman, chunki {{disagreement_grounds}}."
+    },
+    {
+      "id": "ariza_umumiy_idoraviy",
+      "name_uz": "Davlat organi/tashkilot/ish beruvchiga umumiy ariza",
+      "category_path": "Arizalar > Jismoniy shaxslarga oid arizalar / Yuridik shaxslarga oid arizalar",
+      "forum": "sudga oid emas — davlat organi, tashkilot yoki ish beruvchi",
+      "legal_basis": [
+        "\"Jismoniy va yuridik shaxslarning murojaatlari to'g'risida\"gi Qonun"
+      ],
+      "plaintiff_group": "plaintiff_individual_or_legal",
+      "defendant_group": null,
+      "uses_common_groups": [
+        "plaintiff_individual",
+        "plaintiff_legal"
+      ],
+      "content_fields": [
+        {
+          "id": "recipient_org_name",
+          "label_uz": "Murojaat qilinayotgan tashkilot/mansabdor shaxs nomi",
+          "type": "text",
+          "required": true
+        },
+        {
+          "id": "applicant_full_name",
+          "label_uz": "Ariza beruvchi F.I.Sh. (yoki tashkilot nomi)",
+          "type": "text",
+          "required": true
+        },
+        {
+          "id": "applicant_address",
+          "label_uz": "Manzil",
+          "type": "text",
+          "required": true
+        },
+        {
+          "id": "applicant_phone",
+          "label_uz": "Telefon raqami",
+          "type": "text",
+          "required": true
+        },
+        {
+          "id": "applicant_email",
+          "label_uz": "Elektron pochta",
+          "type": "text",
+          "required": false
+        },
+        {
+          "id": "request_essence",
+          "label_uz": "Murojaatning mohiyati (aniq va qisqa)",
+          "type": "textarea",
+          "required": true
+        },
+        {
+          "id": "signing_date",
+          "label_uz": "Ariza sanasi",
+          "type": "date",
+          "required": true
+        }
+      ],
+      "relief_items": [
+        "{{request_essence}} bo'yicha ko'rib chiqib, javob berishingizni so'rayman"
+      ],
+      "attachments": [
+        "Murojaatni asoslovchi hujjatlar (bo'lsa)"
+      ],
+      "notes": "Sudga oid bo'lmagan umumiy ariza — masalan tasdiqnoma, litsenziya, ma'lumotnoma so'rash, xizmat ko'rsatishni talab qilish uchun. Standart javob berish muddati — 30 kun (murakkab holatlarda 60 kungacha).",
+      "body_template": "Men, {{applicant_full_name}} ({{applicant_address}} manzilida istiqomat qiluvchi), {{recipient_org_name}}ga quyidagi masala yuzasidan murojaat qilaman: {{request_essence}}."
+    },
+    {
+      "id": "davo_uyjoy_ijara_bekor_kochirish",
+      "name_uz": "Ijara shartnomasini bekor qilish va xonadondan (uy-joydan) ko'chirish to'g'risida da'vo ariza",
+      "category_path": "Sudga oid hujjatlar > Da'vo arizalar > Uy-joy nizolari bo'yicha",
+      "forum": "fuqarolik sudi",
+      "legal_basis": [
+        "Fuqarolik kodeksi 535, 543, 551-moddalari (mulk ijarasi)",
+        "Fuqarolik kodeksi 606, 615-616-moddalari (uy-joy ijarasi)",
+        "Uy-joy kodeksi 93-moddasi"
+      ],
+      "plaintiff_group": "plaintiff_individual_or_legal",
+      "defendant_group": "defendant_individual",
+      "uses_common_groups": [
+        "court",
+        "plaintiff_individual",
+        "plaintiff_legal",
+        "defendant_individual",
+        "representative",
+        "claim_value_and_duty"
+      ],
+      "content_fields": [
+        {
+          "id": "lease_contract_date",
+          "label_uz": "Ijara shartnomasi tuzilgan sana",
+          "type": "date",
+          "required": true
+        },
+        {
+          "id": "lease_contract_number",
+          "label_uz": "Ijara shartnomasi raqami",
+          "type": "text",
+          "required": false
+        },
+        {
+          "id": "lease_object_address",
+          "label_uz": "Ijaraga berilgan uy-joy manzili",
+          "type": "text",
+          "required": true
+        },
+        {
+          "id": "lease_term",
+          "label_uz": "Shartnoma muddati",
+          "type": "text",
+          "required": false
+        },
+        {
+          "id": "violation_type",
+          "label_uz": "Buzilish turi",
+          "type": "select",
+          "options": [
+            "ijara haqini ketma-ket 2 martadan ortiq to'lamaslik",
+            "uy-joyni maqsadsiz ishlatish/vayron qilish",
+            "qo'shnilar huquqini muntazam buzish",
+            "shartnoma muddati tugagan, ko'chishdan bosh tortish",
+            "boshqa"
+          ],
+          "required": true
+        },
+        {
+          "id": "warning_letter_date",
+          "label_uz": "Ogohlantirish xati yuborilgan sana",
+          "type": "date",
+          "required": false
+        },
+        {
+          "id": "unpaid_rent_amount",
+          "label_uz": "To'lanmagan ijara haqi summasi (so'm, agar bo'lsa)",
+          "type": "money",
+          "required": false
+        }
+      ],
+      "relief_items": [
+        "{{defendant_full_name}} bilan {{lease_contract_date}}da tuzilgan {{lease_contract_number}}-sonli ijara shartnomasini bekor qilishni",
+        "{{defendant_full_name}}ni {{lease_object_address}} manzilidagi uy-joydan ko'chirishni",
+        "{{unpaid_rent_amount}} so'm to'lanmagan ijara haqini undirishni (agar bo'lsa)"
+      ],
+      "attachments": [
+        "Ijara shartnomasi nusxasi",
+        "Ogohlantirish xati va uni yuborilganligini tasdiqlovchi hujjat",
+        "Uy-joyga bo'lgan mulk huquqini tasdiqlovchi hujjat",
+        "Davlat boji to'langanligini tasdiqlovchi hujjat"
+      ],
+      "body_template": "{{plaintiff_name}} bilan {{defendant_full_name}} o'rtasida {{lease_contract_date}}da {{lease_contract_number}}-sonli ijara shartnomasi tuzilgan bo'lib, unga ko'ra {{lease_object_address}} manzilidagi uy-joy {{lease_term}} muddatga ijaraga berilgan. Biroq ijarachi tomonidan {{violation_type}} holati yuz berdi. {{warning_letter_date}}da yuborilgan ogohlantirishga qaramay, buzilish bartaraf etilmadi. {{unpaid_rent_amount}}"
+    },
+    {
+      "id": "davo_yth_zarar_undirish",
+      "name_uz": "Yo'l-transport hodisasi (YTH) natijasida yetkazilgan zararni undirish to'g'risida da'vo ariza",
+      "category_path": "Sudga oid hujjatlar > Da'vo arizalar > Avtotransport vositasi nizolari bo'yicha",
+      "forum": "fuqarolik sudi",
+      "legal_basis": [
+        "Fuqarolik kodeksi 985-modda (zararni to'liq qoplash)",
+        "Fuqarolik kodeksi 1021-1022-moddalari (ma'naviy zarar)",
+        "FPK 188-191-moddalari"
+      ],
+      "plaintiff_group": "plaintiff_individual_or_legal",
+      "defendant_group": "defendant_individual_or_legal",
+      "uses_common_groups": [
+        "court",
+        "plaintiff_individual",
+        "plaintiff_legal",
+        "defendant_individual",
+        "defendant_legal",
+        "representative",
+        "claim_value_and_duty",
+        "evidence"
+      ],
+      "content_fields": [
+        {
+          "id": "accident_date",
+          "label_uz": "YTH sodir bo'lgan sana",
+          "type": "date",
+          "required": true
+        },
+        {
+          "id": "accident_location",
+          "label_uz": "YTH sodir bo'lgan manzil",
+          "type": "text",
+          "required": true
+        },
+        {
+          "id": "defendant_vehicle_details",
+          "label_uz": "Javobgar avtomashinasi rusumi va davlat raqami",
+          "type": "text",
+          "required": true
+        },
+        {
+          "id": "plaintiff_vehicle_details",
+          "label_uz": "Da'vogar avtomashinasi rusumi va davlat raqami",
+          "type": "text",
+          "required": false
+        },
+        {
+          "id": "traffic_violation_description",
+          "label_uz": "Yo'l harakati qoidalari qanday buzilgani",
+          "type": "textarea",
+          "required": true
+        },
+        {
+          "id": "police_protocol_details",
+          "label_uz": "YHXX bo'yicha protokol/qaror rekvizitlari",
+          "type": "text",
+          "required": true
+        },
+        {
+          "id": "repair_cost_amount",
+          "label_uz": "Ta'mirlash/moddiy zarar summasi (baholash xulosasiga ko'ra, so'm)",
+          "type": "money",
+          "required": true
+        },
+        {
+          "id": "lost_profit_amount",
+          "label_uz": "Boy berilgan foyda (so'm, agar bo'lsa)",
+          "type": "money",
+          "required": false
+        },
+        {
+          "id": "moral_damage_amount",
+          "label_uz": "Ma'naviy zarar summasi (so'm, agar talab qilinsa)",
+          "type": "money",
+          "required": false
+        }
+      ],
+      "relief_items": [
+        "{{defendant_name}}dan {{repair_cost_amount}} so'm moddiy zararni undirishni",
+        "{{lost_profit_amount}} so'm boy berilgan foydani undirishni (agar bo'lsa)",
+        "{{moral_damage_amount}} so'm ma'naviy zararni undirishni (agar talab qilinsa)"
+      ],
+      "attachments": [
+        "YHH to'g'risidagi protokol/xarita-sxema nusxasi",
+        "Baholash (ekspertiza) xulosasi",
+        "Avtomashina texnik pasporti/haydovchilik guvohnomasi nusxalari",
+        "Davolanish xarajatlarini tasdiqlovchi hujjatlar (jarohat bo'lsa)",
+        "Davlat boji to'langanligini tasdiqlovchi hujjat"
+      ],
+      "body_template": "{{accident_date}}da {{accident_location}}da {{plaintiff_vehicle_details}} bilan {{defendant_vehicle_details}} o'rtasida yo'l-transport hodisasi sodir bo'ldi. Hodisa {{police_protocol_details}} bilan qayd etilgan bo'lib, {{traffic_violation_description}} sababli javobgar aybdor deb topilgan. Yetkazilgan zarar baholash xulosasiga ko'ra {{repair_cost_amount}} so'mni tashkil etadi."
+    },
+    {
+      "id": "ariza_davo_talabini_ozgartirish",
+      "name_uz": "Da'vo talablari miqdorini oshirish/kamaytirish yoki predmetini o'zgartirish to'g'risida ariza",
+      "category_path": "Sudga oid hujjatlar > Arizalar > Da'vo talablariga aniqlik kiritish, o'zgartirish kiritish va voz kechish bo'yicha",
+      "forum": "ishni ko'rayotgan sud",
+      "legal_basis": [
+        "FPK 44-modda (taraflarning protsessual huquq va majburiyatlari)"
+      ],
+      "plaintiff_group": "plaintiff_individual_or_legal",
+      "defendant_group": null,
+      "uses_common_groups": [
+        "court",
+        "plaintiff_individual",
+        "plaintiff_legal",
+        "case_reference"
+      ],
+      "content_fields": [
+        {
+          "id": "original_claim_subject",
+          "label_uz": "Dastlabki da'vo talabining mazmuni",
+          "type": "textarea",
+          "required": true
+        },
+        {
+          "id": "original_claim_amount",
+          "label_uz": "Dastlabki talab qilingan summa (so'm)",
+          "type": "money",
+          "required": false
+        },
+        {
+          "id": "change_type",
+          "label_uz": "O'zgartirish turi",
+          "type": "select",
+          "options": [
+            "talab miqdorini oshirish",
+            "talab miqdorini kamaytirish",
+            "talab predmetini o'zgartirish",
+            "talab asosini o'zgartirish",
+            "qo'shimcha talab qo'shish"
+          ],
+          "required": true
+        },
+        {
+          "id": "new_claim_amount",
+          "label_uz": "Yangi (o'zgartirilgan) summa (so'm)",
+          "type": "money",
+          "required": false
+        },
+        {
+          "id": "change_justification",
+          "label_uz": "O'zgartirish sababi (qayta hisob-kitob, ekspertiza natijasi va h.k.)",
+          "type": "textarea",
+          "required": true
+        }
+      ],
+      "relief_items": [
+        "{{case_defendant_name}}ga nisbatan da'vo talablarimni {{change_type}} qilishga ruxsat berishni va {{new_claim_amount}} so'm miqdorida undirish to'g'risidagi talabimni ish yurituvga qabul qilishni"
+      ],
+      "attachments": [
+        "O'zgartirishni asoslovchi hujjatlar (qayta hisob-kitob, ekspertiza xulosasi)",
+        "Qo'shimcha davlat boji to'langanligini tasdiqlovchi hujjat (agar summa oshsa)"
+      ],
+      "notes": "Bu ariza mustaqil hujjat sifatida emas, balki davom etayotgan ish doirasida sud majlisida og'zaki yoki yozma tarzda taqdim etiladi.",
+      "body_template": "{{case_court_name}}da ko'rilayotgan ish bo'yicha men {{case_defendant_name}}ga nisbatan {{original_claim_subject}} ({{original_claim_amount}} so'm) to'g'risida da'vo talab qilgan edim. {{change_justification}} sababli talabni {{change_type}} zaruriyati tug'ildi, yangi summa {{new_claim_amount}} so'mni tashkil etadi."
+    },
+    {
+      "id": "ariza_davodan_voz_kechish",
+      "name_uz": "Da'vodan (to'liq yoki qisman) voz kechish sababli ish yuritishni tugatish to'g'risida ariza",
+      "category_path": "Sudga oid hujjatlar > Arizalar > Da'vo talablariga aniqlik kiritish, o'zgartirish kiritish va voz kechish bo'yicha",
+      "forum": "ishni ko'rayotgan sud",
+      "legal_basis": [
+        "FPK 44, 226-moddalari"
+      ],
+      "plaintiff_group": "plaintiff_individual_or_legal",
+      "defendant_group": "defendant_individual_or_legal",
+      "uses_common_groups": [
+        "court",
+        "plaintiff_individual",
+        "plaintiff_legal",
+        "defendant_individual",
+        "defendant_legal",
+        "case_reference"
+      ],
+      "content_fields": [
+        {
+          "id": "original_claim_subject",
+          "label_uz": "Da'vo talabining mazmuni",
+          "type": "textarea",
+          "required": true
+        },
+        {
+          "id": "waiver_scope",
+          "label_uz": "Voz kechish ko'lami",
+          "type": "select",
+          "options": [
+            "to'liq voz kechish",
+            "qisman voz kechish"
+          ],
+          "required": true
+        },
+        {
+          "id": "waiver_reason",
+          "label_uz": "Voz kechish sababi (masalan, nizo bartaraf etilgan)",
+          "type": "textarea",
+          "required": true
+        }
+      ],
+      "relief_items": [
+        "Men {{case_defendant_name}}ga nisbatan {{original_claim_subject}} to'g'risidagi da'vo talablarimdan voz kechganimni qabul qilib, ish yuritishni tugatishingizni"
+      ],
+      "attachments": [
+        "Nizo bartaraf etilganligini tasdiqlovchi hujjat (bo'lsa — kelishuv, to'lov cheki va h.k.)"
+      ],
+      "notes": "Sud voz kechishning huquqiy oqibatlarini (xuddi shu asosda qayta da'vo qo'zg'ata olmaslik) tushuntirishi shart; bu odatda sud majlisi bayonnomasida qayd etiladi.",
+      "body_template": "{{case_court_name}}da ko'rilayotgan ish bo'yicha {{case_defendant_name}}ga nisbatan qo'ygan {{original_claim_subject}} to'g'risidagi da'vo talabimdan {{waiver_scope}} tartibida voz kechaman. Buning sababi: {{waiver_reason}}. Voz kechishning huquqiy oqibatlari (xuddi shu asosda qayta da'vo qo'zg'ata olmasligim) menga tushuntirilgan va tushunarli."
+    },
+    {
+      "id": "ariza_davoni_taminlash",
+      "name_uz": "Da'voni ta'minlash choralarini qo'llash to'g'risida ariza",
+      "category_path": "Sudga oid hujjatlar > Arizalar > Da'voni ta'minlash choralari va xatlash bo'yicha",
+      "forum": "ish qo'zg'atilayotgan/ko'rilayotgan sud",
+      "legal_basis": [
+        "FPK 105-modda (da'voni ta'minlash asoslari)",
+        "FPK 106-modda (da'voni ta'minlash choralari)",
+        "FPK 107-modda (arizani ko'rib chiqish tartibi)"
+      ],
+      "plaintiff_group": "plaintiff_individual_or_legal",
+      "defendant_group": "defendant_individual_or_legal",
+      "uses_common_groups": [
+        "court",
+        "plaintiff_individual",
+        "plaintiff_legal",
+        "defendant_individual",
+        "defendant_legal",
+        "claim_value_and_duty"
+      ],
+      "content_fields": [
+        {
+          "id": "risk_description",
+          "label_uz": "Choralar qo'llanmasa hal qiluv qarorini ijro etish nima uchun qiyinlashishi/imkonsiz bo'lishi mumkinligi",
+          "type": "textarea",
+          "required": true
+        },
+        {
+          "id": "requested_measure",
+          "label_uz": "So'ralayotgan ta'minlash chorasi",
+          "type": "select",
+          "options": [
+            "javobgarga tegishli mol-mulkni xatlash",
+            "javobgarga muayyan harakatlarni amalga oshirishni taqiqlash",
+            "bank hisobvarag'idagi mablag'larni xatlash",
+            "boshqa"
+          ],
+          "required": true
+        },
+        {
+          "id": "measure_target_description",
+          "label_uz": "Xatlanishi/taqiqlanishi so'ralayotgan mol-mulk yoki harakat tavsifi",
+          "type": "textarea",
+          "required": true
+        }
+      ],
+      "relief_items": [
+        "{{defendant_name}}ga tegishli {{measure_target_description}} yuzasidan {{requested_measure}} to'g'risida ajrim chiqarishni"
+      ],
+      "attachments": [
+        "Da'vo predmeti va mol-mulk qiymatini tasdiqlovchi hujjatlar"
+      ],
+      "notes": "Da'voni ta'minlash to'g'risidagi ariza odatda sudga kelib tushgan kunning ertasiga qadar, taraflarni chaqirmasdan ko'rib chiqiladi — tezkorlik muhim.",
+      "body_template": "{{court_name}}da {{defendant_name}}ga nisbatan qo'ygan da'vo talabim ko'rib chiqilmoqda. {{risk_description}} Shu sababli hal qiluv qarorining kelgusida ijro etilishini ta'minlash maqsadida {{measure_target_description}} yuzasidan {{requested_measure}} chorasini qo'llashni so'rayman."
+    },
+    {
+      "id": "ariza_ish_yuritishni_tiklash",
+      "name_uz": "To'xtatilgan yoki ko'rmasdan qoldirilgan ishni tiklash to'g'risida ariza",
+      "category_path": "Sudga oid hujjatlar > Arizalar > Sudda ishlarni ko'rib chiqish, ish yuritishni tugatish va tiklash bo'yicha",
+      "forum": "ish yuritilgan sud",
+      "legal_basis": [
+        "FPK 121-modda (ish yuritishni tiklash)",
+        "FPK 122-123-moddalari (arizani ko'rmasdan qoldirish asoslari va oqibatlari)"
+      ],
+      "plaintiff_group": "plaintiff_individual_or_legal",
+      "defendant_group": null,
+      "uses_common_groups": [
+        "court",
+        "plaintiff_individual",
+        "plaintiff_legal",
+        "case_reference"
+      ],
+      "content_fields": [
+        {
+          "id": "suspension_or_dismissal_reason",
+          "label_uz": "Ish yurituvi to'xtatilgan/ko'rmasdan qoldirilgan sabab",
+          "type": "textarea",
+          "required": true
+        },
+        {
+          "id": "reason_resolved_explanation",
+          "label_uz": "Ushbu sabab endi bartaraf etilganligi tushuntirilishi",
+          "type": "textarea",
+          "required": true
+        }
+      ],
+      "relief_items": [
+        "{{case_number}}-sonli fuqarolik ishi bo'yicha ish yuritishni tiklab, ishni sud muhokamasiga tayinlashingizni"
+      ],
+      "attachments": [
+        "To'xtatish/ko'rmasdan qoldirish sababi bartaraf etilganligini tasdiqlovchi hujjatlar"
+      ],
+      "body_template": "{{case_court_name}}da ko'rilayotgan {{case_number}}-sonli ish bo'yicha ish yurituvi {{suspension_or_dismissal_reason}} sababli to'xtatilgan (ko'rmasdan qoldirilgan) edi. Hozirda {{reason_resolved_explanation}}, shu sababli ish yuritishning tiklanishini so'rayman."
+    },
+    {
+      "id": "ariza_sud_hujjat_nusxasi",
+      "name_uz": "Sud hujjatlaridan ko'chirma nusxa (dublikat) berish to'g'risida ariza",
+      "category_path": "Sudga oid hujjatlar > Arizalar > Sud hujjatlaridan nusxa berish bo'yicha",
+      "forum": "hujjatni chiqargan sud",
+      "legal_basis": [
+        "FPK (sud hujjatlarining ko'chirma nusxalarini berish tartibi)"
+      ],
+      "plaintiff_group": "plaintiff_individual_or_legal",
+      "defendant_group": null,
+      "uses_common_groups": [
+        "court",
+        "plaintiff_individual",
+        "plaintiff_legal",
+        "case_reference"
+      ],
+      "content_fields": [
+        {
+          "id": "document_type_requested",
+          "label_uz": "So'ralayotgan hujjat turi",
+          "type": "select",
+          "options": [
+            "hal qiluv qarori",
+            "ajrim",
+            "sud buyrug'i",
+            "ish materiallaridan nusxa",
+            "boshqa"
+          ],
+          "required": true
+        },
+        {
+          "id": "copies_count",
+          "label_uz": "Nechta nusxa kerak",
+          "type": "number",
+          "required": true
+        },
+        {
+          "id": "purpose_of_request",
+          "label_uz": "Nusxa qayerga taqdim etiladi (masalan, MIB, bank, boshqa idora)",
+          "type": "text",
+          "required": false
+        }
+      ],
+      "relief_items": [
+        "{{case_number}}-sonli ish bo'yicha {{document_type_requested}}ning {{copies_count}} nusxasini berishingizni"
+      ],
+      "attachments": [
+        "Shaxsni tasdiqlovchi hujjat nusxasi",
+        "Davlat boji to'langanligini tasdiqlovchi hujjat (agar talab qilinsa)"
+      ],
+      "body_template": "{{case_court_name}}da ko'rilgan {{case_number}}-sonli ish bo'yicha chiqarilgan {{document_type_requested}}ning {{copies_count}} nusxasi menga zarur, chunki {{purpose_of_request}}."
+    },
+    {
+      "id": "ariza_ijro_varaqasi_berish",
+      "name_uz": "Hal qiluv qarori (sud buyrug'i) bo'yicha ijro varaqasini berish to'g'risida ariza",
+      "category_path": "Sudga oid hujjatlar > Da'vo arizalar > Sud qarorining ijrosi bo'yicha",
+      "forum": "hal qiluv qarorini chiqargan sud",
+      "legal_basis": [
+        "FPK/IPK (ijro varaqasini berish tartibi)",
+        "\"Sud hujjatlari va boshqa organlar hujjatlarini ijro etish to'g'risida\"gi Qonun"
+      ],
+      "plaintiff_group": "plaintiff_individual_or_legal",
+      "defendant_group": "defendant_individual_or_legal",
+      "uses_common_groups": [
+        "court",
+        "plaintiff_individual",
+        "plaintiff_legal",
+        "defendant_individual",
+        "defendant_legal",
+        "case_reference"
+      ],
+      "content_fields": [
+        {
+          "id": "decision_summary",
+          "label_uz": "Hal qiluv qarorining qisqacha mazmuni (nima undirilgan/nima qilish buyurilgan)",
+          "type": "textarea",
+          "required": true
+        },
+        {
+          "id": "decision_legal_force_date",
+          "label_uz": "Qaror qonuniy kuchga kirgan sana",
+          "type": "date",
+          "required": true
+        }
+      ],
+      "relief_items": [
+        "{{case_decision_date}}dagi hal qiluv qarori bo'yicha {{case_defendant_name}}ga nisbatan ijro varaqasi berishingizni"
+      ],
+      "attachments": [
+        "Hal qiluv qarorining nusxasi (agar undiruvchida bo'lsa)"
+      ],
+      "body_template": "{{case_court_name}} tomonidan {{case_decision_date}}da chiqarilgan hal qiluv qarori (sud buyrug'i)ga ko'ra {{decision_summary}}. Ushbu hujjat {{decision_legal_force_date}}da qonuniy kuchga kirgan, biroq javobgar tomonidan ixtiyoriy tartibda ijro etilmayapti."
+    },
+    {
+      "id": "ariza_ijro_muddatini_tiklash",
+      "name_uz": "Ijro varaqasini ijroga taqdim etishning o'tkazib yuborilgan muddatini tiklash to'g'risida ariza",
+      "category_path": "Sudga oid hujjatlar > Da'vo arizalar > Sud qarorining ijrosi bo'yicha",
+      "forum": "hal qiluv qarorini chiqargan sud",
+      "legal_basis": [
+        "FPK 450-453-moddalari"
+      ],
+      "plaintiff_group": "plaintiff_individual_or_legal",
+      "defendant_group": "defendant_individual_or_legal",
+      "uses_common_groups": [
+        "court",
+        "plaintiff_individual",
+        "plaintiff_legal",
+        "defendant_individual",
+        "defendant_legal",
+        "case_reference"
+      ],
+      "content_fields": [
+        {
+          "id": "writ_issue_date",
+          "label_uz": "Ijro varaqasi berilgan sana",
+          "type": "date",
+          "required": true
+        },
+        {
+          "id": "missed_deadline_reason",
+          "label_uz": "Muddat o'tkazib yuborilishining uzrli sababi",
+          "type": "textarea",
+          "required": true
+        }
+      ],
+      "relief_items": [
+        "{{case_decision_date}}dagi hal qiluv qarori bo'yicha berilgan ijro varaqasini ijroga taqdim etishning o'tkazib yuborilgan muddatini tiklab berishingizni"
+      ],
+      "attachments": [
+        "Muddat o'tkazib yuborilishining uzrli sababini tasdiqlovchi hujjatlar"
+      ],
+      "notes": "Ariza sudga kelib tushgan kundan e'tiboran 10 kun ichida sud majlisida ko'riladi (FPK 450-453-moddalari).",
+      "body_template": "{{case_court_name}} tomonidan {{case_decision_date}}dagi hal qiluv qarori bo'yicha {{writ_issue_date}}da ijro varaqasi berilgan edi. Uni ijroga taqdim etish muddati {{missed_deadline_reason}} sababli o'tkazib yuborildi."
+    },
+    {
+      "id": "ariza_ijro_dublikat",
+      "name_uz": "Yo'qolgan ijro varaqasi (sud buyrug'i)ning dublikatini berish to'g'risida ariza",
+      "category_path": "Sudga oid hujjatlar > Da'vo arizalar > Sud qarorining ijrosi bo'yicha",
+      "forum": "hal qiluv qarorini chiqargan sud",
+      "legal_basis": [
+        "FPK 450-modda"
+      ],
+      "plaintiff_group": "plaintiff_individual_or_legal",
+      "defendant_group": "defendant_individual_or_legal",
+      "uses_common_groups": [
+        "court",
+        "plaintiff_individual",
+        "plaintiff_legal",
+        "defendant_individual",
+        "defendant_legal",
+        "case_reference"
+      ],
+      "content_fields": [
+        {
+          "id": "writ_issue_date",
+          "label_uz": "Ijro varaqasi berilgan sana",
+          "type": "date",
+          "required": true
+        },
+        {
+          "id": "loss_circumstances",
+          "label_uz": "Ijro varaqasi qanday holatlarda yo'qolgani",
+          "type": "textarea",
+          "required": true
+        },
+        {
+          "id": "loss_discovered_date",
+          "label_uz": "Yo'qolganligi ma'lum bo'lgan sana",
+          "type": "date",
+          "required": false
+        }
+      ],
+      "relief_items": [
+        "{{case_decision_date}}dagi hal qiluv qarori bo'yicha yo'qotib qo'yilgan ijro varaqasining dublikatini berishingizni"
+      ],
+      "attachments": [
+        "Yo'qotilganlik holatlarini tushuntiruvchi hujjatlar (bo'lsa)"
+      ],
+      "notes": "Dublikat berish to'g'risidagi ariza, umumiy holda, ijroga taqdim etish muddati o'tguniga qadar berilishi lozim (FPK 450-modda istisno holatlarni ham nazarda tutadi).",
+      "body_template": "{{case_court_name}} tomonidan {{case_decision_date}}dagi hal qiluv qarori bo'yicha {{writ_issue_date}}da berilgan ijro varaqasi {{loss_circumstances}} natijasida yo'qolgan. Yo'qolganligi {{loss_discovered_date}}da ma'lum bo'ldi."
+    },
+    {
+      "id": "ariza_notarial_meros_ochilishi",
+      "name_uz": "Meros ochilganligi to'g'risida notariusga ariza",
+      "category_path": "Notarial tasdiqlanadigan hujjatlar > Arizalar > Meros va vasiyatnoma bo'yicha",
+      "forum": "notarius (meros qoldiruvchining oxirgi doimiy yashash joyi bo'yicha notarial okrug)",
+      "legal_basis": [
+        "Fuqarolik kodeksi (meros huquqi bo'limi)",
+        "\"Notariat to'g'risida\"gi Qonun"
+      ],
+      "plaintiff_group": "plaintiff_individual",
+      "defendant_group": null,
+      "uses_common_groups": [
+        "plaintiff_individual",
+        "notary_block"
+      ],
+      "content_fields": [
+        {
+          "id": "testator_full_name",
+          "label_uz": "Meros qoldiruvchi F.I.Sh.",
+          "type": "text",
+          "required": true
+        },
+        {
+          "id": "death_date",
+          "label_uz": "Vafot etgan sana",
+          "type": "date",
+          "required": true
+        },
+        {
+          "id": "death_certificate_details",
+          "label_uz": "Vafot etganlik guvohnomasi seriya/raqami",
+          "type": "text",
+          "required": true
+        },
+        {
+          "id": "last_residence_address",
+          "label_uz": "Meros qoldiruvchining oxirgi doimiy yashash manzili",
+          "type": "text",
+          "required": true
+        },
+        {
+          "id": "relation_to_testator",
+          "label_uz": "Ariza beruvchining qarindoshlik darajasi/huquqiy munosabati",
+          "type": "text",
+          "required": true
+        },
+        {
+          "id": "estate_description",
+          "label_uz": "Meros mulkining tavsifi (ko'chmas mulk, bank hisobi, ulush va h.k.)",
+          "type": "textarea",
+          "required": true
+        },
+        {
+          "id": "other_known_heirs",
+          "label_uz": "Ma'lum bo'lgan boshqa merosxo'rlar",
+          "type": "textarea",
+          "required": false
+        }
+      ],
+      "relief_items": [
+        "{{testator_full_name}}dan qolgan meros ochilganligi to'g'risida meros ishini ochib, muddati kelganda meros huquqi to'g'risida guvohnoma berishingizni so'rayman"
+      ],
+      "attachments": [
+        "Vafot etganlik guvohnomasi nusxasi",
+        "Qarindoshlik munosabatini tasdiqlovchi hujjat",
+        "Meros mulkiga oid hujjatlar (ko'chmas mulk texnik pasporti va h.k.)",
+        "Ariza beruvchi pasporti nusxasi"
+      ],
+      "notes": "Merosni qabul qilish uchun ariza meros ochilgan kundan (vafot etgan kundan) e'tiboran 6 oy ichida berilishi kerak. Muddat o'tkazib yuborilgan bo'lsa, 'ariza_meros_muddatini_tiklash' shabloniga murojaat qiling.",
+      "body_template": "{{testator_full_name}} {{death_date}}da vafot etgan bo'lib (vafot etganlik guvohnomasi: {{death_certificate_details}}), uning oxirgi doimiy yashash manzili {{last_residence_address}} bo'lgan. Men vafot etuvchining {{relation_to_testator}}iman. Meros massasi {{estate_description}}dan iborat. {{other_known_heirs}}"
+    },
+    {
+      "id": "ariza_chet_ellik_ishchi_tasdiqnoma",
+      "name_uz": "Chet ellik fuqaroni mehnat faoliyatiga jalb qilish uchun tasdiqnoma olish to'g'risida ariza",
+      "category_path": "Arizalar > Yuridik shaxslarga oid arizalar (mehnat migratsiyasi)",
+      "forum": "Xorijiy mehnat migratsiyasi agentligi (yoki tegishli hududiy bo'linmasi)",
+      "legal_basis": [
+        "Xorijiy fuqarolarning O'zbekiston Respublikasida mehnat faoliyati to'g'risidagi qonun hujjatlari",
+        "Chet ellik ishchi kuchini jalb qilish tartibini belgilovchi Vazirlar Mahkamasi qarorlari"
+      ],
+      "plaintiff_group": "plaintiff_legal",
+      "defendant_group": null,
+      "uses_common_groups": [
+        "plaintiff_legal",
+        "foreign_worker"
+      ],
+      "content_fields": [
+        {
+          "id": "fw_position",
+          "label_uz": "Taklif qilinayotgan lavozim/mutaxassislik",
+          "type": "text",
+          "required": true
+        },
+        {
+          "id": "fw_qualification",
+          "label_uz": "Malakasi/tajribasini tasdiqlovchi ma'lumot (diplom, ish tajribasi)",
+          "type": "textarea",
+          "required": true
+        },
+        {
+          "id": "fw_contract_period",
+          "label_uz": "Mehnat shartnomasi muddati",
+          "type": "text",
+          "required": true
+        },
+        {
+          "id": "fw_salary_offered",
+          "label_uz": "Taklif qilinayotgan oylik ish haqi (so'm)",
+          "type": "money",
+          "required": true
+        },
+        {
+          "id": "quota_or_exemption_basis",
+          "label_uz": "Jalb qilish asosi",
+          "type": "select",
+          "options": [
+            "kvota doirasida",
+            "kvotadan tashqari (imtiyozli toifa)",
+            "boshqa asos"
+          ],
+          "required": true
+        },
+        {
+          "id": "application_date",
+          "label_uz": "Ariza berilayotgan sana",
+          "type": "date",
+          "required": true
+        }
+      ],
+      "relief_items": [
+        "{{plaintiff_org_name}} tomonidan {{fw_full_name}} ({{fw_citizenship}} fuqarosi)ni {{fw_position}} lavozimida mehnat faoliyatiga jalb qilish uchun tasdiqnoma berishingizni so'rayman"
+      ],
+      "attachments": [
+        "Chet ellik fuqaro pasporti nusxasi",
+        "Ta'lim/malaka hujjatlari nusxasi (notarial tasdiqlangan tarjima bilan)",
+        "Tashkilotning davlat ro'yxatidan o'tganlik guvohnomasi nusxasi",
+        "Bandlik organi bilan kelishuv (kvota doirasida bo'lsa)",
+        "Xizmat haqi/davlat boji to'langanligini tasdiqlovchi hujjat"
+      ],
+      "notes": "Bu shablon AAK doirasidagi tasdiqnoma arizalariga mos tarzda tuzilgan — aniq hujjat ro'yxati va muddatlar Xorijiy mehnat migratsiyasi agentligining joriy reglamentiga qarab farq qilishi mumkin, amaliyotga tatbiq etishdan oldin tekshiring.",
+      "body_template": "{{plaintiff_org_name}} {{fw_full_name}} ({{fw_citizenship}} fuqarosi, {{fw_birth_date}}da tug'ilgan, pasport raqami {{fw_passport_number}}, amal qilish muddati {{fw_passport_validity}}gacha)ni {{fw_position}} lavozimiga ishga jalb qilishni rejalashtirmoqda. Nomzodning malakasi quyidagicha tasdiqlanadi: {{fw_qualification}}. Mehnat shartnomasi {{fw_contract_period}} muddatga, oylik {{fw_salary_offered}} so'm ish haqi bilan tuzilishi rejalashtirilgan. Jalb qilish {{quota_or_exemption_basis}} asosida amalga oshiriladi."
+    },
+    {
+      "id": "shikoyat_kassatsiya",
+      "name_uz": "Kassatsiya shikoyati (qonuniy kuchga kirgan, apellyatsiya tartibida ko'rilmagan sud hujjati ustidan)",
+      "category_path": "Sudga oid hujjatlar > Appelyatsiya, kassatsiya shikoyatlari",
+      "forum": "Qoraqalpog'iston Respublikasi sudi / viloyat / Toshkent shahar sudining fuqarolik ishlari bo'yicha sudlov hay'ati",
+      "legal_basis": [
+        "FPK 403-modda (kassatsiya shikoyati berish huquqi)",
+        "FPK 404-modda (kassatsiya shikoyatlarini ko'radigan sudlar)"
+      ],
+      "plaintiff_group": "plaintiff_individual_or_legal",
+      "defendant_group": "defendant_individual_or_legal",
+      "uses_common_groups": [
+        "court",
+        "plaintiff_individual",
+        "plaintiff_legal",
+        "defendant_individual",
+        "defendant_legal",
+        "representative"
+      ],
+      "content_fields": [
+        {
+          "id": "first_instance_court",
+          "label_uz": "Birinchi instansiya sudi nomi",
+          "type": "text",
+          "required": true
+        },
+        {
+          "id": "decision_date",
+          "label_uz": "Hal qiluv qarori/ajrim/qaror chiqarilgan sana",
+          "type": "date",
+          "required": true
+        },
+        {
+          "id": "case_number",
+          "label_uz": "Ish raqami",
+          "type": "text",
+          "required": false
+        },
+        {
+          "id": "legal_force_date",
+          "label_uz": "Sud hujjati qonuniy kuchga kirgan sana",
+          "type": "date",
+          "required": true
+        },
+        {
+          "id": "not_appealed_note",
+          "label_uz": "Hujjat apellyatsiya tartibida ko'rilmaganligi izohi",
+          "type": "text",
+          "required": false
+        },
+        {
+          "id": "decision_summary",
+          "label_uz": "Sud hujjatining qisqacha mazmuni",
+          "type": "textarea",
+          "required": true
+        },
+        {
+          "id": "legal_violation_grounds",
+          "label_uz": "Moddiy va/yoki protsessual huquq normalari qanday buzilgani (faktlar emas, faqat huquqiy asoslar)",
+          "type": "textarea",
+          "required": true
+        },
+        {
+          "id": "requested_outcome",
+          "label_uz": "So'ralayotgan natija",
+          "type": "select",
+          "options": [
+            "sud hujjatini to'liq bekor qilish",
+            "sud hujjatini qisman bekor qilish",
+            "sud hujjatini o'zgartirish",
+            "ishni qayta ko'rib chiqishga yuborish"
+          ],
+          "required": true
+        }
+      ],
+      "relief_items": [
+        "{{first_instance_court}}ning {{decision_date}}dagi sud hujjatini {{requested_outcome}}ni"
+      ],
+      "attachments": [
+        "Shikoyat qilinayotgan sud hujjatining nusxasi",
+        "Davlat boji to'langanligini tasdiqlovchi hujjat",
+        "Shikoyat asoslarini tasdiqlovchi qo'shimcha hujjatlar (bo'lsa)"
+      ],
+      "notes": "Kassatsiya shikoyati faqat huquq normalarining buzilishi asosida beriladi — faktik holatlar qayta baholanmaydi. Tadbirkorlik faoliyati bilan bog'liq bo'lmagan nizolarda Tadbirkorlik sub'ektlari huquqlarini himoya qilish bo'yicha vakil ham shikoyat berishi mumkin.",
+      "body_template": "{{first_instance_court}} tomonidan {{decision_date}}da {{case_number}}-sonli ish bo'yicha chiqarilgan sud hujjati {{legal_force_date}}da qonuniy kuchga kirgan ({{not_appealed_note}}). Hujjatning qisqacha mazmuni: {{decision_summary}}. Ushbu hujjat qabul qilinishida quyidagi huquq normalari noto'g'ri qo'llanilgan (buzilgan): {{legal_violation_grounds}}."
+    },
+    {
+      "id": "shikoyat_taftish",
+      "name_uz": "Taftish tartibidagi shikoyat (apellyatsiya/kassatsiya tartibida allaqachon ko'rilgan sud hujjati ustidan)",
+      "category_path": "Sudga oid hujjatlar > Appelyatsiya, kassatsiya shikoyatlari",
+      "forum": "Oliy sudning tegishli sudlov hay'ati (yoki yuqori turuvchi sud)",
+      "legal_basis": [
+        "FPK (taftish tartibi bobi, 2024-yil 1-yanvardan joriy etilgan, avvalgi nazorat tartibi o'rniga)"
+      ],
+      "plaintiff_group": "plaintiff_individual_or_legal",
+      "defendant_group": "defendant_individual_or_legal",
+      "uses_common_groups": [
+        "court",
+        "plaintiff_individual",
+        "plaintiff_legal",
+        "defendant_individual",
+        "defendant_legal",
+        "representative"
+      ],
+      "content_fields": [
+        {
+          "id": "first_instance_court",
+          "label_uz": "Birinchi instansiya sudi nomi",
+          "type": "text",
+          "required": true
+        },
+        {
+          "id": "appellate_or_cassation_court",
+          "label_uz": "Ishni oxirgi marta ko'rgan apellyatsiya/kassatsiya sudi nomi",
+          "type": "text",
+          "required": true
+        },
+        {
+          "id": "last_decision_date",
+          "label_uz": "Oxirgi sud hujjati chiqarilgan sana",
+          "type": "date",
+          "required": true
+        },
+        {
+          "id": "case_number",
+          "label_uz": "Ish raqami",
+          "type": "text",
+          "required": false
+        },
+        {
+          "id": "decision_summary",
+          "label_uz": "Ish bo'yicha barcha instansiyalarda chiqarilgan hujjatlarning qisqacha mazmuni",
+          "type": "textarea",
+          "required": true
+        },
+        {
+          "id": "legal_violation_grounds",
+          "label_uz": "Huquq normalari qanday jiddiy buzilgani (sud amaliyoti birligiga ta'siri)",
+          "type": "textarea",
+          "required": true
+        },
+        {
+          "id": "requested_outcome",
+          "label_uz": "So'ralayotgan natija",
+          "type": "select",
+          "options": [
+            "barcha sud hujjatlarini bekor qilish",
+            "faqat oxirgi instansiya hujjatini bekor qilish",
+            "sud hujjatini o'zgartirish"
+          ],
+          "required": true
+        }
+      ],
+      "relief_items": [
+        "Ish bo'yicha chiqarilgan sud hujjatlarini taftish tartibida qayta ko'rib, {{requested_outcome}}ni"
+      ],
+      "attachments": [
+        "Ish bo'yicha barcha instansiyalarda chiqarilgan sud hujjatlarining nusxalari",
+        "Davlat boji to'langanligini tasdiqlovchi hujjat"
+      ],
+      "notes": "Taftish — 2024-yildan joriy etilgan yakuniy tekshiruv bosqichi bo'lib, avvalgi 'nazorat tartibi'ning o'rnini bosgan. Faqat apellyatsiya yoki kassatsiya tartibida allaqachon ko'rilgan ishlar bo'yicha qo'llaniladi — bu holat va aniq muddatlarni joriy FPK tahriridan tekshiring, chunki tartib nisbatan yangi va amaliyot shakllanmoqda.",
+      "body_template": "{{first_instance_court}} tomonidan ko'rilgan ish {{appellate_or_cassation_court}} tomonidan {{last_decision_date}}da yakuniy ko'rib chiqilgan ({{case_number}}-sonli ish). Barcha instansiyalarda chiqarilgan hujjatlarning mazmuni: {{decision_summary}}. Ushbu hujjatlar qabul qilinishida quyidagi jiddiy huquqiy xato yo'l qo'yilgan: {{legal_violation_grounds}}."
+    },
+    {
+      "id": "shikoyat_sud_ijrochisi",
+      "name_uz": "Davlat ijrochisining qarorlari, harakatlari (harakatsizligi) ustidan ariza (shikoyat)",
+      "category_path": "Sudga oid hujjatlar > Da'vo arizalar > Sud qarorining ijrosi bo'yicha",
+      "forum": "davlat ijrochisi faoliyat yurituvchi hududdagi sud",
+      "legal_basis": [
+        "\"Sud hujjatlari va boshqa organlar hujjatlarini ijro etish to'g'risida\"gi Qonun"
+      ],
+      "plaintiff_group": "plaintiff_individual_or_legal",
+      "defendant_group": null,
+      "uses_common_groups": [
+        "court",
+        "plaintiff_individual",
+        "plaintiff_legal"
+      ],
+      "content_fields": [
+        {
+          "id": "bailiff_name",
+          "label_uz": "Davlat ijrochisi F.I.Sh. va MIB (Majburiy ijro byurosi) bo'limi",
+          "type": "text",
+          "required": true
+        },
+        {
+          "id": "enforcement_case_number",
+          "label_uz": "Ijro ishi raqami",
+          "type": "text",
+          "required": true
+        },
+        {
+          "id": "contested_action_date",
+          "label_uz": "Shikoyat qilinayotgan qaror/harakat sanasi",
+          "type": "date",
+          "required": true
+        },
+        {
+          "id": "contested_action_description",
+          "label_uz": "Shikoyat qilinayotgan qaror/harakat (harakatsizlik) tavsifi",
+          "type": "textarea",
+          "required": true
+        },
+        {
+          "id": "violation_discovered_date",
+          "label_uz": "Huquq buzilganligi ma'lum bo'lgan sana",
+          "type": "date",
+          "required": true
+        },
+        {
+          "id": "rights_violated_description",
+          "label_uz": "Qaysi huquq/qonuniy manfaat buzilgani",
+          "type": "textarea",
+          "required": true
+        }
+      ],
+      "relief_items": [
+        "{{bailiff_name}}ning {{contested_action_date}}dagi {{contested_action_description}} bo'yicha qarori (harakati/harakatsizligi)ni g'ayriqonuniy deb topishni"
+      ],
+      "attachments": [
+        "Shikoyat qilinayotgan qaror nusxasi (bo'lsa)",
+        "Huquq buzilganligini tasdiqlovchi hujjatlar"
+      ],
+      "notes": "Ariza (shikoyat) huquq buzilganligi ma'lum bo'lgan kundan e'tiboran 10 kun ichida berilishi lozim — muddat qisqa, tezkor harakat qilish muhim.",
+      "body_template": "{{bailiff_name}} tomonidan {{enforcement_case_number}}-sonli ijro ishi doirasida {{contested_action_date}}da quyidagi qaror qabul qilingan (harakat amalga oshirilgan/harakatsizlikka yo'l qo'yilgan): {{contested_action_description}}. Ushbu qaror (harakat) natijasida {{rights_violated_description}}, bu holat menga {{violation_discovered_date}}da ma'lum bo'ldi."
+    },
+    {
+      "id": "ariza_hujjat_qalbakiligi",
+      "name_uz": "Hujjatning qalbakiligi (soxtaligi) to'g'risida arz",
+      "category_path": "Sudga oid hujjatlar > Iltimosnomalar",
+      "forum": "ishni ko'rayotgan sud",
+      "legal_basis": [
+        "FPK 235-modda (hujjatning qalbakiligi to'g'risida arz qilish)",
+        "FPK 236-modda (arizani tekshirish)"
+      ],
+      "plaintiff_group": "plaintiff_individual_or_legal",
+      "defendant_group": null,
+      "uses_common_groups": [
+        "court",
+        "plaintiff_individual",
+        "plaintiff_legal",
+        "case_reference"
+      ],
+      "content_fields": [
+        {
+          "id": "contested_document_description",
+          "label_uz": "Qalbaki deb hisoblanayotgan hujjat tavsifi (kim tomonidan, qachon taqdim etilgan)",
+          "type": "textarea",
+          "required": true
+        },
+        {
+          "id": "falsification_grounds",
+          "label_uz": "Hujjat nima uchun qalbaki deb hisoblanadi",
+          "type": "textarea",
+          "required": true
+        },
+        {
+          "id": "requested_verification_method",
+          "label_uz": "So'ralayotgan tekshirish usuli",
+          "type": "select",
+          "options": [
+            "ekspertiza tayinlash",
+            "boshqa dalillar bilan solishtirish",
+            "guvohlarni so'roq qilish",
+            "boshqa"
+          ],
+          "required": true
+        }
+      ],
+      "relief_items": [
+        "{{contested_document_description}} hujjatining qalbakiligini tekshirib, uni dalillar qatoridan chiqarib tashlashni"
+      ],
+      "attachments": [
+        "Qalbakilikni asoslovchi qo'shimcha dalillar (bo'lsa)"
+      ],
+      "notes": "Sud arizani qondirsangiz, hujjatni dalillar qatoridan chiqarib tashlaydi yoki uning qalbakiligini tekshirish uchun ekspertiza tayinlaydi (masalan pocherk ekspertizasi).",
+      "body_template": "{{case_court_name}}da ko'rilayotgan ish materiallarida {{contested_document_description}} mavjud. Ushbu hujjat quyidagi sabablarga ko'ra qalbaki (soxta) deb hisoblanadi: {{falsification_grounds}}. Buni tekshirish uchun {{requested_verification_method}} usulini qo'llashni so'rayman."
+    },
+    {
+      "id": "ariza_sudyani_rad_qilish",
+      "name_uz": "Sudyani (yoki boshqa protsess ishtirokchisini) rad qilish to'g'risida ariza",
+      "category_path": "Sudga oid hujjatlar > Iltimosnomalar",
+      "forum": "ishni ko'rayotgan sud",
+      "legal_basis": [
+        "FPK 21-modda (sudyani rad qilish asoslari)",
+        "FPK 22-modda (prokuror, ekspert, mutaxassis, tarjimon, kotibni rad qilish asoslari)",
+        "FPK 23-25-moddalar (ariza berish va hal etish tartibi)"
+      ],
+      "plaintiff_group": "plaintiff_individual_or_legal",
+      "defendant_group": null,
+      "uses_common_groups": [
+        "court",
+        "plaintiff_individual",
+        "plaintiff_legal",
+        "case_reference"
+      ],
+      "content_fields": [
+        {
+          "id": "challenged_person_role",
+          "label_uz": "Rad etilayotgan shaxsning maqomi",
+          "type": "select",
+          "options": [
+            "sudya",
+            "prokuror",
+            "ekspert",
+            "mutaxassis",
+            "tarjimon",
+            "sud majlisi kotibi"
+          ],
+          "required": true
+        },
+        {
+          "id": "challenged_person_name",
+          "label_uz": "Rad etilayotgan shaxs F.I.Sh.",
+          "type": "text",
+          "required": true
+        },
+        {
+          "id": "recusal_grounds",
+          "label_uz": "Rad etish asosi (qarindoshlik, manfaatdorlik, ishda oldin boshqa maqomda ishtirok etgani va h.k.)",
+          "type": "textarea",
+          "required": true
+        }
+      ],
+      "relief_items": [
+        "{{challenged_person_role}} {{challenged_person_name}}ni ushbu ishni ko'rishdan (ishtirok etishdan) rad etishni"
+      ],
+      "attachments": [
+        "Rad etish asosini tasdiqlovchi hujjatlar (bo'lsa)"
+      ],
+      "notes": "Ariza ish mazmunan ko'rila boshlanishidan oldin berilishi tavsiya etiladi; keyinroq ma'lum bo'lgan holatlar uchun istisno qilinadi (FPK 23-modda).",
+      "body_template": "{{case_court_name}}da ko'rilayotgan ish bo'yicha {{challenged_person_role}} {{challenged_person_name}} ishtirok etmoqda. Quyidagi asoslarga ko'ra ushbu shaxsning ishni xolisona ko'rib chiqishiga shubha bor: {{recusal_grounds}}."
+    },
+    {
+      "id": "ariza_yangi_holatlar_qayta_korish",
+      "name_uz": "Yangi ochilgan holatlar bo'yicha ishni qayta ko'rish to'g'risida ariza",
+      "category_path": "Sudga oid hujjatlar > Arizalar > Sudda ishlarni ko'rib chiqish, ish yuritishni tugatish va tiklash bo'yicha",
+      "forum": "hal qiluv qarorini/ajrimni/qarorni chiqargan sud",
+      "legal_basis": [
+        "FPK (yangi ochilgan holatlar bo'yicha ishni qayta ko'rish bobi)"
+      ],
+      "plaintiff_group": "plaintiff_individual_or_legal",
+      "defendant_group": null,
+      "uses_common_groups": [
+        "court",
+        "plaintiff_individual",
+        "plaintiff_legal",
+        "case_reference"
+      ],
+      "content_fields": [
+        {
+          "id": "newly_discovered_fact",
+          "label_uz": "Yangi ochilgan holat tavsifi",
+          "type": "textarea",
+          "required": true
+        },
+        {
+          "id": "fact_known_date",
+          "label_uz": "Ushbu holat ma'lum bo'lgan sana",
+          "type": "date",
+          "required": true
+        },
+        {
+          "id": "fact_significance",
+          "label_uz": "Ushbu holat ish natijasiga qanday ta'sir qilishi",
+          "type": "textarea",
+          "required": true
+        }
+      ],
+      "relief_items": [
+        "{{case_decision_date}}dagi hal qiluv qarorini (ajrim/qarorni) yangi ochilgan holatlar bo'yicha qayta ko'rib chiqishni"
+      ],
+      "attachments": [
+        "Yangi holatni tasdiqlovchi hujjatlar"
+      ],
+      "notes": "Ariza holat ma'lum bo'lgan kundan e'tiboran 3 oy ichida beriladi. Ariza beruvchilar — ishda ishtirok etgan shaxslar yoki prokuror.",
+      "body_template": "{{case_court_name}} tomonidan {{case_decision_date}}da chiqarilgan hal qiluv qarori (ajrim/qaror) qonuniy kuchga kirgan edi. Biroq {{fact_known_date}}da quyidagi yangi holat ma'lum bo'ldi: {{newly_discovered_fact}}. Ushbu holat ishning yakuniy natijasiga quyidagicha ta'sir qiladi: {{fact_significance}}."
+    },
+    {
+      "id": "shikoyat_administrativ",
+      "name_uz": "Ma'muriy organ qarori, harakati (harakatsizligi) ustidan ma'muriy sudga administrativ da'vo arizasi",
+      "category_path": "Ma'muriy sud ishlari",
+      "forum": "tumanlararo ma'muriy sud (ma'muriy organ joylashgan/mansabdor shaxs ishlaydigan joyda)",
+      "legal_basis": [
+        "Ma'muriy sud ishlarini yuritish to'g'risidagi kodeks (MSYK) 4-5-moddalari (murojaat qilish huquqi va shakli)"
+      ],
+      "plaintiff_group": "plaintiff_individual_or_legal",
+      "defendant_group": null,
+      "uses_common_groups": [
+        "court",
+        "plaintiff_individual",
+        "plaintiff_legal",
+        "representative"
+      ],
+      "content_fields": [
+        {
+          "id": "respondent_agency_name",
+          "label_uz": "Javobgar ma'muriy organ/mansabdor shaxs nomi va lavozimi",
+          "type": "text",
+          "required": true
+        },
+        {
+          "id": "contested_act_type",
+          "label_uz": "Shikoyat qilinayotgan predmet turi",
+          "type": "select",
+          "options": [
+            "ma'muriy hujjat (qaror)",
+            "harakat",
+            "harakatsizlik (javob bermaslik)",
+            "idoraviy normativ-huquqiy hujjat"
+          ],
+          "required": true
+        },
+        {
+          "id": "contested_act_details",
+          "label_uz": "Qaror/harakat tavsifi (raqami, sanasi, mazmuni)",
+          "type": "textarea",
+          "required": true
+        },
+        {
+          "id": "rights_violated",
+          "label_uz": "Qaysi huquq, erkinlik yoki qonuniy manfaat buzilgani",
+          "type": "textarea",
+          "required": true
+        },
+        {
+          "id": "violation_known_date",
+          "label_uz": "Buzilganlik ma'lum bo'lgan sana",
+          "type": "date",
+          "required": true
+        },
+        {
+          "id": "pretrial_appeal_attempted",
+          "label_uz": "Yuqori turuvchi organga oldindan (ichki) shikoyat qilinganmi",
+          "type": "boolean",
+          "required": false
+        }
+      ],
+      "relief_items": [
+        "{{respondent_agency_name}}ning {{contested_act_details}}ni g'ayriqonuniy deb topishni",
+        "Buzilgan huquqlarni tiklash choralarini ko'rishga majbur qilishni"
+      ],
+      "attachments": [
+        "Shikoyat qilinayotgan hujjat/qaror nusxasi",
+        "Huquq buzilganligini tasdiqlovchi hujjatlar",
+        "Ichki (idoraviy) shikoyat va unga javob (bo'lsa)",
+        "Davlat boji to'langanligini tasdiqlovchi hujjat"
+      ],
+      "notes": "Umumiy muddat — huquq buzilganligi ma'lum bo'lgan kundan e'tiboran 6 oy (ayrim toifadagi nizolar uchun maxsus qisqaroq muddatlar belgilanishi mumkin). Bu — litsenziya, davlat ro'yxatidan o'tkazish, soliq/bojxona qarorlari kabi davlat organlari bilan nizolarda ishlatiladigan asosiy yo'l.",
+      "body_template": "{{respondent_agency_name}} tomonidan {{contested_act_type}} qabul qilingan (amalga oshirilgan): {{contested_act_details}}. Ushbu qaror (harakat/harakatsizlik) natijasida mening {{rights_violated}} huquqim buzildi, bu holat menga {{violation_known_date}}da ma'lum bo'ldi. {{pretrial_appeal_attempted}}"
+    },
+    {
+      "id": "ariza_bankrotlik",
+      "name_uz": "Qarzdorni to'lovga qobiliyatsiz (bankrot) deb topish to'g'risida ariza",
+      "category_path": "Sudga oid hujjatlar > Iqtisodiy sud > Bankrotlik (to'lovga qobiliyatsizlik) ishlari",
+      "forum": "iqtisodiy sud",
+      "legal_basis": [
+        "IPK 210-211-moddalari",
+        "\"To'lovga qobiliyatsizlik to'g'risida\"gi Qonun 5-6-moddalari"
+      ],
+      "plaintiff_group": "plaintiff_individual_or_legal",
+      "defendant_group": "defendant_individual_or_legal",
+      "uses_common_groups": [
+        "court",
+        "plaintiff_individual",
+        "plaintiff_legal",
+        "defendant_individual",
+        "defendant_legal"
+      ],
+      "content_fields": [
+        {
+          "id": "applicant_role",
+          "label_uz": "Ariza beruvchining maqomi",
+          "type": "select",
+          "options": [
+            "qarzdorning o'zi",
+            "kreditor",
+            "prokuror",
+            "davlat soliq xizmati organi"
+          ],
+          "required": true
+        },
+        {
+          "id": "debt_total_amount",
+          "label_uz": "Umumiy qarz summasi (so'm)",
+          "type": "money",
+          "required": true
+        },
+        {
+          "id": "debt_basis_description",
+          "label_uz": "Qarz kelib chiqish asosi (shartnoma, soliq majburiyati va h.k.)",
+          "type": "textarea",
+          "required": true
+        },
+        {
+          "id": "obligation_due_date",
+          "label_uz": "Majburiyat bajarilishi kerak bo'lgan sana",
+          "type": "date",
+          "required": true
+        },
+        {
+          "id": "insolvency_signs",
+          "label_uz": "To'lovga qobiliyatsizlik alomatlari (masalan 3/6 oy ichida bajarilmaganligi)",
+          "type": "textarea",
+          "required": true
+        },
+        {
+          "id": "proposed_procedure",
+          "label_uz": "Taklif qilinayotgan tartib-taomil",
+          "type": "select",
+          "options": [
+            "to'lov qobiliyatini tiklash (sanatsiya)",
+            "to'g'ridan-to'g'ri tugatish",
+            "sud belgilaydi"
+          ],
+          "required": false
+        }
+      ],
+      "relief_items": [
+        "{{defendant_name}}ni to'lovga qobiliyatsiz (bankrot) deb topishni",
+        "Moliyaviy boshqaruvchi tayinlashni"
+      ],
+      "attachments": [
+        "Qarz asosini tasdiqlovchi hujjatlar (shartnoma, hisob-kitoblar, hal qiluv qarori/ijro hujjati agar bo'lsa)",
+        "Qarzdorning mol-mulki va majburiyatlari to'g'risidagi ma'lumotlar (mavjud bo'lsa)",
+        "Davlat boji to'langanligini tasdiqlovchi hujjat"
+      ],
+      "notes": "To'lovga qobiliyatsizlik ishlari ko'p bosqichli (kuzatuv, sud sanatsiyasi, tashqi boshqaruv, tugatish) — bu shablon faqat ish qo'zg'atish arizasini qamrab oladi. Tugatishga doir ish yuritish muddati odatda 9 oydan (uzaytirilganda 12 oydan) oshmasligi kerak.",
+      "body_template": "{{defendant_name}} oldida {{debt_basis_description}} asosida {{debt_total_amount}} so'm miqdorida qarzdorlik mavjud bo'lib, majburiyat {{obligation_due_date}}gacha bajarilishi lozim edi. Biroq bugungi kungacha bajarilmagan. Qarzdorda quyidagi to'lovga qobiliyatsizlik alomatlari mavjud: {{insolvency_signs}}. Ariza beruvchi sifatida men {{applicant_role}} maqomida ishtirok etaman."
+    },
+    {
+      "id": "davo_hurmat_qadr_qimmat",
+      "name_uz": "Sha'ni, qadr-qimmati va ishchanlik obro'sini himoya qilish to'g'risida da'vo ariza",
+      "category_path": "Sudga oid hujjatlar > Da'vo arizalar > Boshqa nizolar bo'yicha",
+      "forum": "fuqarolik sudi (yuridik shaxsning ishchanlik obro'siga oid bo'lsa — iqtisodiy sud)",
+      "legal_basis": [
+        "Fuqarolik kodeksi (fuqarolarning sha'ni, qadr-qimmati va ishchanlik obro'sini himoya qilish moddalari)"
+      ],
+      "plaintiff_group": "plaintiff_individual_or_legal",
+      "defendant_group": "defendant_individual_or_legal",
+      "uses_common_groups": [
+        "court",
+        "plaintiff_individual",
+        "plaintiff_legal",
+        "defendant_individual",
+        "defendant_legal",
+        "representative",
+        "evidence"
+      ],
+      "content_fields": [
+        {
+          "id": "disseminated_info_description",
+          "label_uz": "Tarqatilgan ma'lumot mazmuni",
+          "type": "textarea",
+          "required": true
+        },
+        {
+          "id": "dissemination_method",
+          "label_uz": "Tarqatish usuli",
+          "type": "select",
+          "options": [
+            "ommaviy axborot vositasida",
+            "ijtimoiy tarmoqda",
+            "og'zaki",
+            "xizmat xarakteridagi hujjatda",
+            "boshqa"
+          ],
+          "required": true
+        },
+        {
+          "id": "dissemination_date",
+          "label_uz": "Tarqatilgan sana",
+          "type": "date",
+          "required": true
+        },
+        {
+          "id": "why_untrue_and_defamatory",
+          "label_uz": "Ma'lumot nima uchun haqiqatga to'g'ri kelmasligi va sha'ni-qadr-qimmatga putur yetkazishi",
+          "type": "textarea",
+          "required": true
+        },
+        {
+          "id": "refutation_method_requested",
+          "label_uz": "So'ralayotgan rad etish usuli",
+          "type": "select",
+          "options": [
+            "xuddi shu usulda rasmiy rad etish",
+            "kechirim so'rash",
+            "boshqa"
+          ],
+          "required": true
+        },
+        {
+          "id": "moral_damage_amount",
+          "label_uz": "Ma'naviy zarar summasi (so'm, agar talab qilinsa)",
+          "type": "money",
+          "required": false
+        }
+      ],
+      "relief_items": [
+        "{{defendant_name}} tomonidan tarqatilgan {{disseminated_info_description}} ma'lumotini haqiqatga to'g'ri kelmaydi deb topishni",
+        "{{defendant_name}}ni {{refutation_method_requested}} tartibida rad etishga majbur qilishni",
+        "{{moral_damage_amount}} so'm ma'naviy zararni undirishni (agar talab qilinsa)"
+      ],
+      "attachments": [
+        "Tarqatilgan ma'lumotni tasdiqlovchi dalillar (skrinshot, nashr nusxasi, guvohlar ko'rsatuvi)"
+      ],
+      "body_template": "{{dissemination_date}}da {{defendant_name}} tomonidan {{dissemination_method}} orqali quyidagi ma'lumot tarqatildi: {{disseminated_info_description}}. Ushbu ma'lumot haqiqatga to'g'ri kelmaydi, chunki {{why_untrue_and_defamatory}}, va bu holat mening sha'nim, qadr-qimmatim va ishchanlik obro'yimga putur yetkazdi."
+    },
+    {
+      "id": "davo_istemolchi_huquqi",
+      "name_uz": "Iste'molchilar huquqini himoya qilish to'g'risida da'vo ariza",
+      "category_path": "Sudga oid hujjatlar > Da'vo arizalar > Boshqa nizolar bo'yicha",
+      "forum": "fuqarolik sudi",
+      "legal_basis": [
+        "\"Iste'molchilar huquqlarini himoya qilish to'g'risida\"gi Qonun"
+      ],
+      "plaintiff_group": "plaintiff_individual",
+      "defendant_group": "defendant_legal",
+      "uses_common_groups": [
+        "court",
+        "plaintiff_individual",
+        "defendant_legal",
+        "evidence"
+      ],
+      "content_fields": [
+        {
+          "id": "purchase_date",
+          "label_uz": "Xarid qilingan/xizmat ko'rsatilgan sana",
+          "type": "date",
+          "required": true
+        },
+        {
+          "id": "product_or_service_description",
+          "label_uz": "Tovar/xizmat tavsifi",
+          "type": "textarea",
+          "required": true
+        },
+        {
+          "id": "defect_description",
+          "label_uz": "Kamchilik/nuqson tavsifi",
+          "type": "textarea",
+          "required": true
+        },
+        {
+          "id": "claim_submitted_to_seller_date",
+          "label_uz": "Sotuvchiga da'vo/pretenziya taqdim etilgan sana",
+          "type": "date",
+          "required": false
+        },
+        {
+          "id": "seller_response",
+          "label_uz": "Sotuvchining javobi (rad etish, javobsiz qoldirish va h.k.)",
+          "type": "textarea",
+          "required": false
+        },
+        {
+          "id": "requested_remedy",
+          "label_uz": "So'ralayotgan yechim",
+          "type": "select",
+          "options": [
+            "pulni qaytarish",
+            "tovarni almashtirish",
+            "kamchilikni bepul bartaraf etish",
+            "narxni kamaytirish",
+            "zararni undirish"
+          ],
+          "required": true
+        },
+        {
+          "id": "claim_amount",
+          "label_uz": "Talab qilinayotgan summa (so'm)",
+          "type": "money",
+          "required": false
+        }
+      ],
+      "relief_items": [
+        "{{defendant_org_name}}dan {{requested_remedy}} to'g'risida qaror qabul qilishni",
+        "{{claim_amount}} so'm zararni (agar bo'lsa) undirishni"
+      ],
+      "attachments": [
+        "Xarid cheki/shartnoma nusxasi",
+        "Kamchilikni tasdiqlovchi hujjatlar (ekspertiza xulosasi, foto)",
+        "Sotuvchiga yuborilgan pretenziya va uning javobi (bo'lsa)"
+      ],
+      "notes": "Iste'molchi sifatida da'vogar davlat bojidan ozod qilinishi mumkin.",
+      "body_template": "{{purchase_date}}da {{defendant_org_name}}dan {{product_or_service_description}} xarid qildim (xizmatidan foydalandim). Keyinchalik quyidagi kamchilik aniqlandi: {{defect_description}}. {{claim_submitted_to_seller_date}}da sotuvchiga pretenziya taqdim etdim, biroq {{seller_response}}."
+    },
+    {
+      "id": "davo_mulk_huquqini_tan_olish",
+      "name_uz": "Mulk huquqini tan olish to'g'risida da'vo ariza",
+      "category_path": "Sudga oid hujjatlar > Da'vo arizalar > Boshqa nizolar bo'yicha",
+      "forum": "fuqarolik sudi",
+      "legal_basis": [
+        "Fuqarolik kodeksi (mulk huquqi bo'limi)"
+      ],
+      "plaintiff_group": "plaintiff_individual_or_legal",
+      "defendant_group": "defendant_individual_or_legal",
+      "uses_common_groups": [
+        "court",
+        "plaintiff_individual",
+        "plaintiff_legal",
+        "defendant_individual",
+        "defendant_legal",
+        "claim_value_and_duty",
+        "evidence"
+      ],
+      "content_fields": [
+        {
+          "id": "property_description",
+          "label_uz": "Mol-mulk tavsifi (ko'chmas/ko'chmas bo'lmagan, manzil/identifikatsiya)",
+          "type": "textarea",
+          "required": true
+        },
+        {
+          "id": "acquisition_basis",
+          "label_uz": "Mulk huquqi qanday asosda vujudga kelgani (xarid, meros, qurilish va h.k.)",
+          "type": "textarea",
+          "required": true
+        },
+        {
+          "id": "registration_issue",
+          "label_uz": "Nima uchun mulk huquqi rasman qayd etilmagan yoki nizolashilmoqda",
+          "type": "textarea",
+          "required": true
+        }
+      ],
+      "relief_items": [
+        "{{plaintiff_name}}ning {{property_description}}ga bo'lgan mulk huquqini tan olishni"
+      ],
+      "attachments": [
+        "Mulkka egalik qilishni tasdiqlovchi hujjatlar",
+        "Baholash hujjati (davlat bojini hisoblash uchun)",
+        "Davlat boji to'langanligini tasdiqlovchi hujjat"
+      ],
+      "body_template": "{{property_description}} nomli mol-mulkka nisbatan mening mulk huquqim {{acquisition_basis}} asosida vujudga kelgan. Biroq {{registration_issue}} sababli ushbu huquq rasman tan olinmagan (nizolashilmoqda), shu sababli sud tartibida mulk huquqimni tasdiqlashga majbur bo'ldim."
+    },
+    {
+      "id": "ariza_guvohni_chaqirish",
+      "name_uz": "Guvohni chaqirish to'g'risida iltimosnoma",
+      "category_path": "Sudga oid hujjatlar > Iltimosnomalar",
+      "forum": "ishni ko'rayotgan sud",
+      "legal_basis": [
+        "FPK 82-modda (guvohni chaqirish to'g'risidagi iltimosnoma)"
+      ],
+      "plaintiff_group": "plaintiff_individual_or_legal",
+      "defendant_group": null,
+      "uses_common_groups": [
+        "court",
+        "plaintiff_individual",
+        "plaintiff_legal",
+        "case_reference"
+      ],
+      "content_fields": [
+        {
+          "id": "witness_full_name",
+          "label_uz": "Guvoh F.I.Sh.",
+          "type": "text",
+          "required": true
+        },
+        {
+          "id": "witness_address",
+          "label_uz": "Guvohning manzili",
+          "type": "text",
+          "required": true
+        },
+        {
+          "id": "witness_relevant_facts",
+          "label_uz": "Guvoh qaysi holatlar yuzasidan ko'rsatuv bera olishi",
+          "type": "textarea",
+          "required": true
+        }
+      ],
+      "relief_items": [
+        "{{witness_full_name}}ni guvoh sifatida sud majlisiga chaqirishni"
+      ],
+      "attachments": [],
+      "body_template": "{{case_court_name}}da ko'rilayotgan {{case_number}}-sonli ish bo'yicha {{witness_full_name}} ({{witness_address}} manzilida istiqomat qiluvchi) quyidagi holatlar yuzasidan ahamiyatga molik ko'rsatuv bera oladi: {{witness_relevant_facts}}."
+    },
+    {
+      "id": "ariza_ekspertiza_tayinlash",
+      "name_uz": "Sud ekspertizasini tayinlash to'g'risida iltimosnoma",
+      "category_path": "Sudga oid hujjatlar > Iltimosnomalar",
+      "forum": "ishni ko'rayotgan sud",
+      "legal_basis": [
+        "FPK 95-modda (ekspertiza)"
+      ],
+      "plaintiff_group": "plaintiff_individual_or_legal",
+      "defendant_group": null,
+      "uses_common_groups": [
+        "court",
+        "plaintiff_individual",
+        "plaintiff_legal",
+        "case_reference"
+      ],
+      "content_fields": [
+        {
+          "id": "expertise_type",
+          "label_uz": "Ekspertiza turi",
+          "type": "select",
+          "options": [
+            "tovar-ekspertiza",
+            "moliyaviy-iqtisodiy",
+            "qurilish-texnik",
+            "pocherk (yozuv)",
+            "tibbiy",
+            "boshqa"
+          ],
+          "required": true
+        },
+        {
+          "id": "expertise_questions",
+          "label_uz": "Ekspert oldiga qo'yiladigan savollar",
+          "type": "textarea",
+          "required": true
+        },
+        {
+          "id": "proposed_expert_or_org",
+          "label_uz": "Taklif qilinayotgan ekspert/ekspert tashkiloti (bo'lsa)",
+          "type": "text",
+          "required": false
+        },
+        {
+          "id": "expertise_cost_payer",
+          "label_uz": "Ekspertiza xarajatini kim to'laydi",
+          "type": "select",
+          "options": [
+            "arizachi",
+            "ikkala taraf teng",
+            "sud belgilaydi"
+          ],
+          "required": false
+        }
+      ],
+      "relief_items": [
+        "{{expertise_type}} turidagi ekspertizani tayinlab, ekspert oldiga {{expertise_questions}} savollarini qo'yishni"
+      ],
+      "attachments": [],
+      "body_template": "{{case_court_name}}da ko'rilayotgan ish bo'yicha ishning to'g'ri hal etilishi uchun maxsus bilimga ega mutaxassis xulosasi zarur. Shu sababli {{expertise_type}} turidagi sud ekspertizasini tayinlab, ekspert oldiga quyidagi savollarni qo'yishni so'rayman: {{expertise_questions}}. {{proposed_expert_or_org}}"
+    },
+    {
+      "id": "notarial_vasiyatnoma",
+      "name_uz": "Vasiyatnoma tuzish to'g'risida ariza (notarial rasmiylashtirish uchun)",
+      "category_path": "Notarial tasdiqlanadigan hujjatlar > Vasiyatnomalar",
+      "forum": "notarius",
+      "legal_basis": [
+        "Fuqarolik kodeksi (meros huquqi bo'limi, vasiyatnoma tuzish qoidalari)",
+        "\"Notariat to'g'risida\"gi Qonun"
+      ],
+      "plaintiff_group": "plaintiff_individual",
+      "defendant_group": null,
+      "uses_common_groups": [
+        "plaintiff_individual",
+        "notary_block"
+      ],
+      "content_fields": [
+        {
+          "id": "heirs_and_shares",
+          "label_uz": "Merosxo'rlar va ularga tegishli ulushlar",
+          "type": "textarea",
+          "required": true
+        },
+        {
+          "id": "property_list",
+          "label_uz": "Vasiyat qilinayotgan mol-mulk ro'yxati",
+          "type": "textarea",
+          "required": true
+        },
+        {
+          "id": "executor_appointed",
+          "label_uz": "Vasiyatnomani ijro etuvchi tayinlanganmi (F.I.Sh., agar bo'lsa)",
+          "type": "text",
+          "required": false
+        },
+        {
+          "id": "special_conditions",
+          "label_uz": "Maxsus shartlar (bo'lsa)",
+          "type": "textarea",
+          "required": false
+        }
+      ],
+      "relief_items": [
+        "Mendan keyin quyidagi mol-mulkni {{heirs_and_shares}} tartibida vasiyat qilishimni tasdiqlashingizni so'rayman"
+      ],
+      "attachments": [
+        "Ariza beruvchi pasporti nusxasi",
+        "Vasiyat qilinayotgan mol-mulkka oid hujjatlar"
+      ],
+      "notes": "Vasiyatnoma shaxsan tuziladi va notarius tomonidan tasdiqlanadi; vasiyat qiluvchi muomala layoqati to'liq bo'lishi va shaxsan (vakil orqali emas) ishtirok etishi shart.",
+      "body_template": "Men, {{plaintiff_full_name}}, sog'lom aqlda va butun xotirjamlikda bo'lib, o'zimga tegishli quyidagi mol-mulkni: {{property_list}} — vafotimdan so'ng quyidagi tartibda vasiyat qilaman: {{heirs_and_shares}}. {{executor_appointed}} {{special_conditions}}"
+    },
+    {
+      "id": "notarial_ishonchnoma",
+      "name_uz": "Notarial ishonchnoma rasmiylashtirish uchun ariza",
+      "category_path": "Notarial tasdiqlanadigan hujjatlar > Ishonchnomalar",
+      "forum": "notarius",
+      "legal_basis": [
+        "Fuqarolik kodeksi (vakillik va ishonchnoma bobi)",
+        "\"Notariat to'g'risida\"gi Qonun"
+      ],
+      "plaintiff_group": "plaintiff_individual_or_legal",
+      "defendant_group": null,
+      "uses_common_groups": [
+        "plaintiff_individual",
+        "plaintiff_legal",
+        "notary_block"
+      ],
+      "content_fields": [
+        {
+          "id": "principal_full_name",
+          "label_uz": "Ishonch bildiruvchi F.I.Sh./tashkilot nomi",
+          "type": "text",
+          "required": true
+        },
+        {
+          "id": "attorney_full_name",
+          "label_uz": "Ishonchli shaxs (vakil) F.I.Sh.",
+          "type": "text",
+          "required": true
+        },
+        {
+          "id": "attorney_passport",
+          "label_uz": "Vakilning pasport ma'lumotlari",
+          "type": "text",
+          "required": true
+        },
+        {
+          "id": "poa_scope",
+          "label_uz": "Ishonchnoma bilan berilayotgan vakolatlar ro'yxati (masalan: ko'chmas mulkni sotish, avtomashinani boshqarish/sotish, sudda vakillik va h.k.)",
+          "type": "textarea",
+          "required": true
+        },
+        {
+          "id": "poa_object_description",
+          "label_uz": "Vakolat tegishli bo'lgan mol-mulk tavsifi (agar mol-mulkka oid bo'lsa)",
+          "type": "textarea",
+          "required": false
+        },
+        {
+          "id": "poa_validity_term",
+          "label_uz": "Ishonchnoma amal qilish muddati",
+          "type": "text",
+          "required": true
+        },
+        {
+          "id": "substitution_allowed",
+          "label_uz": "Qayta ishonch bildirish (peredoverie) huquqi beriladimi",
+          "type": "boolean",
+          "required": false
+        }
+      ],
+      "relief_items": [
+        "{{attorney_full_name}}ga {{poa_scope}} vakolatlarini beruvchi ishonchnoma tasdiqlab berishingizni so'rayman"
+      ],
+      "attachments": [
+        "Ishonch bildiruvchi va vakilning pasport nusxalari",
+        "Mol-mulkka oid hujjatlar (agar mol-mulkka tegishli bo'lsa)"
+      ],
+      "notes": "Ko'chmas mulk yoki avtotransport vositasini sotish/boshqarish uchun ishonchnoma, shuningdek sudda vakillik uchun ishonchnoma notarial tasdiqlanishi shart.",
+      "body_template": "Men, {{principal_full_name}}, ushbu ishonchnoma bilan {{attorney_full_name}} (pasport ma'lumotlari: {{attorney_passport}})ga quyidagi vakolatlarni beraman: {{poa_scope}}. {{poa_object_description}} Ishonchnoma {{poa_validity_term}} muddatga beriladi. {{substitution_allowed}}"
+    },
+    {
+      "id": "ariza_yuridik_fakt_aniqlash",
+      "name_uz": "Yuridik ahamiyatga molik faktni aniqlash to'g'risida ariza",
+      "category_path": "Sudga oid hujjatlar > Arizalar > Alohida tartibda yuritiladigan ishlar",
+      "forum": "arizachining yashash joyidagi fuqarolik sudi",
+      "legal_basis": [
+        "FPK 295-modda va keyingi moddalari (yuridik ahamiyatga ega faktlarni aniqlash to'g'risidagi ishlar)",
+        "Oliy sud Plenumining 1991-yil 20-dekabrdagi 5-son qarori"
+      ],
+      "plaintiff_group": "plaintiff_individual",
+      "defendant_group": null,
+      "uses_common_groups": [
+        "court",
+        "plaintiff_individual",
+        "legal_fact_petitioner"
+      ],
+      "content_fields": [
+        {
+          "id": "fact_type",
+          "label_uz": "Aniqlanishi so'ralayotgan fakt turi",
+          "type": "select",
+          "options": [
+            "qarindoshlik munosabatida bo'lganlik",
+            "boqimandalikda bo'lganlik",
+            "mulkka egalik qilish fakti",
+            "hujjatning egasiga tegishliligi",
+            "nikoh munosabatida bo'lganlik (nikoh rasmiylashtirilmagan)",
+            "tug'ilgan sana/joyning to'g'riligi",
+            "boshqa"
+          ],
+          "required": true
+        },
+        {
+          "id": "fact_description",
+          "label_uz": "Aniqlanishi so'ralayotgan faktning batafsil tavsifi",
+          "type": "textarea",
+          "required": true
+        },
+        {
+          "id": "supporting_circumstances",
+          "label_uz": "Faktni bilvosita tasdiqlovchi holatlar va dalillar",
+          "type": "textarea",
+          "required": true
+        },
+        {
+          "id": "interested_persons",
+          "label_uz": "Ishga jalb qilinishi lozim bo'lgan manfaatdor shaxslar (bo'lsa)",
+          "type": "textarea",
+          "required": false
+        }
+      ],
+      "relief_items": [
+        "{{fact_description}} faktini yuridik ahamiyatga molik fakt sifatida aniqlashni"
+      ],
+      "attachments": [
+        "Faktni bilvosita tasdiqlovchi hujjatlar (arxiv ma'lumotnomalari, guvohlar bayonoti va h.k.)",
+        "Faktni idoraviy tartibda tasdiqlab bo'lmasligini tasdiqlovchi rad javobi (bo'lsa)"
+      ],
+      "notes": "Bu — eng ko'p qo'llaniladigan alohida ish yurituv turi: meros, pensiya, fuqarolik holati dalolatnomalarini tiklash kabi maqsadlarda hujjatlar yetishmasa ishlatiladi. Muhim shart: fakt boshqa (sudga oid bo'lmagan) yo'l bilan aniqlanishi mumkin bo'lmasligi kerak, aks holda ariza qabul qilinmaydi.",
+      "body_template": "Menga {{fact_description}} faktini tasdiqlash zarur, chunki {{fact_purpose}}. Ushbu faktni idoraviy (sud tashqarisidagi) tartibda tasdiqlab bo'lmaydi, chunki {{cannot_obtain_otherwise}}. Faktning mavjudligini quyidagi holatlar va dalillar bilvosita tasdiqlaydi: {{supporting_circumstances}}. {{interested_persons}}"
+    },
+    {
+      "id": "ariza_bedarak_yoqolgan_yoki_vafot_etgan",
+      "name_uz": "Fuqaroni bedarak yo'qolgan deb topish yoki vafot etgan deb e'lon qilish to'g'risida ariza",
+      "category_path": "Sudga oid hujjatlar > Arizalar > Alohida tartibda yuritiladigan ishlar",
+      "forum": "arizachining yashash joyidagi fuqarolik sudi",
+      "legal_basis": [
+        "FPK (fuqaroni bedarak yo'qolgan deb topish va vafot etgan deb e'lon qilish bobi, 309-modda va uning atrofidagi moddalar)"
+      ],
+      "plaintiff_group": "plaintiff_individual",
+      "defendant_group": null,
+      "uses_common_groups": [
+        "court",
+        "plaintiff_individual"
+      ],
+      "content_fields": [
+        {
+          "id": "petition_type",
+          "label_uz": "Ariza turi",
+          "type": "select",
+          "options": [
+            "bedarak yo'qolgan deb topish",
+            "vafot etgan deb e'lon qilish"
+          ],
+          "required": true
+        },
+        {
+          "id": "missing_person_name",
+          "label_uz": "Qidirilayotgan (bedarak yo'qolgan) shaxs F.I.Sh.",
+          "type": "text",
+          "required": true
+        },
+        {
+          "id": "last_known_info_date",
+          "label_uz": "Shaxs to'g'risida oxirgi ma'lumot olingan sana",
+          "type": "date",
+          "required": true
+        },
+        {
+          "id": "disappearance_circumstances",
+          "label_uz": "Yo'qolish holatlari (oddiy yo'qolganlik yoki hayoti uchun xavfli vaziyat — masalan avariya, tabiiy ofat)",
+          "type": "textarea",
+          "required": true
+        },
+        {
+          "id": "search_measures_taken",
+          "label_uz": "Shaxsni qidirish yuzasidan ko'rilgan choralar (IIB ga murojaat va h.k.)",
+          "type": "textarea",
+          "required": true
+        },
+        {
+          "id": "purpose_of_declaration",
+          "label_uz": "Ariza natijasi qayerga taqdim etilishi (meros ochish, nikohni bekor qilish, vasiylik tayinlash va h.k.)",
+          "type": "text",
+          "required": true
+        }
+      ],
+      "relief_items": [
+        "{{missing_person_name}}ni {{petition_type}} deb topishni"
+      ],
+      "attachments": [
+        "Ichki ishlar organiga murojaat va javobi (qidiruv natijasi)",
+        "Shaxsning oxirgi yashash manzilini tasdiqlovchi hujjat",
+        "Xavfli vaziyat bo'lgan bo'lsa — uni tasdiqlovchi hujjatlar (baxtsiz hodisa, tabiiy ofat to'g'risida ma'lumot)"
+      ],
+      "notes": "Bedarak yo'qolgan deb topish uchun odatda shaxs to'g'risida ma'lumot bo'lmagan kundan boshlab 1 yil, vafot etgan deb e'lon qilish uchun 3 yil (hayoti uchun xavfli vaziyatda yo'qolgan bo'lsa — qisqaroq maxsus muddat) o'tgan bo'lishi talab qilinadi; aniq muddatlarni joriy FPK tahriridan tekshiring.",
+      "body_template": "{{missing_person_name}} to'g'risida oxirgi ma'lumot {{last_known_info_date}}da olingan, shundan buyon uning turgan joyi noma'lum. Yo'qolish holatlari: {{disappearance_circumstances}}. Shaxsni qidirish yuzasidan quyidagi choralar ko'rildi: {{search_measures_taken}}. Ushbu ariza natijasi {{purpose_of_declaration}} uchun zarur."
+    },
+    {
+      "id": "ariza_muomala_layoqati_cheklash",
+      "name_uz": "Fuqaroni muomala layoqati cheklangan yoki muomalaga layoqatsiz deb topish to'g'risida ariza",
+      "category_path": "Sudga oid hujjatlar > Arizalar > Alohida tartibda yuritiladigan ishlar",
+      "forum": "fuqaro yashaydigan joydagi fuqarolik sudi",
+      "legal_basis": [
+        "FPK 31-bob (fuqaroni muomala layoqati cheklangan yoki muomalaga layoqatsiz deb topish)",
+        "FPK 316-modda (ushbu toifadagi ishlar bo'yicha sud xarajatlari)"
+      ],
+      "plaintiff_group": "plaintiff_individual",
+      "defendant_group": null,
+      "uses_common_groups": [
+        "court",
+        "plaintiff_individual"
+      ],
+      "content_fields": [
+        {
+          "id": "person_concerned_name",
+          "label_uz": "Muomala layoqati cheklanishi/layoqatsiz deb topilishi so'ralayotgan shaxs F.I.Sh.",
+          "type": "text",
+          "required": true
+        },
+        {
+          "id": "petitioner_relation",
+          "label_uz": "Ariza beruvchining ushbu shaxsga munosabati (oila a'zosi, vasiylik-homiylik organi va h.k.)",
+          "type": "text",
+          "required": true
+        },
+        {
+          "id": "requested_status",
+          "label_uz": "So'ralayotgan maqom",
+          "type": "select",
+          "options": [
+            "muomala layoqati cheklangan (masalan spirtli ichimlik/narkotik moddalarni suiiste'mol qilish oqibatida oilani og'ir moddiy ahvolga solish)",
+            "muomalaga layoqatsiz (ruhiy kasallik/aqli zaiflik sababli)"
+          ],
+          "required": true
+        },
+        {
+          "id": "grounds_description",
+          "label_uz": "Holatning asoslari va dalillari",
+          "type": "textarea",
+          "required": true
+        },
+        {
+          "id": "medical_evidence",
+          "label_uz": "Tibbiy hujjatlar/xulosalar (bo'lsa)",
+          "type": "textarea",
+          "required": false
+        }
+      ],
+      "relief_items": [
+        "{{person_concerned_name}}ni {{requested_status}} deb topishni",
+        "Ushbu shaxsga vasiy/homiy tayinlash masalasini hal qilishni"
+      ],
+      "attachments": [
+        "Qarindoshlik munosabatini tasdiqlovchi hujjat",
+        "Tibbiy xulosa yoki boshqa dalillar (bo'lsa)"
+      ],
+      "notes": "Sud, agar zarur deb topsa, ishni ko'rish jarayonida sud-psixiatriya ekspertizasini tayinlashi mumkin. Bu — shaxsning huquqlarini jiddiy cheklaydigan sezilarli institut, shuning uchun ariza faqat qonunda ko'rsatilgan asoslar (FPK 310-315-moddalar atrofi) mavjud bo'lgandagina beriladi.",
+      "body_template": "{{person_concerned_name}} bilan men {{petitioner_relation}} munosabatidaman. Quyidagi holatlar mavjud: {{grounds_description}}. {{medical_evidence}} Yuqoridagilarga asosan, ushbu shaxsni {{requested_status}} deb topishni so'rayman."
+    },
+    {
+      "id": "ariza_notarial_harakat_shikoyat",
+      "name_uz": "Notarial harakatni yoki undan voz kechishni noto'g'ri deb topish to'g'risida ariza",
+      "category_path": "Sudga oid hujjatlar > Arizalar > Alohida tartibda yuritiladigan ishlar",
+      "forum": "notarial harakat amalga oshirilgan (yoki undan voz kechilgan) joydagi fuqarolik sudi",
+      "legal_basis": [
+        "FPK (notarial harakatlar yoki ulardan voz kechish ustidan shikoyat qilish tartibi bobi)",
+        "\"Notariat to'g'risida\"gi Qonun"
+      ],
+      "plaintiff_group": "plaintiff_individual_or_legal",
+      "defendant_group": null,
+      "uses_common_groups": [
+        "court",
+        "plaintiff_individual",
+        "plaintiff_legal",
+        "notary_block"
+      ],
+      "content_fields": [
+        {
+          "id": "contested_notarial_action",
+          "label_uz": "Shikoyat qilinayotgan notarial harakat (yoki undan voz kechish) tavsifi",
+          "type": "textarea",
+          "required": true
+        },
+        {
+          "id": "notarial_action_date",
+          "label_uz": "Harakat amalga oshirilgan (yoki rad etilgan) sana",
+          "type": "date",
+          "required": true
+        },
+        {
+          "id": "why_incorrect",
+          "label_uz": "Harakat (yoki rad etish) nima uchun noto'g'ri (qonunga xilof) deb hisoblanadi",
+          "type": "textarea",
+          "required": true
+        }
+      ],
+      "relief_items": [
+        "{{notary_office_name}} tomonidan amalga oshirilgan (yoki rad etilgan) {{contested_notarial_action}}ni noto'g'ri deb topishni"
+      ],
+      "attachments": [
+        "Notariusning yozma rad javobi (bo'lsa)",
+        "Notarial harakat natijasida berilgan hujjat nusxasi (bo'lsa)"
+      ],
+      "notes": "Bu ariza notarius bilan taraf o'rtasida huquqiy nizo (masalan mulk huquqi to'g'risida) mavjud bo'lmagan hollarda qo'llaniladi — agar haqiqiy nizo bo'lsa, tegishli da'vo ariza turi (masalan meros yoki mulk huquqi to'g'risida) ishlatilishi kerak.",
+      "body_template": "{{notary_office_name}} tomonidan {{notarial_action_date}}da {{contested_notarial_action}} amalga oshirildi (yoki undan voz kechildi). Ushbu harakat (yoki rad etish) quyidagi sababларга ko'ra noto'g'ri (qonunga xilof) deb hisoblanadi: {{why_incorrect}}."
+    },
+    {
+      "id": "davo_bitim_haqiqiy_emas",
+      "name_uz": "Bitimni (shartnomani) haqiqiy emas deb topish va uning oqibatlarini bartaraf etish to'g'risida da'vo ariza",
+      "category_path": "Sudga oid hujjatlar > Da'vo arizalar > Boshqa nizolar bo'yicha",
+      "forum": "fuqarolik sudi yoki iqtisodiy sud (taraflarga qarab)",
+      "legal_basis": [
+        "Fuqarolik kodeksi (bitimlar va ularning haqiqiy emasligi oqibatlari bo'limi)"
+      ],
+      "plaintiff_group": "plaintiff_individual_or_legal",
+      "defendant_group": "defendant_individual_or_legal",
+      "uses_common_groups": [
+        "court",
+        "plaintiff_individual",
+        "plaintiff_legal",
+        "defendant_individual",
+        "defendant_legal",
+        "representative",
+        "claim_value_and_duty",
+        "evidence"
+      ],
+      "content_fields": [
+        {
+          "id": "transaction_description",
+          "label_uz": "Haqiqiy emas deb topilishi so'ralayotgan bitim (shartnoma) tavsifi, sanasi va raqami",
+          "type": "textarea",
+          "required": true
+        },
+        {
+          "id": "invalidity_ground",
+          "label_uz": "Haqiqiy emaslik asosi",
+          "type": "select",
+          "options": [
+            "qonun talablariga zid (nikaziga)",
+            "aldash, zo'rlik, tahdid ta'sirida tuzilgan",
+            "muomala layoqati bo'lmagan shaxs tomonidan tuzilgan",
+            "mavhum (fiktiv) yoki ko'zbo'yamachilik (притворная) bitim",
+            "shakl talablariga rioya qilinmagan",
+            "boshqa"
+          ],
+          "required": true
+        },
+        {
+          "id": "invalidity_justification",
+          "label_uz": "Ushbu asosning batafsil izohi va dalillari",
+          "type": "textarea",
+          "required": true
+        },
+        {
+          "id": "restitution_requested",
+          "label_uz": "So'ralayotgan oqibat (restitutsiya)",
+          "type": "textarea",
+          "required": true
+        }
+      ],
+      "relief_items": [
+        "{{transaction_description}}ni haqiqiy emas (nikaziga) deb topishni",
+        "Taraflarni bitim tuzilishidan oldingi holatga qaytarishni (restitutsiya): {{restitution_requested}}"
+      ],
+      "attachments": [
+        "Bitim (shartnoma) nusxasi",
+        "Haqiqiy emaslik asosini tasdiqlovchi hujjatlar/dalillar",
+        "Davlat boji to'langanligini tasdiqlovchi hujjat"
+      ],
+      "body_template": "{{transaction_description}} taraflar o'rtasida tuzilgan. Ushbu bitim quyidagi asosga ko'ra haqiqiy emas deb topilishi lozim: {{invalidity_ground}}. Batafsil holatlar: {{invalidity_justification}}. Bitim haqiqiy emas deb topilgan taqdirda taraflar quyidagi tartibda dastlabki holatga qaytarilishi so'raladi: {{restitution_requested}}."
+    },
+    {
+      "id": "davo_vindikatsion",
+      "name_uz": "Mol-mulkni g'ayriqonuniy egalik qiluvchidan qaytarib olish to'g'risida da'vo ariza (vindikatsion da'vo)",
+      "category_path": "Sudga oid hujjatlar > Da'vo arizalar > Boshqa nizolar bo'yicha",
+      "forum": "fuqarolik sudi yoki iqtisodiy sud",
+      "legal_basis": [
+        "Fuqarolik kodeksi (mulk huquqini himoya qilish bo'limi — vindikatsion da'vo instituti)"
+      ],
+      "plaintiff_group": "plaintiff_individual_or_legal",
+      "defendant_group": "defendant_individual_or_legal",
+      "uses_common_groups": [
+        "court",
+        "plaintiff_individual",
+        "plaintiff_legal",
+        "defendant_individual",
+        "defendant_legal",
+        "representative",
+        "claim_value_and_duty",
+        "evidence"
+      ],
+      "content_fields": [
+        {
+          "id": "property_description",
+          "label_uz": "Talab qilinayotgan mol-mulk tavsifi (individual belgilari bilan)",
+          "type": "textarea",
+          "required": true
+        },
+        {
+          "id": "ownership_basis",
+          "label_uz": "Da'vogarning mulk huquqi asosi",
+          "type": "textarea",
+          "required": true
+        },
+        {
+          "id": "how_lost_possession",
+          "label_uz": "Mol-mulk da'vogar egaligidan qanday chiqib ketgani",
+          "type": "textarea",
+          "required": true
+        },
+        {
+          "id": "defendant_possession_basis",
+          "label_uz": "Javobgar mol-mulkka qanday asosda (yoki asossiz) egalik qilmoqda",
+          "type": "textarea",
+          "required": true
+        },
+        {
+          "id": "good_faith_question",
+          "label_uz": "Javobgar vijdonan (bilmagan holda) egalik qilayotganmi yoki vijdonsiz egami",
+          "type": "select",
+          "options": [
+            "vijdonli egalik qiluvchi",
+            "vijdonsiz egalik qiluvchi",
+            "noma'lum"
+          ],
+          "required": false
+        }
+      ],
+      "relief_items": [
+        "{{property_description}}ni {{defendant_name}}ning g'ayriqonuniy egaligidan qaytarib, {{plaintiff_name}}ga topshirishni"
+      ],
+      "attachments": [
+        "Mulk huquqini tasdiqlovchi hujjatlar",
+        "Mol-mulkning javobgar egaligida ekanligini tasdiqlovchi dalillar",
+        "Davlat boji to'langanligini tasdiqlovchi hujjat"
+      ],
+      "notes": "Vindikatsion da'vo faqat aniq (individual-aniqlangan) buyum haqida beriladi; pul yoki tur bilan belgilangan narsalar uchun boshqa himoya vositalari (masalan asossiz boyish to'g'risidagi da'vo) qo'llaniladi.",
+      "body_template": "{{property_description}} mol-mulkka nisbatan mening mulk huquqim {{ownership_basis}} asosida yuzaga kelgan. Ushbu mol-mulk {{how_lost_possession}} sababli mening egaligimdan chiqib ketgan va hozirda {{defendant_name}} egaligida turibdi, u mol-mulkka {{defendant_possession_basis}} asosida (yoki asossiz) egalik qilmoqda. Javobgar {{good_faith_question}}."
+    },
+    {
+      "id": "davo_negator",
+      "name_uz": "Mulkdan foydalanishga to'sqinlik qilinishini bartaraf etish to'g'risida da'vo ariza (negator da'vo)",
+      "category_path": "Sudga oid hujjatlar > Da'vo arizalar > Boshqa nizolar bo'yicha",
+      "forum": "fuqarolik sudi",
+      "legal_basis": [
+        "Fuqarolik kodeksi (mulk huquqini himoya qilish bo'limi — negator da'vo instituti)"
+      ],
+      "plaintiff_group": "plaintiff_individual_or_legal",
+      "defendant_group": "defendant_individual_or_legal",
+      "uses_common_groups": [
+        "court",
+        "plaintiff_individual",
+        "plaintiff_legal",
+        "defendant_individual",
+        "defendant_legal",
+        "representative",
+        "evidence"
+      ],
+      "content_fields": [
+        {
+          "id": "property_description",
+          "label_uz": "Da'vogarga tegishli mol-mulk (odatda ko'chmas mulk) tavsifi",
+          "type": "textarea",
+          "required": true
+        },
+        {
+          "id": "obstruction_description",
+          "label_uz": "Javobgar tomonidan yaratilgan to'sqinlik tavsifi (egalik olib qo'yilmagan, faqat foydalanishga xalaqit berilmoqda)",
+          "type": "textarea",
+          "required": true
+        },
+        {
+          "id": "obstruction_start_date",
+          "label_uz": "To'sqinlik boshlangan sana",
+          "type": "date",
+          "required": false
+        },
+        {
+          "id": "requested_action",
+          "label_uz": "Javobgardan talab qilinayotgan aniq harakat",
+          "type": "textarea",
+          "required": true
+        }
+      ],
+      "relief_items": [
+        "{{defendant_name}}ni {{requested_action}} qilishga majbur qilishni va {{property_description}}dan foydalanishimga to'sqinlik qilishni bartaraf etishni"
+      ],
+      "attachments": [
+        "Mulk huquqini tasdiqlovchi hujjatlar",
+        "To'sqinlikni tasdiqlovchi dalillar (foto, guvohlar ko'rsatuvi)"
+      ],
+      "notes": "Negator da'voda, vindikatsion da'vodan farqli, mulk egalikdan chiqib ketmaydi — faqat undan foydalanish yoki tasarruf etishga to'sqinlik bartaraf etiladi (masalan qo'shni tomonidan yo'lni to'sib qo'yish).",
+      "body_template": "{{property_description}} menga tegishli bo'lib, mol-mulk mening egaligimda qolmoqda. Biroq {{obstruction_start_date}}dan boshlab javobgar tomonidan {{obstruction_description}} ko'rinishidagi to'sqinlik yuzaga keldi, bu esa mulkdan to'liq foydalanish huquqimni cheklamoqda. Ushbu to'sqinlikni bartaraf etish uchun javobgar {{requested_action}} qilishi zarur."
+    },
+    {
+      "id": "davo_notogri_boyitish",
+      "name_uz": "Asossiz boyib olingan mol-mulkni qaytarish to'g'risida da'vo ariza",
+      "category_path": "Sudga oid hujjatlar > Da'vo arizalar > Boshqa nizolar bo'yicha",
+      "forum": "fuqarolik sudi yoki iqtisodiy sud",
+      "legal_basis": [
+        "Fuqarolik kodeksi (asossiz boyib olishdan kelib chiqadigan majburiyatlar bo'limi)"
+      ],
+      "plaintiff_group": "plaintiff_individual_or_legal",
+      "defendant_group": "defendant_individual_or_legal",
+      "uses_common_groups": [
+        "court",
+        "plaintiff_individual",
+        "plaintiff_legal",
+        "defendant_individual",
+        "defendant_legal",
+        "representative",
+        "claim_value_and_duty",
+        "evidence"
+      ],
+      "content_fields": [
+        {
+          "id": "enrichment_description",
+          "label_uz": "Javobgar qanday tarzda va nima hisobidan boyib olgani",
+          "type": "textarea",
+          "required": true
+        },
+        {
+          "id": "legal_basis_absent",
+          "label_uz": "Nima uchun bu boyish qonuniy asosga (shartnoma, sud qarori va h.k.) ega emas",
+          "type": "textarea",
+          "required": true
+        },
+        {
+          "id": "enrichment_amount",
+          "label_uz": "Asossiz boyib olingan summa yoki mol-mulk qiymati (so'm)",
+          "type": "money",
+          "required": true
+        },
+        {
+          "id": "enrichment_date",
+          "label_uz": "Boyish sodir bo'lgan (yoki aniqlangan) sana",
+          "type": "date",
+          "required": true
+        }
+      ],
+      "relief_items": [
+        "{{defendant_name}}dan {{enrichment_amount}} so'm miqdoridagi asossiz boyib olingan mol-mulk (mablag')ni undirishni"
+      ],
+      "attachments": [
+        "To'lov/o'tkazma hujjatlari yoki mol-mulk berilganligini tasdiqlovchi dalillar",
+        "Qonuniy asos yo'qligini tasdiqlovchi hujjatlar (masalan bekor qilingan/tuzilmagan shartnoma)",
+        "Davlat boji to'langanligini tasdiqlovchi hujjat"
+      ],
+      "body_template": "{{enrichment_date}}da (yoki shu davrda) javobgar {{enrichment_description}} tarzida boyib oldi. Ushbu boyish uchun {{legal_basis_absent}} sababli hech qanday qonuniy asos (shartnoma, sud qarori va h.k.) mavjud emas. Javobgar tomonidan asossiz boyib olingan summa (mol-mulk qiymati) {{enrichment_amount}} so'mni tashkil etadi."
+    },
+    {
+      "id": "davo_shartnoma_tuzishga_majburlash",
+      "name_uz": "Shartnoma tuzishga majburlash to'g'risida da'vo ariza",
+      "category_path": "Sudga oid hujjatlar > Da'vo arizalar > Boshqa nizolar bo'yicha",
+      "forum": "iqtisodiy sud (tadbirkorlik sub'ektlari o'rtasida) yoki fuqarolik sudi",
+      "legal_basis": [
+        "Fuqarolik kodeksi (shartnoma tuzish majburiy bo'lgan hollar bo'limi)"
+      ],
+      "plaintiff_group": "plaintiff_individual_or_legal",
+      "defendant_group": "defendant_individual_or_legal",
+      "uses_common_groups": [
+        "court",
+        "plaintiff_individual",
+        "plaintiff_legal",
+        "defendant_individual",
+        "defendant_legal",
+        "representative"
+      ],
+      "content_fields": [
+        {
+          "id": "contract_type",
+          "label_uz": "Tuzilishi talab qilinayotgan shartnoma turi",
+          "type": "text",
+          "required": true
+        },
+        {
+          "id": "mandatory_basis",
+          "label_uz": "Javobgar uchun shartnoma tuzish nima uchun majburiy (qonun, ommaviy oferta, oldindan berilgan majburiyat va h.k.)",
+          "type": "textarea",
+          "required": true
+        },
+        {
+          "id": "draft_sent_date",
+          "label_uz": "Shartnoma loyihasi javobgarga yuborilgan sana",
+          "type": "date",
+          "required": false
+        },
+        {
+          "id": "defendant_refusal_or_silence",
+          "label_uz": "Javobgarning rad javobi yoki javob bermaganligi tavsifi",
+          "type": "textarea",
+          "required": true
+        },
+        {
+          "id": "proposed_key_terms",
+          "label_uz": "Shartnomaning asosiy shartlari (narx, muddat, predmet)",
+          "type": "textarea",
+          "required": true
+        }
+      ],
+      "relief_items": [
+        "{{defendant_name}}ni {{contract_type}}ni {{proposed_key_terms}} shartlarida tuzishga majbur qilishni"
+      ],
+      "attachments": [
+        "Shartnoma loyihasi",
+        "Javobgarga yuborilgan taklif va uning rad javobi (bo'lsa)",
+        "Shartnoma tuzish majburiyligini tasdiqlovchi hujjat"
+      ],
+      "body_template": "Javobgar uchun {{contract_type}}ni tuzish {{mandatory_basis}} sababli majburiy hisoblanadi. {{draft_sent_date}}da men javobgarga shartnoma loyihasini {{proposed_key_terms}} shartlarida yubordim, biroq {{defendant_refusal_or_silence}}."
+    },
+    {
+      "id": "davo_shartnomani_bekor_ozgartirish",
+      "name_uz": "Shartnomani bekor qilish yoki shartlarini o'zgartirish to'g'risida da'vo ariza",
+      "category_path": "Sudga oid hujjatlar > Da'vo arizalar > Boshqa nizolar bo'yicha",
+      "forum": "fuqarolik sudi yoki iqtisodiy sud",
+      "legal_basis": [
+        "Fuqarolik kodeksi (shartnomani bekor qilish va o'zgartirish asoslari bo'limi)"
+      ],
+      "plaintiff_group": "plaintiff_individual_or_legal",
+      "defendant_group": "defendant_individual_or_legal",
+      "uses_common_groups": [
+        "court",
+        "plaintiff_individual",
+        "plaintiff_legal",
+        "defendant_individual",
+        "defendant_legal",
+        "representative",
+        "evidence"
+      ],
+      "content_fields": [
+        {
+          "id": "contract_details",
+          "label_uz": "Shartnoma sanasi, raqami va predmeti",
+          "type": "textarea",
+          "required": true
+        },
+        {
+          "id": "requested_change",
+          "label_uz": "So'ralayotgan natija",
+          "type": "select",
+          "options": [
+            "shartnomani to'liq bekor qilish",
+            "shartnomani qisman bekor qilish",
+            "shartnoma shartlarini o'zgartirish"
+          ],
+          "required": true
+        },
+        {
+          "id": "change_grounds",
+          "label_uz": "Asos",
+          "type": "select",
+          "options": [
+            "javobgar tomonidan jiddiy shartnoma buzilishi",
+            "vaziyatning tub o'zgarishi",
+            "shartnomada nazarda tutilgan boshqa asos",
+            "boshqa"
+          ],
+          "required": true
+        },
+        {
+          "id": "grounds_details",
+          "label_uz": "Asosning batafsil tavsifi",
+          "type": "textarea",
+          "required": true
+        },
+        {
+          "id": "pretrial_notice_sent",
+          "label_uz": "Shartnomani bekor qilish/o'zgartirish to'g'risida javobgarga oldindan xabar yuborilganmi",
+          "type": "boolean",
+          "required": false
+        }
+      ],
+      "relief_items": [
+        "{{contract_details}}ni {{requested_change}} qilishni"
+      ],
+      "attachments": [
+        "Shartnoma nusxasi",
+        "Shartnoma buzilganligini yoki vaziyat o'zgarganligini tasdiqlovchi dalillar",
+        "Javobgarga yuborilgan oldindan xabar (bo'lsa)"
+      ],
+      "body_template": "{{contract_details}} bo'yicha taraflar o'rtasida shartnoma munosabati mavjud. {{pretrial_notice_sent}} Quyidagi asosga ko'ra ushbu shartnomani {{requested_change}} zarurati tug'ildi: {{change_grounds}}. Batafsil holatlar: {{grounds_details}}."
+    },
+    {
+      "id": "davo_umumiy_mulk_ulush_ajratish",
+      "name_uz": "Umumiy (sheriklik) mulkdagi ulushni ajratib berish to'g'risida da'vo ariza",
+      "category_path": "Sudga oid hujjatlar > Da'vo arizalar > Boshqa nizolar bo'yicha",
+      "forum": "fuqarolik sudi",
+      "legal_basis": [
+        "Fuqarolik kodeksi (umumiy mulk to'g'risidagi bo'lim, ulushli va qo'shma mulk)"
+      ],
+      "plaintiff_group": "plaintiff_individual",
+      "defendant_group": "defendant_individual",
+      "uses_common_groups": [
+        "court",
+        "plaintiff_individual",
+        "defendant_individual",
+        "representative",
+        "claim_value_and_duty"
+      ],
+      "content_fields": [
+        {
+          "id": "property_description",
+          "label_uz": "Umumiy mulk tavsifi (manzil, maydon va h.k.)",
+          "type": "textarea",
+          "required": true
+        },
+        {
+          "id": "ownership_type",
+          "label_uz": "Umumiy mulk turi",
+          "type": "select",
+          "options": [
+            "ulushli mulk (ulushlar aniq belgilangan)",
+            "qo'shma mulk (ulushlar belgilanmagan, masalan er-xotin mulki)"
+          ],
+          "required": true
+        },
+        {
+          "id": "plaintiff_share_claimed",
+          "label_uz": "Da'vogar talab qilayotgan ulush (masalan 1/2)",
+          "type": "text",
+          "required": true
+        },
+        {
+          "id": "share_basis",
+          "label_uz": "Ulush miqdorini asoslash (kim qancha mablag'/mehnat kiritgani va h.k.)",
+          "type": "textarea",
+          "required": true
+        },
+        {
+          "id": "division_method_requested",
+          "label_uz": "So'ralayotgan ajratish usuli",
+          "type": "select",
+          "options": [
+            "mulkni ayni holda (natura) bo'lish",
+            "mulkni sotib, pulini ulush bo'yicha taqsimlash",
+            "boshqa tarafga kompensatsiya to'lab, mulkni to'liq o'ziga olish"
+          ],
+          "required": true
+        }
+      ],
+      "relief_items": [
+        "{{property_description}}dagi {{plaintiff_share_claimed}} ulushni {{plaintiff_full_name}}ga tegishli deb topib, {{division_method_requested}} tartibida ajratib berishni"
+      ],
+      "attachments": [
+        "Mulkka umumiy egalikni tasdiqlovchi hujjatlar",
+        "Ulush miqdorini asoslovchi hujjatlar (to'lov cheklari, qurilish xarajatlari va h.k.)",
+        "Baholash hujjati va davlat boji to'langanligini tasdiqlovchi hujjat"
+      ],
+      "body_template": "{{property_description}} menga va {{defendant_full_name}}ga {{ownership_type}} asosida umumiy tarzda tegishli. Mening ulushim {{share_basis}} asosida {{plaintiff_share_claimed}}ni tashkil etishi lozim. Taraflar o'rtasida ulushni kelishuv yo'li bilan ajratib olish imkoni bo'lmaganligi sababli, uni {{division_method_requested}} tartibida ajratib berishni so'rayman."
+    },
+    {
+      "id": "davo_garov_predmeti_undirish",
+      "name_uz": "Garov predmetiga undiruvni qaratish to'g'risida da'vo ariza",
+      "category_path": "Sudga oid hujjatlar > Da'vo arizalar > Boshqa nizolar bo'yicha (bank/kredit nizolari)",
+      "forum": "iqtisodiy sud (agar taraflar tadbirkorlik sub'ekti bo'lsa) yoki fuqarolik sudi",
+      "legal_basis": [
+        "Fuqarolik kodeksi (garov huquqi bo'limi)"
+      ],
+      "plaintiff_group": "plaintiff_legal",
+      "defendant_group": "defendant_individual_or_legal",
+      "uses_common_groups": [
+        "court",
+        "plaintiff_legal",
+        "defendant_individual",
+        "defendant_legal",
+        "representative",
+        "claim_value_and_duty"
+      ],
+      "content_fields": [
+        {
+          "id": "credit_agreement_details",
+          "label_uz": "Kredit (qarz) shartnomasi raqami va sanasi",
+          "type": "text",
+          "required": true
+        },
+        {
+          "id": "pledge_agreement_details",
+          "label_uz": "Garov shartnomasi raqami va sanasi",
+          "type": "text",
+          "required": true
+        },
+        {
+          "id": "pledged_property_description",
+          "label_uz": "Garov predmeti tavsifi (ko'chmas/ko'chmas bo'lmagan mulk, individual belgilari)",
+          "type": "textarea",
+          "required": true
+        },
+        {
+          "id": "principal_debt_amount",
+          "label_uz": "Asosiy qarz summasi (so'm)",
+          "type": "money",
+          "required": true
+        },
+        {
+          "id": "interest_and_penalty_amount",
+          "label_uz": "Foizlar va penya summasi (so'm)",
+          "type": "money",
+          "required": false
+        },
+        {
+          "id": "default_description",
+          "label_uz": "Qarzdor tomonidan majburiyat qanday buzilgani (to'lov jadvaliga rioya qilinmaganligi)",
+          "type": "textarea",
+          "required": true
+        },
+        {
+          "id": "sale_method_requested",
+          "label_uz": "So'ralayotgan sotish usuli",
+          "type": "select",
+          "options": [
+            "ochiq savdo (auksion) orqali sotish",
+            "sud tomonidan belgilanadigan boshqa usul"
+          ],
+          "required": false
+        }
+      ],
+      "relief_items": [
+        "{{defendant_name}}dan {{principal_debt_amount}} so'm asosiy qarz va {{interest_and_penalty_amount}} so'm foiz/penyani undirishni",
+        "{{pledged_property_description}} garov predmetiga undiruvni qaratib, uni {{sale_method_requested}} orqali sotishni"
+      ],
+      "attachments": [
+        "Kredit (qarz) shartnomasi nusxasi",
+        "Garov shartnomasi nusxasi (davlat ro'yxatidan o'tgan bo'lsa — shu haqidagi belgi bilan)",
+        "Qarz bo'yicha hisob-kitob (asosiy qarz, foiz, penya taqsimoti)",
+        "Davlat boji to'langanligini tasdiqlovchi hujjat"
+      ],
+      "notes": "Bu shablon garov (masalan bank krediti ta'minoti sifatida qo'yilgan ko'chmas mulk yoki asbob-uskuna) predmetiga undiruvni sud orqali qaratishda ishlatiladi — bank kredit ta'minoti masalalari bilan ishlaydigan tashkilotlar uchun amaliy.",
+      "body_template": "{{plaintiff_org_name}} va {{defendant_name}} o'rtasida {{credit_agreement_details}} asosida kredit (qarz) munosabati yuzaga kelgan bo'lib, uning ta'minoti sifatida {{pledge_agreement_details}} asosida {{pledged_property_description}} garovga qo'yilgan. Qarzdor tomonidan {{default_description}} sodir etilgan, natijada {{principal_debt_amount}} so'm asosiy qarz va {{interest_and_penalty_amount}} so'm foiz/penya yuzaga kelgan. Qarz ixtiyoriy tartibda to'lanmaganligi sababli garov predmetiga undiruvni sud tartibida qaratishga majbur bo'ldik."
+    },
+    {
+      "id": "davo_otalikni_aniqlash",
+      "name_uz": "Otalikni aniqlash to'g'risida da'vo ariza",
+      "category_path": "Sudga oid hujjatlar > Da'vo arizalar > Nikoh, aliment va boshqa oilaviy nizolar bo'yicha",
+      "forum": "fuqarolik sudi",
+      "legal_basis": [
+        "Oila kodeksi (otalikni aniqlash bobi)"
+      ],
+      "plaintiff_group": "plaintiff_individual",
+      "defendant_group": "defendant_individual",
+      "uses_common_groups": [
+        "court",
+        "plaintiff_individual",
+        "defendant_individual",
+        "representative"
+      ],
+      "content_fields": [
+        {
+          "id": "child_details",
+          "label_uz": "Farzand F.I.Sh. va tug'ilgan sanasi",
+          "type": "text",
+          "required": true
+        },
+        {
+          "id": "relationship_period",
+          "label_uz": "Taraflar birga yashagan/munosabatda bo'lgan davr",
+          "type": "text",
+          "required": true
+        },
+        {
+          "id": "paternity_evidence",
+          "label_uz": "Otalikni tasdiqlovchi dalillar (birga yashaganlik, moddiy yordam, yozishmalar, DNK tahlili va h.k.)",
+          "type": "textarea",
+          "required": true
+        },
+        {
+          "id": "dna_test_requested",
+          "label_uz": "Genetik (DNK) ekspertizasi tayinlanishi so'raladimi",
+          "type": "boolean",
+          "required": false
+        }
+      ],
+      "relief_items": [
+        "{{defendant_full_name}}ning {{child_details}}ga nisbatan otaligini aniqlashni",
+        "Farzandning tug'ilganlik guvohnomasiga ота sifatida {{defendant_full_name}}ni kiritishni"
+      ],
+      "attachments": [
+        "Farzandning tug'ilganlik guvohnomasi nusxasi",
+        "Otalikni tasdiqlovchi dalillar (xat-xabar, foto, guvohlar ma'lumotlari va h.k.)"
+      ],
+      "body_template": "Men {{defendant_full_name}} bilan {{relationship_period}} davomida yaqin munosabatda bo'lganman, ushbu munosabat natijasida {{child_details}} dunyoga keldi. Otalikni quyidagi dalillar tasdiqlaydi: {{paternity_evidence}}. {{dna_test_requested}}"
+    },
+    {
+      "id": "davo_ota_onalik_huquqidan_mahrum_qilish",
+      "name_uz": "Ota-onalik huquqidan mahrum qilish to'g'risida da'vo ariza",
+      "category_path": "Sudga oid hujjatlar > Da'vo arizalar > Nikoh, aliment va boshqa oilaviy nizolar bo'yicha",
+      "forum": "fuqarolik sudi",
+      "legal_basis": [
+        "Oila kodeksi (ota-onalik huquqidan mahrum qilish bobi)"
+      ],
+      "plaintiff_group": "plaintiff_individual_or_legal",
+      "defendant_group": "defendant_individual",
+      "uses_common_groups": [
+        "court",
+        "plaintiff_individual",
+        "plaintiff_legal",
+        "defendant_individual",
+        "representative"
+      ],
+      "content_fields": [
+        {
+          "id": "petitioner_role",
+          "label_uz": "Ariza beruvchining maqomi",
+          "type": "select",
+          "options": [
+            "boshqa ota-ona",
+            "vasiylik-homiylik organi",
+            "prokuror",
+            "farzandni tarbiyalovchi boshqa qonuniy vakil"
+          ],
+          "required": true
+        },
+        {
+          "id": "child_details",
+          "label_uz": "Farzand(lar) F.I.Sh. va tug'ilgan sanasi",
+          "type": "textarea",
+          "required": true
+        },
+        {
+          "id": "grounds_for_deprivation",
+          "label_uz": "Mahrum qilish asosi",
+          "type": "select",
+          "options": [
+            "farzand tarbiyasidan bo'yin tovlash",
+            "aliment to'lashdan bosh tortish",
+            "farzandga nisbatan shafqatsizlik",
+            "surunkali giyohvandlik/spirtli ichimlikka ruju qo'yish",
+            "qasddan sodir etilgan jinoyat",
+            "boshqa"
+          ],
+          "required": true
+        },
+        {
+          "id": "grounds_details",
+          "label_uz": "Holatning batafsil tavsifi va dalillari",
+          "type": "textarea",
+          "required": true
+        },
+        {
+          "id": "child_current_care",
+          "label_uz": "Farzand hozirda kim tomonidan parvarish qilinmoqda",
+          "type": "text",
+          "required": true
+        }
+      ],
+      "relief_items": [
+        "{{defendant_full_name}}ni {{child_details}}ga nisbatan ota-onalik huquqidan mahrum qilishni",
+        "{{defendant_full_name}}dan farzand(lar) uchun aliment undirishni"
+      ],
+      "attachments": [
+        "Farzandning tug'ilganlik guvohnomasi nusxasi",
+        "Vasiylik-homiylik organi xulosasi",
+        "Holatni tasdiqlovchi hujjatlar (politsiya materiallari, tibbiy hujjatlar, guvohlar ko'rsatuvi va h.k.)"
+      ],
+      "notes": "Bu — bolaning huquq va manfaatlarini himoya qilishga qaratilgan jiddiy oqibatli institut. Ishda prokuror va vasiylik-homiylik organining ishtiroki majburiy.",
+      "body_template": "{{defendant_full_name}} {{child_details}}ning ota-onasi (ota/ona) hisoblanadi. Biroq quyidagi asosga ko'ra ota-onalik majburiyatlari bajarilmayapti: {{grounds_for_deprivation}}. Batafsil holatlar: {{grounds_details}}. Hozirgi kunda farzand(lar) {{child_current_care}} tomonidan parvarish qilinmoqda."
+    },
+    {
+      "id": "davo_kafolat_kafillik",
+      "name_uz": "Kafildan (kafolat beruvchidan) qarzni undirish to'g'risida da'vo ariza",
+      "category_path": "Sudga oid hujjatlar > Da'vo arizalar > Boshqa nizolar bo'yicha (bank/kredit nizolari)",
+      "forum": "iqtisodiy sud (tadbirkorlik sub'ektlari o'rtasida) yoki fuqarolik sudi",
+      "legal_basis": [
+        "Fuqarolik kodeksi (kafillik va kafolat bo'limi)"
+      ],
+      "plaintiff_group": "plaintiff_individual_or_legal",
+      "defendant_group": "defendant_individual_or_legal",
+      "uses_common_groups": [
+        "court",
+        "plaintiff_individual",
+        "plaintiff_legal",
+        "defendant_individual",
+        "defendant_legal",
+        "representative",
+        "claim_value_and_duty"
+      ],
+      "content_fields": [
+        {
+          "id": "main_obligation_details",
+          "label_uz": "Asosiy majburiyat (kredit/shartnoma) rekvizitlari",
+          "type": "text",
+          "required": true
+        },
+        {
+          "id": "surety_agreement_details",
+          "label_uz": "Kafillik (kafolat) shartnomasi raqami va sanasi",
+          "type": "text",
+          "required": true
+        },
+        {
+          "id": "principal_debtor_name",
+          "label_uz": "Asosiy qarzdor nomi/F.I.Sh.",
+          "type": "text",
+          "required": true
+        },
+        {
+          "id": "debt_amount",
+          "label_uz": "Undirilishi so'ralayotgan qarz summasi (so'm)",
+          "type": "money",
+          "required": true
+        },
+        {
+          "id": "principal_debtor_default",
+          "label_uz": "Asosiy qarzdor majburiyatni qanday buzgani",
+          "type": "textarea",
+          "required": true
+        },
+        {
+          "id": "liability_type",
+          "label_uz": "Javobgarlik turi",
+          "type": "select",
+          "options": [
+            "subsidiar (asosiy qarzdordan keyin)",
+            "solidar (birgalikda, tanlov bo'yicha)"
+          ],
+          "required": false
+        }
+      ],
+      "relief_items": [
+        "{{defendant_name}}dan (kafil sifatida) {{main_obligation_details}} bo'yicha {{debt_amount}} so'm qarzni undirishni"
+      ],
+      "attachments": [
+        "Asosiy shartnoma (kredit shartnomasi) nusxasi",
+        "Kafillik (kafolat) shartnomasi nusxasi",
+        "Asosiy qarzdorning majburiyatni bajarmaganligini tasdiqlovchi hujjatlar",
+        "Davlat boji to'langanligini tasdiqlovchi hujjat"
+      ],
+      "body_template": "{{principal_debtor_name}} bilan {{main_obligation_details}} bo'yicha asosiy majburiyat mavjud bo'lib, uning bajarilishini ta'minlash uchun {{defendant_name}} {{surety_agreement_details}} asosida kafil (kafolat beruvchi) sifatida javobgarlikni o'z zimmasiga olgan ({{liability_type}}). Asosiy qarzdor {{principal_debtor_default}} sababli majburiyatni bajarmadi, natijada {{debt_amount}} so'm miqdorida qarz yuzaga keldi."
+    }
+  ]
+}
