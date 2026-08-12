@@ -56,40 +56,40 @@ export function Footer() {
   const { setView } = useMarketplaceStore();
 
   return (
-    <footer className="mt-auto border-t border-border bg-secondary/40">
+    <footer className="mt-auto bg-ink text-paper">
       {/* Editorial top accent */}
-      <div className="h-0.5 w-full bg-accent" aria-hidden />
+      <div className="h-px w-full bg-registry" aria-hidden />
 
       <div className="mx-auto max-w-7xl px-4 py-14 sm:px-6 lg:px-8">
         <div className="grid gap-10 lg:grid-cols-12">
           {/* Brand column */}
           <div className="lg:col-span-4">
             <div className="flex items-center gap-2">
-              <div className="flex h-9 w-9 items-center justify-center rounded-lg bg-foreground text-background">
+              <div className="flex h-9 w-9 items-center justify-center rounded-lg bg-registry text-white">
                 <Scales weight="regular" className="h-5 w-5" />
               </div>
               <div>
-                <div className="font-display text-base font-bold text-foreground">Adolat</div>
-                <div className="font-mono text-[9px] uppercase tracking-[0.2em] text-muted-foreground">
+                <div className="font-display text-base font-bold text-paper">Adolat</div>
+                <div className="font-mono text-[9px] uppercase tracking-[0.2em] text-paper/60">
                   Huquqiy marketplace
                 </div>
               </div>
             </div>
-            <p className="mt-4 max-w-xs text-sm leading-relaxed text-muted-foreground">
+            <p className="mt-4 max-w-xs text-sm leading-relaxed text-paper/60">
               O'zbekistonning birinchi huquqiy marketplace'i. Advokatlar va hujjat
               namunalarini bir joyda toping. Vaqtingiz va pulingizni tejang.
             </p>
 
-            <div className="mt-5 space-y-2 text-xs text-muted-foreground">
+            <div className="mt-5 space-y-2 text-xs text-paper/60">
               <div className="flex items-center gap-2">
                 <Envelope weight="regular" className="h-3.5 w-3.5 text-accent" />
-                <a href="mailto:info@adolat.uz" className="hover:text-foreground">
+                <a href="mailto:info@adolat.uz" className="hover:text-paper">
                   info@adolat.uz
                 </a>
               </div>
               <div className="flex items-center gap-2">
                 <Phone weight="regular" className="h-3.5 w-3.5 text-accent" />
-                <a href="tel:+998712020202" className="hover:text-foreground">
+                <a href="tel:+998712020202" className="hover:text-paper">
                   +998 71 202 02 02
                 </a>
               </div>
@@ -110,7 +110,7 @@ export function Footer() {
                   key={label}
                   href="#"
                   aria-label={label}
-                  className="flex h-9 w-9 items-center justify-center rounded-lg border border-border bg-card text-muted-foreground transition-all hover:border-accent/40 hover:text-accent"
+                  className="flex h-9 w-9 items-center justify-center rounded-lg border border-white/10 bg-ink-2 text-paper/60 transition-all hover:border-accent/40 hover:text-accent"
                 >
                   <Icon className="h-4 w-4" />
                 </a>
@@ -122,7 +122,7 @@ export function Footer() {
           <div className="grid grid-cols-2 gap-8 sm:grid-cols-4 lg:col-span-8">
             {LINK_COLUMNS.map((col) => (
               <div key={col.title}>
-                <h3 className="font-mono text-[10px] font-semibold uppercase tracking-[0.2em] text-foreground">
+                <h3 className="font-mono text-[10px] font-semibold uppercase tracking-[0.2em] text-paper">
                   {col.title}
                 </h3>
                 <ul className="mt-3 space-y-2">
@@ -130,7 +130,7 @@ export function Footer() {
                     <li key={link.label}>
                       <button
                         onClick={() => link.view && setView(link.view)}
-                        className="text-sm text-muted-foreground transition-colors hover:text-accent"
+                        className="text-sm text-paper/60 transition-colors hover:text-accent"
                       >
                         {link.label}
                       </button>
@@ -143,23 +143,23 @@ export function Footer() {
         </div>
 
         {/* Bottom bar — editorial newspaper footer */}
-        <div className="mt-12 flex flex-col items-center justify-between gap-4 border-t border-border pt-6 text-xs text-muted-foreground sm:flex-row">
+        <div className="mt-12 flex flex-col items-center justify-between gap-4 border-t border-white/10 pt-6 text-xs text-paper/60 sm:flex-row">
           <div className="flex items-center gap-2">
             <span className="font-mono">© 2026 Adolat Marketplace</span>
             <span className="text-border">·</span>
             <span>Barcha huquqlar himoyalangan</span>
           </div>
           <div className="flex flex-wrap gap-4 font-mono text-[11px] uppercase tracking-wider">
-            <a href="#" className="hover:text-foreground">
+            <a href="#" className="hover:text-paper">
               Maxfiylik
             </a>
-            <a href="#" className="hover:text-foreground">
+            <a href="#" className="hover:text-paper">
               Oferta
             </a>
-            <a href="#" className="hover:text-foreground">
+            <a href="#" className="hover:text-paper">
               Cookie
             </a>
-            <a href="#" className="hover:text-foreground">
+            <a href="#" className="hover:text-paper">
               Shartlar
             </a>
           </div>

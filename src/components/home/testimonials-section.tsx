@@ -27,7 +27,7 @@ export function TestimonialsSection({ limit = 4 }: { limit?: number }) {
           <Text size="lg" tone="secondary" className="mt-3" maxW="xl">Advokatlar, yuristlar, tadbirkorlar va oddiy fuqarolar — minglab foydalanuvchilar Adolat platformasidan foydalanmoqda.</Text>
         </div>
 
-        <Grid cols={{ base: 1, sm: 2, lg: 4 }} gap="md">
+        <Grid cols={{ base: 1, sm: 2, lg: 4 }} gap="md" className="reveal-stagger in-view">
           {testimonials.map((t, i) => (
             <TestimonialCard key={t.id} testimonial={t} featured={i === 0} />
           ))}

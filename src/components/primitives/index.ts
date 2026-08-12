@@ -57,3 +57,8 @@ export {
   type GridProps,
   type StackProps,
 } from "./layout";
+
+export {
+  Seal,
+  type SealProps,
+} from "./seal";

@@ -13,6 +13,7 @@ import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/primitives/button";
 import { Heading, Text } from "@/components/primitives/typography";
 import { Stack } from "@/components/primitives/layout";
+import { Seal } from "@/components/primitives/seal";
 import { cn } from "@/lib/utils";
 
 export interface AdvocateCardData {
@@ -62,8 +63,8 @@ export function AdvocateCard({ advocate, onSelect, onContact, className }: Advoc
               className="size-14 rounded-md border border-border object-cover"
             />
             {advocate.verified && (
-              <div className="absolute -bottom-1 -right-1 flex size-5 items-center justify-center rounded-full border-2 border-card bg-stamp-green text-white">
-                <SealCheck className="size-3" weight="fill" />
+              <div className="absolute -bottom-1 -right-1">
+                <Seal size={20} variant="verified" ringText="VERIFIED" />
               </div>
             )}
           </div>

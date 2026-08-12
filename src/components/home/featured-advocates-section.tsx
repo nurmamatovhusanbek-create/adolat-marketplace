@@ -68,7 +68,7 @@ export function FeaturedAdvocatesSection({ limit = 6 }: { limit?: number }) {
         />
 
         {loading ? (
-          <Grid cols={{ base: 1, sm: 2, lg: 3 }} gap="md" className="mt-10">
+          <Grid cols={{ base: 1, sm: 2, lg: 3 }} gap="md" className="mt-10 reveal-stagger in-view">
             {Array.from({ length: limit }).map((_, i) => (
               <div key={i} className="rounded-lg border border-border bg-card p-6">
                 <div className="flex items-start gap-3">
@@ -85,7 +85,7 @@ export function FeaturedAdvocatesSection({ limit = 6 }: { limit?: number }) {
             ))}
           </Grid>
         ) : (
-          <Grid cols={{ base: 1, sm: 2, lg: 3 }} gap="md" className="mt-10">
+          <Grid cols={{ base: 1, sm: 2, lg: 3 }} gap="md" className="mt-10 reveal-stagger in-view">
             {advocates.map((adv) => (
               <AdvocateCard
                 key={adv.id}

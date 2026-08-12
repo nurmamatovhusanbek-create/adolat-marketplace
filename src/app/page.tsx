@@ -1,6 +1,7 @@
 "use client";
 
 import { Suspense, lazy } from "react";
+import { motion, AnimatePresence } from "framer-motion";
 import { useMarketplaceStore } from "@/lib/marketplace/store";
 import { Header } from "@/components/marketplace/header";
 import { Footer } from "@/components/marketplace/footer";
@@ -12,7 +13,7 @@ import { ForAdvocatesPage } from "@/components/marketplace/for-advocates-page";
 import { RecentRequests } from "@/components/marketplace/recent-requests";
 import { PopularDocuments } from "@/components/marketplace/popular-documents";
 
-// New home sections — UI Revolution Plan Phase 3
+// Home sections
 import { HeroSection } from "@/components/home/hero-section";
 import { TrustBar } from "@/components/home/trust-bar";
 import { DocumentCategoriesSection } from "@/components/home/document-categories-section";
@@ -29,7 +30,7 @@ import { AuthModal } from "@/components/auth/auth-modal";
 import { DocumentEditor } from "@/components/editor/document-editor";
 import { Dashboard } from "@/components/dashboard/dashboard";
 
-// Phase 6: Dynamic imports for heavy components (code splitting)
+// Lazy-loaded heavy components (code splitting)
 const ChatPanel = lazy(() => import("@/components/chat/chat-panel").then(m => ({ default: m.ChatPanel })));
 const AdvocateDashboard = lazy(() => import("@/components/advocate/advocate-dashboard").then(m => ({ default: m.AdvocateDashboard })));
 const AdminPanel = lazy(() => import("@/components/admin/admin-panel").then(m => ({ default: m.AdminPanel })));
@@ -42,15 +43,22 @@ function LoadingSpinner() {
   );
 }
 
+// View transition variants — mirrors .rise timing from globals.css
+const viewVariants = {
+  initial: { opacity: 0, y: 8 },
+  animate: { opacity: 1, y: 0 },
+  exit: { opacity: 0, y: -8 },
+};
+
+const viewTransition = { duration: 0.3, ease: [0.3, 0, 0, 1] as const };
+
 export default function Home() {
   const { currentView, isAuthOpen, authMode, setAuthOpen } = useMarketplaceStore();
 
-  return (
-    <div className="flex min-h-screen flex-col bg-background">
-      <Header />
-
-      <main className="flex-1">
-        {currentView === "home" && (
+  const renderView = () => {
+    switch (currentView) {
+      case "home":
+        return (
           <>
             <HeroSection />
             <TrustBar stats={{
@@ -67,23 +75,45 @@ export default function Home() {
             <TestimonialsSection limit={4} />
             <CTASection />
           </>
-        )}
-
-        {currentView === "advocates" && <AdvocateListing />}
-        {currentView === "documents" && <DocumentListing />}
-        {currentView === "requests" && <RequestsPage />}
-        {currentView === "how-it-works" && <HowItWorksPage />}
-        {currentView === "for-advocates" && <ForAdvocatesPage />}
-        {currentView === "advocate-dashboard" && (
+        );
+      case "advocates": return <AdvocateListing />;
+      case "documents": return <DocumentListing />;
+      case "requests": return <RequestsPage />;
+      case "how-it-works": return <HowItWorksPage />;
+      case "for-advocates": return <ForAdvocatesPage />;
+      case "advocate-dashboard":
+        return (
           <Suspense fallback={<LoadingSpinner />}>
             <AdvocateDashboard />
           </Suspense>
-        )}
-        {currentView === "admin-panel" && (
+        );
+      case "admin-panel":
+        return (
           <Suspense fallback={<LoadingSpinner />}>
             <AdminPanel />
           </Suspense>
-        )}
+        );
+      default: return null;
+    }
+  };
+
+  return (
+    <div className="flex min-h-screen flex-col bg-background">
+      <Header />
+
+      <main className="flex-1">
+        <AnimatePresence mode="wait">
+          <motion.div
+            key={currentView}
+            variants={viewVariants}
+            initial="initial"
+            animate="animate"
+            exit="exit"
+            transition={viewTransition}
+          >
+            {renderView()}
+          </motion.div>
+        </AnimatePresence>
       </main>
 
       <Footer />
@@ -103,7 +133,6 @@ export default function Home() {
       <DocumentEditor />
       <Dashboard />
 
-      {/* Phase 6: Lazy-loaded chat panel */}
       <Suspense fallback={null}>
         <ChatPanel />
       </Suspense>

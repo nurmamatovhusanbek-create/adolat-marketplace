@@ -81,23 +81,23 @@ export function Header() {
   };
 
   return (
-    <header className="sticky top-0 z-50 w-full border-b border-border bg-background/95 backdrop-blur-md">
+    <header className="sticky top-0 z-50 w-full bg-ink text-paper">
       {/* Top accent strip — solid registry blue */}
-      <div className="h-px w-full bg-primary" aria-hidden />
+      <div className="h-px w-full bg-registry" aria-hidden />
 
       <div className="mx-auto flex h-16 max-w-7xl items-center gap-3 px-4 sm:px-6 lg:px-8">
         {/* Logo */}
         <button
           onClick={() => handleNav("home")}
-          className="group flex shrink-0 items-center gap-2.5 rounded-md p-1 transition-colors hover:bg-secondary/60"
+          className="group flex shrink-0 items-center gap-2.5 rounded-md p-1 transition-colors hover:bg-white/10"
           aria-label="Adolat bosh sahifa"
         >
-          <div className="flex size-9 items-center justify-center rounded-md bg-primary text-primary-foreground">
+          <div className="flex size-9 items-center justify-center rounded-md bg-registry text-white">
             <Scales className="size-5" weight="fill" />
           </div>
           <div className="hidden flex-col leading-tight sm:flex">
-            <span className="font-display text-base font-bold tracking-tight text-foreground">Adolat</span>
-            <span className="font-mono text-[9px] uppercase tracking-[0.15em] text-muted-foreground mt-0.5">
+            <span className="font-display text-base font-bold tracking-tight text-paper">Adolat</span>
+            <span className="font-mono text-[9px] uppercase tracking-[0.15em] text-paper/60 mt-0.5">
               Huquqiy regist'r
             </span>
           </div>
@@ -115,8 +115,8 @@ export function Header() {
                 className={cn(
                   "inline-flex h-9 items-center gap-1.5 rounded-md px-3 text-sm font-medium transition-colors",
                   active
-                    ? "bg-primary/10 text-primary"
-                    : "text-muted-foreground hover:bg-secondary/60 hover:text-foreground"
+                    ? "bg-white/10 text-paper"
+                    : "text-paper/70 hover:bg-white/10 hover:text-paper"
                 )}
               >
                 <Icon className="size-4" weight={active ? "fill" : "regular"} />

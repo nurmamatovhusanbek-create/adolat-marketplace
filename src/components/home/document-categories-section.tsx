@@ -38,7 +38,7 @@ export function DocumentCategoriesSection({ limit = 6 }: { limit?: number }) {
           <Text size="lg" tone="secondary" maxW="xl">Yuridik shaxslar, ko'chmas mulk, sud ishlari va boshqa 700+ tayyor hujjat namunalari.</Text>
         </Stack>
 
-        <Grid cols={{ base: 1, sm: 2, lg: 3 }} gap="md">
+        <Grid cols={{ base: 1, sm: 2, lg: 3 }} gap="md" className="reveal-stagger in-view">
           {categories.map((cat) => (
             <CategoryCard key={cat.id} category={cat} onSelect={handleSelect} />
           ))}

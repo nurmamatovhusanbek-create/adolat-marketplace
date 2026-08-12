@@ -78,6 +78,11 @@
   --stamp-green: #1F5C4E;     /* success — verified states */
   --hairline: rgba(20, 22, 28, 0.12); /* borders */
 
+  /* --- New additive tokens (§4.1) --- */
+  --ink-2: #1E212A;           /* lifted near-black for solid-fill internal elevation */
+  --seal-tint: rgba(122, 39, 49, 0.08); /* seal-colored bg tint */
+  --stamp-tint: rgba(31, 92, 78, 0.08); /* stamp-green bg tint */
+
   /* --- Surfaces --- */
   --surface-card: #FFFFFF;    /* cards — pure white on paper */
   --surface-sunken: #EFEEEA;  /* inset/sunken areas */
@@ -183,28 +188,12 @@
 
 @layer utilities {
   /* ============================================================================
-     SHADOWS — 3 real tokens (replaces shadow-elevation-1..4 + shadow-glow)
      ============================================================================ */
   .shadow-sm { box-shadow: var(--shadow-sm); }
   .shadow-md { box-shadow: var(--shadow-md); }
   .shadow-lg { box-shadow: var(--shadow-lg); }
 
   /* Legacy aliases — map old class names to new shadows so nothing breaks */
-  .shadow-elevation-1 { box-shadow: var(--shadow-sm); }
-  .shadow-elevation-2 { box-shadow: var(--shadow-md); }
-  .shadow-elevation-3 { box-shadow: var(--shadow-md); }
-  .shadow-elevation-4 { box-shadow: var(--shadow-lg); }
-  .shadow-beautiful-sm { box-shadow: var(--shadow-sm); }
-  .shadow-beautiful-md { box-shadow: var(--shadow-md); }
-  .shadow-beautiful-lg { box-shadow: var(--shadow-lg); }
-  .shadow-beautiful-xl { box-shadow: var(--shadow-lg); }
-  .shadow-beautiful-2xl { box-shadow: var(--shadow-lg); }
-  .shadow-beautiful-xs { box-shadow: var(--shadow-sm); }
-  .shadow-glow { box-shadow: var(--shadow-md); }
-  .shadow-hard { box-shadow: 2px 2px 0 0 var(--hairline); }
-  .shadow-hard-sm { box-shadow: 1px 1px 0 0 var(--hairline); }
-  .shadow-hard-clay { box-shadow: 2px 2px 0 0 rgba(122, 39, 49, 0.15); }
-  .shadow-inner { box-shadow: inset 0 1px 2px rgba(20, 22, 28, 0.04); }
 
   /* ============================================================================
      BACKGROUNDS
@@ -276,6 +265,16 @@
   }
   .verified-pulse {
     animation: verified-pulse 2s var(--ease-standard) infinite;
+  }
+
+  /* The Seal — one-shot stamp entrance animation */
+  @keyframes stamp-in {
+    0%   { transform: scale(1.15) rotate(-8deg); opacity: 0; }
+    60%  { transform: scale(0.95) rotate(2deg); opacity: 1; }
+    100% { transform: scale(1) rotate(0deg); opacity: 1; }
+  }
+  .stamp-in {
+    animation: stamp-in 220ms var(--ease-emphasized) forwards;
   }
 
   @keyframes riseIn {
@@ -381,7 +380,7 @@
       scroll-behavior: auto !important;
     }
     .rise, .reveal-on-scroll, .reveal-stagger > *,
-    .typing-dot, .verified-pulse {
+    .typing-dot, .verified-pulse, .stamp-in {
       animation: none !important;
       opacity: 1 !important;
       transform: none !important;

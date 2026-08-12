@@ -38,7 +38,7 @@ export function HeroSection() {
       <Container size="xl" className="relative">
         <Grid cols={{ base: 1, lg: 2 }} gap="xl">
           {/* Left: Value Proposition */}
-          <Stack gap="lg" align="start">
+          <Stack gap="lg" align="start" className="rise rise-1">
             {/* Registry-style eyebrow — monospace reference code + date */}
             <div className="flex items-center gap-3">
               <span className="font-mono text-xs font-semibold uppercase tracking-[0.15em] text-primary">
@@ -76,7 +76,7 @@ export function HeroSection() {
           </Stack>
 
           {/* Right: Live Stats Card */}
-          <div className="relative">
+          <div className="relative rise rise-3">
             <LiveStatsCard />
           </div>
         </Grid>
@@ -96,7 +96,7 @@ function TrustBadge({ icon, label }: { icon: React.ReactNode; label: string }) {
 
 function LiveStatsCard() {
   return (
-    <div className="relative">
+    <div className="relative rise rise-3">
       {/* Header — registry style */}
       <div className="mb-3 flex items-center justify-between">
         <span className="font-mono text-[10px] font-semibold uppercase tracking-[0.15em] text-muted-foreground">

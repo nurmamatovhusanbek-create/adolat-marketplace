@@ -18,7 +18,7 @@ O'zbekistonning yuridik marketplace'i: advokatlarni toping, 700+ huquqiy hujjat 
 - **Auth**: NextAuth v4, bcrypt (cost 12), JWT sessions
 - **Real-time**: HTTP polling (3s interval, no WebSocket needed)
 - **Document generation**: pdf-lib (PDF), docx (DOCX)
-- **Design**: Editorial Trust — warm ivory parchment + clay accent + Playfair Display serif
+- **Design**: Registry — paper + ink + registry-blue + seal-red + stamp-green; IBM Plex Sans + Inter + JetBrains Mono
 
 ## Quick Start
 
@@ -64,7 +64,7 @@ src/
 │   │   └── chat/         # File upload + download
 │   ├── layout.tsx        # Root layout with providers
 │   ├── page.tsx          # SPA shell with view switcher
-│   └── globals.css       # Editorial Trust design system
+│   └── globals.css       # Registry design system
 ├── components/
 │   ├── auth/             # Sign in / sign up modal
 │   ├── chat/             # Real-time chat panel with file attachments
